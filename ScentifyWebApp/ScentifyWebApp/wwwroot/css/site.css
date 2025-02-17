@@ -1,22 +1,207 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
+#header,
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #FFFEF2 !important;
 }
+
+#header {
+    border-bottom: 1px solid rgba(51, 51, 51, .2);
+}
+
+/*Products page*/
+/* General Styles */
+.podium-section {
+    padding: 20px;
+    /* Or your chosen font */
+}
+
+.product-commerce-cards {
+    max-width: 100%;
+    margin: 100px auto;
+}
+
+.card-wrapper {
+    text-align: center;
+    /* Center text in the header */
+    margin-bottom: 40px;
+    padding: 80px 0 0 80px;
+}
+
+.text-wrapper {
+    max-width: 100%;
+    text-align: center;
+    /* Center text in the header */
+}
+
+.section-heading {
+    text-align: left;
+    /* Center heading text */
+}
+
+    .section-heading h2 {
+        font-size: 2rem;
+        font-weight: 400;
+        margin-bottom: 10px;
+    }
+
+    .section-heading h3 {
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+.text-wrapper p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #333;
+    line-height: 1.5;
+    text-align: left;
+    /* Center paragraph text */
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 110px;
+}
+
+.product-grid-item {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* Stack children vertically */
+    align-items: center;
+    /* Center content horizontally */
+    transition: background-color 0.3s ease;
+    /* Smooth background color transition */
+}
+
+    .product-grid-item:hover .body-wrapper {
+        background-color: rgba(51, 51, 51, 0.05);
+        /* Change background color on hover */
+    }
+
+.image-wrapper {
+    width: 100%;
+    /* Full width of the container */
+    margin: 0 auto;
+    /* Center the wrapper and add margin below */
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    background-color: rgba(51, 51, 51, 0.05);
+    /* Light gray background */
+    padding-top: 32px;
+    /* Add padding at the top */
+    padding-bottom: 32px;
+    /* Add padding at the bottom for symmetry */
+}
+
+    .image-wrapper img {
+        width: 60%;
+        /* Make the image smaller */
+        height: auto;
+        /* Maintain aspect ratio */
+        border-radius: 8px;
+        /* Rounded corners */
+        display: block;
+        /* Ensure the image behaves as a block element */
+        margin: 0 auto;
+        /* Center the image horizontally within the wrapper */
+    }
+
+.body-wrapper {
+    flex: 1;
+    /* Allow body content to grow and push button to the bottom */
+    text-align: center;
+    padding: 32px 0;
+    width: 100%;
+    /* Center text in the body */
+}
+
+    .body-wrapper h4 a {
+        text-decoration: none;
+        color: #000;
+        font-size: 14px;
+        /* Set font size to 14px */
+    }
+
+    .body-wrapper p {
+        color: #666;
+        font-size: 14px;
+        /* Set font size to 14px */
+        margin: 10px 0;
+    }
+
+.price-info {
+    margin-top: 50px;
+}
+
+.unit-pricing {
+    font-size: 14px;
+    /* Set font size to 14px */
+    color: #666;
+}
+
+/* CTA Button - Full Width at Bottom */
+.cta-wrapper {
+    margin-top: auto;
+    /* Push button to the bottom */
+    width: 100%;
+    /* Full width */
+    opacity: 0;
+    /* Hide button by default */
+    transition: opacity 0.3s ease;
+    /* Smooth opacity transition */
+}
+
+.product-grid-item:hover .cta-wrapper {
+    opacity: 1;
+    /* Show button on hover */
+}
+
+.cta-wrapper button {
+    width: 100%;
+    /* Full width */
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 20px;
+    /* Set font size to 14px */
+    transition: background-color 0.3s ease;
+}
+
+    .cta-wrapper button:hover {
+        background-color: #333;
+        /* Darken button on hover */
+    }
