@@ -6,8 +6,11 @@
 *.sln.docstates
 
 # Build artifacts
-/bin/
-/obj/
+**/bin/
+**/obj/
+**/Debug/
+**/Release/
+
 /out/
 
 # .NET Core specific
