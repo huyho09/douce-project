@@ -29,3 +29,34 @@ D:\$1_Projects\_Source code\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debu
 D:\$1_Projects\_Source code\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\ScentifyWebApp.pdb
 D:\$1_Projects\_Source code\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\ScentifyWebApp.genruntimeconfig.cache
 D:\$1_Projects\_Source code\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\ref\ScentifyWebApp.dll
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\bin\Debug\net8.0\appsettings.json
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\bin\Debug\net8.0\libman.json
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\bin\Debug\net8.0\ScentifyWebApp.staticwebassets.runtime.json
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\bin\Debug\net8.0\ScentifyWebApp.exe
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\bin\Debug\net8.0\ScentifyWebApp.deps.json
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\bin\Debug\net8.0\ScentifyWebApp.runtimeconfig.json
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\bin\Debug\net8.0\ScentifyWebApp.dll
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\bin\Debug\net8.0\ScentifyWebApp.pdb
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\ScentifyWebApp.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\ScentifyWebApp.AssemblyInfoInputs.cache
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\ScentifyWebApp.AssemblyInfo.cs
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\ScentifyWebApp.csproj.CoreCompileInputs.cache
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\ScentifyWebApp.MvcApplicationPartsAssemblyInfo.cache
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\ScentifyWebApp.RazorAssemblyInfo.cache
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\ScentifyWebApp.RazorAssemblyInfo.cs
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\ScentifyWebApp.sourcelink.json
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\staticwebassets.build.json
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\staticwebassets.development.json
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\staticwebassets\msbuild.ScentifyWebApp.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\staticwebassets\msbuild.build.ScentifyWebApp.props
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.ScentifyWebApp.props
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.ScentifyWebApp.props
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\staticwebassets.pack.json
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\scopedcss\bundle\ScentifyWebApp.styles.css
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\scopedcss\projectbundle\ScentifyWebApp.bundle.scp.css
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\ScentifyWebApp.dll
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\refint\ScentifyWebApp.dll
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\ScentifyWebApp.pdb
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\ScentifyWebApp.genruntimeconfig.cache
+D:\Projects\douce-project\ScentifyWebApp\ScentifyWebApp\obj\Debug\net8.0\ref\ScentifyWebApp.dll

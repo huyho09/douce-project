@@ -73,11 +73,12 @@ html {
   box-sizing: border-box;
 }
 body {
-  font-family: var(--body-font);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.6;
-  margin: 0;
+    font-family: var(--body-font);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+    margin: 0;
+    background-color: #fffef2;
 }
 p {
   font-size: 1.2em;
@@ -96,7 +97,7 @@ a.light {
 }
 a:hover {
   text-decoration: none;
-  color: var(--primary-color);
+  /*color: var(--primary-color);*/
 }
 
 /*------------ Background Color -----------*/
@@ -266,9 +267,9 @@ h3.cart-title {
   color: var(--light-color);
 }
 .btn.btn-outline-light:hover {
-  background: var(--primary-color);
+  /*background: var(--primary-color);*/
   color: var(--light-color);
-  border-color: var(--primary-color);
+  /*border-color: var(--primary-color);*/
 }
 .btn.btn-outline-accent {
   background: transparent;
@@ -588,7 +589,7 @@ h3.cart-title {
 .site-header {
     position: fixed;
     width: 100%;
-    z-index: 10;
+    z-index: 1000;
     transition: background 0.3s ease-out;
 }
 .navbar-toggler svg.navbar-icon {
@@ -596,12 +597,12 @@ h3.cart-title {
     height: 50px;
 }
 .navbar-nav .nav-item a.nav-link {
-    color: var(--accent-color);
+  /*  color: var(--accent-color);*/
 }
 .navbar-nav .nav-item a.nav-link.active, 
 .navbar-nav .nav-item a.nav-link:focus, 
 .navbar-nav .nav-item a.nav-link:hover {
-    color: var(--primary-color);
+  /*  color: var(--primary-color);*/
 }
 
 /*------------ Offcanvas -------------- */
@@ -666,13 +667,17 @@ h3.cart-title {
   #billboard .banner-content {
       margin-top: 210px;
   }
-  #billboard .image-holder {
-      margin-top: -390px;
-      opacity: 0.3;
-  }
-  #billboard .swiper-arrow {
-      top: 400px;
-  }
+    #billboard .image-holder {
+        margin-top: -390px;
+        opacity: 0.3;
+    }
+    #billboard .swiper-arrow {
+        top: 400px;
+    }
+}
+.image-holder img {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
 /* 3. Icon Box - Company Services
@@ -964,7 +969,7 @@ figure.instagram-item img.insta-image {
 }
 .product-info-tabs .nav-tabs .nav-item.show .nav-link, 
 .product-info-tabs .nav-tabs .nav-link.active {
-    color: var(--primary-color);
+    /*color: var(--primary-color);*/
 }
 
 

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ScentifyWebApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a6edb2b7b3e364f9912789f1e9d89d32f110b537")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4504617dee99b1219fcc24652b52eabbb24dfa5b")]
 [assembly: System.Reflection.AssemblyProductAttribute("ScentifyWebApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ScentifyWebApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
