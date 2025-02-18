@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<ScentifyWebApp.Models.Product>?
+
+@{
     ViewData["Title"] = "Products Page";
 }
 
@@ -19,188 +21,53 @@
             </div>
 
             <div class="product-grid">
-                <!-- Product 1 -->
-                <div class="product-grid-item">
-                    <div class="image-wrapper">
-                        <a href="/fr/en/p/fragrance/ouranon/ouranon-eau-de-parfum/" target="_self">
-                            <img alt="Ouranon Eau de Parfum" loading="lazy" src="./images/gloam.png">
-                        </a>
-                    </div>
-                    <div class="body-wrapper">
-                        <h4>
-                            <a href="/fr/en/p/fragrance/ouranon/ouranon-eau-de-parfum/" target="_self">
-                                Ouranon Eau
-                                de Parfum
-                            </a>
-                        </h4>
-                        <p>Frankincense, Hay, Myrrh</p>
-                        <div class="price-info">
-                            <p>50 mL</p>
-                            <div class="unit-pricing">
-                                <span>€165.00</span>
-                                <span>/</span>
-                                <span>€330.00 per 100 ml</span>
+                @if (Model != null && Model?.Count() > 0)
+                {
+                    foreach (var product in Model)
+                    {
+                        <div class="product-grid-item">
+                            <!-- Image -->
+                            <div class="image-wrapper">
+                                <a href="/products/details/@product.Id" target="_self">
+                                    <img alt="@product.Name" loading="lazy" src="@product.Image">
+                                </a>
+                            </div>
+
+                            <!-- Product Body -->
+                            <div class="body-wrapper">
+                                <!-- Title -->
+                                <h4 class="product-title">
+                                    <a href="/products/details/@product.Id" target="_self">
+                                        @product.Name
+                                    </a>
+                                </h4>
+
+                                <!-- Description -->
+                                <p class="product-description">@product.Description</p>
+
+                                <!-- Price Info -->
+                                <div class="price-info">
+                                    <p class="product-size">@product.Size</p>
+                                    <div class="unit-pricing">
+                                        <span class="product-price">@product.Price.Amount @product.Price.Currency</span>
+                                        <span>/</span>
+                                        <span class="unit-price">@product.Price.UnitPrice</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Call to Action -->
+                            <div class="cta-wrapper">
+                                <button class="add-to-cart-btn" aria-label="Add to your cart - €@product.Price.Amount">Add to your cart</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="cta-wrapper">
-                        <button aria-label="Add to your cart - €165.00">Add to your cart</button>
-                    </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="product-grid-item">
-                    <div class="image-wrapper">
-                        <a href="/fr/en/p/fragrance/ouranon/ouranon-eau-de-parfum/" target="_self">
-                            <img alt="Ouranon Eau de Parfum" loading="lazy" src="./images/gloam.png">
-                        </a>
-                    </div>
-                    <div class="body-wrapper">
-                        <h4>
-                            <a href="/fr/en/p/fragrance/ouranon/ouranon-eau-de-parfum/" target="_self">
-                                Ouranon Eau
-                                de Parfum
-                            </a>
-                        </h4>
-                        <p>Frankincense, Hay, Myrrh</p>
-                        <div class="price-info">
-                            <p>50 mL</p>
-                            <div class="unit-pricing">
-                                <span>€165.00</span>
-                                <span>/</span>
-                                <span>€330.00 per 100 ml</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cta-wrapper">
-                        <button aria-label="Add to your cart - €165.00">Add to your cart</button>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="product-grid-item">
-                    <div class="image-wrapper">
-                        <a href="/fr/en/p/fragrance/ouranon/ouranon-eau-de-parfum/" target="_self">
-                            <img alt="Ouranon Eau de Parfum" loading="lazy" src="./images/gloam.png">
-                        </a>
-                    </div>
-                    <div class="body-wrapper">
-                        <h4>
-                            <a href="/fr/en/p/fragrance/ouranon/ouranon-eau-de-parfum/" target="_self">
-                                Ouranon Eau
-                                de Parfum
-                            </a>
-                        </h4>
-                        <p>Frankincense, Hay, Myrrh</p>
-                        <div class="price-info">
-                            <p>50 mL</p>
-                            <div class="unit-pricing">
-                                <span>€165.00</span>
-                                <span>/</span>
-                                <span>€330.00 per 100 ml</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cta-wrapper">
-                        <button aria-label="Add to your cart - €165.00">Add to your cart</button>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="product-grid">
-                <!-- Product 1 -->
-                <div class="product-grid-item">
-                    <div class="image-wrapper">
-                        <a href="/fr/en/p/fragrance/ouranon/ouranon-eau-de-parfum/" target="_self">
-                            <img alt="Ouranon Eau de Parfum" loading="lazy" src="./images/gloam.png">
-                        </a>
-                    </div>
-                    <div class="body-wrapper">
-                        <h4>
-                            <a href="/fr/en/p/fragrance/ouranon/ouranon-eau-de-parfum/" target="_self">
-                                Ouranon Eau
-                                de Parfum
-                            </a>
-                        </h4>
-                        <p>Frankincense, Hay, Myrrh</p>
-                        <div class="price-info">
-                            <p>50 mL</p>
-                            <div class="unit-pricing">
-                                <span>€165.00</span>
-                                <span>/</span>
-                                <span>€330.00 per 100 ml</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cta-wrapper">
-                        <button aria-label="Add to your cart - €165.00">Add to your cart</button>
-                    </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="product-grid-item">
-                    <div class="image-wrapper">
-                        <a href="/fr/en/p/fragrance/ouranon/ouranon-eau-de-parfum/" target="_self">
-                            <img alt="Ouranon Eau de Parfum" loading="lazy" src="./images/gloam.png">
-                        </a>
-                    </div>
-                    <div class="body-wrapper">
-                        <h4>
-                            <a href="/fr/en/p/fragrance/ouranon/ouranon-eau-de-parfum/" target="_self">
-                                Ouranon Eau
-                                de Parfum
-                            </a>
-                        </h4>
-                        <p>Frankincense, Hay, Myrrh</p>
-                        <div class="price-info">
-                            <p>50 mL</p>
-                            <div class="unit-pricing">
-                                <span>€165.00</span>
-                                <span>/</span>
-                                <span>€330.00 per 100 ml</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cta-wrapper">
-                        <button aria-label="Add to your cart - €165.00">Add to your cart</button>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="product-grid-item">
-                    <div class="image-wrapper">
-                        <a href="/fr/en/p/fragrance/ouranon/ouranon-eau-de-parfum/" target="_self">
-                            <img alt="Ouranon Eau de Parfum" loading="lazy" src="./images/gloam.png">
-                        </a>
-                    </div>
-                    <div class="body-wrapper">
-                        <h4>
-                            <a href="/fr/en/p/fragrance/ouranon/ouranon-eau-de-parfum/" target="_self">
-                                Ouranon Eau
-                                de Parfum
-                            </a>
-                        </h4>
-                        <p>Frankincense, Hay, Myrrh</p>
-                        <div class="price-info">
-                            <p>50 mL</p>
-                            <div class="unit-pricing">
-                                <span>€165.00</span>
-                                <span>/</span>
-                                <span>€330.00 per 100 ml</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cta-wrapper">
-                        <button aria-label="Add to your cart - €165.00">Add to your cart</button>
-                    </div>
-                </div>
-
+                    }
+                }
             </div>
 
             <!-- Load More Button -->
             <div class="load-more-container">
-                <button class="load-more-btn">
+                <button class="load-more-btn" onclick="loadMoreProducts()">
                     <span>Load More</span>
                     <i class="bi bi-chevron-double-down"></i>
                 </button>
@@ -208,3 +75,64 @@
         </div>
     </div>
 </section>
+
+<script>
+    let currentPage = 1;
+    const itemsPerPage = 3;
+
+    async function loadMoreProducts() {
+        const response = await fetch(`/Products/LoadMoreProducts`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ page: currentPage, size: itemsPerPage })
+        });
+        const products = await response.json();
+
+        if (typeof products !== 'underfined' || products?.length > 0) {
+            const container = document.querySelector('.product-grid');
+            products.forEach(product => {
+                const item = document.createElement('div');
+                item.className = 'product-grid-item';
+                item.innerHTML = `
+                    <div class="product-grid-item">
+                        <div class="image-wrapper">
+                            <a href="/products/details/${product.id}" target="_self">
+                                <img alt="${product.name}" loading="lazy" src="${product.image}">
+                            </a>
+                        </div>
+
+                        <div class="body-wrapper">
+                            <!-- Title -->
+                            <h4 class="product-title">
+                                <a href="/products/details/${product.id}" target="_self">
+                                    ${product.name}
+                                </a>
+                            </h4>
+
+                            <p class="product-description">${product.description}</p>
+
+                            <div class="price-info">
+                                <p class="product-size">${product.size}</p>
+                                <div class="unit-pricing">
+                                    <span class="product-price">${product.price.amount} ${product.price.currency}</span>
+                                    <span>/</span>
+                                    <span class="unit-price">${product.price.unitPrice}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cta-wrapper">
+                            <button class="add-to-cart-btn" aria-label="Add to your cart - €${product.price.amount}">Add to your cart</button>
+                        </div>
+                    </div>`;
+                container.appendChild(item);
+            });
+
+            currentPage++;
+        } else {
+            $('.load-more-btn').hide();
+        }
+    }
+</script>
