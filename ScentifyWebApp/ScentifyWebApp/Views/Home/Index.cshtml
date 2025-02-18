@@ -159,7 +159,45 @@
 			<div class="swiper-button-next"></div>
 			<div class="swiper-button-prev"></div>
 		</div>
-		
+
+	</div>
+	<div class="display-header text-dark text-center pb-3">
+		<div class="content-0 swiper-detail">
+			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("FragranceName", new List<string>() {"Yuzu", "Vetiver Heart", "Basil" }, 2, "", "€143.00", "€286.01", true, true, false, true, false, false, false, false, false, false, false,
+			new List<string>() {"Citrus Melange Body Cleanser", "Rind Concentrate Body Balm", "Olous Aromatique Room Spray" }) />
+		</div>
+		<div class="content-1 swiper-detail d-none">
+			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Karst Eau de Parfum", new List<string>() {"Juniper", "Cumin", "Sandalwood" }, 1, "50 mL", "€165.00", "€330.00", true, false, true, false, true, false, false, false, false, false, false,
+			new List<string>() {"Resurrection Aromatique Hand Wash", "Kagerou Aromatique Incense", "Aganice Aromatique Candle" }) />
+		</div>
+		<div class="content-2 swiper-detail d-none">
+			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Virēre Eau de Parfum", new List<string>() {"Bergamot", "Fig", "Green Tea" }, 1, "50 mL", "€143.00", "", false, true, false, true, false, false, false, true, false, false, false,
+			new List<string>() {"Kagerou Aromatique Incense", "Geranium Leaf Hydrating Body Treatment", "Resurrection Aromatique Hand Balm" }) />
+		</div>
+		<div class="content-3 swiper-detail d-none">
+			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Aurner Eau de Parfum", new List<string>() {"Magnolia Leaf", "Roman Chamomile", "Cedar Heart" }, 1, "50 mL", "€165.00", "", true, false, false, false, true, true, false, false, false, false, false,
+			new List<string>() {"Kagerou Aromatique Incense", "Geranium Leaf Hydrating Body Treatment", "Resurrection Aromatique Hand Balm" }) />
+		</div>
+		<div class="content-4 swiper-detail d-none">
+			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Erémia Eau de Parfum", new List<string>() {"Galbanum", "Iris", "Yuzu" }, 1, "50 mL", "€165.00", "€330.00", false, true, false, true, false, true, false, false, false, false, false,
+			new List<string>() {"Geranium Leaf Body Cleanser", "Geranium Leaf Hydrating Body Treatment", "Aganice Aromatique Candle" }) />
+		</div>
+		<div class="content-5 swiper-detail d-none">
+			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Gloam Eau de Parfum", new List<string>() {"Mimosa", "Saffron", "Iris" }, 1, "50 mL", "€165.00", "€330.00", false, false, false, true, false, true, true, false, false, false, false,
+			new List<string>() {"A Rose By Any Other Name Body Cleanser", "Coriander Seed Body Cleanser", "Resurrection Aromatique Hand Balm" }) />
+		</div>
+		<div class="content-6 swiper-detail d-none">
+			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Rōzu Eau de Parfum", new List<string>() {"Rose", "Rose", "Guaiacwood" }, 1, "50 mL", "€165.00", "€330.00", false, false, false, true, false, true, false, true, false, false, false,
+			new List<string>() {"A Rose By Any Other Name Body Cleanser", "Istros Aromatique Room Spray", "Déodorant" }) />
+		</div>
+		<div class="content-7 swiper-detail d-none">
+			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Marrakech Intense Eau de Parfum", new List<string>() {"Clove", "Sandalwood", "Cardamom" }, 2, "", "€143.00", "€286.01", false, false, false, false, false, true, true, true, false, false, false,
+			new List<string>() {"Rejuvenate Intensive Body Balm", "Murasaki Aromatique Incense", "Moroccan Neroli Post-Shave Lotion" }) />
+		</div>
+		<div class="content-8 swiper-detail d-none">
+			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Hwyl Eau de Parfum", new List<string>() {"Cypress", "Frankincense", "Vetiver" }, 2, "", "€143.00", "€286.01", false, false, false, false, false, false, true, true, true, false, false,
+			new List<string>() {"Redemption Body Scrub", "Reverence Aromatique Hand Balm", "Ptolemy Aromatique Candle" }) />
+		</div>
 	</div>
 </section>
 <section id="subscribe" class="container-grid padding-large position-relative overflow-hidden">
@@ -184,7 +222,7 @@
 		</div>
 	</div>
 </section>
-<section id="instagram" class="padding-large overflow-hidden no-padding-top">
+@*<section id="instagram" class="padding-large overflow-hidden no-padding-top">
 	<div class="container">
 		<div class="row">
 			<div class="display-header text-uppercase text-dark text-center pb-3">
@@ -244,7 +282,7 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section>*@
 <script>
 	function currentSlide(n) {
 		showSlides(slideIndex = n);

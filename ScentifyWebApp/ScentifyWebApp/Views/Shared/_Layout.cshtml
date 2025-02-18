@@ -367,6 +367,13 @@
 				nextEl: ".swiper-button-next",
 				prevEl: ".swiper-button-prev",
 			},
+			on: {
+				slideChange: function () {
+					var activeIndex = swiper.activeIndex;
+					$('.swiper-detail').addClass('d-none');
+					$('.content-' + activeIndex).removeClass('d-none');
+				}
+			}
 		});
 	</script>
 </body>
