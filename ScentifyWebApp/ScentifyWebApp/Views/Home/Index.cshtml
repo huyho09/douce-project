@@ -1,38 +1,96 @@
 ﻿@{
-	ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Page";
 }
 
+<!-- Modal Backdrop -->
+<div class="modal-backdrop" onclick="toggleCart()"></div>
+
+<!-- Cart Popup -->
+<div class="cart-container">
+    <div class="cart-header">
+        <p>Cart</p>
+        <button class="close-btn" onclick="toggleCart()">✕</button>
+    </div>
+
+    <div class="cart-item">
+        <p class="product-name">Ouranon Eau de Parfum</p>
+        <p class="product-size">50 mL</p>
+        <div class="product-quantity">
+            <select>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+        </div>
+        <p class="product-price">€165,00</p>
+    </div>
+
+    <hr />
+
+    <div class="promo-code">
+        <p>Apply a promotional code</p>
+        <!-- Apply Promo Code Button -->
+        <button class="open-popup-btn">+</button>
+    </div>
+
+    <p class="shipping-info">Enjoy complimentary standard shipping on all orders over 90 €.</p>
+
+    <div class="cart-total">
+        <p>Subtotal (Tax Incl.)</p>
+        <p class="total-price">€165.00</p>
+    </div>
+
+    <button class="checkout-btn">Checkout</button>
+
+    <div class="payment-methods">
+        <p>VISA • MasterCard • Apple Pay • Klarna</p>
+    </div>
+</div>
+
+<!-- Popup Overlay (Backdrop) -->
+<div class="popup-overlay" id="popupOverlay"></div>
+
+<!-- Popup Container -->
+<div class="popup-container" id="promoPopup">
+    <div class="popup-content">
+        <button class="close-btn" id="closePopup">&times;</button>
+        <h2>Apply a promotional code</h2>
+        <label for="promoCode">Promotional code</label>
+        <input type="text" id="promoCode" placeholder="Enter your code" />
+        <button class="apply-btn">Apply</button>
+    </div>
+</div>
 
 <div id="carouselExample" class="carousel slide" data-ride="carousel">
-	<div class="carousel-inner">
-		<div class="carousel-item active">
-			<img class="d-block w-100" src="/images/Aesop_Fragrance_2024_Web_Category_Page_Primary_Full_Bleed_Desktop_2880x1044px.png" alt="Slide 0">
-		</div>
-		<div class="carousel-item">
-			<img class="d-block w-100" src="~/images/Aesop_Category_Skin_Care_Primary_Full_Bleed_Desktop_XL_5120x1856px.png" alt="Slide 1">
-		</div>
-		<div class="carousel-item">
-			@*<video controls autoplay muted loop>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="/images/Aesop_Fragrance_2024_Web_Category_Page_Primary_Full_Bleed_Desktop_2880x1044px.png" alt="Slide 0">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="~/images/Aesop_Category_Skin_Care_Primary_Full_Bleed_Desktop_XL_5120x1856px.png" alt="Slide 1">
+        </div>
+        <div class="carousel-item">
+            @*<video controls autoplay muted loop>
 				<source src="https://www.youtube.com/watch?v=RUDKRvHXKug" type="video/mp4">
 				Your browser does not support the video tag.
 				</video>*@
-			<iframe width="1280"
-					height="720"
-					src="//www.youtube.com/embed/RUDKRvHXKug?autoplay=1&loop=1&playlist=RUDKRvHXKug"
-					title="Respect@Work Navigating fun and functions in the age of “positive duty”"
-					frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-					referrerpolicy="strict-origin-when-cross-origin"
-					allowfullscreen></iframe>
-		</div>
-	</div>
-	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-	</button>
-	<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-		<span class="carousel-control-next-icon" aria-hidden="true"></span>
-	</button>
-	@*<br>
+            <iframe width="1280"
+                    height="720"
+                    src="//www.youtube.com/embed/RUDKRvHXKug?autoplay=1&loop=1&playlist=RUDKRvHXKug"
+                    title="Respect@Work Navigating fun and functions in the age of “positive duty”"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen></iframe>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+    @*<br>
 
 		<div style="text-align:center">
 			<span class="dot" onclick="currentSlide(1)"></span>
@@ -41,186 +99,186 @@
 		</div>*@
 </div>
 <div class="subNavigation_subNavigation__b0ZiE" data-testid="category-navigation">
-	<div class="subNavigation_subNavContainerHolder__MyYfR">
-		<div class="subNavigation_subNavContainer__8LZ2X">
-			<div class="subNavigationList_subNavListsContainer__IyfDM" data-testid="CATEGORY_SUB_NAV">
-				<ul class="subNavigationList_subNavList__YlZCz">
-					<li class="subNavigationList_subNavListItem__phySy"><a class="Hyperlink_base__H3jim Hyperlink_left__UZaMy Hyperlink_dark__ROIlG subNavigationList_subNavLink__anNud" data-test-id="CATEGORY_SUB_NAV_ALL-FRAGRANCE" data-test-ref="CATEGORY_SUB_NAV_ITEM_LINK" data-testid="CATEGORY_SUB_NAV_ALL-FRAGRANCE" href="#" target="_self">All Fragrance</a></li>
-					<li class="subNavigationList_subNavListItem__phySy"><a class="Hyperlink_base__H3jim Hyperlink_left__UZaMy Hyperlink_dark__ROIlG subNavigationList_subNavLink__anNud" data-test-id="CATEGORY_SUB_NAV_FLORAL" data-test-ref="CATEGORY_SUB_NAV_ITEM_LINK" data-testid="CATEGORY_SUB_NAV_FLORAL" href="#" target="_self">Floral</a></li>
-					<li class="subNavigationList_subNavListItem__phySy"><a class="Hyperlink_base__H3jim Hyperlink_left__UZaMy Hyperlink_dark__ROIlG subNavigationList_subNavLink__anNud" data-test-id="CATEGORY_SUB_NAV_FRESH" data-test-ref="CATEGORY_SUB_NAV_ITEM_LINK" data-testid="CATEGORY_SUB_NAV_FRESH" href="#" target="_self">Fresh</a></li>
-					<li class="subNavigationList_subNavListItem__phySy"><a class="Hyperlink_base__H3jim Hyperlink_left__UZaMy Hyperlink_dark__ROIlG subNavigationList_subNavLink__anNud" data-test-id="CATEGORY_SUB_NAV_WOODY" data-test-ref="CATEGORY_SUB_NAV_ITEM_LINK" data-testid="CATEGORY_SUB_NAV_WOODY" href="#" target="_self">Woody</a></li>
-					<li class="subNavigationList_subNavListItem__phySy">
-						<a class="Hyperlink_base__H3jim Hyperlink_left__UZaMy Hyperlink_dark__ROIlG subNavigationList_subNavLink__anNud" data-test-id="CATEGORY_SUB_NAV_OPULENT" data-test-ref="CATEGORY_SUB_NAV_ITEM_LINK" data-testid="CATEGORY_SUB_NAV_OPULENT" href="/fr/en/c/fragrance/opulent/" target="_self">Opulent</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+    <div class="subNavigation_subNavContainerHolder__MyYfR">
+        <div class="subNavigation_subNavContainer__8LZ2X">
+            <div class="subNavigationList_subNavListsContainer__IyfDM" data-testid="CATEGORY_SUB_NAV">
+                <ul class="subNavigationList_subNavList__YlZCz">
+                    <li class="subNavigationList_subNavListItem__phySy"><a class="Hyperlink_base__H3jim Hyperlink_left__UZaMy Hyperlink_dark__ROIlG subNavigationList_subNavLink__anNud" data-test-id="CATEGORY_SUB_NAV_ALL-FRAGRANCE" data-test-ref="CATEGORY_SUB_NAV_ITEM_LINK" data-testid="CATEGORY_SUB_NAV_ALL-FRAGRANCE" href="#" target="_self">All Fragrance</a></li>
+                    <li class="subNavigationList_subNavListItem__phySy"><a class="Hyperlink_base__H3jim Hyperlink_left__UZaMy Hyperlink_dark__ROIlG subNavigationList_subNavLink__anNud" data-test-id="CATEGORY_SUB_NAV_FLORAL" data-test-ref="CATEGORY_SUB_NAV_ITEM_LINK" data-testid="CATEGORY_SUB_NAV_FLORAL" href="#" target="_self">Floral</a></li>
+                    <li class="subNavigationList_subNavListItem__phySy"><a class="Hyperlink_base__H3jim Hyperlink_left__UZaMy Hyperlink_dark__ROIlG subNavigationList_subNavLink__anNud" data-test-id="CATEGORY_SUB_NAV_FRESH" data-test-ref="CATEGORY_SUB_NAV_ITEM_LINK" data-testid="CATEGORY_SUB_NAV_FRESH" href="#" target="_self">Fresh</a></li>
+                    <li class="subNavigationList_subNavListItem__phySy"><a class="Hyperlink_base__H3jim Hyperlink_left__UZaMy Hyperlink_dark__ROIlG subNavigationList_subNavLink__anNud" data-test-id="CATEGORY_SUB_NAV_WOODY" data-test-ref="CATEGORY_SUB_NAV_ITEM_LINK" data-testid="CATEGORY_SUB_NAV_WOODY" href="#" target="_self">Woody</a></li>
+                    <li class="subNavigationList_subNavListItem__phySy">
+                        <a class="Hyperlink_base__H3jim Hyperlink_left__UZaMy Hyperlink_dark__ROIlG subNavigationList_subNavLink__anNud" data-test-id="CATEGORY_SUB_NAV_OPULENT" data-test-ref="CATEGORY_SUB_NAV_ITEM_LINK" data-testid="CATEGORY_SUB_NAV_OPULENT" href="/fr/en/c/fragrance/opulent/" target="_self">Opulent</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 <section id="mobile-products" class="product-store position-relative padding-large ">
-	<div class="container">
-		<div class="row">
-			<div class="display-header d-flex justify-content-between pb-3">
-				<h2 class="display-7 text-dark text-uppercase">Begin exploring by fragrance family</h2>
-			</div>
-		</div>
+    <div class="container">
+        <div class="row">
+            <div class="display-header d-flex justify-content-between pb-3">
+                <h2 class="display-7 text-dark text-uppercase">Begin exploring by fragrance family</h2>
+            </div>
+        </div>
 
-	</div>
-	<div class="row m-1">
-		<div class="col-3  p-1">
-			<div class="product-card position-relative">
-				<div class="image-holder">
-					<img src="https://www.aesop.com/u1nb1km7t5q7/2hthaLRXLy8nsxiaCbCyq2/c1b27569f129f2b24fd06c5d420ad646/Aesop_Fragrance_2024_Web_Category_Page_Secondary_Menu_Floral_Desktop_1280x804px.jpg" alt="product-item" class="img-fluid">
-				</div>
-				<h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">Floral</h3>
-			</div>
-		</div>
-		<div class="col-3 p-1">
-			<div class="product-card position-relative">
-				<div class="image-holder">
-					<img src="https://www.aesop.com/u1nb1km7t5q7/7xLN21UUjQb29vqbzjKweA/b1b246e4e1e42eca1d9461963dcff2df/Aesop_Fragrance_2024_Web_Category_Page_Secondary_Menu_Fresh_Desktop_1280x804px.jpg" alt="product-item" class="img-fluid">
-				</div>
-				<h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">Fresh</h3>
-			</div>
-		</div>
-		<div class="col-3  p-1">
-			<div class="product-card position-relative">
-				<div class="image-holder">
-					<img src="https://www.aesop.com/u1nb1km7t5q7/2EurYl7oUUR1AgEUyVLyHL/b4fa9958e121ab8a07de13f82ba4b347/Aesop_Fragrance_2024_Web_Category_Page_Secondary_Menu_Woody_Desktop_1280x804px.jpg" alt="product-item" class="img-fluid">
-				</div>
-				<h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">Woody</h3>
-			</div>
-		</div>
-		<div class="col-3  p-1">
-			<div class="product-card position-relative">
-				<div class="image-holder">
-					<img src="https://www.aesop.com/u1nb1km7t5q7/2I1o09YtXkRr4OZg9vlwGB/8c3075fa27f58fe59443d7ead73f5804/Aesop_Fragrance_2024_Web_Category_Page_Secondary_Menu_Opulent_Desktop_1280x804px.jpg" alt="product-item" class="img-fluid">
-				</div>
-				<h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">Opulent</h3>
-			</div>
-		</div>
-	</div>
+    </div>
+    <div class="row m-1">
+        <div class="col-3  p-1">
+            <div class="product-card position-relative">
+                <div class="image-holder">
+                    <img src="https://www.aesop.com/u1nb1km7t5q7/2hthaLRXLy8nsxiaCbCyq2/c1b27569f129f2b24fd06c5d420ad646/Aesop_Fragrance_2024_Web_Category_Page_Secondary_Menu_Floral_Desktop_1280x804px.jpg" alt="product-item" class="img-fluid">
+                </div>
+                <h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">Floral</h3>
+            </div>
+        </div>
+        <div class="col-3 p-1">
+            <div class="product-card position-relative">
+                <div class="image-holder">
+                    <img src="https://www.aesop.com/u1nb1km7t5q7/7xLN21UUjQb29vqbzjKweA/b1b246e4e1e42eca1d9461963dcff2df/Aesop_Fragrance_2024_Web_Category_Page_Secondary_Menu_Fresh_Desktop_1280x804px.jpg" alt="product-item" class="img-fluid">
+                </div>
+                <h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">Fresh</h3>
+            </div>
+        </div>
+        <div class="col-3  p-1">
+            <div class="product-card position-relative">
+                <div class="image-holder">
+                    <img src="https://www.aesop.com/u1nb1km7t5q7/2EurYl7oUUR1AgEUyVLyHL/b4fa9958e121ab8a07de13f82ba4b347/Aesop_Fragrance_2024_Web_Category_Page_Secondary_Menu_Woody_Desktop_1280x804px.jpg" alt="product-item" class="img-fluid">
+                </div>
+                <h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">Woody</h3>
+            </div>
+        </div>
+        <div class="col-3  p-1">
+            <div class="product-card position-relative">
+                <div class="image-holder">
+                    <img src="https://www.aesop.com/u1nb1km7t5q7/2I1o09YtXkRr4OZg9vlwGB/8c3075fa27f58fe59443d7ead73f5804/Aesop_Fragrance_2024_Web_Category_Page_Secondary_Menu_Opulent_Desktop_1280x804px.jpg" alt="product-item" class="img-fluid">
+                </div>
+                <h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">Opulent</h3>
+            </div>
+        </div>
+    </div>
 
 </section>
 
 <section id="yearly-sale" class="bg-light-blue overflow-hidden mt-5">
-	<div class="row d-flex flex-wrap align-items-center position-relative" style="color:whitesmoke">
-		<img class="Image_picture" alt="Metal tray with flower, wood and dried flowers placed next to a hand holding Aurner EDP" loading="lazy" src="https://www.aesop.com/u1nb1km7t5q7/6YUjno3jbrtqUwcWLgCH6/165699472aef564dd8a2608372560cc4/Aesop_Aurner_Eau_de_Parfum_Web_Category_Page_Secondary_Full_Width_Desktop_2880x1044px.jpg">
-		<div class="col-md-6 col-sm-12 position-absolute">
-			<div class="text-content offset-4 padding-medium">
-				<h3>A defiant bloom</h3>
-				<h2 class="Heading_base__RCdQN Heading_xLarge__AY5lq Heading_light__G2Y3e SectionHeading_heading__vDzj6">New Aurner Eau de Parfum</h2>
-				<div class="BodyCopy_copy__8BnZm">
-					<p class="Paragraph_base__CFztu Paragraph_light__GdrHW Contentful_contentful__richtext--whitespace__p8_HS" style="color:whitesmoke">Created with long-term collaborator Céline Barel, our latest fragrance subverts traditional expectations of a floral, with herbaceous Magnolia Leaf providing a nuanced expression of the bloom.</p>
-				</div>
-				<a href="shop.html" class="btn text-uppercase btn-discount">
-					Discover Aurner Eau de Parfum
-					<i aria-hidden="true" class="Hyperlink_icon__u_gO9"><svg aria-labelledby="rightArrow-:Rlrh9am:" class="Icon_base__GKZ58 Icon_light__1TZsq" data-testid="data-testid-Icon" focusable="false" height="12" role="img" style="height:12px;width:12px" tabindex="-1" viewBox="0 0 50 50" width="12"><title id="rightArrow-:Rlrh9am:">rightArrow</title><g><path d="M30.1,5.3L50,25.1L30.1,45h-6.6l18-17.6H0v-4.8h41.5l-18-17.6h6.6V5.3z"></path></g></svg></i>
-				</a>
-			</div>
-		</div>
-	</div>
+    <div class="row d-flex flex-wrap align-items-center position-relative" style="color:whitesmoke">
+        <img class="Image_picture" alt="Metal tray with flower, wood and dried flowers placed next to a hand holding Aurner EDP" loading="lazy" src="https://www.aesop.com/u1nb1km7t5q7/6YUjno3jbrtqUwcWLgCH6/165699472aef564dd8a2608372560cc4/Aesop_Aurner_Eau_de_Parfum_Web_Category_Page_Secondary_Full_Width_Desktop_2880x1044px.jpg">
+        <div class="col-md-6 col-sm-12 position-absolute">
+            <div class="text-content offset-4 padding-medium">
+                <h3>A defiant bloom</h3>
+                <h2 class="Heading_base__RCdQN Heading_xLarge__AY5lq Heading_light__G2Y3e SectionHeading_heading__vDzj6">New Aurner Eau de Parfum</h2>
+                <div class="BodyCopy_copy__8BnZm">
+                    <p class="Paragraph_base__CFztu Paragraph_light__GdrHW Contentful_contentful__richtext--whitespace__p8_HS" style="color:whitesmoke">Created with long-term collaborator Céline Barel, our latest fragrance subverts traditional expectations of a floral, with herbaceous Magnolia Leaf providing a nuanced expression of the bloom.</p>
+                </div>
+                <a href="shop.html" class="btn text-uppercase btn-discount">
+                    Discover Aurner Eau de Parfum
+                    <i aria-hidden="true" class="Hyperlink_icon__u_gO9"><svg aria-labelledby="rightArrow-:Rlrh9am:" class="Icon_base__GKZ58 Icon_light__1TZsq" data-testid="data-testid-Icon" focusable="false" height="12" role="img" style="height:12px;width:12px" tabindex="-1" viewBox="0 0 50 50" width="12"><title id="rightArrow-:Rlrh9am:">rightArrow</title><g><path d="M30.1,5.3L50,25.1L30.1,45h-6.6l18-17.6H0v-4.8h41.5l-18-17.6h6.6V5.3z"></path></g></svg></i>
+                </a>
+            </div>
+        </div>
+    </div>
 </section>
 <section id="testimonials" class="position-relative" style="margin-top: 100px">
-	<div class="display-header text-uppercase text-dark text-center pb-3">
-		<h2 class="display-7">Compare our fragrances</h2>
-	</div>
-	<div #swiperRef="" class="swiper mySwiper">
-		<div class="swiper-wrapper">
-			<div class="swiper-slide">
-				<img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
-			</div>
-			<div class="swiper-slide">
-				<img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
-			</div>
-			<div class="swiper-slide">
-				<img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
-			</div>
-			<div class="swiper-slide">
-				<img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
-			</div>
-			<div class="swiper-slide">
-				<img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
-			</div>
-			<div class="swiper-slide">
-				<img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
-			</div>
-			<div class="swiper-slide">
-				<img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
-			</div>
-			<div class="swiper-slide">
-				<img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
-			</div>
-			<div class="swiper-slide">
-				<img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
-			</div>
-		</div>
-		<div class="d-flex justify-content-center align-content-center">
-			<div class="swiper-button-next"></div>
-			<div class="swiper-button-prev"></div>
-		</div>
+    <div class="display-header text-uppercase text-dark text-center pb-3">
+        <h2 class="display-7">Compare our fragrances</h2>
+    </div>
+    <div #swiperRef="" class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
+            </div>
+            <div class="swiper-slide">
+                <img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
+            </div>
+            <div class="swiper-slide">
+                <img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
+            </div>
+            <div class="swiper-slide">
+                <img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
+            </div>
+            <div class="swiper-slide">
+                <img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
+            </div>
+            <div class="swiper-slide">
+                <img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
+            </div>
+            <div class="swiper-slide">
+                <img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
+            </div>
+            <div class="swiper-slide">
+                <img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
+            </div>
+            <div class="swiper-slide">
+                <img src="~/images/Aesop_Fragrance_Tool_Bottle_Tacit.png" />
+            </div>
+        </div>
+        <div class="d-flex justify-content-center align-content-center">
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
 
-	</div>
-	<div class="display-header text-dark text-center pb-3">
-		<div class="content-0 swiper-detail">
-			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("FragranceName", new List<string>() {"Yuzu", "Vetiver Heart", "Basil" }, 2, "", "€143.00", "€286.01", true, true, false, true, false, false, false, false, false, false, false,
-			new List<string>() {"Citrus Melange Body Cleanser", "Rind Concentrate Body Balm", "Olous Aromatique Room Spray" }) />
-		</div>
-		<div class="content-1 swiper-detail d-none">
-			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Karst Eau de Parfum", new List<string>() {"Juniper", "Cumin", "Sandalwood" }, 1, "50 mL", "€165.00", "€330.00", true, false, true, false, true, false, false, false, false, false, false,
-			new List<string>() {"Resurrection Aromatique Hand Wash", "Kagerou Aromatique Incense", "Aganice Aromatique Candle" }) />
-		</div>
-		<div class="content-2 swiper-detail d-none">
-			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Virēre Eau de Parfum", new List<string>() {"Bergamot", "Fig", "Green Tea" }, 1, "50 mL", "€143.00", "", false, true, false, true, false, false, false, true, false, false, false,
-			new List<string>() {"Kagerou Aromatique Incense", "Geranium Leaf Hydrating Body Treatment", "Resurrection Aromatique Hand Balm" }) />
-		</div>
-		<div class="content-3 swiper-detail d-none">
-			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Aurner Eau de Parfum", new List<string>() {"Magnolia Leaf", "Roman Chamomile", "Cedar Heart" }, 1, "50 mL", "€165.00", "", true, false, false, false, true, true, false, false, false, false, false,
-			new List<string>() {"Kagerou Aromatique Incense", "Geranium Leaf Hydrating Body Treatment", "Resurrection Aromatique Hand Balm" }) />
-		</div>
-		<div class="content-4 swiper-detail d-none">
-			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Erémia Eau de Parfum", new List<string>() {"Galbanum", "Iris", "Yuzu" }, 1, "50 mL", "€165.00", "€330.00", false, true, false, true, false, true, false, false, false, false, false,
-			new List<string>() {"Geranium Leaf Body Cleanser", "Geranium Leaf Hydrating Body Treatment", "Aganice Aromatique Candle" }) />
-		</div>
-		<div class="content-5 swiper-detail d-none">
-			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Gloam Eau de Parfum", new List<string>() {"Mimosa", "Saffron", "Iris" }, 1, "50 mL", "€165.00", "€330.00", false, false, false, true, false, true, true, false, false, false, false,
-			new List<string>() {"A Rose By Any Other Name Body Cleanser", "Coriander Seed Body Cleanser", "Resurrection Aromatique Hand Balm" }) />
-		</div>
-		<div class="content-6 swiper-detail d-none">
-			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Rōzu Eau de Parfum", new List<string>() {"Rose", "Rose", "Guaiacwood" }, 1, "50 mL", "€165.00", "€330.00", false, false, false, true, false, true, false, true, false, false, false,
-			new List<string>() {"A Rose By Any Other Name Body Cleanser", "Istros Aromatique Room Spray", "Déodorant" }) />
-		</div>
-		<div class="content-7 swiper-detail d-none">
-			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Marrakech Intense Eau de Parfum", new List<string>() {"Clove", "Sandalwood", "Cardamom" }, 2, "", "€143.00", "€286.01", false, false, false, false, false, true, true, true, false, false, false,
-			new List<string>() {"Rejuvenate Intensive Body Balm", "Murasaki Aromatique Incense", "Moroccan Neroli Post-Shave Lotion" }) />
-		</div>
-		<div class="content-8 swiper-detail d-none">
-			<partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Hwyl Eau de Parfum", new List<string>() {"Cypress", "Frankincense", "Vetiver" }, 2, "", "€143.00", "€286.01", false, false, false, false, false, false, true, true, true, false, false,
-			new List<string>() {"Redemption Body Scrub", "Reverence Aromatique Hand Balm", "Ptolemy Aromatique Candle" }) />
-		</div>
-	</div>
+    </div>
+    <div class="display-header text-dark text-center pb-3">
+        <div class="content-0 swiper-detail">
+            <partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("FragranceName", new List<string>() {"Yuzu", "Vetiver Heart", "Basil" }, 2, "", "€143.00", "€286.01", true, true, false, true, false, false, false, false, false, false, false,
+                     new List<string>() {"Citrus Melange Body Cleanser", "Rind Concentrate Body Balm", "Olous Aromatique Room Spray" }) />
+        </div>
+        <div class="content-1 swiper-detail d-none">
+            <partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Karst Eau de Parfum", new List<string>() {"Juniper", "Cumin", "Sandalwood" }, 1, "50 mL", "€165.00", "€330.00", true, false, true, false, true, false, false, false, false, false, false,
+                     new List<string>() {"Resurrection Aromatique Hand Wash", "Kagerou Aromatique Incense", "Aganice Aromatique Candle" }) />
+        </div>
+        <div class="content-2 swiper-detail d-none">
+            <partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Virēre Eau de Parfum", new List<string>() {"Bergamot", "Fig", "Green Tea" }, 1, "50 mL", "€143.00", "", false, true, false, true, false, false, false, true, false, false, false,
+                     new List<string>() {"Kagerou Aromatique Incense", "Geranium Leaf Hydrating Body Treatment", "Resurrection Aromatique Hand Balm" }) />
+        </div>
+        <div class="content-3 swiper-detail d-none">
+            <partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Aurner Eau de Parfum", new List<string>() {"Magnolia Leaf", "Roman Chamomile", "Cedar Heart" }, 1, "50 mL", "€165.00", "", true, false, false, false, true, true, false, false, false, false, false,
+                     new List<string>() {"Kagerou Aromatique Incense", "Geranium Leaf Hydrating Body Treatment", "Resurrection Aromatique Hand Balm" }) />
+        </div>
+        <div class="content-4 swiper-detail d-none">
+            <partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Erémia Eau de Parfum", new List<string>() {"Galbanum", "Iris", "Yuzu" }, 1, "50 mL", "€165.00", "€330.00", false, true, false, true, false, true, false, false, false, false, false,
+                     new List<string>() {"Geranium Leaf Body Cleanser", "Geranium Leaf Hydrating Body Treatment", "Aganice Aromatique Candle" }) />
+        </div>
+        <div class="content-5 swiper-detail d-none">
+            <partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Gloam Eau de Parfum", new List<string>() {"Mimosa", "Saffron", "Iris" }, 1, "50 mL", "€165.00", "€330.00", false, false, false, true, false, true, true, false, false, false, false,
+                     new List<string>() {"A Rose By Any Other Name Body Cleanser", "Coriander Seed Body Cleanser", "Resurrection Aromatique Hand Balm" }) />
+        </div>
+        <div class="content-6 swiper-detail d-none">
+            <partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Rōzu Eau de Parfum", new List<string>() {"Rose", "Rose", "Guaiacwood" }, 1, "50 mL", "€165.00", "€330.00", false, false, false, true, false, true, false, true, false, false, false,
+                     new List<string>() {"A Rose By Any Other Name Body Cleanser", "Istros Aromatique Room Spray", "Déodorant" }) />
+        </div>
+        <div class="content-7 swiper-detail d-none">
+            <partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Marrakech Intense Eau de Parfum", new List<string>() {"Clove", "Sandalwood", "Cardamom" }, 2, "", "€143.00", "€286.01", false, false, false, false, false, true, true, true, false, false, false,
+                     new List<string>() {"Rejuvenate Intensive Body Balm", "Murasaki Aromatique Incense", "Moroccan Neroli Post-Shave Lotion" }) />
+        </div>
+        <div class="content-8 swiper-detail d-none">
+            <partial name="/Views/Shared/_SwiperContentDetailI.cshtml" model=@("Hwyl Eau de Parfum", new List<string>() {"Cypress", "Frankincense", "Vetiver" }, 2, "", "€143.00", "€286.01", false, false, false, false, false, false, true, true, true, false, false,
+                     new List<string>() {"Redemption Body Scrub", "Reverence Aromatique Hand Balm", "Ptolemy Aromatique Candle" }) />
+        </div>
+    </div>
 </section>
 <section id="subscribe" class="container-grid padding-large position-relative overflow-hidden">
-	<div class="container">
-		<div class="row">
-			<div class="subscribe-content bg-dark d-flex flex-wrap justify-content-center align-items-center padding-medium">
-				<div class="col-md-6 col-sm-12">
-					<div class="display-header pe-3">
-						<h2 class="display-7 text-uppercase text-light">Subscribe Us Now</h2>
-						<p>Get latest news, updates and deals directly mailed to your inbox.</p>
-					</div>
-				</div>
-				<div class="col-md-5 col-sm-12">
-					<form class="subscription-form validate">
-						<div class="input-group flex-wrap">
-							<input class="form-control btn-rounded-none" type="email" name="EMAIL" placeholder="Your email address here" required="">
-							<button class="btn btn-medium btn-primary text-uppercase btn-rounded-none" type="submit" name="subscribe">Subscribe</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="subscribe-content bg-dark d-flex flex-wrap justify-content-center align-items-center padding-medium">
+                <div class="col-md-6 col-sm-12">
+                    <div class="display-header pe-3">
+                        <h2 class="display-7 text-uppercase text-light">Subscribe Us Now</h2>
+                        <p>Get latest news, updates and deals directly mailed to your inbox.</p>
+                    </div>
+                </div>
+                <div class="col-md-5 col-sm-12">
+                    <form class="subscription-form validate">
+                        <div class="input-group flex-wrap">
+                            <input class="form-control btn-rounded-none" type="email" name="EMAIL" placeholder="Your email address here" required="">
+                            <button class="btn btn-medium btn-primary text-uppercase btn-rounded-none" type="submit" name="subscribe">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 @*<section id="instagram" class="padding-large overflow-hidden no-padding-top">
 	<div class="container">
@@ -284,23 +342,56 @@
 	</div>
 </section>*@
 <script>
-	function currentSlide(n) {
-		showSlides(slideIndex = n);
-	}
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
 
-	function showSlides(n) {
-		let i;
-		let slides = document.getElementsByClassName("carousel-item");
-		let dots = document.getElementsByClassName("dot");
-		if (n > slides.length) { slideIndex = 1 }
-		if (n < 1) { slideIndex = slides.length }
-		for (i = 0; i < slides.length; i++) {
-			slides[i].style.display = "none";
-		}
-		for (i = 0; i < dots.length; i++) {
-			dots[i].className = dots[i].className.replace(" active", "");
-		}
-		slides[slideIndex - 1].style.display = "block";
-		dots[slideIndex - 1].className += " active";
-	}
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("carousel-item");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
+</script>
+
+<script>
+    function toggleCart() {
+        document.querySelector('.cart-container').classList.toggle('active');
+        document.querySelector('.modal-backdrop').classList.toggle('active');
+    }
+</script>
+
+<script>
+    // Get elements
+    const openPopupBtn = document.querySelector(".open-popup-btn");
+    const closePopupBtn = document.getElementById("closePopup");
+    const popupOverlay = document.getElementById("popupOverlay");
+    const promoPopup = document.getElementById("promoPopup");
+
+    // Open popup
+    openPopupBtn.addEventListener("click", () => {
+      promoPopup.classList.add("active");
+      popupOverlay.classList.add("active");
+    });
+
+    // Close popup
+    closePopupBtn.addEventListener("click", () => {
+      promoPopup.classList.remove("active");
+      popupOverlay.classList.remove("active");
+    });
+
+    // Close when clicking outside the popup
+    popupOverlay.addEventListener("click", () => {
+      promoPopup.classList.remove("active");
+      popupOverlay.classList.remove("active");
+    });
 </script>
