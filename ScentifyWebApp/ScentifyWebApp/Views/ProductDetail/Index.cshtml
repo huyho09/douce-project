@@ -1,149 +1,148 @@
-﻿
-<div class="product-detail-container">
-	<div class="d-flex justify-content-around text-white hero" style="padding-top: 100px; background: linear-gradient(135deg, #0d0d0d, #1a0b0b);">
-		<div class="text-content">
-			<h1>THE<br>NIGHT<br>TREASURE</h1>
-			<p>The night treasure Parfum embodies a new facet of love.</p>
+﻿@{
+	Layout = "~/Views/Shared/_DetailLayout.cshtml";
+}
+
+
+<!-- Main Content -->
+<div class="container main d-flex">
+	<!-- Text Section -->
+	<div class="text-content">
+		<h1>THE<br>NIGHT<br>TREASURE</h1>
+		<p><span style="padding-left: 40px;">The night treasure Parfum embodies a new facet of love.</span></p>
+		
+	</div>
+	<div class="product-display d-flex flex-column">
+		<img src="~/images/default_frag.png" alt="Perfume Bottle">
+		<div>
 			<button class="add-to-cart">Add to cart +</button>
-		</div>
-		<div class="product-display">
-			<img src="https://via.placeholder.com/300x400?text=Perfume+Image" alt="Perfume Bottle">
-			<div class="product-info">
-				<h3>$100.45</h3>
-				<div class="stars">
-					★★★★☆
-				</div>
-				<div class="details">30 mL</div>
-				<div class="controls">
-					<i class="fas fa-chevron-left"></i>
-					<i class="fas fa-chevron-right"></i>
-				</div>
+		</div>	
+	</div>
+	<!-- Product Image & Info -->
+	<div class="product-display">
+		
+		<div class="product-info">
+			<h3>$100.45</h3>
+			<div class="stars">
+				★★★★☆
+			</div>
+			<div class="details">30 mL</div>
+			<div class="controls">
+				<i class="fas fa-chevron-left"></i>
+				<i class="fas fa-chevron-right"></i>
 			</div>
 		</div>
 	</div>
-	<div class="info-sections">
-		<div class="section">
-			<div class="number">01</div>
-			<div class="title">DESCRIPTION</div>
-		</div>
-		<div class="section">
-			<div class="number">02</div>
-			<div class="title">PERFUMED NOTES</div>
-		</div>
-		<div class="section">
-			<div class="number">03</div>
-			<div class="title">FLACON</div>
-		</div>
-		<div class="section">
-			<div class="number">04</div>
-			<div class="title">COMPOSITION</div>
-		</div>
-	</div>
-	<section class="second-section">
-		<div class="section-content">
-			<h2 class="section-title">A Vanilla Phrodisiac</h2>
-			<p class="section-subtitle">
-				Financial institutions provide financial services for members
-				and as middlemen between the savers and borrowers.
-			</p>
-
-			<!-- Ingredients Cards -->
-			<div class="cards">
-				<!-- Card 1 -->
-				<div class="card">
-					<img src="https://via.placeholder.com/100x100?text=Rose+Branch" alt="Rose Damascena">
-					<h3>ROSE DAMASCENA</h3>
-					<p>the rose of Castile, is a rose hybrid.</p>
-				</div>
-
-				<!-- Card 2 - Highlighted -->
-				<div class="card center">
-					<img src="https://via.placeholder.com/150x150?text=Rose+Flower" alt="Rose Damascena Center">
-					<h3>ROSE DAMASCENA</h3>
-					<p>more commonly known as the Damask rose.</p>
-				</div>
-
-				<!-- Card 3 -->
-				<div class="card">
-					<img src="https://via.placeholder.com/100x100?text=Vanilla" alt="Vanilla">
-					<h3>VANILLE</h3>
-					<p>Grown in Papua New Guinea from Tahitensis variety.</p>
-				</div>
-			</div>
-
-			<!-- Navigation Controls -->
-			<div class="nav-controls">
-				<button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
-				<button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
-			</div>
-		</div>
-	</section>
-	<div class="review-content position-relative">
-		<div class="swiper-icon swiper-arrow swiper-arrow-prev position-absolute d-flex align-items-center">
-			<svg class="chevron-left">
-				<use xlink:href="#chevron-left" />
-			</svg>
-		</div>
-		<div class="swiper testimonial-swiper">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide text-center d-flex justify-content-center">
-					<div class="review-item col-md-10">
-						<div class="author-detail">
-							<div class="name text-dark text-uppercase pt-2">Emma Chamberlin</div>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide text-center d-flex justify-content-center">
-					<div class="review-item col-md-10">
-						<div class="author-detail">
-							<div class="name text-dark text-uppercase pt-2">Jennie Rose</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="swiper-icon swiper-arrow swiper-arrow-next position-absolute d-flex align-items-center">
-			<svg class="chevron-right">
-				<use xlink:href="#chevron-right" />
-			</svg>
-		</div>
-	</div>
-	<section class="third-section">
-		<div class="section-content">
-			<!-- Heading -->
-			<div class="section-heading">
-				<p class="section-label">SIMILAR PRODUCTS</p>
-				<h2 class="section-title">The fragrance larger than life.</h2>
-			</div>
-
-			<!-- Product Cards -->
-			<div class="product-cards">
-				<!-- Card 1 -->
-				<div class="product-card">
-					<div class="card-content">
-						<h3>01</h3>
-						<h4>The night treasure</h4>
-						<p>L'amour est un trésor. Depuis sa création en 1990, l'Eau de absolu sous toute.</p>
-						<a href="#" class="learn-more">LEARN MORE</a>
-					</div>
-				</div>
-
-				<!-- Card 2 -->
-				<div class="product-card">
-					<div class="card-content">
-						<h3>02</h3>
-						<h4>The night treasure</h4>
-						<p>L'amour est un trésor. Depuis sa création en 1990, l'Eau de absolu sous toute.</p>
-						<a href="#" class="learn-more">LEARN MORE</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Navigation Controls -->
-			<div class="nav-controls">
-				<button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
-				<button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
-			</div>
-		</div>
-	</section>
 </div>
+
+<!-- Info Sections -->
+<div class="info-sections">
+	<div class="section">
+		<div class="number">01</div>
+		<div class="title">DESCRIPTION</div>
+	</div>
+	<div class="section">
+		<div class="number">02</div>
+		<div class="title">PERFUMED NOTES</div>
+	</div>
+	<div class="section">
+		<div class="number">03</div>
+		<div class="title">FLACON</div>
+	</div>
+	<div class="section">
+		<div class="number">04</div>
+		<div class="title">COMPOSITION</div>
+	</div>
+</div>
+
+<!-- Second Section -->
+<section class="second-section">
+	<div class="section-content container">
+		<h2 class="section-title">A Vanilla Phrodisiac</h2>
+		<p class="section-subtitle">
+			Financial institutions provide financial services for members
+			and as middlemen between the savers and borrowers.
+		</p>
+
+		<!-- Ingredients Cards -->
+		<div class="cards">
+			<!-- Card 1 -->
+			<div class="card">
+				<img src="~/images/ROSE_DAMASCENA.png" alt="Rose Damascena">
+				<h3>ROSE DAMASCENA</h3>
+				<p>the rose of Castile, is a rose hybrid.</p>
+			</div>
+
+			<!-- Card 2 - Highlighted -->
+			<div class="card center">
+				<img src="~/images/ROSE_DAMASCENA2.png" alt="Rose Damascena Center">
+				<h3>ROSE DAMASCENA</h3>
+				<p>more commonly known as the Damask rose.</p>
+			</div>
+
+			<!-- Card 3 -->
+			<div class="card">
+				<img src="~/images/VANILLE.png" alt="Vanilla">
+				<h3>VANILLE</h3>
+				<p>Grown in Papua New Guinea from Tahitensis variety.</p>
+			</div>
+		</div>
+
+		<!-- Navigation Controls -->
+		<!--<div class="nav-controls">
+			<button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+			<button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+		</div>-->
+	</div>
+</section>
+
+<!-- Third Section -->
+<section class="third-section container">
+	<div class="section-content">
+		<!-- Heading -->
+		<div class="section-heading">
+			<p class="section-label">SIMILAR PRODUCTS</p>
+			<h2 class="section-title">The fragrance larger than life.</h2>
+		</div>
+
+		<!-- Product Cards -->
+		<div class="product-cards d-flex justify-content-center">
+			<!-- Card 1 -->
+			<div class="product-card">
+				<img src="~/images/default_frag.png" alt="The Night Treasure">
+				<div class="card-content">
+					<h3>01</h3>
+					<h4>The night treasure</h4>
+					<p>L'amour est un trésor. Depuis sa création en 1990, l'Eau de absolu sous toute.</p>
+					<a href="#" class="learn-more">LEARN MORE</a>
+				</div>
+			</div>
+
+			<!-- Card 2 -->
+			<div class="product-card">
+				<img src="~/images/default_frag.png" alt="The Night Treasure">
+				<div class="card-content">
+					<h3>02</h3>
+					<h4>The night treasure</h4>
+					<p>L'amour est un trésor. Depuis sa création en 1990, l'Eau de absolu sous toute.</p>
+					<a href="#" class="learn-more">LEARN MORE</a>
+				</div>
+			</div>
+			<!-- Card 3 -->
+			<div class="product-card">
+				<img src="~/images/default_frag.png" alt="The Night Treasure">
+				<div class="card-content">
+					<h3>02</h3>
+					<h4>The night treasure</h4>
+					<p>L'amour est un trésor. Depuis sa création en 1990, l'Eau de absolu sous toute.</p>
+					<a href="#" class="learn-more">LEARN MORE</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Navigation Controls -->
+		<!--<div class="nav-controls">
+			<button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+			<button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+		</div>-->
+	</div>
+</section>
