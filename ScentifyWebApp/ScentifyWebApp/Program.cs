@@ -1,3 +1,5 @@
+using ScentifyWebApp.Services;
+
 namespace ScentifyWebApp
 {
     public class Program
@@ -6,8 +8,8 @@ namespace ScentifyWebApp
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            // Configure services
+            ConfigureServices(builder.Services);
 
             var app = builder.Build();
 
@@ -23,6 +25,7 @@ namespace ScentifyWebApp
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession(); // Add this line to use session
 
             app.UseAuthorization();
 
@@ -31,6 +34,14 @@ namespace ScentifyWebApp
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+        }
+
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            services.AddControllersWithViews();
+            services.AddHttpContextAccessor();
+            services.AddScoped<CartService>();
+            services.AddSession(); // Add this line to enable session
         }
     }
 }
