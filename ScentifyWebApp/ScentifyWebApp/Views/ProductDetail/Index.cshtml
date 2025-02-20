@@ -1,148 +1,151 @@
-﻿@{
+﻿@model Product
+@{
 	Layout = "~/Views/Shared/_DetailLayout.cshtml";
 }
 
+@if (Model != null)
+{
+	<!-- Main Content -->
+	<div class="container main d-flex">
+		<!-- Text Section -->
+		<div class="text-content">
+			<h1>@Model.Name</h1>
+			<p><span style="padding-left: 40px;">@Model.Description</span></p>
 
-<!-- Main Content -->
-<div class="container main d-flex">
-	<!-- Text Section -->
-	<div class="text-content">
-		<h1>THE<br>NIGHT<br>TREASURE</h1>
-		<p><span style="padding-left: 40px;">The night treasure Parfum embodies a new facet of love.</span></p>
-		
-	</div>
-	<div class="product-display d-flex flex-column">
-		<img src="~/images/default_frag.png" alt="Perfume Bottle">
-		<div>
-			<button class="add-to-cart">Add to cart +</button>
-		</div>	
-	</div>
-	<!-- Product Image & Info -->
-	<div class="product-display">
-		
-		<div class="product-info">
-			<h3>$100.45</h3>
-			<div class="stars">
-				★★★★☆
-			</div>
-			<div class="details">30 mL</div>
-			<div class="controls">
-				<i class="fas fa-chevron-left"></i>
-				<i class="fas fa-chevron-right"></i>
+		</div>
+		<div class="product-display d-flex flex-column">
+			<img loading="lazy" alt="@Model.Name" src="@Url.Content(Model.Image.Replace("./","~/"))">
+			<div>
+				<button class="add-to-cart">Add to cart +</button>
 			</div>
 		</div>
-	</div>
-</div>
+		<!-- Product Image & Info -->
+		<div class="product-display">
 
-<!-- Info Sections -->
-<div class="info-sections">
-	<div class="section">
-		<div class="number">01</div>
-		<div class="title">DESCRIPTION</div>
-	</div>
-	<div class="section">
-		<div class="number">02</div>
-		<div class="title">PERFUMED NOTES</div>
-	</div>
-	<div class="section">
-		<div class="number">03</div>
-		<div class="title">FLACON</div>
-	</div>
-	<div class="section">
-		<div class="number">04</div>
-		<div class="title">COMPOSITION</div>
-	</div>
-</div>
-
-<!-- Second Section -->
-<section class="second-section">
-	<div class="section-content container">
-		<h2 class="section-title">A Vanilla Phrodisiac</h2>
-		<p class="section-subtitle">
-			Financial institutions provide financial services for members
-			and as middlemen between the savers and borrowers.
-		</p>
-
-		<!-- Ingredients Cards -->
-		<div class="cards">
-			<!-- Card 1 -->
-			<div class="card">
-				<img src="~/images/ROSE_DAMASCENA.png" alt="Rose Damascena">
-				<h3>ROSE DAMASCENA</h3>
-				<p>the rose of Castile, is a rose hybrid.</p>
-			</div>
-
-			<!-- Card 2 - Highlighted -->
-			<div class="card center">
-				<img src="~/images/ROSE_DAMASCENA2.png" alt="Rose Damascena Center">
-				<h3>ROSE DAMASCENA</h3>
-				<p>more commonly known as the Damask rose.</p>
-			</div>
-
-			<!-- Card 3 -->
-			<div class="card">
-				<img src="~/images/VANILLE.png" alt="Vanilla">
-				<h3>VANILLE</h3>
-				<p>Grown in Papua New Guinea from Tahitensis variety.</p>
-			</div>
-		</div>
-
-		<!-- Navigation Controls -->
-		<!--<div class="nav-controls">
-			<button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
-			<button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
-		</div>-->
-	</div>
-</section>
-
-<!-- Third Section -->
-<section class="third-section container">
-	<div class="section-content">
-		<!-- Heading -->
-		<div class="section-heading">
-			<p class="section-label">SIMILAR PRODUCTS</p>
-			<h2 class="section-title">The fragrance larger than life.</h2>
-		</div>
-
-		<!-- Product Cards -->
-		<div class="product-cards d-flex justify-content-center">
-			<!-- Card 1 -->
-			<div class="product-card">
-				<img src="~/images/default_frag.png" alt="The Night Treasure">
-				<div class="card-content">
-					<h3>01</h3>
-					<h4>The night treasure</h4>
-					<p>L'amour est un trésor. Depuis sa création en 1990, l'Eau de absolu sous toute.</p>
-					<a href="#" class="learn-more">LEARN MORE</a>
+			<div class="product-info">
+				<h3>$@Model?.Price?.Amount</h3>
+				<div class="stars">
+					★★★★☆
 				</div>
-			</div>
-
-			<!-- Card 2 -->
-			<div class="product-card">
-				<img src="~/images/default_frag.png" alt="The Night Treasure">
-				<div class="card-content">
-					<h3>02</h3>
-					<h4>The night treasure</h4>
-					<p>L'amour est un trésor. Depuis sa création en 1990, l'Eau de absolu sous toute.</p>
-					<a href="#" class="learn-more">LEARN MORE</a>
-				</div>
-			</div>
-			<!-- Card 3 -->
-			<div class="product-card">
-				<img src="~/images/default_frag.png" alt="The Night Treasure">
-				<div class="card-content">
-					<h3>02</h3>
-					<h4>The night treasure</h4>
-					<p>L'amour est un trésor. Depuis sa création en 1990, l'Eau de absolu sous toute.</p>
-					<a href="#" class="learn-more">LEARN MORE</a>
+				<div class="details">@Model?.Size</div>
+				<div class="controls">
+					@*<i class="fas fa-chevron-left"></i>
+					<i class="fas fa-chevron-right"></i>*@
 				</div>
 			</div>
 		</div>
-
-		<!-- Navigation Controls -->
-		<!--<div class="nav-controls">
-			<button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
-			<button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
-		</div>-->
 	</div>
-</section>
+
+	<!-- Info Sections -->
+	<div class="info-sections">
+		<div class="section">
+			<div class="number">01</div>
+			<div class="title">DESCRIPTION</div>
+		</div>
+		<div class="section">
+			<div class="number">02</div>
+			<div class="title">PERFUMED NOTES</div>
+		</div>
+		<div class="section">
+			<div class="number">03</div>
+			<div class="title">FLACON</div>
+		</div>
+		<div class="section">
+			<div class="number">04</div>
+			<div class="title">COMPOSITION</div>
+		</div>
+	</div>
+
+	<!-- Second Section -->
+	<section class="second-section">
+		<div class="section-content container">
+			<h2 class="section-title">A Vanilla Phrodisiac</h2>
+			<p class="section-subtitle">
+				Financial institutions provide financial services for members
+				and as middlemen between the savers and borrowers.
+			</p>
+
+			<!-- Ingredients Cards -->
+			<div class="cards">
+				<!-- Card 1 -->
+				<div class="card">
+					<img src="~/images/ROSE_DAMASCENA.png" alt="Rose Damascena">
+					<h3>ROSE DAMASCENA</h3>
+					<p>the rose of Castile, is a rose hybrid.</p>
+				</div>
+
+				<!-- Card 2 - Highlighted -->
+				<div class="card center">
+					<img src="~/images/ROSE_DAMASCENA2.png" alt="Rose Damascena Center">
+					<h3>ROSE DAMASCENA</h3>
+					<p>more commonly known as the Damask rose.</p>
+				</div>
+
+				<!-- Card 3 -->
+				<div class="card">
+					<img src="~/images/VANILLE.png" alt="Vanilla">
+					<h3>VANILLE</h3>
+					<p>Grown in Papua New Guinea from Tahitensis variety.</p>
+				</div>
+			</div>
+
+			<!-- Navigation Controls -->
+			<!--<div class="nav-controls">
+				<button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+				<button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+			</div>-->
+		</div>
+	</section>
+
+	<!-- Third Section -->
+	<section class="third-section container">
+		<div class="section-content">
+			<!-- Heading -->
+			<div class="section-heading">
+				<p class="section-label">SIMILAR PRODUCTS</p>
+				<h2 class="section-title">The fragrance larger than life.</h2>
+			</div>
+
+			<!-- Product Cards -->
+			<div class="product-cards d-flex justify-content-center">
+				<!-- Card 1 -->
+				<div class="product-card">
+					<img src="~/images/default_frag.png" alt="The Night Treasure">
+					<div class="card-content">
+						<h3>01</h3>
+						<h4>The night treasure</h4>
+						<p>L'amour est un trésor. Depuis sa création en 1990, l'Eau de absolu sous toute.</p>
+						<a href="#" class="learn-more">LEARN MORE</a>
+					</div>
+				</div>
+
+				<!-- Card 2 -->
+				<div class="product-card">
+					<img src="~/images/default_frag.png" alt="The Night Treasure">
+					<div class="card-content">
+						<h3>02</h3>
+						<h4>The night treasure</h4>
+						<p>L'amour est un trésor. Depuis sa création en 1990, l'Eau de absolu sous toute.</p>
+						<a href="#" class="learn-more">LEARN MORE</a>
+					</div>
+				</div>
+				<!-- Card 3 -->
+				<div class="product-card">
+					<img src="~/images/default_frag.png" alt="The Night Treasure">
+					<div class="card-content">
+						<h3>02</h3>
+						<h4>The night treasure</h4>
+						<p>L'amour est un trésor. Depuis sa création en 1990, l'Eau de absolu sous toute.</p>
+						<a href="#" class="learn-more">LEARN MORE</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Navigation Controls -->
+			<!--<div class="nav-controls">
+				<button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+				<button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+			</div>-->
+		</div>
+	</section>
+}
