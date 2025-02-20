@@ -367,14 +367,14 @@ hr {
 /********************************************/
 /* Open Popup Button */
 .open-popup-btn {
-  padding: 12px 20px;
-  background: #fff;
-  color: #111;
-  border: none;
-  font-size: 1em;
-  cursor: pointer;
-  border-radius: 5px;
-  font-weight: bold;
+    padding: 12px 20px;
+    background: #fff;
+    color: #111;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
 }
 
 /* Popup Overlay (Blur Background) */

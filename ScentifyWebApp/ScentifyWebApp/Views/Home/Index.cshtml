@@ -2,65 +2,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-<!-- Modal Backdrop -->
-<div class="modal-backdrop" onclick="toggleCart()"></div>
-
-<!-- Cart Popup -->
-<div class="cart-container">
-    <div class="cart-header">
-        <p>Cart</p>
-        <button class="close-btn" onclick="toggleCart()">✕</button>
-    </div>
-
-    <div class="cart-item">
-        <p class="product-name">Ouranon Eau de Parfum</p>
-        <p class="product-size">50 mL</p>
-        <div class="product-quantity">
-            <select>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-            </select>
-        </div>
-        <p class="product-price">€165,00</p>
-    </div>
-
-    <hr />
-
-    <div class="promo-code">
-        <p>Apply a promotional code</p>
-        <!-- Apply Promo Code Button -->
-        <button class="open-popup-btn">+</button>
-    </div>
-
-    <p class="shipping-info">Enjoy complimentary standard shipping on all orders over 90 €.</p>
-
-    <div class="cart-total">
-        <p>Subtotal (Tax Incl.)</p>
-        <p class="total-price">€165.00</p>
-    </div>
-
-    <button class="checkout-btn">Checkout</button>
-
-    <div class="payment-methods">
-        <p>VISA • MasterCard • Apple Pay • Klarna</p>
-    </div>
-</div>
-
-<!-- Popup Overlay (Backdrop) -->
-<div class="popup-overlay" id="popupOverlay"></div>
-
-<!-- Popup Container -->
-<div class="popup-container" id="promoPopup">
-    <div class="popup-content">
-        <button class="close-btn" id="closePopup">&times;</button>
-        <h2>Apply a promotional code</h2>
-        <label for="promoCode">Promotional code</label>
-        <input type="text" id="promoCode" placeholder="Enter your code" />
-        <button class="apply-btn">Apply</button>
-    </div>
-</div>
-
 <div id="carouselExample" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
@@ -361,37 +302,4 @@
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].className += " active";
     }
-</script>
-
-<script>
-    function toggleCart() {
-        document.querySelector('.cart-container').classList.toggle('active');
-        document.querySelector('.modal-backdrop').classList.toggle('active');
-    }
-</script>
-
-<script>
-    // Get elements
-    const openPopupBtn = document.querySelector(".open-popup-btn");
-    const closePopupBtn = document.getElementById("closePopup");
-    const popupOverlay = document.getElementById("popupOverlay");
-    const promoPopup = document.getElementById("promoPopup");
-
-    // Open popup
-    openPopupBtn.addEventListener("click", () => {
-      promoPopup.classList.add("active");
-      popupOverlay.classList.add("active");
-    });
-
-    // Close popup
-    closePopupBtn.addEventListener("click", () => {
-      promoPopup.classList.remove("active");
-      popupOverlay.classList.remove("active");
-    });
-
-    // Close when clicking outside the popup
-    popupOverlay.addEventListener("click", () => {
-      promoPopup.classList.remove("active");
-      popupOverlay.classList.remove("active");
-    });
 </script>

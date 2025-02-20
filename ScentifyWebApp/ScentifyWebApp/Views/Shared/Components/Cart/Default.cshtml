@@ -1,0 +1,95 @@
+﻿@model List<CartItem>
+
+<!-- Modal Backdrop -->
+<div class="modal-backdrop" onclick="toggleCart()"></div>
+
+<!-- Cart Popup -->
+<div class="cart-container">
+    <div class="cart-header">
+        <p>Cart</p>
+        <button class="close-btn" onclick="toggleCart()">✕</button>
+    </div>
+
+    @if (Model.Count > 0)
+    {
+        foreach (var cartItem in Model)
+        {
+            var product = cartItem.Product;
+
+            <div class="cart-item">
+                <p class="product-name">@product.Name</p>
+                <p class="product-size">@product.Size</p>
+                <div class="product-quantity">
+                    <select>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                        <option>13</option>
+                        <option>14</option>
+                        <option>15</option>
+                        <option>16</option>
+                        <option>17</option>
+                        <option>18</option>
+                        <option>19</option>
+                        <option>20</option>
+                    </select>
+                </div>
+                <p class="product-price">@product.Price.Currency @product.Price.Currency</p>
+            </div>
+        }
+    }
+    else
+    {
+        <span class="fst-italic text-light text-decoration-underline">
+            You have no items in your cart
+        </span>
+    }
+    <hr />
+
+    <div class="cart-infor float-end col-4">
+        <div class="promo-code">
+            <p>Apply a promotional code</p>
+            <!-- Apply Promo Code Button -->
+            <button type="button" class="btn-sm open-popup-btn">
+                +
+            </button>
+        </div>
+
+        <p class="shipping-info">Enjoy complimentary standard shipping on all orders over 90 €.</p>
+
+        <div class="cart-total">
+            <p>Subtotal (Tax Incl.)</p>
+            <p class="total-price">€165.00</p>
+        </div>
+
+        <button type="button" class="checkout-btn">Checkout</button>
+
+        <div class="payment-methods">
+            <p>VISA • MasterCard • Apple Pay • Klarna</p>
+        </div>
+    </div>
+</div>
+
+<!-- Popup Overlay (Backdrop) -->
+<div class="popup-overlay" id="popupOverlay"></div>
+
+<!-- Popup Container -->
+<div class="popup-container" id="promoPopup">
+    <div class="popup-content">
+        <button class="close-btn" id="closePopup">&times;</button>
+        <h2>Apply a promotional code</h2>
+        <label for="promoCode">Promotional code</label>
+        <input type="text" id="promoCode" placeholder="Enter your code" />
+        <button class="apply-btn">Apply</button>
+    </div>
+</div>
+
