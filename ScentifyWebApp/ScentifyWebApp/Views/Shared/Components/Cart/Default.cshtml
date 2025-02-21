@@ -2,14 +2,15 @@
 
 <!-- Modal Backdrop -->
 <div class="modal-backdrop" onclick="toggleCart()"></div>
-
+@{
+    double totalPrice = 0;
+}
 <!-- Cart Popup -->
 <div class="cart-container">
     <div class="cart-header">
         <p>Cart</p>
         <button class="close-btn" onclick="toggleCart()">✕</button>
     </div>
-
     @if (Model.Count > 0)
     {
         foreach (var cartItem in Model)
@@ -19,7 +20,7 @@
             <div class="cart-item">
                 <p class="product-name">@product.Name</p>
                 <p class="product-size">@product.Size</p>
-                <div class="product-quantity">
+                @* <div class="product-quantity custom-dropdown">
                     <select>
                         <option>1</option>
                         <option>2</option>
@@ -42,9 +43,30 @@
                         <option>19</option>
                         <option>20</option>
                     </select>
+                </div> *@
+                <div class="custom-dropdown">
+                    <button class="dropdown-toggle">
+                        <span class="selected-option">Select</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li data-value="1">1</li>
+                        <li data-value="2">2</li>
+                        <li data-value="3">3</li>
+                        <li data-value="4">4</li>
+                        <li data-value="5">5</li>
+                        <li data-value="6">6</li>
+                        <li data-value="7">7</li>
+                        <li data-value="8">8</li>
+                        <li data-value="9">9</li>
+                        <li data-value="10">10</li>
+                    </ul>
                 </div>
-                <p class="product-price">@product.Price.Currency @product.Price.Currency</p>
+
+                <p class="product-price">@product.Price.Currency @product.Price.Amount</p>
+                <button class="remove-btn">✕</button>
             </div>
+
+            totalPrice += (double)product.Price.Amount;
         }
     }
     else
@@ -53,28 +75,29 @@
             You have no items in your cart
         </span>
     }
-    <hr />
 
-    <div class="cart-infor float-end col-4">
-        <div class="promo-code">
-            <p>Apply a promotional code</p>
-            <!-- Apply Promo Code Button -->
-            <button type="button" class="btn-sm open-popup-btn">
-                +
-            </button>
-        </div>
+    <div class="cart-infor float-end col-md-4 col-sm-12">
+        <div class="cart-info">
+            <div class="promo-code">
+                <p>Apply a promotional code</p>
+                <button type="button" class="expand-btn">+</button>
+            </div>
 
-        <p class="shipping-info">Enjoy complimentary standard shipping on all orders over 90 €.</p>
+            <p class="shipping-info">Enjoy complimentary standard shipping on all orders over 90 €.</p>
 
-        <div class="cart-total">
-            <p>Subtotal (Tax Incl.)</p>
-            <p class="total-price">€165.00</p>
-        </div>
+            <div class="cart-total">
+                <p>Subtotal (Tax Incl.)</p>
+                <p class="total-price">€@totalPrice</p>
+            </div>
 
-        <button type="button" class="checkout-btn">Checkout</button>
+            <button type="button" class="checkout-btn">Checkout</button>
 
-        <div class="payment-methods">
-            <p>VISA • MasterCard • Apple Pay • Klarna</p>
+            <div class="payment-methods">
+                <svg class="icon"><use xlink:href="#visa"></use></svg>
+                <svg class="icon"><use xlink:href="#mastercard"></use></svg>
+                <svg class="icon"><use xlink:href="#apple-pay"></use></svg>
+                <svg class="icon"><use xlink:href="#klarna"></use></svg>
+            </div>
         </div>
     </div>
 </div>

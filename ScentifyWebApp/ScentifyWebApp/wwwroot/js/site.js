@@ -1,6 +1,6 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
     // Get elements
-    const openPopupBtn = document.querySelector(".open-popup-btn");
+    const openPopupBtn = document.querySelector(".expand-btn");
     const closePopupBtn = document.getElementById("closePopup");
     const popupOverlay = document.getElementById("popupOverlay");
     const promoPopup = document.getElementById("promoPopup");
@@ -80,3 +80,45 @@ function clearCart() {
 function updateCart() {
     $("#cart-container").load("/Cart/Index #cart-container > *");
 }
+
+//document.addEventListener("DOMContentLoaded", function () {
+//    const menuButton = document.querySelector(".custom-hamburger");
+//    const mobileMenu = document.querySelector(".mobile-menu");
+
+//    menuButton.addEventListener("click", function () {
+//        mobileMenu.classList.toggle("active");
+//    });
+//});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const menuButton = document.querySelector(".custom-hamburger");
+    const mobileMenu = document.querySelector(".mobile-menu");
+    const overlay = document.createElement("div");
+    overlay.classList.add("mobile-overlay");
+    document.body.appendChild(overlay);
+
+    // Toggle menu on hamburger click
+    menuButton.addEventListener("click", function () {
+        mobileMenu.classList.toggle("active");
+        overlay.classList.toggle("active");
+        document.body.classList.toggle("menu-open");
+    });
+
+    // Close menu when clicking outside (overlay)
+    overlay.addEventListener("click", function () {
+        mobileMenu.classList.remove("active");
+        overlay.classList.remove("active");
+        document.body.classList.remove("menu-open");
+    });
+
+    // Handle submenu hover effect
+    document.querySelectorAll(".has-submenu").forEach(item => {
+        item.addEventListener("mouseenter", function () {
+            this.querySelector(".sub-menu").style.display = "flex";
+        });
+        item.addEventListener("mouseleave", function () {
+            this.querySelector(".sub-menu").style.display = "none";
+        });
+    });
+});
+

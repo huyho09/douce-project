@@ -67,6 +67,10 @@
 
             <!-- Load More Button -->
             <div class="load-more-container">
+                <@* p class="fst-italic text-center text-sm-center">About <span id="numofRemaining">
+                        @(Model?.Count() > 0 ? (Model?.Count() - 6): 0)
+                </span> more products remaining... load more if you want to explore.</p> *@
+
                 <button class="load-more-btn" onclick="loadMoreProducts()">
                     <span>Load More</span>
                     <i class="bi bi-chevron-double-down"></i>

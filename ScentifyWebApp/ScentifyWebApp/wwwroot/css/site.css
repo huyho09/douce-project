@@ -158,10 +158,9 @@ body,
 
 .load-more-container {
   text-align: center;
-  margin-top: 20px;
+  margin: 60px 0;
 }
 .load-more-container .load-more-btn {
-  margin: 60px 0;
   background-color: transparent;
   color: #333;
   text-decoration: none;
@@ -275,12 +274,13 @@ body,
   cursor: pointer;
 }
 
-/* Cart Items */
+/* Cart Items Layout */
 .cart-item {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr 0.5fr; /* Matches header */
   align-items: center;
   padding: 15px 0;
+  border-bottom: 1px solid #444;
 }
 
 .product-name {
@@ -289,14 +289,17 @@ body,
 
 .product-size {
   color: gray;
+  font-size: 0.9em;
 }
 
 .product-quantity select {
   padding: 5px;
-  background: #444;
+  background: #222;
   color: #fff;
   border: none;
   cursor: pointer;
+  width: 50px;
+  text-align: center;
 }
 
 .product-price {
@@ -309,20 +312,34 @@ hr {
   margin: 10px 0;
 }
 
-/* Promo Code */
+/* Apply Promo Code Section */
 .promo-code {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   cursor: pointer;
   font-weight: bold;
+  padding: 10px 0;
 }
 
 .expand-btn {
   background: none;
-  border: none;
   color: #fff;
   font-size: 1.2em;
   cursor: pointer;
+  padding: 5px;
+  border-radius: 50%; /* Circular button */
+  width: 30px;
+  height: 30px;
+  display: flex;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Light white outline */
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.expand-btn:hover {
+  border-color: #fff;
 }
 
 /* Shipping Info */
@@ -332,7 +349,7 @@ hr {
   margin: 10px 0;
 }
 
-/* Total */
+/* Cart Total */
 .cart-total {
   display: flex;
   justify-content: space-between;
@@ -344,37 +361,150 @@ hr {
 .checkout-btn {
   width: 100%;
   padding: 15px;
-  background: #fff;
+  background: #f8f5e6;
   color: #111;
   font-size: 1.2em;
   border: none;
   cursor: pointer;
   margin-top: 10px;
+  font-weight: bold;
 }
 
 .checkout-btn:hover {
   background: #ddd;
 }
 
-/* Payment Methods */
 .payment-methods {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Space between icons */
   margin-top: 15px;
-  font-size: 0.9em;
-  color: #aaa;
+}
+
+.payment-methods .icon {
+  width: 50px; /* Adjust the size */
+  height: 30px;
+  fill: white; /* Makes icons white */
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Add hover effect */
+.payment-methods .icon:hover {
+  transform: scale(1.1); /* Slight zoom effect */
+}
+
+/* Remove Button */
+.remove-btn {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Light white outline */
+  color: #fff;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%; /* Circular button */
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.remove-btn:hover {
+  color: #f00; /* Turns red on hover */
+  border-color: #f00; /* Outline turns red */
+}
+
+.custom-dropdown {
+  position: relative;
+  width: 150px;
+  font-family: Arial, sans-serif;
+}
+
+/* Dropdown Button */
+.dropdown-toggle {
+  width: 100%;
+  padding: 10px;
+  background: #222;
+  color: white;
+  border: 1px solid #555;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Dropdown Icon */
+.dropdown-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+/* Rotate icon when active */
+.custom-dropdown.active .dropdown-icon {
+  transform: rotate(180deg);
+}
+
+/* Dropdown List */
+.dropdown-menu {
+  position: absolute;
+  width: 100%;
+  background: #222;
+  color: white;
+  border: 1px solid #555;
+  border-radius: 5px;
+  max-height: 250px; /* Limit dropdown height */
+  overflow-y: auto; /* Enable scroll */
+  display: none; /* Hide initially */
+  list-style: none;
+  padding: 0;
+  margin: 5px 0 0;
+  z-index: 1000;
+}
+
+/* Show dropdown when active */
+.custom-dropdown.active .dropdown-menu {
+  display: block;
+}
+
+/* Dropdown Items */
+.dropdown-menu li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+  background: #666;
+}
+
+/* Custom Scrollbar */
+.dropdown-menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dropdown-menu::-webkit-scrollbar-track {
+  background: #333;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
 }
 
 /********************************************/
 /* Open Popup Button */
 .open-popup-btn {
-    padding: 12px 20px;
-    background: #fff;
-    color: #111;
-    border: none;
-    font-size: 1em;
-    cursor: pointer;
-    border-radius: 5px;
-    font-weight: bold;
+  padding: 12px 20px;
+  background: #fff;
+  color: #111;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 /* Popup Overlay (Blur Background) */
@@ -441,7 +571,11 @@ hr {
   border: none;
   font-size: 1.5em;
   cursor: pointer;
-  color: #111;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.close-btn:hover {
+  color: #fff;
 }
 
 /* Input Field */

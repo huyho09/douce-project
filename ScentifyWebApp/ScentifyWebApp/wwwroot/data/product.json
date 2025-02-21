@@ -7,7 +7,7 @@
     "size": "50 mL",
     "price": {
       "amount": 165.00,
-      "currency": "EUR",
+      "currency": "€",
       "unitPrice": "€330.00 per 100 ml"
     }
   },
@@ -19,7 +19,7 @@
     "size": "100 mL",
     "price": {
       "amount": 250.00,
-      "currency": "EUR",
+      "currency": "€",
       "unitPrice": "€250.00 per 100 ml"
     }
   },
@@ -31,7 +31,7 @@
     "size": "75 mL",
     "price": {
       "amount": 190.00,
-      "currency": "EUR",
+      "currency": "€",
       "unitPrice": "€253.33 per 100 ml"
     }
   },
@@ -43,7 +43,7 @@
     "size": "60 mL",
     "price": {
       "amount": 180.00,
-      "currency": "EUR",
+      "currency": "€",
       "unitPrice": "€300.00 per 100 ml"
     }
   },
@@ -55,7 +55,7 @@
     "size": "100 mL",
     "price": {
       "amount": 275.00,
-      "currency": "EUR",
+      "currency": "€",
       "unitPrice": "€275.00 per 100 ml"
     }
   },
@@ -67,7 +67,7 @@
     "size": "50 mL",
     "price": {
       "amount": 160.00,
-      "currency": "EUR",
+      "currency": "€",
       "unitPrice": "€320.00 per 100 ml"
     }
   },
@@ -79,7 +79,7 @@
     "size": "75 mL",
     "price": {
       "amount": 210.00,
-      "currency": "EUR",
+      "currency": "€",
       "unitPrice": "€280.00 per 100 ml"
     }
   },
@@ -91,7 +91,7 @@
     "size": "60 mL",
     "price": {
       "amount": 190.00,
-      "currency": "EUR",
+      "currency": "€",
       "unitPrice": "€316.67 per 100 ml"
     }
   },
@@ -103,7 +103,7 @@
     "size": "100 mL",
     "price": {
       "amount": 260.00,
-      "currency": "EUR",
+      "currency": "€",
       "unitPrice": "€260.00 per 100 ml"
     }
   },
@@ -115,7 +115,7 @@
     "size": "50 mL",
     "price": {
       "amount": 185.00,
-      "currency": "EUR",
+      "currency": "€",
       "unitPrice": "€370.00 per 100 ml"
     }
   },
@@ -127,7 +127,7 @@
     "size": "75 mL",
     "price": {
       "amount": 215.00,
-      "currency": "EUR",
+      "currency": "€",
       "unitPrice": "€286.67 per 100 ml"
     }
   },
@@ -139,7 +139,7 @@
     "size": "60 mL",
     "price": {
       "amount": 200.00,
-      "currency": "EUR",
+      "currency": "€",
       "unitPrice": "€333.33 per 100 ml"
     }
   },
@@ -151,7 +151,7 @@
     "size": "100 mL",
     "price": {
       "amount": 270.00,
-      "currency": "EUR",
+      "currency": "€",
       "unitPrice": "€270.00 per 100 ml"
     }
   },
@@ -163,7 +163,7 @@
     "size": "50 mL",
     "price": {
       "amount": 175.00,
-      "currency": "EUR",
+      "currency": "€",
       "unitPrice": "€350.00 per 100 ml"
     }
   },
@@ -175,7 +175,7 @@
     "size": "75 mL",
     "price": {
       "amount": 230.00,
-      "currency": "EUR",
+      "currency": "€",
       "unitPrice": "€306.67 per 100 ml"
     }
   }
