@@ -238,6 +238,7 @@ body,
 /* Cart Popup */
 .cart-container {
   position: fixed;
+  display: none;
   top: -100%;
   left: 0;
   z-index: 9999;
@@ -247,6 +248,10 @@ body,
   padding: 20px;
   transition: top 0.4s ease-in-out;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+body:has(.modal-backdrop.active) .cart-container {
+  display: block;
 }
 
 /* Active States */
@@ -277,7 +282,8 @@ body,
 /* Cart Items Layout */
 .cart-item {
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr 0.5fr; /* Matches header */
+  grid-template-columns: 3fr 1fr 1fr 1fr 0.5fr;
+  /* Matches header */
   align-items: center;
   padding: 15px 0;
   border-bottom: 1px solid #444;
@@ -328,11 +334,13 @@ hr {
   font-size: 1.2em;
   cursor: pointer;
   padding: 5px;
-  border-radius: 50%; /* Circular button */
+  border-radius: 50%;
+  /* Circular button */
   width: 30px;
   height: 30px;
   display: flex;
-  border: 1px solid rgba(255, 255, 255, 0.5); /* Light white outline */
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  /* Light white outline */
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease-in-out;
@@ -377,31 +385,37 @@ hr {
 .payment-methods {
   display: flex;
   justify-content: center;
-  gap: 15px; /* Space between icons */
+  gap: 15px;
+  /* Space between icons */
   margin-top: 15px;
 }
 
 .payment-methods .icon {
-  width: 50px; /* Adjust the size */
+  width: 50px;
+  /* Adjust the size */
   height: 30px;
-  fill: white; /* Makes icons white */
+  fill: white;
+  /* Makes icons white */
   transition: transform 0.3s ease-in-out;
 }
 
 /* Add hover effect */
 .payment-methods .icon:hover {
-  transform: scale(1.1); /* Slight zoom effect */
+  transform: scale(1.1);
+  /* Slight zoom effect */
 }
 
 /* Remove Button */
 .remove-btn {
   background: none;
-  border: 1px solid rgba(255, 255, 255, 0.5); /* Light white outline */
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  /* Light white outline */
   color: #fff;
   font-size: 1.2em;
   cursor: pointer;
   padding: 5px;
-  border-radius: 50%; /* Circular button */
+  border-radius: 50%;
+  /* Circular button */
   width: 30px;
   height: 30px;
   display: flex;
@@ -412,8 +426,10 @@ hr {
 
 /* Hover Effect */
 .remove-btn:hover {
-  color: #f00; /* Turns red on hover */
-  border-color: #f00; /* Outline turns red */
+  color: #f00;
+  /* Turns red on hover */
+  border-color: #f00;
+  /* Outline turns red */
 }
 
 .custom-dropdown {
@@ -456,9 +472,12 @@ hr {
   color: white;
   border: 1px solid #555;
   border-radius: 5px;
-  max-height: 250px; /* Limit dropdown height */
-  overflow-y: auto; /* Enable scroll */
-  display: none; /* Hide initially */
+  max-height: 250px;
+  /* Limit dropdown height */
+  overflow-y: auto;
+  /* Enable scroll */
+  display: none;
+  /* Hide initially */
   list-style: none;
   padding: 0;
   margin: 5px 0 0;
@@ -711,4 +730,258 @@ input {
     gap: 15px;
     min-width: auto;
   }
+}
+/**********************************************/
+/* Layout: Two Column Full Window */
+.checkout-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  /* Left Section: Form */
+  /* Form Layout: 2 Rows */
+  /* Floating Label Input & Select */
+  /* Floating label */
+  /* Move label when focused or filled */
+  /* Right Section: Order Summary */
+  /* Product Section */
+  /* Responsive */
+  /* Adjust container layout */
+  /* Left section (form) - 65% */
+  /* Right section (order summary) - 35% */
+  /* Responsive: Stack on smaller screens */
+  /* Floating Chat Button */
+}
+.checkout-container .form-section {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+.checkout-container .breadcrumb {
+  font-size: 14px;
+  color: #777;
+  gap: 10px;
+}
+.checkout-container .breadcrumb .active {
+  font-weight: bold;
+  color: #000;
+}
+.checkout-container h2 {
+  font-size: 32px;
+  margin: 20px 0;
+  font-weight: 300;
+}
+.checkout-container .checkout-form {
+  padding: 100px;
+  display: flex;
+  gap: 60px;
+  flex-direction: column;
+}
+.checkout-container .form-row {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+.checkout-container .floating-group {
+  position: relative;
+  flex: 1;
+  width: 100%;
+}
+.checkout-container .floating-group input,
+.checkout-container .floating-group select {
+  width: 100%;
+  padding: 12px 5px;
+  font-size: 18px;
+  color: #222;
+  border: none;
+  border-bottom: 2px solid #888;
+  background: transparent;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+.checkout-container .floating-group select {
+  cursor: pointer;
+  background: none;
+}
+.checkout-container .floating-group label {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #777;
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+}
+.checkout-container .floating-group input:not(:-moz-placeholder-shown) ~ label {
+  top: -10px;
+  font-size: 14px;
+  color: #000;
+}
+.checkout-container .floating-group input:focus ~ label,
+.checkout-container .floating-group input:not(:placeholder-shown) ~ label,
+.checkout-container .floating-group select:focus ~ label,
+.checkout-container .floating-group select:not([value=""]) ~ label {
+  top: -10px;
+  font-size: 14px;
+  color: #000;
+}
+.checkout-container .continue-btn {
+  background: black;
+  color: white;
+  font-size: 16px;
+  padding: 20px 30px;
+  margin-top: 20px;
+  border: none;
+  cursor: pointer;
+  width: -moz-fit-content;
+  width: fit-content;
+  text-transform: uppercase;
+}
+.checkout-container .continue-btn:hover {
+  background: #333;
+}
+.checkout-container .order-summary {
+  width: 400px;
+  background: #f9f6ec;
+  padding: 150px 40px 40px 40px !important;
+  box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.checkout-container .order-summary select {
+  background: transparent;
+  clear: both;
+}
+.checkout-container .price-details {
+  margin-bottom: 15px;
+}
+.checkout-container .summary-item,
+.checkout-container .summary-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.checkout-container .summary-total {
+  font-weight: bold;
+  margin-top: 10px;
+}
+.checkout-container .product {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+.checkout-container img {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+.checkout-container .product-details {
+  flex-grow: 1;
+}
+.checkout-container .product-name {
+  font-weight: bold;
+  margin: 0;
+}
+.checkout-container .product-size {
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0;
+}
+.checkout-container .remove {
+  font-size: 12px;
+  color: red;
+  text-decoration: none;
+}
+.checkout-container .quantity {
+  padding: 5px;
+  margin-right: 10px;
+}
+.checkout-container .product-price {
+  font-weight: bold;
+}
+@media (max-width: 900px) {
+  .checkout-container .checkout-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .checkout-container .order-summary {
+    width: 90%;
+    margin-top: 20px;
+    box-shadow: none;
+  }
+  .checkout-container .form-row {
+    flex-direction: column;
+  }
+}
+.checkout-container .checkout-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+.checkout-container .form-section {
+  flex: 0 0 65%;
+  padding: 40px;
+  padding-top: 100px;
+}
+.checkout-container .order-summary {
+  flex: 0 0 35%;
+  background: #f9f6ec;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.1);
+  /* Two-column layout for section */
+  /* Right side: "Edit" link floats right */
+}
+.checkout-container .order-summary .section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.checkout-container .order-summary .section div {
+  flex-grow: 1;
+}
+.checkout-container .order-summary .section .edit {
+  float: right;
+}
+@media (max-width: 900px) {
+  .checkout-container .checkout-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .checkout-container .form-section,
+  .checkout-container .order-summary {
+    flex: 1 1 100%;
+    width: 90%;
+    padding: 20px;
+  }
+  .checkout-container .order-summary {
+    margin-top: 20px;
+    box-shadow: none;
+  }
+}
+.checkout-container .chat-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: black;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+}
+.checkout-container .chat-btn:hover {
+  background: #333;
 }/*# sourceMappingURL=site.css.map */

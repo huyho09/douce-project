@@ -1,0 +1,101 @@
+﻿<section class="checkout-container">
+    <div class="form-section">
+        <nav class="breadcrumb">
+            <span>Customer</span> &gt; <span class="active">Shipping</span> &gt; <span>Payment</span> &gt;
+            <span>Review</span>
+        </nav>
+        <h2>Where would you like your order sent?</h2>
+
+        <form class="checkout-form">
+            <!-- Row 1: Title, First Name, Last Name -->
+            <div class="form-row">
+                <div class="floating-group">
+                    <select id="title" name="title" required>
+                        <option value="" disabled selected></option>
+                        <option value="Dr">Dr</option>
+                        <option value="Mr">Mr</option>
+                        <option value="Ms">Ms</option>
+                    </select>
+                    <label for="title">Title</label>
+                </div>
+
+                <div class="floating-group">
+                    <input type="text" id="first-name" name="first-name" value="John" required>
+                    <label for="first-name">First name</label>
+                </div>
+
+                <div class="floating-group">
+                    <input type="text" id="last-name" name="last-name" value="Smith" required>
+                    <label for="last-name">Last name</label>
+                </div>
+            </div>
+
+            <!-- Row 2: Country Selector, Address -->
+            <div class="form-row">
+                <div class="floating-group">
+                    <select id="country" name="country" required>
+                        <option value="france">France</option>
+                        <option selected value="germany">Germany</option>
+                        <option value="usa">USA</option>
+                    </select>
+                    <label for="country">Country / Region</label>
+                </div>
+
+                <div class="floating-group">
+                    <input type="text" id="address" name="address" value="1234 Elm Street, Apt 56, Springfield, IL 62704" required>
+                    <label for="address">Address</label>
+                </div>
+            </div>
+
+            <button class="continue-btn" type="submit">Confirm completed invoice</button>
+        </form>
+    </div>
+
+    <div class="order-summary">
+        <div class="price-details">
+            <div class="summary-item"><span>Subtotal</span><span>€165.00</span></div>
+            <div class="summary-item"><span>Shipping fee</span><span>€0.00</span></div>
+            <div class="summary-item"><span>Included taxes</span><span>€0.00</span></div>
+            <div class="summary-total"><span>Total</span><span>€165.00</span></div>
+        </div>
+
+        <div class="product">
+            <img src="./images/per_4.png" alt="Gloam Eau de Parfum">
+            <div class="product-details">
+                <p class="product-name">Gloam Eau de Parfum</p>
+                <p class="product-size">50 mL</p>
+                <a href="#" class="remove">Remove</a>
+            </div>
+            <select class="quantity">
+                <option>1</option>
+                <option selected>2</option>
+                <option>3</option>
+            </select>
+            <span class="product-price">€165.00</span>
+        </div>
+
+        <hr>
+
+        <div class="section">
+            <img src="./images/sample.png" alt="Samples">
+            <div>
+                <p class="section-title">Complimentary samples</p>
+                <p>No samples</p>
+            </div>
+            <a href="#" class="edit">Edit</a>
+        </div>
+
+        <hr>
+
+        <div class="section">
+            <img src="./images/gift.png" alt="Gift Option">
+            <div>
+                <p class="section-title">Is this order a gift?</p>
+            </div>
+            <a href="#" class="edit">Edit</a>
+        </div>
+
+        <button class="chat-btn">💬</button>
+
+    </div>
+</section>
