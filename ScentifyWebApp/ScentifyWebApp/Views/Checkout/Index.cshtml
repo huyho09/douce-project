@@ -1,8 +1,7 @@
 ﻿<section class="checkout-container">
     <div class="form-section">
         <nav class="breadcrumb">
-            <span>Customer</span> &gt; <span class="active">Shipping</span> &gt; <span>Payment</span> &gt;
-            <span>Review</span>
+            <a href="/home">Home</a> &gt; <span class="active">Checkout</span>
         </nav>
         <h2>Where would you like your order sent?</h2>
 
@@ -11,8 +10,7 @@
             <div class="form-row">
                 <div class="floating-group">
                     <select id="title" name="title" required>
-                        <option value="" disabled selected></option>
-                        <option value="Dr">Dr</option>
+                        <option selected value="Dr">Dr</option>
                         <option value="Mr">Mr</option>
                         <option value="Ms">Ms</option>
                     </select>
@@ -99,3 +97,7 @@
 
     </div>
 </section>
+
+<script>
+    document.querySelector('header.custom-navbar').style.display = 'none';
+</script>

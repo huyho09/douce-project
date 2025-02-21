@@ -90,35 +90,74 @@ function updateCart() {
 //    });
 //});
 
+//document.addEventListener("DOMContentLoaded", function () {
+//    const menuButton = document.querySelector(".custom-hamburger");
+//    const mobileMenu = document.querySelector(".mobile-menu");
+//    const overlay = document.createElement("div");
+//    overlay.classList.add("mobile-overlay");
+//    document.body.appendChild(overlay);
+
+//    // Toggle menu on hamburger click
+//    menuButton.addEventListener("click", function () {
+//        mobileMenu.classList.toggle("active");
+//        overlay.classList.toggle("active");
+//        document.body.classList.toggle("menu-open");
+//    });
+
+//    // Close menu when clicking outside (overlay)
+//    overlay.addEventListener("click", function () {
+//        mobileMenu.classList.remove("active");
+//        overlay.classList.remove("active");
+//        document.body.classList.remove("menu-open");
+//    });
+
+//    // Handle submenu hover effect
+//    document.querySelectorAll(".has-submenu").forEach(item => {
+//        item.addEventListener("mouseenter", function () {
+//            this.querySelector(".sub-menu").style.display = "flex";
+//        });
+//        item.addEventListener("mouseleave", function () {
+//            this.querySelector(".sub-menu").style.display = "none";
+//        });
+//    });
+//});
+
+
 document.addEventListener("DOMContentLoaded", function () {
-    const menuButton = document.querySelector(".custom-hamburger");
-    const mobileMenu = document.querySelector(".mobile-menu");
-    const overlay = document.createElement("div");
-    overlay.classList.add("mobile-overlay");
-    document.body.appendChild(overlay);
+    const dropdowns = document.querySelectorAll(".custom-dropdown");
 
-    // Toggle menu on hamburger click
-    menuButton.addEventListener("click", function () {
-        mobileMenu.classList.toggle("active");
-        overlay.classList.toggle("active");
-        document.body.classList.toggle("menu-open");
-    });
+    dropdowns.forEach((dropdown) => {
+        const toggleButton = dropdown.querySelector(".dropdown-toggle");
+        const menu = dropdown.querySelector(".dropdown-menu");
+        const selectedOption = dropdown.querySelector(".selected-option");
 
-    // Close menu when clicking outside (overlay)
-    overlay.addEventListener("click", function () {
-        mobileMenu.classList.remove("active");
-        overlay.classList.remove("active");
-        document.body.classList.remove("menu-open");
-    });
+        // Toggle dropdown on button click
+        toggleButton.addEventListener("click", function (event) {
+            event.stopPropagation(); // Prevents immediate close when clicking button
 
-    // Handle submenu hover effect
-    document.querySelectorAll(".has-submenu").forEach(item => {
-        item.addEventListener("mouseenter", function () {
-            this.querySelector(".sub-menu").style.display = "flex";
+            // Close other dropdowns before opening current one
+            dropdowns.forEach((d) => {
+                if (d !== dropdown) d.classList.remove("active");
+            });
+
+            dropdown.classList.toggle("active");
         });
-        item.addEventListener("mouseleave", function () {
-            this.querySelector(".sub-menu").style.display = "none";
+
+        // Select option and close dropdown
+        menu.addEventListener("click", function (event) {
+            if (event.target.tagName === "LI") {
+                selectedOption.textContent = event.target.textContent;
+                dropdown.classList.remove("active");
+            }
+        });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener("click", function (event) {
+        dropdowns.forEach((dropdown) => {
+            if (!dropdown.contains(event.target)) {
+                dropdown.classList.remove("active");
+            }
         });
     });
 });
-

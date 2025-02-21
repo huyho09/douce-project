@@ -76,6 +76,11 @@ body,
   margin-top: 110px;
 }
 
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
 .product-grid-item {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -226,7 +231,7 @@ body,
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background: rgba(0, 0, 0, 0.6);
   -webkit-backdrop-filter: blur(8px);
           backdrop-filter: blur(8px);
@@ -287,8 +292,56 @@ body:has(.modal-backdrop.active) .cart-container {
   align-items: center;
   padding: 15px 0;
   border-bottom: 1px solid #444;
+  gap: 20px;
 }
 
+.cart-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Responsive Styles for Mobile */
+@media (max-width: 768px) {
+  .cart-item {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* Two columns for better spacing */
+    grid-template-rows: auto auto;
+    /* Allows items to wrap */
+    gap: 15px;
+    padding: 10px;
+    padding-top: 20px;
+  }
+  /* Ensure text and buttons are properly aligned */
+  .cart-item > * {
+    text-align: center;
+  }
+  /* Make the last column (remove button) take full width */
+  .cart-item :nth-child(5) {
+    grid-column: span 2;
+    /* Makes the remove button centered */
+  }
+  .remove-btn {
+    position: absolute;
+  }
+  button.remove-btn {
+    grid-column: 4/5;
+    /* Place the last column in the first row, fourth column */
+    grid-row: 1/2;
+    /* Place it in the first row */
+    justify-self: end;
+    /* Float it to the right */
+    transform: translate(-50%, -50%);
+    right: -10px;
+  }
+  .cart-item {
+    grid-template-rows: auto auto;
+    /* Two rows */
+    padding-right: 30px;
+    text-align: center;
+    align-items: center;
+  }
+}
 .product-name {
   font-weight: bold;
 }
@@ -513,6 +566,14 @@ hr {
   border-radius: 5px;
 }
 
+@media (max-width: 768px) {
+  .cart-container {
+    max-height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling for iOS */
+  }
+}
 /********************************************/
 /* Open Popup Button */
 .open-popup-btn {
@@ -533,7 +594,7 @@ hr {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background: rgba(0, 0, 0, 0.6);
   -webkit-backdrop-filter: blur(8px);
           backdrop-filter: blur(8px);
@@ -643,7 +704,6 @@ input {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1300px;
   margin: 0 auto;
 }
 
@@ -737,6 +797,7 @@ input {
   display: flex;
   width: 100%;
   height: 100%;
+  padding: 0 150px;
   /* Left Section: Form */
   /* Form Layout: 2 Rows */
   /* Floating Label Input & Select */
@@ -744,12 +805,6 @@ input {
   /* Move label when focused or filled */
   /* Right Section: Order Summary */
   /* Product Section */
-  /* Responsive */
-  /* Adjust container layout */
-  /* Left section (form) - 65% */
-  /* Right section (order summary) - 35% */
-  /* Responsive: Stack on smaller screens */
-  /* Floating Chat Button */
 }
 .checkout-container .form-section {
   flex: 1;
@@ -770,11 +825,11 @@ input {
 }
 .checkout-container h2 {
   font-size: 32px;
-  margin: 20px 0;
+  margin: 50px 0;
   font-weight: 300;
 }
 .checkout-container .checkout-form {
-  padding: 100px;
+  padding: 20px;
   display: flex;
   gap: 60px;
   flex-direction: column;
@@ -849,7 +904,7 @@ input {
 .checkout-container .order-summary {
   width: 400px;
   background: #f9f6ec;
-  padding: 150px 40px 40px 40px !important;
+  padding: 40px;
   box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -908,33 +963,37 @@ input {
 .checkout-container .product-price {
   font-weight: bold;
 }
+
+/* Responsive */
 @media (max-width: 900px) {
-  .checkout-container .checkout-container {
+  .checkout-container {
     flex-direction: column;
     align-items: center;
   }
-  .checkout-container .order-summary {
+  .order-summary {
     width: 90%;
     margin-top: 20px;
     box-shadow: none;
   }
-  .checkout-container .form-row {
+  .form-row {
     flex-direction: column;
   }
 }
-.checkout-container .checkout-container {
+/* Adjust container layout */
+.checkout-container {
   display: flex;
   justify-content: space-between;
-  max-width: 1200px;
   margin: 40px auto;
-  padding: 20px;
 }
-.checkout-container .form-section {
+
+/* Left section (form) - 65% */
+.form-section {
   flex: 0 0 65%;
-  padding: 40px;
-  padding-top: 100px;
+  padding: 40px 40px 40px 150px;
 }
-.checkout-container .order-summary {
+
+/* Right section (order summary) - 35% */
+.order-summary {
   flex: 0 0 35%;
   background: #f9f6ec;
   padding: 40px;
@@ -943,34 +1002,40 @@ input {
   /* Two-column layout for section */
   /* Right side: "Edit" link floats right */
 }
-.checkout-container .order-summary .section {
+.order-summary .section {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.checkout-container .order-summary .section div {
+.order-summary .section div {
   flex-grow: 1;
 }
-.checkout-container .order-summary .section .edit {
+.order-summary .section .edit {
   float: right;
 }
-@media (max-width: 900px) {
-  .checkout-container .checkout-container {
-    flex-direction: column;
+
+/* Responsive: Stack on smaller screens */
+@media (max-width: 768px) {
+  .checkout-container {
+    flex-direction: column-reverse;
     align-items: center;
+    padding: 10px;
+    margin: 20px auto;
   }
-  .checkout-container .form-section,
-  .checkout-container .order-summary {
+  .form-section,
+  .order-summary {
     flex: 1 1 100%;
-    width: 90%;
-    padding: 20px;
+    width: 100%;
+    padding: 0;
   }
-  .checkout-container .order-summary {
+  .order-summary {
     margin-top: 20px;
     box-shadow: none;
+    padding-top: 20px !important;
   }
 }
-.checkout-container .chat-btn {
+/* Floating Chat Button */
+.chat-btn {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -982,6 +1047,7 @@ input {
   font-size: 18px;
   cursor: pointer;
 }
-.checkout-container .chat-btn:hover {
+
+.chat-btn:hover {
   background: #333;
 }/*# sourceMappingURL=site.css.map */
