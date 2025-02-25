@@ -1,11 +1,17 @@
-﻿<section class="checkout-container">
+﻿@{
+    var orderId = Guid.NewGuid().ToString();
+    double amount = 165000;
+}
+<section class="checkout-container">
     <div class="form-section">
         <nav class="breadcrumb">
             <a href="/home">Home</a> &gt; <span class="active">Checkout</span>
         </nav>
         <h2>Where would you like your order sent?</h2>
 
-        <form class="checkout-form">
+        <form class="checkout-form" id="checkout-form">
+            <input type="hidden" id="orderId" value="@orderId" />
+            <input type="hidden" id="amount" value="@amount" />
             <!-- Row 1: Title, First Name, Last Name -->
             <div class="form-row">
                 <div class="floating-group">
@@ -51,7 +57,7 @@
 
     <div class="order-summary">
         <div class="price-details">
-            <div class="summary-item"><span>Subtotal</span><span>€165.00</span></div>
+            <div class="summary-item"><span>Subtotal</span><span>€@amount</span></div>
             <div class="summary-item"><span>Shipping fee</span><span>€0.00</span></div>
             <div class="summary-item"><span>Included taxes</span><span>€0.00</span></div>
             <div class="summary-total"><span>Total</span><span>€165.00</span></div>
@@ -100,4 +106,32 @@
 
 <script>
     document.querySelector('header.custom-navbar').style.display = 'none';
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("checkout-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form from reloading the page
+
+            const orderId = document.getElementById("orderId").value;
+            const amount = document.getElementById("amount").value;
+
+            fetch("/pay?orderId=" + orderId + "&amount=" + amount, {
+                method: "POST"
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.payUrl) {
+                    // Redirect user to MoMo payment page
+                    window.location.href = data.payUrl;
+                } else {
+                    document.getElementById("paymentResult").innerHTML = `<p style="color: red;">Error: ${data.message}</p>`;
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("paymentResult").innerHTML = `<p style="color: red;">Failed to connect to payment API.</p>`;
+            });
+        });
+    });
 </script>

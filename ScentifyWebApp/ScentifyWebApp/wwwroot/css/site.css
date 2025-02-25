@@ -429,6 +429,7 @@ hr {
   cursor: pointer;
   margin-top: 10px;
   font-weight: bold;
+  text-align: center;
 }
 
 .checkout-btn:hover {

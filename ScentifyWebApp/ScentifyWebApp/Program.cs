@@ -7,6 +7,15 @@ namespace ScentifyWebApp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
+                });
+            });
 
             // Configure services
             ConfigureServices(builder.Services);
@@ -29,6 +38,9 @@ namespace ScentifyWebApp
 
             app.UseAuthorization();
 
+            app.UseCors("AllowAll");
+            app.MapControllers();
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -41,6 +53,7 @@ namespace ScentifyWebApp
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
             services.AddScoped<CartService>();
+            services.AddHttpClient<MomoService>();
             services.AddSession(); // Add this line to enable session
         }
     }
