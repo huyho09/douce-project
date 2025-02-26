@@ -50,7 +50,7 @@ namespace ScentifyWebApp.Services
 
                 // Generate a unique requestId and build order info
                 var requestId = Guid.NewGuid().ToString();
-                var orderInfo = $"Payment for Order {orderId}";
+                var orderInfo = $"Thanh toán tiền nước hoa Douce - Gloam Eau de Parfum 50L";
 
                 // For IPN (asynchronous notification), use a publicly accessible URL
                 var ipnUrl = "https://douce.somee.com/momo-callback";
