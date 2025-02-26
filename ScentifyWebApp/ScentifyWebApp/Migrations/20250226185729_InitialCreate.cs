@@ -28,6 +28,8 @@ namespace ScentifyWebApp.Migrations
                     CountryOfOrigin = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     FragranceType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    UnitPrice = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Currency = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     StockQuantity = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     AverageRating = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
