@@ -14,27 +14,6 @@ $color-pagination-active: #1d4ed8;
 $shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 $transition: all 0.3s ease;
 
-// Base styles
-html {
-  font-size: $font-size-base;
-  position: relative;
-  min-height: 100%;
-
-  @media (min-width: 768px) {
-    font-size: $font-size-lg;
-  }
-}
-
-body,
-#header {
-  margin-bottom: 60px;
-  background-color: $color-background !important;
-}
-
-#header {
-  border-bottom: 1px solid $color-border;
-}
-
 // Focus styles
 .btn:focus,
 .btn:active:focus,
@@ -126,6 +105,7 @@ body,
 
 .image-wrapper {
   width: 100%;
+  height: 45vh;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -271,7 +251,6 @@ body,
   border-radius: 5px;
   z-index: 10;
 }
-
 
 /* Modal Backdrop */
 .modal-backdrop {

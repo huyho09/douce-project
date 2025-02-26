@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using ScentifyWebApp.DAL.DB;
 using ScentifyWebApp.Services;
 
 namespace ScentifyWebApp
@@ -19,6 +21,10 @@ namespace ScentifyWebApp
 
             // Configure services
             ConfigureServices(builder.Services);
+
+            // Configure SQL Server
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 

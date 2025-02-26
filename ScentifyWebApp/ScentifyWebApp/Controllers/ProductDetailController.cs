@@ -1,41 +1,53 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using ScentifyWebApp.DAL.DB;
 using ScentifyWebApp.Models;
+using ScentifyWebApp.Models.Entities;
 
 namespace ScentifyWebApp.Controllers
 {
-	[Route("products")]
-	public class ProductDetailController : Controller
-	{
-		private readonly ILogger<ProductDetailController> _logger;
-		public ProductDetailController(ILogger<ProductDetailController> logger)
-		{
-			_logger = logger;
-		}
+    [Route("products")]
+    public class ProductDetailController : Controller
+    {
+        private readonly ApplicationDbContext _context;
+        private readonly ILogger<ProductDetailController> _logger;
+        public ProductDetailController(ApplicationDbContext context,
+            ILogger<ProductDetailController> logger)
+        {
+            _context = context;
+            _logger = logger;
+        }
 
-		[HttpGet("details/{id}")]
-		public IActionResult Index(int id = 1)
-		{
-			var product = _productDetail(id);
-			return View(product);
-		}
+        [HttpGet("details/{id}")]
+        public async Task<IActionResult> Index(string id)
+        {
+            if (!Guid.TryParse(id, out Guid guidId))
+            {
+                throw new Exception("Invalid Id");
+            }
 
-		private Product? _productDetail(int id)
-		{
-			string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "data", "product.json");
-			var result = new Product();
-			if (!System.IO.File.Exists(filePath))
-			{
-				throw new Exception("Product data file not found.");
-			}
+            var product = await _productDetail(guidId);
+            return View(product);
+        }
 
-			var jsonData = System.IO.File.ReadAllText(filePath);
-			var products = JsonConvert.DeserializeObject<List<Product>>(jsonData);
-			if(products != null)
-			{
-				result = products.FirstOrDefault(x => x.Id == id);
-			}
-			return result;
-		}
-	}
+        private async Task<Perfume> _productDetail(Guid id)
+        {
+            //string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "data", "product.json");
+            var result = new Perfume();
+            //if (!System.IO.File.Exists(filePath))
+            //{
+            //	throw new Exception("Product data file not found.");
+            //}
+
+            //var jsonData = System.IO.File.ReadAllText(filePath);
+            //var products = JsonConvert.DeserializeObject<List<Product>>(jsonData);
+            var products = await _context.Perfume.ToListAsync();
+            if (products != null)
+            {
+                result = products.FirstOrDefault(x => x.Id == id);
+            }
+            return result;
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ScentifyWebApp.Models.Product>?
+﻿@model IEnumerable<ScentifyWebApp.Models.Entities.Perfume>?
 
 @{
     ViewData["Title"] = "Products Page";
@@ -29,7 +29,7 @@
                             <!-- Image -->
                             <div class="image-wrapper">
                                 <a href="/products/details/@product.Id" target="_self">
-                                    <img alt="@product.Name" loading="lazy" src="@product.Image">
+                                    <img alt="@product.Name" loading="lazy" src="@product.ImageUrl">
                                 </a>
                             </div>
 
@@ -47,18 +47,18 @@
 
                                 <!-- Price Info -->
                                 <div class="price-info">
-                                    <p class="product-size">@product.Size</p>
+                                    <p class="product-size">@product.VolumeMl mL</p>
                                     <div class="unit-pricing">
-                                        <span class="product-price">@product.Price.Amount @product.Price.Currency</span>
+                                        <span class="product-price">@product.Currency @product.Price</span>
                                         <span>/</span>
-                                        <span class="unit-price">@product.Price.UnitPrice</span>
+                                        <span class="unit-price">@product.UnitPrice</span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Call to Action -->
                             <div class="cta-wrapper">
-                                <button class="add-to-cart-btn" aria-label="Add to your cart - €@product.Price.Amount">Add to your cart</button>
+                                <button class="add-to-cart-btn" aria-label="Add to your cart - €@product.Price">Add to your cart</button>
                             </div>
                         </div>
                     }
@@ -66,9 +66,11 @@
             </div>
 
             <!-- Load More Button -->
-            <div class="load-more-container">
-                @* <p class="fst-italic text-center text-sm-center">About <span id="numofRemaining">
-                        @(Model?.Count() > 0 ? (Model?.Count() - 6): 0)
+            @if (Model?.Count() > 6)
+            {
+                <div class="load-more-container">
+                    @* <p class="fst-italic text-center text-sm-center">About <span id="numofRemaining">
+                @(Model?.Count() > 0 ? (Model?.Count() - 6): 0)
                 </span> more products remaining... load more if you want to explore.</p> *@
 
                 <button class="load-more-btn" onclick="loadMoreProducts()">
@@ -76,6 +78,7 @@
                     <i class="bi bi-chevron-double-down"></i>
                 </button>
             </div>
+            }
         </div>
     </div>
 </section>
@@ -100,37 +103,37 @@
                 const item = document.createElement('div');
                 item.className = 'product-grid-item';
                 item.innerHTML = `
-                    <div class="product-grid-item">
-                        <div class="image-wrapper">
-                            <a href="/products/details/${product.id}" target="_self">
-                                <img alt="${product.name}" loading="lazy" src="${product.image}">
-                            </a>
-                        </div>
-
-                        <div class="body-wrapper">
-                            <!-- Title -->
-                            <h4 class="product-title">
+                        <div class="product-grid-item">
+                            <div class="image-wrapper">
                                 <a href="/products/details/${product.id}" target="_self">
-                                    ${product.name}
+                                    <img alt="${product.name}" loading="lazy" src="${product.image}">
                                 </a>
-                            </h4>
+                            </div>
 
-                            <p class="product-description">${product.description}</p>
+                            <div class="body-wrapper">
+                                <!-- Title -->
+                                <h4 class="product-title">
+                                    <a href="/products/details/${product.id}" target="_self">
+                                        ${product.name}
+                                    </a>
+                                </h4>
 
-                            <div class="price-info">
-                                <p class="product-size">${product.size}</p>
-                                <div class="unit-pricing">
-                                    <span class="product-price">${product.price.amount} ${product.price.currency}</span>
-                                    <span>/</span>
-                                    <span class="unit-price">${product.price.unitPrice}</span>
+                                <p class="product-description">${product.description}</p>
+
+                                <div class="price-info">
+                                    <p class="product-size">${product.size}</p>
+                                    <div class="unit-pricing">
+                                        <span class="product-price">${product.price.amount} ${product.price.currency}</span>
+                                        <span>/</span>
+                                        <span class="unit-price">${product.price.unitPrice}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="cta-wrapper">
-                            <button class="add-to-cart-btn" aria-label="Add to your cart - €${product.price.amount}">Add to your cart</button>
-                        </div>
-                    </div>`;
+                            <div class="cta-wrapper">
+                                <button class="add-to-cart-btn" aria-label="Add to your cart - €${product.price.amount}">Add to your cart</button>
+                            </div>
+                        </div>`;
                 container.appendChild(item);
             });
 

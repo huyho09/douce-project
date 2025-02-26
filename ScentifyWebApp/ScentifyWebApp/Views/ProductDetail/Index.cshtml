@@ -1,4 +1,4 @@
-﻿@model Product
+﻿@model ScentifyWebApp.Models.Entities.Perfume
 @{
 	Layout = "~/Views/Shared/_DetailLayout.cshtml";
 }
@@ -14,7 +14,7 @@
 
 		</div>
 		<div class="product-display d-flex flex-column">
-			<img loading="lazy" alt="@Model.Name" src="@Url.Content(Model.Image.Replace("./","~/"))">
+			<img loading="lazy" alt="@Model.Name" src="@Url.Content(Model.ImageUrl.Replace("./","~/"))">
 			<div>
 				<button class="add-to-cart">Add to cart +</button>
 			</div>
@@ -23,11 +23,11 @@
 		<div class="product-display">
 
 			<div class="product-info">
-				<h3>$@Model?.Price?.Amount</h3>
+				<h3>$@Model?.Price</h3>
 				<div class="stars">
 					★★★★☆
 				</div>
-				<div class="details">@Model?.Size</div>
+				<div class="details">@Model?.VolumeMl</div>
 				<div class="controls">
 					@*<i class="fas fa-chevron-left"></i>
 					<i class="fas fa-chevron-right"></i>*@
