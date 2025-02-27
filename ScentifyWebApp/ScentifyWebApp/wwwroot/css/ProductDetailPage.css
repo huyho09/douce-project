@@ -31,13 +31,13 @@
   line-height: 1.1;
   color: #d5b260;
 }
-.text-content p {
+.text-content .text-content-detail {
   margin-bottom: 30px;
   color: #d5b260;
   position: relative;
   padding-left: 20px;
 }
-.text-content p::before {
+.text-content .text-content-detail::before {
   content: "";
   position: absolute;
   left: 0;

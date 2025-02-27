@@ -837,7 +837,7 @@ input {
   display: flex;
   gap: 60px;
   flex-direction: column;
-  background: #ffd8a9;
+  background: #fffef2;
   border-radius: 10px;
 }
 .checkout-container .form-row {

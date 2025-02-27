@@ -46,7 +46,18 @@ $custom-color-4: #d5b260;
 }
 
 body {
-	background: linear-gradient($custom-color-1, $background-color_8, $custom-color-1, $background-color_8, $custom-color-1);
+	background-image: url('/images/background-img.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+}
+
+a {
+	color: $custom-color-4;
+
+	&hover {
+		color: $custom-color-3 !important;
+	}
 }
 /* On smaller screens, decrease text size */
 /* Position the Previous Button */
@@ -407,14 +418,13 @@ iframe {
 	scroll-snap-align: center;
 	transition: opacity 1scubic-bezier(.215, .61, .355, 1);
 	width: 52vw;
-	background: #fffef2;
+	background: inherit;
 
 	img {
 		display: block;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		background: $custom-color-2;
 	}
 }
 
@@ -598,7 +608,7 @@ iframe {
 }
 
 .Footer_Footer-base__r2czG {
-	background-color: $custom-color-1;
+	background-color: $custom-color-2;
 	position: relative;
 }
 
@@ -627,7 +637,7 @@ iframe {
 
 	a {
 		&:hover {
-			color: $color_3 !important;
+			color: $custom-color-3 !important;
 		}
 	}
 }
@@ -1259,7 +1269,7 @@ iframe {
 		text-align: center !important;
 		margin: 50px auto;
 		font-weight: 700;
-	
+
 		p {
 			font-weight: 700;
 		}
