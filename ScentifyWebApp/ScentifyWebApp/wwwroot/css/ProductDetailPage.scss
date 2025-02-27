@@ -8,6 +8,10 @@ $color_7: #fffef2;
 $font-family_1: 'Poppins', sans-serif;
 $border-color_1: #f35b7a;
 $border-color_2: #fff;
+$custom-color-1: #200901;
+$custom-color-2: #0f0100;
+$custom-color-3: #9f5f2e;
+$custom-color-4: #d5b260;
 
 /* Reset */
 /* Header */
@@ -35,16 +39,20 @@ $border-color_2: #fff;
 }
 .text-content {
 	max-width: 500px;
+
 	h1 {
 		font-size: 4em;
 		margin-bottom: 30px;
 		line-height: 1.1;
+		color: $custom-color-4;
 	}
+
 	p {
 		margin-bottom: 30px;
-		color: $color_3;
+		color: $custom-color-4;
 		position: relative;
 		padding-left: 20px;
+
 		&::before {
 			content: '';
 			position: absolute;
@@ -53,12 +61,12 @@ $border-color_2: #fff;
 			transform: translateY(-50%);
 			width: 50px;
 			height: 2px;
-			background: $color_3;
+			background: $custom-color-4;
 		}
 	}
 }
 .add-to-cart {
-	background: $color_3;
+	background: $custom-color-3;
 	border: none;
 	color: $color_1;
 	padding: 12px 25px;
@@ -67,7 +75,7 @@ $border-color_2: #fff;
 	cursor: pointer;
 	transition: 0.3s;
 	display: inline-block;
-	margin-top: 10px;
+	margin-top: 30px;
 	&:hover {
 		transform: translateY(-3px);
 	}
@@ -79,7 +87,7 @@ $border-color_2: #fff;
 		width: 300px;
 		height: auto;
 		object-fit: contain;
-		filter: drop-shadow(0 20px 30px $color_3);
+		filter: drop-shadow(0 10px 10px $custom-color-3);
 	}
 }
 .product-info {
@@ -88,15 +96,16 @@ $border-color_2: #fff;
 	h3 {
 		font-size: 2em;
 		margin-bottom: 10px;
+		color: $color_2;
 	}
 }
 .stars {
-	color: $color_4;
+	color: $custom-color-4;
 	margin-bottom: 5px;
 }
 .details {
 	margin-top: 15px;
-	color: $color_3;
+	color: $color_2;
 	font-size: 0.9em;
 }
 .controls {
@@ -119,7 +128,8 @@ $border-color_2: #fff;
 	justify-content: space-around;
 	margin-top: 60px;
 	border-top: 1px solid rgba(255, 255, 255, 0.2);
-	background: $color_4;
+	background: $custom-color-1;
+
 	.section {
 		flex: 1;
 		text-align: center;
@@ -127,17 +137,21 @@ $border-color_2: #fff;
 		border-right: 1px solid rgba(255, 255, 255, 0.2);
 		cursor: pointer;
 		transition: 0.3s;
+
 		&:last-child {
 			border-right: none;
 		}
+
 		&:hover {
-			background: $color_5;
+			background: $custom-color-3;
 		}
+
 		.number {
 			color: $color_1;
 			font-size: 1.2em;
 			margin-bottom: 10px;
 		}
+
 		.title {
 			font-size: 1em;
 			text-transform: uppercase;
@@ -151,8 +165,12 @@ $border-color_2: #fff;
 	color: $color_6;
 	margin: 0px 0;
 	padding: 60px 30px;
-	background: $color_7;
 	position: relative;
+	color: $custom-color-4;
+
+	p {
+		color: $color_7;
+	}
 }
 .section-title {
 	font-size: 2.5em;
@@ -160,6 +178,7 @@ $border-color_2: #fff;
 	text-align: justify;
 	font-size: 2.5em;
 	max-width: 400px;
+
 }
 .section-subtitle {
 	color: $color_6;
@@ -184,7 +203,7 @@ $border-color_2: #fff;
 	text-align: center;
 	transition: 0.4s;
 	cursor: pointer;
-	box-shadow: 0 10px 20px $color_3;
+	box-shadow: 0 5px 10px $color_3;
 
 	img {
 		width: 100px;
@@ -212,7 +231,7 @@ $border-color_2: #fff;
 }
 .card.center {
 	background: $color_2;
-	box-shadow: 0 20px 40px $color_3;
+	box-shadow: 0 5px 10px $color_3;
 	transform: translateY(-20px);
 	transition: 0.5s;
 	img {
@@ -247,8 +266,7 @@ $border-color_2: #fff;
 }
 .third-section {
 	padding: 60px 30px;
-	background: $color_7;
-	color: $color_6;
+	color: $custom-color-4;
 	position: relative;
 }
 .section-heading {
@@ -258,7 +276,7 @@ $border-color_2: #fff;
 .section-label {
 	text-transform: uppercase;
 	letter-spacing: 2px;
-	color: $color_6;
+	color: $color_7;
 	margin-bottom: 10px;
 	font-size: 0.9em;
 }
@@ -269,7 +287,7 @@ $border-color_2: #fff;
 }
 .product-card {
 	flex: 1;
-	background: $color_5;
+	background: $custom-color-3;
 	border-radius: 20px;
 	overflow: hidden;
 	transition: transform 0.4s;
@@ -307,7 +325,7 @@ $border-color_2: #fff;
 }
 .learn-more {
 	text-decoration: none;
-	color: $color_2;
+	color: $custom-color-1;
 	font-weight: bold;
 	transition: color 0.3s;
 	&:hover {

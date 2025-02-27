@@ -1,4 +1,4 @@
-/* The dots/bullets/indicators */
+﻿/* The dots/bullets/indicators */
 /* Fading animation */
 @keyframes fade {
   from {
@@ -8,6 +8,10 @@
     opacity: 1;
   }
 }
+body {
+  background: linear-gradient(#200901, #000, #200901, #000, #200901);
+}
+
 /* On smaller screens, decrease text size */
 /* Position the Previous Button */
 /* Position the Next Button */
@@ -33,21 +37,18 @@
 .carousel-item img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .carousel-item video {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 iframe {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .dot {
@@ -108,13 +109,11 @@ iframe {
   font-size: 0.875rem;
   height: 60px;
   line-height: 1.35;
-  margin-right: 20px;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 34px, #000 calc(100% - 42px), transparent);
-  mask-image: linear-gradient(90deg, transparent 0, #000 34px, #000 calc(100% - 42px), transparent);
   overflow: auto;
   position: relative;
-  transition: height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
   width: 100%;
+  background: #200901;
+  color: #ffd8a9;
 }
 .subNavigationList_subNavListsContainer__IyfDM:hover .subNavigationList_subNavList__YlZCz {
   overflow: auto;
@@ -165,10 +164,10 @@ iframe {
 
 .subNavigationList_subNavLink__anNud.subNavigationList_subNavLink__anNud {
   font-family: Suisse Medium, sans-serif;
-  color: #666;
+  color: #d5b260;
 }
 .subNavigationList_subNavLink__anNud.subNavigationList_subNavLink__anNud:focus {
-  color: #000;
+  color: #ffd8a9;
 }
 .subNavigationList_subNavLink__anNud.subNavigationList_subNavLink__anNud:after {
   content: "";
@@ -180,7 +179,7 @@ iframe {
   margin-top: 0;
 }
 .subNavigationList_subNavLink__anNud.subNavigationList_subNavLink__anNud:hover {
-  color: #000;
+  color: #ffd8a9;
 }
 .subNavigationList_subNavLink__anNud.subNavigationList_subNavLink__anNud:hover:after {
   transform: scaleX(1);
@@ -193,7 +192,7 @@ iframe {
 .GridBlockItem_gridItemCopy__kWIsl {
   position: absolute;
   z-index: 30;
-  color: #fff;
+  color: #cc5500;
   font-family: Suisse, sans-serif;
   font-size: 16px;
   font-weight: 700;
@@ -204,11 +203,15 @@ iframe {
 }
 
 .GridBlockItem_gridItemCopy__kWIsl.GridBlockItem_dark__CfoXX {
-  color: #333;
+  color: #aa4406;
 }
 
 .GridBlockItem_gridItemCopy__kWIsl.GridBlockItem_light__N8Mr7 {
   color: #fffef2;
+}
+
+.image-holder {
+  filter: drop-shadow(0 2px 4px #9f5f2e);
 }
 
 .Hyperlink_light__12A_f.Hyperlink_light__12A_f.Hyperlink_blockStyle__yQb3f {
@@ -220,7 +223,7 @@ iframe {
 }
 .Hyperlink_light__12A_f.Hyperlink_light__12A_f.Hyperlink_blockStyle__yQb3f:focus {
   background-color: #fffef2;
-  color: #333;
+  color: #aa4406;
   border: 2px #252525;
 }
 .Hyperlink_light__12A_f.Hyperlink_light__12A_f.Hyperlink_blockStyle__yQb3f:focus .Hyperlink_icon__u_gO9 svg path {
@@ -228,7 +231,7 @@ iframe {
 }
 .Hyperlink_light__12A_f.Hyperlink_light__12A_f.Hyperlink_blockStyle__yQb3f:hover {
   background-color: #fffef2;
-  color: #333;
+  color: #aa4406;
 }
 .Hyperlink_light__12A_f.Hyperlink_light__12A_f.Hyperlink_blockStyle__yQb3f:hover .Hyperlink_icon__u_gO9 svg path {
   fill: #333;
@@ -240,7 +243,6 @@ iframe {
 }
 
 .Hyperlink_light__12A_f.Hyperlink_light__12A_f {
-  color: #fffef2;
   color: #fffef2;
 }
 .Hyperlink_light__12A_f.Hyperlink_light__12A_f .Hyperlink_icon__u_gO9.Hyperlink_icon__u_gO9 svg path {
@@ -254,15 +256,29 @@ iframe {
 }
 
 .btn-discount {
-  border: 1px solid whitesmoke;
-  color: whitesmoke;
+  border: 1px solid #d5b260;
+  color: #d5b260;
   font-family: Suisse, sans-serif;
   font-weight: 700;
   font-size: 0.875rem;
   padding: 15px;
+  background: #200901;
 }
 .btn-discount svg path {
   fill: whitesmoke;
+}
+.btn-discount:hover {
+  color: #fffef2 !important;
+  background: #200901;
+}
+
+.BodyCopy_copy__8BnZm .Paragraph_base__CFztu {
+  font-size: 1.3em;
+  color: #fffef2 !important;
+}
+
+#yearly-sale {
+  color: #d5b260 !important;
 }
 
 .TextOverFullWidthAsset {
@@ -274,8 +290,7 @@ iframe {
   width: 100%;
   min-height: 80vh;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   vertical-align: middle;
 }
 
@@ -309,8 +324,12 @@ iframe {
   display: block;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
+  background: #0f0100;
+}
+
+.product-store h2 {
+  color: #d5b260 !important;
 }
 
 .append-buttons {
@@ -325,6 +344,13 @@ iframe {
 #testimonials h2 {
   font-family: Zapf Humanist, serif;
   font-size: 1.5rem;
+  color: #d5b260;
+}
+#testimonials p, #testimonials a {
+  color: #fff;
+}
+#testimonials .details_KeyIngredients {
+  color: #fff;
 }
 
 .swiper-button-prev {
@@ -334,7 +360,7 @@ iframe {
   transform: translate(-50%, -50%) !important;
   width: 50px;
   height: 50px;
-  color: white;
+  color: #fffef2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -357,7 +383,7 @@ iframe {
   transform: translate(-50%, -50%) !important;
   width: 50px;
   height: 50px;
-  color: white;
+  color: #fffef2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -374,7 +400,7 @@ iframe {
 }
 
 .details_heading {
-  color: #333;
+  color: #aa4406;
   font-size: 1rem;
   font-weight: 700;
   margin-bottom: 0.3125rem;
@@ -382,30 +408,31 @@ iframe {
 
 .details_KeyIngredients {
   margin-bottom: 0.3125rem;
-  color: #666;
-  font-family: Suisse, sans-serif;
+  color: black;
+  font-family: Suisse Medium, sans-serif;
   font-size: 14px;
+  font-weight: 500;
 }
 
 .unitPricingPrice {
-  font-family: Suisse, sans-serif;
+  font-family: Suisse Medium, sans-serif;
   line-height: 1.7;
-  font-weight: 400;
+  font-weight: 550;
   font-size: 14px;
-  color: #333;
+  color: #fff;
 }
 
 .unitPricingSlash {
-  color: #e0dfd6;
+  color: #fff;
   margin: 0 0.5rem;
 }
 
 .unitPricingUnitPrice {
   font-family: Suisse, sans-serif;
   line-height: 1.7;
-  font-weight: 400;
+  font-weight: 550;
   font-size: 14px;
-  color: #666;
+  color: #fff;
 }
 
 .color-notes-table {
@@ -422,7 +449,7 @@ iframe {
   text-align: center;
   vertical-align: top;
   font-weight: bold;
-  color: #333;
+  color: #6c1d10;
   padding: 0px;
 }
 
@@ -441,6 +468,7 @@ iframe {
   line-height: 1.15;
   padding-left: 3px;
   padding-top: 5px;
+  background: #fffef2;
 }
 
 .TypefragranceTable tbody {
@@ -468,7 +496,7 @@ iframe {
 }
 
 .Footer_Footer-base__r2czG {
-  background-color: #252525;
+  background-color: #200901;
   position: relative;
 }
 
@@ -495,7 +523,7 @@ iframe {
   grid-column: span 1;
 }
 .Footer_Footer-block-item__p_R_M a:hover {
-  color: #fff !important;
+  color: #cc5500 !important;
 }
 
 .Footer_Footer-shipping-to__68Tb6 {
@@ -550,7 +578,7 @@ iframe {
   width: 100%;
 }
 .Footer_Footer-text-button__WKjTi.Footer_Footer-text-button__WKjTi:hover {
-  color: #fff;
+  color: #cc5500;
 }
 .Footer_Footer-text-button__WKjTi.Footer_Footer-text-button__WKjTi:hover:after {
   background: #fff;
@@ -665,11 +693,11 @@ iframe {
 }
 
 .Footer_NewsLetterSignUp-subscriptionMessage__WrDyw.Footer_dark__N7MXx {
-  color: #333;
+  color: #aa4406;
 }
 
 .Footer_NewsLetterSignUp-subscriptionMessage__WrDyw.Footer_light___DRPe {
-  color: #fffef2;
+  color: #8d3004;
 }
 
 .Footer_NewsLetterSignUp-footerNewsletterErrorMessage__9ObHK {
@@ -688,7 +716,7 @@ iframe {
 }
 
 .Footer_NewsLetterSignUp-termsAndCondition__Kknlz {
-  color: #fffef2;
+  color: #8d3004;
   font-family: Suisse Regular, sans-serif;
   font-size: 12px;
   height: 90px;
@@ -707,13 +735,13 @@ iframe {
 }
 
 .Hyperlink_dark__ROIlG {
-  color: #333;
+  color: #aa4406;
 }
 .Hyperlink_dark__ROIlG:focus {
-  color: #333;
+  color: #aa4406;
 }
 .Hyperlink_dark__ROIlG:hover {
-  color: #333;
+  color: #aa4406;
 }
 .Hyperlink_dark__ROIlG .Hyperlink_icon__u_gO9.Hyperlink_icon__u_gO9 svg path {
   fill: #333;
@@ -791,7 +819,7 @@ iframe {
 .Hyperlink_dark__ROIlG.Hyperlink_blockStyle__yQb3f:focus {
   border-color: #333;
   background-color: #333;
-  color: #fffef2;
+  color: #8d3004;
 }
 .Hyperlink_dark__ROIlG.Hyperlink_blockStyle__yQb3f:focus .Hyperlink_icon__u_gO9 svg path {
   fill: #fffef2;
@@ -799,7 +827,7 @@ iframe {
 .Hyperlink_dark__ROIlG.Hyperlink_blockStyle__yQb3f:hover {
   border-color: #333;
   background-color: #333;
-  color: #fffef2;
+  color: #8d3004;
 }
 .Hyperlink_dark__ROIlG.Hyperlink_blockStyle__yQb3f:hover .Hyperlink_icon__u_gO9 svg path {
   fill: #fffef2;
@@ -811,11 +839,11 @@ iframe {
   color: #f6f5e8;
 }
 .Hyperlink_dark__ROIlG.Hyperlink_blockStyle__yQb3f.Hyperlink_alternate__Yvw81:focus {
-  border-color: #000;
+  border-color: #120301;
   background-color: #000;
 }
 .Hyperlink_dark__ROIlG.Hyperlink_blockStyle__yQb3f.Hyperlink_alternate__Yvw81:hover {
-  border-color: #000;
+  border-color: #120301;
   background-color: #000;
 }
 .Hyperlink_dark__ROIlG.Hyperlink_blockStyle__yQb3f.Hyperlink_alternate__Yvw81 .Hyperlink_icon__u_gO9 svg path {
@@ -825,7 +853,7 @@ iframe {
 .Hyperlink_light__12A_f.Hyperlink_light__12A_f.Hyperlink_blockStyle__yQb3f.Hyperlink_alternate__Yvw81 {
   border-color: #f6f5e8;
   background-color: #f6f5e8;
-  color: #333;
+  color: #aa4406;
 }
 .Hyperlink_light__12A_f.Hyperlink_light__12A_f.Hyperlink_blockStyle__yQb3f.Hyperlink_alternate__Yvw81:focus {
   border-color: #fffef2;
@@ -877,11 +905,11 @@ iframe {
 }
 
 .FooterBlock_base__lzouW.FooterBlock_dark__Qy4St {
-  color: #333;
+  color: #aa4406;
 }
 
 .FooterBlock_base__lzouW.FooterBlock_light__JdnEy {
-  color: #fffef2;
+  color: #d5b260;
 }
 
 .FooterBlock_heading__IVkcc {
@@ -989,14 +1017,12 @@ iframe {
   .carousel-item img {
     width: 100%;
     height: 220px;
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
   .carousel-item video {
     width: 100%;
     height: 220px;
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
   .mySwiperContainer {
     display: none !important;
@@ -1007,8 +1033,7 @@ iframe {
   iframe {
     width: 100%;
     height: 220px;
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
   .carousel-control-next {
     top: 40px;
@@ -1026,8 +1051,7 @@ iframe {
     width: 100%;
     min-height: 50vh !important;
     height: 100%;
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
     vertical-align: middle;
   }
   .text-content {
@@ -1110,4 +1134,4 @@ iframe {
   .FlyinPanel_footer__PvryQ {
     padding: 0 80px;
   }
-}/*# sourceMappingURL=HomePage.css.map */
+}
