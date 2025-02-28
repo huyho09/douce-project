@@ -1,4 +1,4 @@
-﻿/* Reset */
+/* Reset */
 /* Header */
 /* Main Content */
 /* Image & Info */
@@ -71,7 +71,8 @@
 .product-display img {
   width: 300px;
   height: auto;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   filter: drop-shadow(0 10px 10px #9f5f2e);
 }
 
@@ -196,7 +197,8 @@
   width: 100px;
   height: 100px;
   margin-bottom: 20px;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   transition: 0.3s;
 }
 .card h3 {
@@ -293,7 +295,8 @@
 .product-card img {
   width: 100%;
   height: auto;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .card-content {
@@ -443,4 +446,4 @@
   .info-sections .section:last-child {
     border-bottom: none;
   }
-}
+}/*# sourceMappingURL=ProductDetailPage.css.map */

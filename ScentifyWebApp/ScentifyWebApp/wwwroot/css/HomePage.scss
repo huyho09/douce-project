@@ -379,6 +379,9 @@ iframe {
 
 #yearly-sale {
 	color: $custom-color-4 !important;
+	.text-content{
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+	}
 }
 
 .TextOverFullWidthAsset {
@@ -479,7 +482,7 @@ iframe {
 	&:after {
 		font-size: 12px !important;
 		font-weight: bold;
-		color: $color_8 !important;
+		color: $color_1 !important;
 	}
 }
 
@@ -503,7 +506,7 @@ iframe {
 	&:after {
 		font-size: 12px !important;
 		font-weight: bold;
-		color: $color_8 !important;
+		color: $color_1 !important;
 	}
 }
 
