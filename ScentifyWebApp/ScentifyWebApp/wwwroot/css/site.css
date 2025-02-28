@@ -844,6 +844,9 @@ input {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+.custom-logo:hover {
+  color: #000;
+}
 
 /* Center Navigation Links */
 .custom-nav-links {

@@ -41,6 +41,9 @@ namespace ScentifyWebApp.Models.Entities
         [StringLength(100)]
         public string CountryOfOrigin { get; set; } // Quốc gia sản xuất
 
+        //[Required]
+        //public string Ingredients { get; set; } // Nguyên liệu
+
         [StringLength(50)]
         public string FragranceType { get; set; } // Loại nước hoa (Spray, Rollerball, Solid)
 
@@ -73,5 +76,12 @@ namespace ScentifyWebApp.Models.Entities
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow; // Thời gian tạo bản ghi
 
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow; // Thời gian cập nhật gần nhất
+    }
+
+    public class Ingredient
+    {
+        public string Name { get; set; }
+        public string ImageUrl { get; set; }
+        public string Description { get; set; }
     }
 }
