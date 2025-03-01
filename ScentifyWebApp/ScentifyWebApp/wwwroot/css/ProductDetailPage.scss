@@ -150,6 +150,9 @@ $custom-color-4: #d5b260;
 		border-right: 1px solid rgba(255, 255, 255, 0.2);
 		cursor: pointer;
 		transition: 0.3s;
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
 
 		&:last-child {
 			border-right: none;
@@ -170,6 +173,10 @@ $custom-color-4: #d5b260;
 			text-transform: uppercase;
 			letter-spacing: 1px;
 			color: $color_1;
+		}
+
+		.text-content {
+			color: #fff;
 		}
 	}
 }
@@ -224,11 +231,12 @@ $custom-color-4: #d5b260;
 	box-shadow: 0 5px 10px $color_3;
 
 	img {
-		width: 190px;
+		width: 180px;
 		margin-bottom: 20px;
 		object-fit: contain;
 		transition: 0.3s;
-		margin: 0 auto; /* Ensures horizontal centering */
+		margin: 0 auto;
+		/* Ensures horizontal centering */
 		display: block;
 	}
 
@@ -252,14 +260,14 @@ $custom-color-4: #d5b260;
 .card.center {
 	background: $color_2;
 	box-shadow: 0 5px 10px $color_3;
-	transform: translateY(-20px);
+	// transform: translateY(-20px);
 	transition: 0.5s;
 
 	img {
 		filter: drop-shadow(0 0 10px #fff);
-		width: 240px;
+		width: 180px;
 	}
-	
+
 	&:hover {
 		transform: translateY(-10px);
 		box-shadow: 0 15px 25px $color_3;
@@ -500,36 +508,52 @@ $custom-color-4: #d5b260;
 		.section {
 			border-right: none;
 			border-bottom: 1px solid $color_3;
+			gap: 10px; 
 
 			&:last-child {
 				border-bottom: none;
 			}
+
+			.text-content{
+				margin: auto;
+			}
+		}
+	}
+
+	.second-section{
+		.section-subtitle{
+			margin-bottom: 50px;
 		}
 	}
 }
 
 @media (max-width: 768px) {
-	.cards {
-	  display: flex;
-	  flex-wrap: nowrap; /* Prevents cards from wrapping */
-	  overflow-x: auto;
-	  scroll-snap-type: x mandatory;
-	  gap: 20px;
-	  padding: 20px;
-	  scroll-padding: 20px;
-	  -webkit-overflow-scrolling: touch;
-	  width: 100%; /* Ensures full width */
+	.cards,
+	.product-cards {
+		display: flex;
+		flex-wrap: nowrap;
+		/* Prevents cards from wrapping */
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		gap: 20px;
+		padding: 20px;
+		scroll-padding: 20px;
+		-webkit-overflow-scrolling: touch;
+		width: 100%;
+		/* Ensures full width */
 	}
-  
-	.card {
-	  flex: 0 0 80%; /* Each card takes 80% of screen width */
-	  max-width: 300px;
-	  scroll-snap-align: center;
+
+	.card,
+	.product-card {
+		flex: 0 0 80%;
+		/* Each card takes 80% of screen width */
+		max-width: 300px;
+		scroll-snap-align: center;
 	}
-  
+
 	/* Hide the scrollbar for a clean look */
-	.cards::-webkit-scrollbar {
-	  display: none;
+	.cards::-webkit-scrollbar ,
+	.product-cards::-webkit-scrollbar {
+		display: none;
 	}
-  }
-  
+}

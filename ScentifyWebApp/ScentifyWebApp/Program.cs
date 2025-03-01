@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using ScentifyWebApp.DAL.DB;
 using ScentifyWebApp.Services;
+using AutoMapper;
+
 
 namespace ScentifyWebApp
 {
@@ -27,6 +29,7 @@ namespace ScentifyWebApp
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -61,6 +64,9 @@ namespace ScentifyWebApp
             services.AddScoped<CartService>();
             services.AddHttpClient<MomoService>();
             services.AddSession(); // Add this line to enable session
+
+            // Add AutoMapper
+            services.AddAutoMapper(typeof(Program));
         }
     }
 }

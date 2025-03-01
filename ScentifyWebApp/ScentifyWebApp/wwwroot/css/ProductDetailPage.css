@@ -127,6 +127,9 @@
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
   transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 .info-sections .section:last-child {
   border-right: none;
@@ -143,6 +146,9 @@
   font-size: 1em;
   text-transform: uppercase;
   letter-spacing: 1px;
+  color: #fff;
+}
+.info-sections .section .text-content {
   color: #fff;
 }
 
@@ -194,12 +200,13 @@
   box-shadow: 0 5px 10px #cc5500;
 }
 .card img {
-  width: 190px;
+  width: 180px;
   margin-bottom: 20px;
   -o-object-fit: contain;
      object-fit: contain;
   transition: 0.3s;
-  margin: 0 auto; /* Ensures horizontal centering */
+  margin: 0 auto;
+  /* Ensures horizontal centering */
   display: block;
 }
 .card h3 {
@@ -219,12 +226,11 @@
 .card.center {
   background: #ffd8a9;
   box-shadow: 0 5px 10px #cc5500;
-  transform: translateY(-20px);
   transition: 0.5s;
 }
 .card.center img {
   filter: drop-shadow(0 0 10px #fff);
-  width: 240px;
+  width: 180px;
 }
 .card.center:hover {
   transform: translateY(-10px);
@@ -446,30 +452,43 @@
   .info-sections .section {
     border-right: none;
     border-bottom: 1px solid #cc5500;
+    gap: 10px;
   }
   .info-sections .section:last-child {
     border-bottom: none;
   }
+  .info-sections .section .text-content {
+    margin: auto;
+  }
+  .second-section .section-subtitle {
+    margin-bottom: 50px;
+  }
 }
 @media (max-width: 768px) {
-  .cards {
+  .cards,
+  .product-cards {
     display: flex;
-    flex-wrap: nowrap; /* Prevents cards from wrapping */
+    flex-wrap: nowrap;
+    /* Prevents cards from wrapping */
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 20px;
     padding: 20px;
     scroll-padding: 20px;
     -webkit-overflow-scrolling: touch;
-    width: 100%; /* Ensures full width */
+    width: 100%;
+    /* Ensures full width */
   }
-  .card {
-    flex: 0 0 80%; /* Each card takes 80% of screen width */
+  .card,
+  .product-card {
+    flex: 0 0 80%;
+    /* Each card takes 80% of screen width */
     max-width: 300px;
     scroll-snap-align: center;
   }
   /* Hide the scrollbar for a clean look */
-  .cards::-webkit-scrollbar {
+  .cards::-webkit-scrollbar,
+  .product-cards::-webkit-scrollbar {
     display: none;
   }
 }/*# sourceMappingURL=ProductDetailPage.css.map */

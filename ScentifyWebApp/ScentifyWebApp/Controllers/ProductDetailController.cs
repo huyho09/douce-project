@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ScentifyWebApp.DAL.DB;
 using ScentifyWebApp.Models;
+using ScentifyWebApp.Models.Dtos;
 using ScentifyWebApp.Models.Entities;
 
 namespace ScentifyWebApp.Controllers
@@ -12,11 +14,15 @@ namespace ScentifyWebApp.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<ProductDetailController> _logger;
+        private readonly IMapper _mapper;
+
         public ProductDetailController(ApplicationDbContext context,
-            ILogger<ProductDetailController> logger)
+            ILogger<ProductDetailController> logger,
+            IMapper mapper)
         {
             _context = context;
             _logger = logger;
+            _mapper = mapper;
         }
 
         [HttpGet("details/{id}")]
@@ -31,10 +37,10 @@ namespace ScentifyWebApp.Controllers
             return View(product);
         }
 
-        private async Task<Perfume> _productDetail(Guid id)
+        private async Task<DtoPerfume> _productDetail(Guid id)
         {
             //string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "data", "product.json");
-            var result = new Perfume();
+            var result = new DtoPerfume();
             //if (!System.IO.File.Exists(filePath))
             //{
             //	throw new Exception("Product data file not found.");
@@ -43,11 +49,32 @@ namespace ScentifyWebApp.Controllers
             //var jsonData = System.IO.File.ReadAllText(filePath);
             //var products = JsonConvert.DeserializeObject<List<Product>>(jsonData);
             var products = await _context.Perfume.ToListAsync();
-            if (products != null)
+            if (products != null && products.Count > 0)
             {
-                result = products.FirstOrDefault(x => x.Id == id);
+                var perfume = products.FirstOrDefault(x => x.Id == id);
+                if (perfume != null)
+                {
+                    result = _mapper.Map<DtoPerfume>(perfume);
+                    List<Perfume> randomPerfumes = GetRandomItems(products, 3);
+
+                    // get similar 
+                    var mappingList = _mapper.Map<List<DtoPerfume>>(randomPerfumes);
+                    result.SimilarPerfumes = mappingList;
+
+                    // convert ingredients
+                    if (!string.IsNullOrEmpty(perfume.Ingredients))
+                    {
+                        var dtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(perfume.Ingredients);
+                        result.DtoIngredients = dtoIngredients;
+                    }
+                }
             }
             return result;
+        }
+
+        private List<T> GetRandomItems<T>(List<T> list, int count)
+        {
+            return list.OrderBy(_ => Guid.NewGuid()).Take(count).ToList();
         }
     }
 }
