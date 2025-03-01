@@ -71,6 +71,7 @@ $custom-color-4: #d5b260;
     color: $custom-color-4 !important;
     font-size: 1.1rem !important;
     font-weight: 600;
+
     &::after {
       content: "";
       position: absolute;
@@ -78,16 +79,21 @@ $custom-color-4: #d5b260;
       bottom: -3px;
       width: 0;
       height: 2px;
-      background-color: #c49b63; /* Accent color */
+      background-color: #c49b63;
+      /* Accent color */
       transition: width 0.3s ease-in-out;
     }
+
     &:hover,
     &:focus {
-      color: #c49b63; /* Change text color */
+      color: #c49b63;
+      /* Change text color */
     }
+
     &:hover::after,
     &:focus::after {
-      width: 100%; /* Underline animation */
+      width: 100%;
+      /* Underline animation */
     }
   }
 }
@@ -135,7 +141,8 @@ $custom-color-4: #d5b260;
   align-items: center;
   transition: background-color $transition;
   //   background: $custom-color-2;
-  background-color: transparent; /* Deep brown for luxury feel */
+  background-color: transparent;
+  /* Deep brown for luxury feel */
   //filter: drop-shadow(0 1px 2px $custom-color-3);
   border: 1px solid rgba(255, 215, 150, 0.2);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
@@ -154,12 +161,10 @@ $custom-color-4: #d5b260;
     left: 50%;
     width: 80%;
     height: 3px;
-    background: linear-gradient(
-      to right,
-      rgba(255, 215, 150, 0),
-      rgba(255, 215, 150, 0.8),
-      rgba(255, 215, 150, 0)
-    );
+    background: linear-gradient(to right,
+        rgba(255, 215, 150, 0),
+        rgba(255, 215, 150, 0.8),
+        rgba(255, 215, 150, 0));
     transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
@@ -169,12 +174,16 @@ $custom-color-4: #d5b260;
     // .body-wrapper {
     //   background-color: $custom-color-2;
     // }
-    border-color: rgba(255, 215, 150, 0.6); /* Brighter gold on hover */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Adds a soft hover shadow */
+    border-color: rgba(255, 215, 150, 0.6);
+    /* Brighter gold on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+
+    /* Adds a soft hover shadow */
     // transform: translateY(-5px); /* Slight lift effect */
     &::before {
       opacity: 1;
     }
+
     .cta-wrapper {
       opacity: 1;
     }
@@ -182,6 +191,8 @@ $custom-color-4: #d5b260;
     .add-to-cart-btn {
       background-color: $custom-color-3 !important;
     }
+
+
     .image-wrapper {
       position: relative;
       overflow: hidden;
@@ -197,12 +208,15 @@ $custom-color-4: #d5b260;
         height: 100%;
         object-fit: contain;
         transition: transform 0.6s ease-in-out, opacity 0.3s ease-in-out;
-        transform: scale(1.1); /* Slight zoom-in effect */
-        opacity: 0.9; /* Light fade effect */
+        transform: scale(1.1);
+        /* Slight zoom-in effect */
+        opacity: 0.9;
+        /* Light fade effect */
       }
 
       &::before {
         content: "";
+        opacity: 1;
         position: absolute;
         top: 0;
         left: 0;
@@ -211,17 +225,6 @@ $custom-color-4: #d5b260;
         background: rgba(0, 0, 0, 0.3);
         opacity: 0;
         transition: opacity 0.3s ease-in-out;
-      }
-
-      .product-grid-item:hover & {
-        img {
-          transform: scale(1.1);
-          opacity: 0.9;
-        }
-
-        &::before {
-          opacity: 1;
-        }
       }
     }
   }
@@ -257,9 +260,38 @@ $custom-color-4: #d5b260;
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .product-grid-item {
-    padding: 0 15px 15px;
+    padding: 0;
+    border-color: rgba(255, 215, 150, 0.6);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+
     .image-wrapper {
       padding: 15px 0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      z-index: -1;
+      justify-content: center;
+
+      img {
+        width: 100%;
+        height: 100%;
+        -o-object-fit: contain;
+        object-fit: contain;
+        transition: transform 0.6sease-in-out, opacity 0.3sease-in-out;
+        transform: scale(1.1);
+        opacity: 0.9;
+      }
+    }
+
+    .cta-wrapper {
+      opacity: 1;
+
+      .add-to-cart-btn {
+        background-color: #9f5f2e !important;
+      }
     }
   }
 }
@@ -275,8 +307,10 @@ $custom-color-4: #d5b260;
   padding: 15px;
   border-radius: 10px;
   position: relative;
-  overflow: hidden; /* Prevents overflow */
-  background-color: transparent; /* Subtle background for empty states */
+  overflow: hidden;
+  /* Prevents overflow */
+  background-color: transparent;
+  /* Subtle background for empty states */
   display: flex;
 
   img {
@@ -286,8 +320,10 @@ $custom-color-4: #d5b260;
     width: 100%;
     height: 100%;
     // opacity: 0.5;
-    object-fit: contain; /* Keeps the image fully visible without cropping */
+    object-fit: contain;
+    /* Keeps the image fully visible without cropping */
   }
+
   &::before {
     content: "";
     position: absolute;
@@ -295,7 +331,8 @@ $custom-color-4: #d5b260;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Dark overlay */
+    background: rgba(0, 0, 0, 0.3);
+    /* Dark overlay */
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
   }
@@ -363,6 +400,7 @@ $custom-color-4: #d5b260;
 .load-more-container {
   text-align: center;
   margin: 60px 0;
+
   // Outline Load More Button
   .load-more-btn {
     background-color: transparent;
@@ -380,6 +418,7 @@ $custom-color-4: #d5b260;
     gap: 10px;
     border: 1px solid $color-black;
     border-radius: 6px;
+
     // Hover State
     &:hover {
       background-color: rgba(51, 51, 51, 0.05);
@@ -387,17 +426,20 @@ $custom-color-4: #d5b260;
       box-shadow: inset 0 0 0 2px rgba(51, 51, 51, 0.4);
       transform: translateY(-2px);
     }
+
     // Focus State (Accessible Outline)
     &:focus {
       outline: none;
       box-shadow: inset 0 0 0 2px rgba(51, 51, 51, 0.4),
         0 0 0 3px rgba(51, 51, 51, 0.3);
     }
+
     // Active State
     &:active {
       background-color: rgba(51, 51, 51, 0.1);
       transform: translateY(1px);
     }
+
     // Disabled State
     &:disabled {
       color: $color-text-light;
@@ -407,6 +449,7 @@ $custom-color-4: #d5b260;
       box-shadow: none;
       transform: none;
     }
+
     // Icon Styling
     i {
       font-size: $font-size-base;
@@ -521,7 +564,7 @@ body:has(.modal-backdrop.active) {
   }
 
   /* Ensure text and buttons are properly aligned */
-  .cart-item > * {
+  .cart-item>* {
     text-align: center;
   }
 
@@ -931,6 +974,7 @@ input {
   color: $color-black;
   text-transform: uppercase;
   letter-spacing: 1px;
+
   &:hover {
     color: $color-black;
   }
@@ -953,6 +997,7 @@ input {
   font-size: 16px;
   font-weight: 500;
   transition: color 0.3s ease-in-out;
+
   &::after {
     content: "";
     position: absolute;
@@ -964,6 +1009,7 @@ input {
     transform-origin: left;
     transition: transform 0.3s ease-in-out;
   }
+
   &:hover {
     text-decoration: underline;
   }
@@ -1035,6 +1081,7 @@ input {
   width: 100%;
   height: 100%;
   padding: 0 150px;
+
   /* Left Section: Form */
   .form-section {
     flex: 1;
@@ -1074,12 +1121,14 @@ input {
     background: $color_7;
     border-radius: 10px;
   }
+
   /* Form Layout: 2 Rows */
   .form-row {
     display: flex;
     gap: 20px;
     width: 100%;
   }
+
   /* Floating Label Input & Select */
   .floating-group {
     position: relative;
@@ -1104,6 +1153,7 @@ input {
     cursor: pointer;
     background: none;
   }
+
   /* Floating label */
   .floating-group label {
     position: absolute;
@@ -1115,11 +1165,12 @@ input {
     transition: all 0.3s ease-in-out;
     pointer-events: none;
   }
+
   /* Move label when focused or filled */
-  .floating-group input:focus ~ label,
-  .floating-group input:not(:placeholder-shown) ~ label,
-  .floating-group select:focus ~ label,
-  .floating-group select:not([value=""]) ~ label {
+  .floating-group input:focus~label,
+  .floating-group input:not(:placeholder-shown)~label,
+  .floating-group select:focus~label,
+  .floating-group select:not([value=""])~label {
     top: -10px;
     font-size: 14px;
     color: #000;
@@ -1140,6 +1191,7 @@ input {
   .continue-btn:hover {
     background: #333;
   }
+
   /* Right Section: Order Summary */
   .order-summary {
     width: 400px;
@@ -1173,6 +1225,7 @@ input {
     font-weight: bold;
     margin-top: 10px;
   }
+
   /* Product Section */
   .product {
     display: flex;
@@ -1258,6 +1311,7 @@ input {
   padding: 40px;
   border-radius: 8px;
   box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.1);
+
   /* Two-column layout for section */
   .section {
     display: flex;
@@ -1268,6 +1322,7 @@ input {
   .section div {
     flex-grow: 1;
   }
+
   /* Right side: "Edit" link floats right */
   .section .edit {
     float: right;

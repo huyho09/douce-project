@@ -8,7 +8,7 @@
 		<!-- Text Section -->
 		<div class="text-content">
 			<h1>@Model.Name</h1>
-			<p class="text-content-detail"><span style="padding-left: 40px;">@Model.Description</span></p>
+			<p class="text-content-detail"><span style="padding-left: 40px;">@Model.ShortDescription</span></p>
 
 		</div>
 		<div class="product-display d-flex flex-column">
@@ -39,10 +39,12 @@
 		<div class="section">
 			<div class="number">01</div>
 			<div class="title">DESCRIPTION</div>
+			<span class="text-content">@Model.Description</span>
 		</div>
 		<div class="section">
 			<div class="number">02</div>
 			<div class="title">PERFUMED NOTES</div>
+			<span class="text-content">@Model.Description</span>
 		</div>
 		<div class="section">
 			<div class="number">03</div>
@@ -66,23 +68,23 @@
 			<div class="cards">
 				<!-- Card 1 -->
 				<div class="card">
-					<img src="~/images/ROSE_DAMASCENA.png" alt="Rose Damascena">
-					<h3>ROSE DAMASCENA</h3>
-					<p>the rose of Castile, is a rose hybrid.</p>
+					<img src="~/images/bergamot.png" alt="Bergamot">
+					<h3>BERGAMOT</h3>
+					<p>A zesty and refreshing citrus note.</p>
 				</div>
 
 				<!-- Card 2 - Highlighted -->
 				<div class="card center">
-					<img src="~/images/ROSE_DAMASCENA2.png" alt="Rose Damascena Center">
-					<h3>ROSE DAMASCENA</h3>
+					<img src="~/images/lavender.png" alt="Lavender">
+					<h3>LAVENDER</h3>
 					<p>more commonly known as the Damask rose.</p>
 				</div>
 
 				<!-- Card 3 -->
 				<div class="card">
-					<img src="~/images/VANILLE.png" alt="Vanilla">
-					<h3>VANILLE</h3>
-					<p>Grown in Papua New Guinea from Tahitensis variety.</p>
+					<img src="~/images/pepper.png" alt="Pepper">
+					<h3>PEPPER</h3>
+					<p>A soothing floral note that balances the intensity.</p>
 				</div>
 			</div>
 

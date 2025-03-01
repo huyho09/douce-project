@@ -1,87 +1,102 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ScentifyWebApp.Models.Entities
 {
-    public class Perfume
-    {
-        [Key]
-        public Guid Id { get; set; } = Guid.NewGuid(); // Auto-generate GUID
+	public class Perfume
+	{
+		[Key]
+		public Guid Id { get; set; } = Guid.NewGuid(); // Auto-generate GUID
 
-        [Required]
-        [StringLength(255)]
-        public string Name { get; set; }
+		[Required]
+		[StringLength(255)]
+		public string Name { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string Brand { get; set; }
+		[Required]
+		[StringLength(255)]
+		public string Brand { get; set; }
 
-        [StringLength(255)]
-        public string Manufacturer { get; set; } // Nhà sản xuất (có thể khác thương hiệu)
+		[StringLength(255)]
+		public string Manufacturer { get; set; } // Nhà sản xuất (có thể khác thương hiệu)
 
-        public string Description { get; set; }
+		[StringLength(255)]
+		public string ShortDescription { get; set; }
 
-        [Required]
-        [StringLength(10)]
-        public string Gender { get; set; } // "Male", "Female", "Unisex"
+		public string Description { get; set; }
 
-        [StringLength(100)]
-        public string FragranceFamily { get; set; } // Nhóm hương chính (VD: Floral, Woody)
+		public string Perfumed_Notes { get; set; }
 
-        [Required]
-        public int VolumeMl { get; set; }// Dung tích chai (VD: 30ml, 50ml, 100ml)
+		public string Flacon { get; set; }
 
-        [Required]
-        [StringLength(10)]
-        public string Concentration { get; set; } // Nồng độ nước hoa (EDT, EDP, Parfum)
+		public string Composition { get; set; }
 
-        [Range(1900, 2100)]
-        public int ReleaseYear { get; set; } // Năm ra mắt sản phẩm
+		[Required]
+		[StringLength(10)]
+		public string Gender { get; set; } // "Male", "Female", "Unisex"
 
-        [StringLength(100)]
-        public string CountryOfOrigin { get; set; } // Quốc gia sản xuất
+		[StringLength(100)]
+		public string FragranceFamily { get; set; } // Nhóm hương chính (VD: Floral, Woody)
 
-        //[Required]
-        //public string Ingredients { get; set; } // Nguyên liệu
+		[Required]
+		public int VolumeMl { get; set; }// Dung tích chai (VD: 30ml, 50ml, 100ml)
 
-        [StringLength(50)]
-        public string FragranceType { get; set; } // Loại nước hoa (Spray, Rollerball, Solid)
+		//[Required]
+		//[StringLength(10)]
+		//public string Concentration { get; set; } // Nồng độ nước hoa (EDT, EDP, Parfum)
 
-        [Required]
-        [Range(0, double.MaxValue)]
-        public decimal Price { get; set; }  // Giá bán (VNĐ hoặc USD)
+		//[Range(1900, 2100)]
+		//public int ReleaseYear { get; set; } // Năm ra mắt sản phẩm
 
-        [StringLength(50)]
-        public string UnitPrice { get; set; } // e.g., "€275.00 per 100 ml"
+		//[StringLength(100)]
+		//public string CountryOfOrigin { get; set; } // Quốc gia sản xuất
 
-        [StringLength(10)]
-        public string Currency { get; set; } // e.g., "€"
+		[Required]
+		public string Ingredients { get; set; } // Nguyên liệu
 
-        [Range(0, int.MaxValue)]
-        public int StockQuantity { get; set; } = 0; // Số lượng tồn kho
+		//[StringLength(50)]
+		//public string FragranceType { get; set; } // Loại nước hoa (Spray, Rollerball, Solid)
 
-        [Required]
-        [StringLength(20)]
-        public string Status { get; set; } // Trạng thái: "Available", "Out of Stock", "Discontinued"
+		[Required]
+		[Range(0, double.MaxValue)]
+		public decimal Price { get; set; }  // Giá bán (VNĐ hoặc USD)
 
-        [Range(0, 5)]
-        public decimal AverageRating { get; set; } // Điểm đánh giá trung bình (từ 0 đến 5 sao)
+		[StringLength(50)]
+		public string UnitPrice { get; set; } // e.g., "€275.00 per 100 ml"
 
-        [Range(0, int.MaxValue)]
-        public int ReviewCount { get; set; } // Số lượng đánh giá
+		[StringLength(10)]
+		public string Currency { get; set; } // e.g., "€"
 
-        [StringLength(500)]
-        public string ImageUrl { get; set; } // URL hình ảnh sản phẩm
+		[Range(0, int.MaxValue)]
+		public int StockQuantity { get; set; } = 0; // Số lượng tồn kho
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow; // Thời gian tạo bản ghi
+		[Required]
+		[StringLength(20)]
+		public string Status { get; set; } // Trạng thái: "Available", "Out of Stock", "Discontinued"
 
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow; // Thời gian cập nhật gần nhất
-    }
+		[Range(0, 5)]
+		public decimal AverageRating { get; set; } // Điểm đánh giá trung bình (từ 0 đến 5 sao)
 
-    public class Ingredient
-    {
-        public string Name { get; set; }
-        public string ImageUrl { get; set; }
-        public string Description { get; set; }
-    }
+		[Range(0, int.MaxValue)]
+		public int ReviewCount { get; set; } // Số lượng đánh giá
+
+		[StringLength(500)]
+		public string ImageUrl { get; set; } // URL hình ảnh sản phẩm
+
+		public DateTime CreatedAt { get; set; } = DateTime.UtcNow; // Thời gian tạo bản ghi
+
+		public DateTime UpdatedAt { get; set; } = DateTime.UtcNow; // Thời gian cập nhật gần nhất
+	}
+
+	public class PerfumedNote
+	{
+		public List<string> Top { get; set; }
+		public List<string> Middle { get; set; }
+		public List<string> Base { get; set; }
+	}
+
+	public class Ingredient
+	{
+		public string Name { get; set; }
+		public string ImageUrl { get; set; }
+		public string Description { get; set; }
+	}
 }

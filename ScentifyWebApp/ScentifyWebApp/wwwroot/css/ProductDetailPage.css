@@ -184,7 +184,7 @@
 
 .card {
   flex: 1;
-  max-width: 220px;
+  max-width: 380px;
   background: #ffd8a9;
   border-radius: 15px;
   padding: 30px 20px;
@@ -194,15 +194,16 @@
   box-shadow: 0 5px 10px #cc5500;
 }
 .card img {
-  width: 100px;
-  height: 100px;
+  width: 190px;
   margin-bottom: 20px;
   -o-object-fit: contain;
      object-fit: contain;
   transition: 0.3s;
+  margin: 0 auto; /* Ensures horizontal centering */
+  display: block;
 }
 .card h3 {
-  margin-bottom: 10px;
+  margin: 15px 0;
   font-size: 1.4em;
   color: #aa4406;
 }
@@ -223,8 +224,11 @@
 }
 .card.center img {
   filter: drop-shadow(0 0 10px #fff);
-  width: 150px;
-  height: 150px;
+  width: 240px;
+}
+.card.center:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 25px #cc5500;
 }
 
 .nav-controls {
@@ -445,5 +449,27 @@
   }
   .info-sections .section:last-child {
     border-bottom: none;
+  }
+}
+@media (max-width: 768px) {
+  .cards {
+    display: flex;
+    flex-wrap: nowrap; /* Prevents cards from wrapping */
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding: 20px;
+    scroll-padding: 20px;
+    -webkit-overflow-scrolling: touch;
+    width: 100%; /* Ensures full width */
+  }
+  .card {
+    flex: 0 0 80%; /* Each card takes 80% of screen width */
+    max-width: 300px;
+    scroll-snap-align: center;
+  }
+  /* Hide the scrollbar for a clean look */
+  .cards::-webkit-scrollbar {
+    display: none;
   }
 }/*# sourceMappingURL=ProductDetailPage.css.map */
