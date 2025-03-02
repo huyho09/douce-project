@@ -1,5 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using ScentifyAdmin.DAL.DB;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddAutoMapper(typeof(Program));
+// Configure SQL Server
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
