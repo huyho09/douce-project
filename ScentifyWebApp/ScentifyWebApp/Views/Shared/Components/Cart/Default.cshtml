@@ -19,7 +19,7 @@
 
             <div class="cart-item">
                 <p class="product-name">@product.Name</p>
-                <p class="product-size">@product.Size</p>
+                <p class="product-size">@product.VolumeMl</p>
                 @* <div class="product-quantity custom-dropdown">
                     <select>
                         <option>1</option>
@@ -62,11 +62,11 @@
                     </ul>
                 </div>
 
-                <p class="product-price">@product.Price.Currency @product.Price.Amount</p>
+                @* <p class="product-price">@product.Price.Currency @product.Price.Amount</p> *@
                 <button class="remove-btn">✕</button>
             </div>
 
-            totalPrice += (double)product.Price.Amount;
+            @* totalPrice += (double)product.Price.Amount; *@
         }
     }
     else

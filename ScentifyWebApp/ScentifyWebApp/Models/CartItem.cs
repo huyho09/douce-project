@@ -1,8 +1,10 @@
-﻿namespace ScentifyWebApp.Models
+﻿using ScentifyWebApp.Models.Entities;
+
+namespace ScentifyWebApp.Models
 {
     public class CartItem
     {
-        public Product Product { get; set; }
+        public Perfume Product { get; set; }
         public int Quantity { get; set; }
     }
 }
