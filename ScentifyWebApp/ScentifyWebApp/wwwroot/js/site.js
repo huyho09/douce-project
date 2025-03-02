@@ -160,5 +160,7 @@ function updatetotalQuantity() {
             total += parseInt($(ele).val()) || 0; // Ensure numeric value, default to 0 if empty
         });
         $('#number-of-cart').text(total);
+    } else {
+        $('#number-of-cart').text('');
     }
 }
