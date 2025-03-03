@@ -14,7 +14,7 @@
         <div class="product-display d-flex flex-column">
             <img loading="lazy" alt="@Model.Name" src="@Url.Content(Model.ImageUrl.Replace("./","~/"))">
             <div>
-                <button class="add-to-cart">Add to cart +</button>
+                <button class="add-to-cart add-to-cart-btn" aria-label="Add to your cart - €@Model.Price" data-id="@Model.Id">Add to cart +</button>
             </div>
         </div>
         <!-- Product Image & Info -->
@@ -109,15 +109,15 @@
                     <div class="product-cards d-flex justify-content-center">
                         @foreach (var similarItem in similarItems)
                         {
-                            <div class="product-card">
+                            <a href="/products/details/@similarItem.Id" class="product-card">
                                 <img src="@similarItem.ImageUrl" alt="@similarItem.Name">
                                 <div class="card-content">
                                     <h3>0@(index)</h3>
                                     <h4>@similarItem.Name</h4>
                                     <p>@similarItem.ShortDescription</p>
-                                    <a href="#" class="learn-more">LEARN MORE</a>
+                                    @*<a href="/products/details/@similarItem.Id" class="learn-more">LEARN MORE</a>*@
                                 </div>
-                            </div>
+                            </a>
                             index++;
                         }
                     </div>

@@ -267,6 +267,7 @@ a[disabled]:focus {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+
   .product-grid-item {
     padding: 0;
     border-color: rgba(255, 215, 150, 0.6);
@@ -856,7 +857,8 @@ hr {
     max-height: 100vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    /* Smooth scrolling for iOS */
+    /* Enable smooth scrolling */
+    scroll-snap-type: x mandatory;
   }
 }
 
@@ -1070,6 +1072,148 @@ input {
   justify-content: center;
 }
 
+.custom-nav-right {
+  .search-group-box {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .search-input {
+    width: 0;
+    opacity: 0;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: width 0.4s ease-out, opacity 0.4s ease-out;
+    position: absolute;
+    right: 40px;
+    /* Positioning it to start from right */
+    background: white;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    text-align: left;
+  }
+
+  .custom-search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    /* Ensures button stays above input */
+  }
+
+  .search-input.active {
+    width: 20vw;
+    /* Adjust as needed */
+    opacity: 1;
+    right: 0;
+    /* Expands from right to left */
+  }
+
+  .mobile-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-nav-right {
+    .mobile-btn {
+      display: block;
+    }
+
+    .search-group-box {
+      display: none;
+    }
+  }
+
+  #search-modal {
+    background: transparent;
+
+    .modal-dialog {
+      margin-top: 60px;
+
+      .modal-content {
+        width: 100%;
+        padding: 10px 30px;
+        background: $custom-color-4;
+        position: relative;
+        /* Needed for absolute positioning of pseudo-element */
+        padding: 20px;
+        z-index: 0;
+        border: 1px solid $custom-color-2;
+
+        input {
+          border-radius: 30px;
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: -16px;
+          /* Adjust position above modal */
+          right: 57px;
+          z-index: 99;
+          /* Adjust position horizontally */
+          width: 0;
+          height: 0;
+
+          /* Outer border (thicker outline effect) */
+          border-left: 16px solid transparent;
+          border-right: 16px solid transparent;
+          border-bottom: 16px solid black;
+          /* Outline color */
+
+          /* Place another triangle inside for the actual color */
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: -14px;
+          /* Adjust to fit inside the border */
+          right: 57px;
+          z-index: 99;
+          /* Align with before */
+          width: 0;
+          height: 0;
+          z-index: 99;
+
+          /* Inner triangle (actual triangle color) */
+          border-left: 16px solid transparent;
+          border-right: 16px solid transparent;
+          border-bottom: 16px solid $custom-color-4;
+          /* Triangle color */
+        }
+
+        /* Glowing Button */
+        .btn-glow {
+          background: $custom-color-3;
+          color: white;
+          border: none;
+          padding: 11px 20px;
+          border-radius: 30px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.3s ease-in-out;
+          box-shadow: 0 0 10px rgba(255, 118, 136, 0.5);
+          top: 20px;
+          right: 20px;
+        }
+
+        .btn-glow:hover {
+          box-shadow: 0 0 20px $color_5;
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+}
+
 /* SVG Icons */
 .custom-icon {
   width: 24px;
@@ -1108,7 +1252,7 @@ input {
   display: flex;
   width: 100%;
   height: 100%;
-  padding: 0 150px;
+  padding: 60px 100px 20px;
 
   /* Left Section: Form */
   .form-section {
@@ -1141,6 +1285,13 @@ input {
     font-weight: 300;
   }
 
+  .section-title {
+    margin-bottom: unset;
+    text-align: justify;
+    font-size: unset;
+    max-width: unset;
+  }
+
   .checkout-form {
     padding: 40px 20px 30px;
     display: flex;
@@ -1148,6 +1299,9 @@ input {
     flex-direction: column;
     background: $color_7;
     border-radius: 10px;
+    background: transparent;
+    color: $color_1;
+    border: 1px solid $color_1;
   }
 
   /* Form Layout: 2 Rows */
@@ -1167,14 +1321,17 @@ input {
   .floating-group input,
   .floating-group select {
     width: 100%;
-    padding: 12px 5px;
+    margin-top: 10px;
+    padding: 8px 5px;
     font-size: 18px;
-    border: none;
-    border-bottom: 2px solid #888;
+    border: 1px solid #888;
+    // border-bottom: 2px solid #888;
     background: transparent;
     outline: none;
+    border-radius: 8px;
     transition: all 0.3s ease-in-out;
     appearance: none;
+    color: $color_1;
   }
 
   .floating-group select {
@@ -1201,29 +1358,34 @@ input {
   .floating-group select:not([value=""])~label {
     top: -10px;
     font-size: 14px;
-    color: #000;
+    color: $color_1;
   }
 
   .continue-btn {
-    background: black;
+    background: #9f5f2e;
     color: white;
     font-size: 16px;
     padding: 20px 30px;
     margin-top: 20px;
     border: none;
+    border-radius: 8px;
     cursor: pointer;
     width: fit-content;
     text-transform: uppercase;
   }
 
   .continue-btn:hover {
-    background: #333;
+    background: #b36a33;
+    /* Lighter shade on hover */
+    box-shadow: 0px 4px 10px rgba(159, 95, 46, 0.4);
   }
+
 
   /* Right Section: Order Summary */
   .order-summary {
-    width: 400px;
-    background: #f9f6ec;
+    // width: 400px;
+    background: transparent;
+    border: 1px solid $color_1;
     padding: 40px;
     box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -1233,12 +1395,21 @@ input {
     select {
       background: transparent;
       clear: both;
+      color: $color_1;
+
+      option {
+        background: transparent;
+        /* Ensures visibility */
+        color: $color_1;
+        /* Text color */
+        padding: 5px;
+      }
     }
   }
 
   .price-details {
     margin-bottom: 15px;
-    color: $color-black;
+    color: $color_1;
   }
 
   .summary-item,
@@ -1280,14 +1451,14 @@ input {
 
   .product-size {
     font-size: 14px;
-    color: $color_6 !important;
+    font-weight: bold;
     margin: 5px 0;
   }
 
   .remove {
     font-size: 12px;
     color: red;
-    text-decoration: none;
+    text-decoration: underline;
   }
 
   .quantity {
@@ -1297,14 +1468,33 @@ input {
 
   .product-price {
     font-weight: bold;
+    color: $color_1;
+  }
+
+  a {
+    text-decoration: underline;
+    color: $color_1;
+  }
+
+  a:hover {
+    color: $color_1;
+  }
+
+  .remove:hover {
+    text-decoration: none;
+    color: red;
   }
 }
 
 /* Responsive */
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .checkout-container {
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
+  }
+
+  .form-section {
+    padding: 0;
   }
 
   .order-summary {
@@ -1335,7 +1525,7 @@ input {
 /* Right section (order summary) - 35% */
 .order-summary {
   flex: 0 0 35%;
-  background: #f9f6ec;
+  background: transparent;
   padding: 40px;
   border-radius: 8px;
   box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.1);
@@ -1364,14 +1554,15 @@ input {
     align-items: center;
     padding: 10px;
     margin: 20px auto;
+
+    .form-section,
+    .order-summary {
+      flex: 1 1 100%;
+      width: 100%;
+      padding: 30px;
+    }
   }
 
-  .form-section,
-  .order-summary {
-    flex: 1 1 100%;
-    width: 100%;
-    padding: 0;
-  }
 
   .order-summary {
     margin-top: 20px;
@@ -1445,22 +1636,5 @@ input {
     transform: translateY(50px);
     opacity: 0;
     // transition: transform 0.3s ease-in, opacity 0.3s ease-in;
-  }
-
-  /* Special glowing button */
-  .btn-glow {
-    background: linear-gradient(135deg, #ff7eb3, #ff758c);
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 30px;
-    font-weight: bold;
-    // transition: all 0.3s ease-in-out;
-    box-shadow: 0 0 10px rgba(255, 118, 136, 0.5);
-  }
-
-  .btn-glow:hover {
-    box-shadow: 0 0 20px rgba(255, 118, 136, 0.9);
-    transform: scale(1.05);
   }
 }

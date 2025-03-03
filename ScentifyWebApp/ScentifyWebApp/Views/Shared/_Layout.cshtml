@@ -112,6 +112,11 @@
         <symbol id="visa" viewBox="0 0 120 60">
             <text x="0" y="40" font-size="50" fill="white" font-family="Arial, sans-serif" font-weight="bold">VISA</text>
         </symbol>
+        <symbol id="close" viewBox="0 0 32 32">
+            <title>Close</title>
+            <path fill="currentColor" d="M7 7L25 25M7 25L25 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+
 
         <!-- MasterCard -->
         <symbol id="mastercard" viewBox="0 0 48 30">
@@ -255,7 +260,15 @@
 
             <!-- Right Side: Search & Cart Icons -->
             <div class="custom-nav-right">
-                <button class="custom-search-btn search-button">
+                <form asp-controller="Products" asp-action="Search" method="get" class="search-group-box">
+                    <button type="button" class="custom-search-btn" id="btn-search">
+                        <svg class="custom-icon">
+                            <use xlink:href="#custom-search"></use>
+                        </svg>
+                    </button>
+                    <input type="text" name="searchInput" class="search-input col-sm-12" id="search-input" placeholder="What are you looking for?" />
+                </form>
+                <button class="custom-search-btn mobile-btn" id="btn-search-popup" type="button">
                     <svg class="custom-icon">
                         <use xlink:href="#custom-search"></use>
                     </svg>
@@ -265,12 +278,24 @@
                         <use xlink:href="#custom-cart"></use>
                     </svg>
                     <span class="p-2 text-dark" id="number-of-cart">
-                        
                     </span>
                 </a>
             </div>
         </nav>
     </header>
+
+    <!-- Search Modal -->
+    <div class="modal fade noti-modal" id="search-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                @* <button class="custom-close" id="close-search">&times;</button> *@
+                <form asp-controller="Products" asp-action="Search" method="get" class="search-form">
+                    <input name="searchInput" type="text" class="search-input" placeholder="What are you looking for?" />
+                    <button type="submit" class="btn-glow">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!--Render Body-->
     <main role="main" class="pb-3">

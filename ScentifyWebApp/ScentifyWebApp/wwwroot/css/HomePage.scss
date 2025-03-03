@@ -33,6 +33,7 @@ $custom-color-1: #200901;
 $custom-color-2: #0f0100;
 $custom-color-3: #9f5f2e;
 $custom-color-4: #d5b260;
+
 /* The dots/bullets/indicators */
 /* Fading animation */
 @keyframes fade {
@@ -52,6 +53,7 @@ body {
 	background-attachment: fixed;
 	background-size: 100% 100%;
 }
+
 body::before {
 	content: "";
 	position: absolute;
@@ -59,9 +61,11 @@ body::before {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(255, 255, 255, 0.06); /* White overlay with 50% opacity */
+	background: rgba(255, 255, 255, 0.06);
+	/* White overlay with 50% opacity */
 	z-index: -1;
 }
+
 a {
 	color: $custom-color-4;
 
@@ -69,6 +73,7 @@ a {
 		color: $custom-color-3 !important;
 	}
 }
+
 /* On smaller screens, decrease text size */
 /* Position the Previous Button */
 /* Position the Next Button */
@@ -128,7 +133,7 @@ iframe {
 }
 
 .add-to-cabinet-button_iconHover__VqI4Z {
-	path{
+	path {
 		fill: $color_7;
 	}
 }
@@ -395,7 +400,8 @@ iframe {
 
 #yearly-sale {
 	color: $custom-color-4 !important;
-	.text-content{
+
+	.text-content {
 		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 	}
 }
@@ -438,12 +444,22 @@ iframe {
 	transition: opacity 1scubic-bezier(.215, .61, .355, 1);
 	width: 52vw;
 	background: inherit;
+	pointer-events: none;
 
 	img {
 		display: block;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		filter: brightness(50%);
+	}
+}
+
+.swiper-slide-active {
+	pointer-events: inherit;
+
+	img {
+		filter: drop-shadow(0 10px 10px $custom-color-3);
 	}
 }
 
@@ -469,7 +485,8 @@ iframe {
 		color: $custom-color-4;
 	}
 
-	p, a {
+	p,
+	a {
 		color: $color_1;
 	}
 
@@ -494,6 +511,7 @@ iframe {
 	cursor: pointer;
 	left: 44% !important;
 	top: 190px !important;
+	filter: drop-shadow(0 10px 10px #fff);
 
 	&:after {
 		font-size: 12px !important;
@@ -518,6 +536,7 @@ iframe {
 	cursor: pointer;
 	left: 56% !important;
 	top: 190px !important;
+	filter: drop-shadow(0 10px 10px #fff);
 
 	&:after {
 		font-size: 12px !important;
@@ -680,7 +699,7 @@ iframe {
 	.Footer_Footer-text-list__qqrVv.Footer_active__jaXqd {
 		order: -1;
 
-		> a {
+		>a {
 			text-decoration: underline;
 		}
 	}
@@ -1093,7 +1112,7 @@ iframe {
 	position: fixed;
 	width: 100vw;
 
-	> button {
+	>button {
 		flex: 1 1 auto;
 		max-width: unset;
 		min-width: unset;
@@ -1152,7 +1171,7 @@ iframe {
 		margin-bottom: 0;
 	}
 
-	p > a {
+	p>a {
 		display: inline-block;
 	}
 }

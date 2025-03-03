@@ -164,3 +164,21 @@ function updatetotalQuantity() {
         $('#number-of-cart').text('');
     }
 }
+
+document.getElementById("btn-search").addEventListener("click", function () {
+    const searchInput = document.getElementById("search-input");
+    searchInput.classList.toggle("active");
+    if (searchInput.classList.contains("active")) {
+        $(this).html("<svg class=\"custom-icon\">\r\n                            <use xlink:href=\"#close\"></use>\r\n                        </svg>");
+    } else {
+        $(this).html("<svg class=\"custom-icon\">\r\n                            <use xlink:href=\"#custom-search\"></use>\r\n                        </svg>");
+    }
+});
+
+document.getElementById("btn-search-popup").addEventListener("click", function () {
+    if ($("#search-modal").is("visible")) {
+        $("#search-modal").modal("hide");
+    } else {
+        $("#search-modal").modal("show");
+    }
+});

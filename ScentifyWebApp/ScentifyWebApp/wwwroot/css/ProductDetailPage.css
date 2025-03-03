@@ -125,7 +125,6 @@
   text-align: center;
   padding: 30px 0;
   border-right: 1px solid rgba(255, 255, 255, 0.2);
-  cursor: pointer;
   transition: 0.3s;
   display: flex;
   flex-direction: column;
@@ -196,7 +195,6 @@
   padding: 30px 20px;
   text-align: center;
   transition: 0.4s;
-  cursor: pointer;
   box-shadow: 0 5px 10px #cc5500;
 }
 .card img {
@@ -309,6 +307,10 @@
      object-fit: cover;
 }
 
+main:has(.product-info) .product-card {
+  height: 550px;
+}
+
 .card-content {
   padding: 20px;
 }
@@ -318,9 +320,15 @@
   margin-bottom: 10px;
 }
 .card-content h4 {
-  font-size: 1.5em;
-  margin-bottom: 15px;
-  color: #fffef2;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  transition: color 0.3sease-in-out;
+  color: #d5b260;
+  font-size: 1.1rem;
+}
+.card-content h4:hover {
+  text-decoration: underline;
 }
 .card-content p {
   color: #fff;
@@ -336,8 +344,9 @@
   transition: color 0.3s;
 }
 .learn-more:hover {
-  color: #fff;
+  color: #200901;
   border-color: #fff;
+  text-decoration: underline;
 }
 
 .footer {

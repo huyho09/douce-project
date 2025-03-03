@@ -91,11 +91,11 @@
     </table>
 </div>
 
-<h3 class="details_heading mt-4 mb-3">
-    <a data-testid="product-comparison-name" href="#" tabindex="0">Aromatically alike</a>
-</h3>
 @if (Model.Aroma != null && Model.Aroma.Count > 0)
 {
+    <h3 class="details_heading mt-4 mb-3">
+        <a data-testid="product-comparison-name" href="#" tabindex="0">Aromatically alike</a>
+    </h3>
     foreach (var item in Model.Aroma)
     {
         <div class="details_KeyIngredients">

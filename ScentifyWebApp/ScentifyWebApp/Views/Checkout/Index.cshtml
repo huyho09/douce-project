@@ -20,17 +20,17 @@
                         <option value="Mr">Mr</option>
                         <option value="Ms">Ms</option>
                     </select>
-                    <label for="title">Title</label>
+                    <label for="title">1. Title</label>
                 </div>
 
                 <div class="floating-group">
                     <input type="text" id="first-name" name="first-name" value="John" required>
-                    <label for="first-name">First name</label>
+                    <label for="first-name">2. First name</label>
                 </div>
 
                 <div class="floating-group">
                     <input type="text" id="last-name" name="last-name" value="Smith" required>
-                    <label for="last-name">Last name</label>
+                    <label for="last-name">3. Last name</label>
                 </div>
             </div>
 
@@ -42,12 +42,12 @@
                         <option selected value="germany">Germany</option>
                         <option value="usa">USA</option>
                     </select>
-                    <label for="country">Country / Region</label>
+                    <label for="country">4. Country / Region</label>
                 </div>
 
                 <div class="floating-group">
                     <input type="text" id="address" name="address" value="1234 Elm Street, Apt 56, Springfield, IL 62704" required>
-                    <label for="address">Address</label>
+                    <label for="address">5. Address</label>
                 </div>
             </div>
 
@@ -70,11 +70,12 @@
                 <p class="product-size">50 mL</p>
                 <a href="#" class="remove">Remove</a>
             </div>
-            <select class="quantity">
+            @* <select class="quantity">
                 <option>1</option>
                 <option selected>2</option>
                 <option>3</option>
-            </select>
+            </select> *@
+            <input type="number" class="quantity form-control-sm w-25" value="2" />
             <span class="product-price">€165.00</span>
         </div>
 

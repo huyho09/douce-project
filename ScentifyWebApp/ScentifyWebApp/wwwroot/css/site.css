@@ -758,7 +758,8 @@ hr {
     max-height: 100vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    /* Smooth scrolling for iOS */
+    /* Enable smooth scrolling */
+    scroll-snap-type: x mandatory;
   }
 }
 /********************************************/
@@ -965,6 +966,127 @@ input {
   justify-content: center;
 }
 
+.custom-nav-right .search-group-box {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.custom-nav-right .search-input {
+  width: 0;
+  opacity: 0;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: width 0.4s ease-out, opacity 0.4s ease-out;
+  position: absolute;
+  right: 40px;
+  /* Positioning it to start from right */
+  background: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+.custom-nav-right .custom-search-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  /* Ensures button stays above input */
+}
+.custom-nav-right .search-input.active {
+  width: 20vw;
+  /* Adjust as needed */
+  opacity: 1;
+  right: 0;
+  /* Expands from right to left */
+}
+.custom-nav-right .mobile-btn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .custom-nav-right .mobile-btn {
+    display: block;
+  }
+  .custom-nav-right .search-group-box {
+    display: none;
+  }
+  #search-modal {
+    background: transparent;
+  }
+  #search-modal .modal-dialog {
+    margin-top: 60px;
+  }
+  #search-modal .modal-dialog .modal-content {
+    width: 100%;
+    padding: 10px 30px;
+    background: #d5b260;
+    position: relative;
+    /* Needed for absolute positioning of pseudo-element */
+    padding: 20px;
+    z-index: 0;
+    border: 1px solid #0f0100;
+    /* Glowing Button */
+  }
+  #search-modal .modal-dialog .modal-content input {
+    border-radius: 30px;
+  }
+  #search-modal .modal-dialog .modal-content::before {
+    content: "";
+    position: absolute;
+    top: -16px;
+    /* Adjust position above modal */
+    right: 57px;
+    z-index: 99;
+    /* Adjust position horizontally */
+    width: 0;
+    height: 0;
+    /* Outer border (thicker outline effect) */
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    border-bottom: 16px solid black;
+    /* Outline color */
+    /* Place another triangle inside for the actual color */
+  }
+  #search-modal .modal-dialog .modal-content::after {
+    content: "";
+    position: absolute;
+    top: -14px;
+    /* Adjust to fit inside the border */
+    right: 57px;
+    z-index: 99;
+    /* Align with before */
+    width: 0;
+    height: 0;
+    z-index: 99;
+    /* Inner triangle (actual triangle color) */
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    border-bottom: 16px solid #d5b260;
+    /* Triangle color */
+  }
+  #search-modal .modal-dialog .modal-content .btn-glow {
+    background: #9f5f2e;
+    color: white;
+    border: none;
+    padding: 11px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(255, 118, 136, 0.5);
+    top: 20px;
+    right: 20px;
+  }
+  #search-modal .modal-dialog .modal-content .btn-glow:hover {
+    box-shadow: 0 0 20px #8d3004;
+    transform: scale(1.05);
+  }
+}
 /* SVG Icons */
 .custom-icon {
   width: 24px;
@@ -999,7 +1121,7 @@ input {
   display: flex;
   width: 100%;
   height: 100%;
-  padding: 0 150px;
+  padding: 60px 100px 20px;
   /* Left Section: Form */
   /* Form Layout: 2 Rows */
   /* Floating Label Input & Select */
@@ -1033,6 +1155,12 @@ input {
   margin: 50px 0;
   font-weight: 300;
 }
+.checkout-container .section-title {
+  margin-bottom: unset;
+  text-align: justify;
+  font-size: unset;
+  max-width: unset;
+}
 .checkout-container .checkout-form {
   padding: 40px 20px 30px;
   display: flex;
@@ -1040,6 +1168,9 @@ input {
   flex-direction: column;
   background: #fffef2;
   border-radius: 10px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
 }
 .checkout-container .form-row {
   display: flex;
@@ -1054,16 +1185,18 @@ input {
 .checkout-container .floating-group input,
 .checkout-container .floating-group select {
   width: 100%;
-  padding: 12px 5px;
+  margin-top: 10px;
+  padding: 8px 5px;
   font-size: 18px;
-  border: none;
-  border-bottom: 2px solid #888;
+  border: 1px solid #888;
   background: transparent;
   outline: none;
+  border-radius: 8px;
   transition: all 0.3s ease-in-out;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
+  color: #fff;
 }
 .checkout-container .floating-group select {
   cursor: pointer;
@@ -1082,7 +1215,7 @@ input {
 .checkout-container .floating-group input:not(:-moz-placeholder-shown) ~ label {
   top: -10px;
   font-size: 14px;
-  color: #000;
+  color: #fff;
 }
 .checkout-container .floating-group input:focus ~ label,
 .checkout-container .floating-group input:not(:placeholder-shown) ~ label,
@@ -1090,26 +1223,29 @@ input {
 .checkout-container .floating-group select:not([value=""]) ~ label {
   top: -10px;
   font-size: 14px;
-  color: #000;
+  color: #fff;
 }
 .checkout-container .continue-btn {
-  background: black;
+  background: #9f5f2e;
   color: white;
   font-size: 16px;
   padding: 20px 30px;
   margin-top: 20px;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
   width: -moz-fit-content;
   width: fit-content;
   text-transform: uppercase;
 }
 .checkout-container .continue-btn:hover {
-  background: #333;
+  background: #b36a33;
+  /* Lighter shade on hover */
+  box-shadow: 0px 4px 10px rgba(159, 95, 46, 0.4);
 }
 .checkout-container .order-summary {
-  width: 400px;
-  background: #f9f6ec;
+  background: transparent;
+  border: 1px solid #fff;
   padding: 40px;
   box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -1119,10 +1255,18 @@ input {
 .checkout-container .order-summary select {
   background: transparent;
   clear: both;
+  color: #fff;
+}
+.checkout-container .order-summary select option {
+  background: transparent;
+  /* Ensures visibility */
+  color: #fff;
+  /* Text color */
+  padding: 5px;
 }
 .checkout-container .price-details {
   margin-bottom: 15px;
-  color: #000;
+  color: #fff;
 }
 .checkout-container .summary-item,
 .checkout-container .summary-total {
@@ -1156,13 +1300,13 @@ input {
 }
 .checkout-container .product-size {
   font-size: 14px;
-  color: #6c1d10 !important;
+  font-weight: bold;
   margin: 5px 0;
 }
 .checkout-container .remove {
   font-size: 12px;
   color: red;
-  text-decoration: none;
+  text-decoration: underline;
 }
 .checkout-container .quantity {
   padding: 5px;
@@ -1170,13 +1314,28 @@ input {
 }
 .checkout-container .product-price {
   font-weight: bold;
+  color: #fff;
+}
+.checkout-container a {
+  text-decoration: underline;
+  color: #fff;
+}
+.checkout-container a:hover {
+  color: #fff;
+}
+.checkout-container .remove:hover {
+  text-decoration: none;
+  color: red;
 }
 
 /* Responsive */
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .checkout-container {
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
+  }
+  .form-section {
+    padding: 0;
   }
   .order-summary {
     width: 90%;
@@ -1204,7 +1363,7 @@ input {
 /* Right section (order summary) - 35% */
 .order-summary {
   flex: 0 0 35%;
-  background: #f9f6ec;
+  background: transparent;
   padding: 40px;
   border-radius: 8px;
   box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.1);
@@ -1231,11 +1390,11 @@ input {
     padding: 10px;
     margin: 20px auto;
   }
-  .form-section,
-  .order-summary {
+  .checkout-container .form-section,
+  .checkout-container .order-summary {
     flex: 1 1 100%;
     width: 100%;
-    padding: 0;
+    padding: 30px;
   }
   .order-summary {
     margin-top: 20px;
@@ -1269,7 +1428,6 @@ input {
   /* Glassmorphism effect */
   /* Custom close button */
   /* Smooth animation */
-  /* Special glowing button */
 }
 .modal.noti-modal .modal-dialog {
   max-width: 400px;
@@ -1303,17 +1461,4 @@ input {
 .modal.noti-modal .modal.fade .modal-dialog.hide-animation {
   transform: translateY(50px);
   opacity: 0;
-}
-.modal.noti-modal .btn-glow {
-  background: linear-gradient(135deg, #ff7eb3, #ff758c);
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 30px;
-  font-weight: bold;
-  box-shadow: 0 0 10px rgba(255, 118, 136, 0.5);
-}
-.modal.noti-modal .btn-glow:hover {
-  box-shadow: 0 0 20px rgba(255, 118, 136, 0.9);
-  transform: scale(1.05);
 }/*# sourceMappingURL=site.css.map */

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ScentifyWebApp.Models.Entities.Perfume>?
 
 @{
-    ViewData["Title"] = $"{ViewData["fragranceFamily"]} Perfumes";
+    ViewData["Title"] = $"Finding {ViewData["searchInput"]} ...";
 }
 
 <section class="podium-section">
@@ -11,7 +11,7 @@
                 <div class="text-wrapper">
                     <header class="section-heading">
                         @* <b>A bold and unorthodox collection</b> *@
-                        <h2>Introducing @ViewData["fragranceFamily"] Perfumes</h2>
+                        <h2>Finding @ViewData["searchInput"]...</h2>
                     </header>
                     <p class="col-md-6 col-sm-12">
                         Comprising six unique fragrances, Othertopias is a series of eaux de parfum designed to
