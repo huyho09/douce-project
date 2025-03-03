@@ -57,7 +57,7 @@
 							<th>Average Rating</th>
 							<th>Review Count</th>
 							<th>Image Url</th>
-							<th>Similar Perfumes</th>
+							@*<th>Similar Perfumes</th>*@
 							<th>Action</th>
 						</tr>
 					</thead>
@@ -72,7 +72,18 @@
 									<td>@product.Manufacturer</td>
 									<td>@product.ShortDescription</td>
 									<td>@product.Description</td>
-									<td>@product.Perfumed_Notes</td>
+									<td>
+										@if (product.Perfumed_Notes_DTO != null)
+										{
+											<div>- Top: @string.Join(", ", product.Perfumed_Notes_DTO.Top)</div>
+											<div>- Middle: @string.Join(", ", product.Perfumed_Notes_DTO.Middle)</div>
+											<div>- Base: @string.Join(", ", product.Perfumed_Notes_DTO.Base)</div>
+										}
+										else if (!string.IsNullOrEmpty(product.Perfumed_Notes))
+										{
+											<div>@Html.Raw(product.Perfumed_Notes)</div>
+										}
+									</td>
 									<td>@product.Flacon</td>
 									<td>@product.Composition</td>
 									<td>@product.Gender</td>
@@ -92,17 +103,17 @@
 									<td>@product.AverageRating</td>
 									<td>@product.ReviewCount</td>
 									<td>@product.ImageUrl</td>
-									<td>
-										@if (product.SimilarPerfumes != null && product.SimilarPerfumes.Any())
-										{
-											@string.Join(", ", product.SimilarPerfumes.Select(i => i.Name))
-										}
-									</td>
+									@*	<td>
+											@if (product.SimilarPerfumes != null && product.SimilarPerfumes.Any())
+											{
+												@string.Join(", ", product.SimilarPerfumes.Select(i => i.Name))
+											}
+										</td>*@
 									<td>
 										<a class="edit-btn btn btn-warning" href="/Products/Edit?id=@product.Id">
 											<i class="fas fa-edit"></i> Edit
 										</a>
-										<button class="delete-btn btn btn-danger" onclick="ChangeIdModalDelete(this);" data-toggle="modal" data-target="#deleteModal" type="button" data-product-id="@product.Id">
+										<button class="delete-btn btn btn-danger" data-toggle="modal" data-target="#deleteModal" type="button" value="@product.Id">
 											<i class="fas fa-trash-alt"></i> Delete
 										</button>
 									</td>
@@ -131,42 +142,11 @@
 			<div class="modal-body">Please confirm the request to delete this item? Click "Delete" to confirm...</div>
 			<div class="modal-footer">
 				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-				<button class="btn btn-primary" id="btn-delete-product" onclick="ProcessDeleteProduct(this)">Delete</button>
+				<button class="btn btn-primary" id="btn-delete-product" onclick="DeleteCategory()">Delete</button>
 			</div>
 		</div>
 	</div>
 </div>
-
-<script>
-	function ChangeIdModalDelete(btn) {
-		var productId = $(btn).attr('data-product-id');
-		$("#btn-delete-product").attr('data-product-id', productId)
-	}
-	function ProcessDeleteProduct(btn) {
-		var productId = $(btn).attr('data-product-id');
-		$.ajax({
-			url: "/Admin/ProductAdmin/Delete?",
-			type: 'DELETE',
-			data: { id: productId },
-			beforeSend: function () {
-				appendLoading();
-			},
-			success: function (content) {
-				if (content !== true) {
-					alert(content);
-				} else {
-					document.location.reload(true);
-				}
-			},
-			complete: function () {
-				hideLoading();
-			},
-			error: function () {
-				alert('Error deleting the product.');
-			}
-		});
-	}
-</script>
 
 <script src="~/vendor/jquery/jquery.min.js"></script>
 <script>
@@ -176,4 +156,29 @@
 			"sScrollXInner": "110%",
 		});
 	});
+</script>
+<script>
+	$(".delete-btn").bind("click", function () {
+		var value = $(this)[0].value;
+		currentId = value;
+	})
+	function DeleteCategory() {
+		$.ajax({
+			url: '/products',
+			type: 'DELETE',
+			data: { currentId: currentId },
+			beforeSend: function () {
+				appendLoading();
+			},
+			success: function (data) {
+				document.location.href = document.location.origin + data;
+			},
+			complete: function () {
+				hideLoading();
+			},
+			error: function () {
+				alert('Error deleting the product category.');
+			}
+		});
+	}
 </script>

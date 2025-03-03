@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ScentifyAdmin.DAL.DB;
 using ScentifyAdmin.Models.Dtos;
 using ScentifyAdmin.Models.Entities;
@@ -36,18 +37,42 @@ namespace ScentifyAdmin.Controllers
 				{
 					foreach (var item in result)
 					{
-						item.SimilarPerfumes = mappingList;
+						//item.SimilarPerfumes = mappingList;
 						if (!string.IsNullOrEmpty(item.Ingredients))
 						{
-							var PerfumedNotes = JsonConvert.DeserializeObject<List<Ingredient>>(item.Ingredients);
-							item.DtoIngredients = PerfumedNotes;
+							var Ingredients = JsonConvert.DeserializeObject<List<Ingredient>>(item.Ingredients);
+							item.DtoIngredients = Ingredients;
+						}
+						if (!string.IsNullOrEmpty(item.Perfumed_Notes) && IsValidJson(item.Perfumed_Notes))
+						{
+							var PerfumedNotes = JsonConvert.DeserializeObject<PerfumedNote>(item.Perfumed_Notes);
+							item.Perfumed_Notes_DTO = PerfumedNotes != null ? PerfumedNotes : new PerfumedNote();
 						}
 					}
 				}
 			}
 			return View(result);
 		}
+		[HttpGet("Create")]
+		public IActionResult Create()
+		{
+			var model = new DtoPerfume();
+			return View("Create", model);
+		}
 
+
+		[HttpPost("Create")]
+		public async Task<IActionResult> Create(DtoPerfume requestDTO)
+		{
+			if (requestDTO != null)
+			{
+				var request = _mapper.Map<Perfume>(requestDTO);
+				_context.Perfume.Add(request);
+				await _context.SaveChangesAsync();
+				return RedirectToAction("index");
+			}
+			return RedirectToAction("Index","Product");
+		}
 		//[HttpPost]
 		//public async Task<IActionResult> Edit(UpdateProductRequest request)
 		//{
@@ -70,23 +95,44 @@ namespace ScentifyAdmin.Controllers
 		//	return View("Edit", request);
 		//}
 
-		//[HttpDelete]
-		//public async Task<IActionResult> Delete([Required] string id)
-		//{
-		//	var deleteProduct = await _productService.DeleteProductAsync(id);
-		//	if (!deleteProduct.IsSuccess)
-		//	{
-		//		return Content(deleteProduct.Detail);
-		//	}
+		[HttpDelete]
+		public async Task<IActionResult> Delete(string currentId)
+		{
+			if (!Guid.TryParse(currentId, out Guid guidId))
+			{
+			}
+			var product = _context.Perfume.FirstOrDefault(m => m.Id == guidId);
+			if(product != null)
+			{
+				_context.Perfume.Remove(product);
+				await _context.SaveChangesAsync();
+			}
 
-		//	TempData["ResultPopup"] = deleteProduct.Detail;
-		//	return Json(true);
-		//	//return Redirect("/Admin/ProductAdmin");
-		//}
+			return Content("/Products");
+		}
 
 		private List<T> GetRandomItems<T>(List<T> list, int count)
 		{
 			return list.OrderBy(_ => Guid.NewGuid()).Take(count).ToList();
+		}
+
+		private bool IsValidJson(string str)
+		{
+			str = str.Trim();
+			if ((str.StartsWith("{") && str.EndsWith("}")) || // Object
+				(str.StartsWith("[") && str.EndsWith("]")))   // Array
+			{
+				try
+				{
+					JToken.Parse(str);
+					return true;
+				}
+				catch (JsonReaderException)
+				{
+					return false;
+				}
+			}
+			return false;
 		}
 	}
 }

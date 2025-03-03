@@ -7,46 +7,47 @@ namespace ScentifyAdmin.Models.Dtos
     {
         public string Id { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
-        public string Brand { get; set; }
+        public string Brand { get; set; } = string.Empty;
 
-        public string Manufacturer { get; set; } // Nhà sản xuất (có thể khác thương hiệu)
+		public string Manufacturer { get; set; } = string.Empty; // Nhà sản xuất (có thể khác thương hiệu)
 
-        public string ShortDescription { get; set; }
+        public string ShortDescription { get; set; } = string.Empty;
 
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
-        public string Perfumed_Notes { get; set; }
+        public string Perfumed_Notes { get; set; } = string.Empty;
+		public PerfumedNote Perfumed_Notes_DTO { get; set; }
 
-        public string Flacon { get; set; }
+		public string Flacon { get; set; } = string.Empty;
 
-        public string Composition { get; set; }
+        public string Composition { get; set; } = string.Empty;
 
-        public string Gender { get; set; } // "Male", "Female", "Unisex"
+        public string Gender { get; set; } = string.Empty; // "Male", "Female", "Unisex"
 
-        public string FragranceFamily { get; set; } // Nhóm hương chính (VD: Floral, Woody)
+        public string FragranceFamily { get; set; } = string.Empty; // Nhóm hương chính (VD: Floral, Woody)
 
         public int VolumeMl { get; set; }// Dung tích chai (VD: 30ml, 50ml, 100ml)
 
-		public string Ingredients { get; set; }
+		public string Ingredients { get; set; } = string.Empty;
 		public List<Ingredient>? DtoIngredients { get; set; } // Nguyên liệu
 
-        public decimal Price { get; set; }  // Giá bán (VNĐ hoặc USD)
+        public decimal Price { get; set; } = 0; // Giá bán (VNĐ hoặc USD)
 
-        public string UnitPrice { get; set; } // e.g., "€275.00 per 100 ml"
+        public string UnitPrice { get; set; } = string.Empty; // e.g., "€275.00 per 100 ml"
 
-        public string Currency { get; set; } // e.g., "€"
+        public string Currency { get; set; } = string.Empty; // e.g., "€"
 
         public int StockQuantity { get; set; } = 0; // Số lượng tồn kho
 
-        public string Status { get; set; } // Trạng thái: "Available", "Out of Stock", "Discontinued"
+        public string Status { get; set; } = string.Empty; // Trạng thái: "Available", "Out of Stock", "Discontinued"
 
-        public decimal AverageRating { get; set; } // Điểm đánh giá trung bình (từ 0 đến 5 sao)
+        public decimal AverageRating { get; set; } = 0; // Điểm đánh giá trung bình (từ 0 đến 5 sao)
 
-        public int ReviewCount { get; set; } // Số lượng đánh giá
+        public int ReviewCount { get; set; } = 0; // Số lượng đánh giá
 
-        public string ImageUrl { get; set; } // URL hình ảnh sản phẩm
+        public string ImageUrl { get; set; } = "/"; // URL hình ảnh sản phẩm
 
         public List<DtoPerfume> SimilarPerfumes { get; set; }
 

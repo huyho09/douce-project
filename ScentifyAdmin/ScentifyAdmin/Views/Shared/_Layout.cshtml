@@ -64,7 +64,7 @@
 				<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<a class="collapse-item" href="/products">Products</a>
-						<a class="collapse-item" href="/product-new">Add Product</a>
+						<a class="collapse-item" href="/products/Create">Add Product</a>
 					</div>
 				</div>
 			</li>
@@ -355,6 +355,16 @@
 	<script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 	@await RenderSectionAsync("Scripts", required: false)
+	<script>
+		function hideLoading() {
+			document.querySelectorAll(".loading").forEach(function (e) {
+				e.remove();
+			});
+		}
+		function appendLoading() {
+			$('body').append("<div id='ajaxLoading' class='loading'><div class='loading-image'></div></div>");
+		}
+	</script>
 </body>
 
 </html>

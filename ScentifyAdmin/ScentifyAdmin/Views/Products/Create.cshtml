@@ -1,0 +1,121 @@
+﻿@model ScentifyAdmin.Models.Dtos.DtoPerfume
+<div class="row justify-content-center">
+	<div class="col-xl-8 col-lg-12 col-md-7">
+		<div class="card o-hidden border-0 shadow-lg my-lg-5">
+			<div class="card-body p-0 card-login">
+				<div class="text-center">
+					<h1 class="h3 text-gray-900 mb-4 mt-5 font-weight-bold">CREATE CATEGORY ITEM</h1>
+				</div>
+				<div class="h-full overflow-hidden m-5">
+					<form asp-action="Create" class="needs-validation" method="post">
+						<div class="row">
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Name">Name:</label>
+								<input asp-for="Name" required class="form-control" autocomplete="off" />
+							</div>
+							<!-- Brand -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Brand">Brand:</label>
+								<input asp-for="Brand" class="form-control" autocomplete="off" />
+							</div>
+
+							<!-- Manufacturer -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Manufacturer">Manufacturer:</label>
+								<input asp-for="Manufacturer" class="form-control" autocomplete="off" />
+							</div>
+
+							<!-- Short Description -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="ShortDescription">Short Description:</label>
+								<textarea asp-for="ShortDescription" class="form-control"></textarea>
+							</div>
+
+							<!-- Description -->
+							<div class="form-outline mb-4 col-lg-12">
+								<label class="form-label" for="Description">Description:</label>
+								<textarea asp-for="Description" class="form-control" required></textarea>
+							</div>
+							<!-- Perfumed Notes -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Perfumed_Notes">Perfumed Notes:</label>
+								<input asp-for="Perfumed_Notes" class="form-control" autocomplete="off" />
+
+							</div>
+							<!-- Flacon -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Flacon">Flacon:</label>
+								<input asp-for="Flacon" class="form-control" autocomplete="off" />
+							</div>
+							<!-- Composition -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Composition">Composition:</label>
+								<input asp-for="Composition" class="form-control" autocomplete="off" />
+							</div>
+							<!-- Gender -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Gender">Gender:</label>
+								<select asp-for="Gender" class="form-control">
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+									<option value="Unisex">Unisex</option>
+								</select>
+							</div>
+
+							<!-- Fragrance Family -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="FragranceFamily">Fragrance Family:</label>
+								<input asp-for="FragranceFamily" class="form-control" autocomplete="off" />
+							</div>
+
+							<!-- Volume (ml) -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="VolumeMl">Volume (ml):</label>
+								<input asp-for="VolumeMl" type="number" class="form-control" min="1" />
+							</div>
+
+							<!-- Price -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Price">Price:</label>
+								<input asp-for="Price" type="number" class="form-control" step="0.01" />
+							</div>
+
+							<!-- Currency -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Currency">Currency:</label>
+								<input asp-for="Currency" class="form-control" required />
+							</div>
+
+							<!-- Stock Quantity -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="StockQuantity">Stock Quantity:</label>
+								<input asp-for="StockQuantity" type="number" class="form-control" min="0" />
+							</div>
+
+							<!-- Status -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Status">Status:</label>
+								<select asp-for="Status" class="form-control">
+									<option value="Available">Available</option>
+									<option value="Out of Stock">Out of Stock</option>
+									<option value="Discontinued">Discontinued</option>
+								</select>
+							</div>
+
+							<!-- Image Upload -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="ImageUrl">Product Image:</label>
+								<input type="file" name="ImageUrl" class="form-control" accept="image/*" required/>
+							</div>
+						</div>
+						<div class="mt-5 text-end">
+							<button type="submit" class="btn btn-primary">Submit Form</button>
+							<a asp-action="Index" class="btn btn-secondary">Cancel</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="~/vendor/jquery/jquery.min.js"></script>
