@@ -1,101 +1,105 @@
-﻿@model (string FragranceName, List<string> KeyIngredients, int NumberSize, string Size, string PriceMin, string PriceMax, bool isFresh, bool isCitrus, bool isMarine, bool isGreen, bool isHerbaceous, bool isFloral, bool isSpicy, bool isWoody, bool isSmoky, bool isAmbery, bool isResinous, List<string> Aroma)
+﻿@model (string FragranceName, List<string> KeyIngredients, int NumberSize, int Size, string Price, string UnitPrice, bool isFresh, bool isCitrus, bool isMarine, bool isGreen, bool isHerbaceous, bool isFloral, bool isSpicy, bool isWoody, bool isSmoky, bool isAmbery, bool isResinous, List<string> Aroma)
 
 
 <style>
-	tbody {
-		display: flex;
-		font-family: Suisse, sans-serif;
-		font-size: 0.875rem;
-		max-width: 100vw;
-		overflow-x: auto;
-		list-style: none;
-		margin: 0px auto -50px;
-		padding: 0px 20px 50px;
-	}
+    tbody {
+        display: flex;
+        font-family: Suisse, sans-serif;
+        font-size: 0.875rem;
+        max-width: 100vw;
+        overflow-x: auto;
+        list-style: none;
+        margin: 0px auto -50px;
+        padding: 0px 20px 50px;
+    }
 </style>
 <h3 class="details_heading mb-2">
-	<a data-testid="product-comparison-name" href="#" tabindex="0">@Model.FragranceName</a>
+    <a data-testid="product-comparison-name" href="#" tabindex="0">@Model.FragranceName</a>
 </h3>
 <div class="details_KeyIngredients">
-	@String.Join(", ", Model.KeyIngredients)
+    @String.Join(", ", Model.KeyIngredients)
 </div>
 <div class="details_KeyIngredients">
-	@if (Model.NumberSize > 1)
-	{
-		<span class="m-1">@Model.NumberSize Sizes</span>
-	}
-	else
-	{
-		<span class="m-1">
-			@Model.Size
-		</span>
+    @if (Model.NumberSize > 1)
+    {
+        <span class="m-1">@Model.NumberSize Sizes</span>
+    }
+    else
+    {
+        <span class="m-1">
+            @Model.Size mL
+        </span>
 
-	}
-	<svg class="add-to-cabinet-button_iconHover__VqI4Z" data-test-ref="add-to-cabinet-button-heart" fill="#000" height="15" viewBox="0 0 16 15" width="13" xmlns="http://www.w3.org/2000/svg">
-		<path d="M8 14.7038L7.18 13.9735C5.76667 12.6972 4.6 11.5952 3.68 10.6676C2.76 9.73998 2.02667 8.91104 1.48 8.18077C0.933333 7.45051 0.55 6.78933 0.33 6.19722C0.11 5.60512 0 5.00643 0 4.40117C0 3.21696 0.403333 2.22683 1.21 1.43077C2.01667 0.634721 3.01333 0.236694 4.2 0.236694C4.96 0.236694 5.66333 0.414326 6.31 0.769589C6.95667 1.12485 7.52 1.63801 8 2.30906C8.56 1.59854 9.15333 1.07551 9.78 0.739984C10.4067 0.404457 11.08 0.236694 11.8 0.236694C12.9867 0.236694 13.9833 0.634721 14.79 1.43077C15.5967 2.22683 16 3.21696 16 4.40117C16 5.00643 15.89 5.60512 15.67 6.19722C15.45 6.78933 15.0667 7.45051 14.52 8.18077C13.9733 8.91104 13.24 9.73998 12.32 10.6676C11.4 11.5952 10.2333 12.6972 8.82 13.9735L8 14.7038ZM8 13.1446C9.34667 11.9209 10.4567 10.8716 11.33 9.99656C12.2033 9.12156 12.8967 8.35512 13.41 7.69722C13.9233 7.03933 14.2833 6.4538 14.49 5.94064C14.6967 5.42748 14.8 4.91433 14.8 4.40117C14.8 3.53275 14.52 2.81893 13.96 2.25972C13.4 1.70051 12.68 1.4209 11.8 1.4209C11.12 1.4209 10.4867 1.62814 9.9 2.04262C9.31333 2.45709 8.84 3.03933 8.48 3.78933H7.5C7.15333 3.05248 6.68667 2.47354 6.1 2.05248C5.51333 1.63143 4.88 1.4209 4.2 1.4209C3.32 1.4209 2.6 1.70051 2.04 2.25972C1.48 2.81893 1.2 3.53275 1.2 4.40117C1.2 4.91433 1.30333 5.43077 1.51 5.95051C1.71667 6.47025 2.07667 7.06235 2.59 7.72683C3.10333 8.3913 3.8 9.15775 4.68 10.0262C5.56 10.8946 6.66667 11.9341 8 13.1446Z" fill="#000"></path>
-	</svg>
+    }
+    <svg class="add-to-cabinet-button_iconHover__VqI4Z" data-test-ref="add-to-cabinet-button-heart" fill="#000" height="15" viewBox="0 0 16 15" width="13" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 14.7038L7.18 13.9735C5.76667 12.6972 4.6 11.5952 3.68 10.6676C2.76 9.73998 2.02667 8.91104 1.48 8.18077C0.933333 7.45051 0.55 6.78933 0.33 6.19722C0.11 5.60512 0 5.00643 0 4.40117C0 3.21696 0.403333 2.22683 1.21 1.43077C2.01667 0.634721 3.01333 0.236694 4.2 0.236694C4.96 0.236694 5.66333 0.414326 6.31 0.769589C6.95667 1.12485 7.52 1.63801 8 2.30906C8.56 1.59854 9.15333 1.07551 9.78 0.739984C10.4067 0.404457 11.08 0.236694 11.8 0.236694C12.9867 0.236694 13.9833 0.634721 14.79 1.43077C15.5967 2.22683 16 3.21696 16 4.40117C16 5.00643 15.89 5.60512 15.67 6.19722C15.45 6.78933 15.0667 7.45051 14.52 8.18077C13.9733 8.91104 13.24 9.73998 12.32 10.6676C11.4 11.5952 10.2333 12.6972 8.82 13.9735L8 14.7038ZM8 13.1446C9.34667 11.9209 10.4567 10.8716 11.33 9.99656C12.2033 9.12156 12.8967 8.35512 13.41 7.69722C13.9233 7.03933 14.2833 6.4538 14.49 5.94064C14.6967 5.42748 14.8 4.91433 14.8 4.40117C14.8 3.53275 14.52 2.81893 13.96 2.25972C13.4 1.70051 12.68 1.4209 11.8 1.4209C11.12 1.4209 10.4867 1.62814 9.9 2.04262C9.31333 2.45709 8.84 3.03933 8.48 3.78933H7.5C7.15333 3.05248 6.68667 2.47354 6.1 2.05248C5.51333 1.63143 4.88 1.4209 4.2 1.4209C3.32 1.4209 2.6 1.70051 2.04 2.25972C1.48 2.81893 1.2 3.53275 1.2 4.40117C1.2 4.91433 1.30333 5.43077 1.51 5.95051C1.71667 6.47025 2.07667 7.06235 2.59 7.72683C3.10333 8.3913 3.8 9.15775 4.68 10.0262C5.56 10.8946 6.66667 11.9341 8 13.1446Z" fill="#000"></path>
+    </svg>
 </div>
 <div class="unitPricing">
-	@if (!string.IsNullOrEmpty(Model.PriceMin) && !string.IsNullOrEmpty(Model.PriceMax))
-	{
-		<span class="unitPricingPrice" data-testid="product-price">From @Model.PriceMin</span><span class="unitPricingSlash">/</span>
-		<span class="unitPricingUnitPrice" data-testid="unit-price">@Model.PriceMax<!-- -->&nbsp;<!-- -->per<!-- -->&nbsp;<!-- -->100<!-- -->&nbsp;<!-- -->ml</span>
-	}
-	else
-	{
-		<span class="unitPricingPrice" data-testid="product-price">@Model.PriceMin</span>
-	}
+    @if (!string.IsNullOrEmpty(Model.Price) && !string.IsNullOrEmpty(Model.UnitPrice))
+    {
+        <span class="unitPricingPrice" data-testid="product-price">From @Model.Price</span>
 
+        <span class="unitPricingSlash">/</span>
+        <span class="unitPricingUnitPrice" data-testid="unit-price">@Model.UnitPrice</span>
+    }
+    else
+    {
+        <span class="unitPricingPrice" data-testid="product-price">@Model.Price</span>
+    }
 </div>
 
 <div class="color-notes-table">
-	<table class="TypefragranceTable" style="overflow: hidden;">
-		<tbody>
-			<tr>
-				<td>
-					<div class="color-box" style="background-image: url(@(Model.isFresh ? "https://www.aesop.com/u1nb1km7t5q7/4IlvsbgOoH7HIFnTiDGvZf/e5db8efc47e9c3f895be78009f5e1f80/Aesop_Fragrance_Tool_Fresh_160x160px.png" : ""));">Fresh</div>
-				</td>
-				<td>
-					<div class="color-box" style="background-image: url(@(Model.isCitrus ? "https://www.aesop.com/u1nb1km7t5q7/6FUNM618nNAJsiSqQ22XxS/6e3e91d0c168a32e85d9d91a295f4b19/Aesop_Fragrance_Tool_Citrus_160x160px.png" : ""));">Citrus</div>
-				</td>
-				<td>
-					<div class="color-box" style="background-image: url(@(Model.isMarine ? "https://www.aesop.com/u1nb1km7t5q7/7sV9RzJLztofG6nuxd5KEK/ca88d00baa19cfb9eded711f8f42cd52/Aesop_Fragrance_Tool_Marine_160x160px.png": ""));">Marine</div>
-				</td>
-				<td>
-					<div class="color-box" style="background-image: url(@(Model.isGreen ? "https://www.aesop.com/u1nb1km7t5q7/4E8OrotpOjvuOKIz2Q9163/8e26c2963a1d760f61553b0232a86e2e/Aesop_Fragrance_Tool_Green_160x160px.png" : ""));">Green</div>
-				</td>
-				<td>
-					<div class="color-box" style="background-image: url(@(Model.isHerbaceous ? "https://www.aesop.com/u1nb1km7t5q7/1MLxAgtQ22V9fvJqD2D95S/da133c2a417cf100692c049158cca3ed/Aesop_Fragrance_Tool_Swatch_Herbaceous_160x160px.png": ""));">Herbaceous</div>
-				</td>
-				<td>
-					<div class="color-box" style="background-image: url(@(Model.isFloral ? "https://www.aesop.com/u1nb1km7t5q7/5bEc54Iiyl3apMzwSuUqvp/c0600c2f03356ffb1ecf62a9a2e88343/Aesop_Fragrance_Tool_Floral_160x160px.png": ""));">Floral</div>
-				</td>
-				<td>
-					<div class="color-box" style="background-image: url(@(Model.isSpicy ? "https://www.aesop.com/u1nb1km7t5q7/2TGYXNuabu8DZjzBHXC9AQ/41a0e65847879c2977fafb2b91f7d78e/Aesop_Fragrance_Tool_Spicy_160x160px.png": ""));">Spicy</div>
-				</td>
-				<td>
-					<div class="color-box" style="background-image: url(@(Model.isWoody ? "https://www.aesop.com/u1nb1km7t5q7/7MvWqFGR6jr0qWiNWq5T50/d280ab802ceec4d30a91302cbb54737d/Aesop_Fragrance_Tool_Woody_160x160px.png" : ""));">Woody</div>
-				</td>
-				<td>
-					<div class="color-box" style="background-image: url(@(Model.isSmoky ? "https://www.aesop.com/u1nb1km7t5q7/2WzHqe9TXllqSheI9XFXJ8/f2ccf366263302bbe938062a925b21f2/Aesop_Fragrance_Tool_Smoky_160x160px.png" : ""));">Smoky</div>
-				</td>
-				<td>
-					<div class="color-box" style="background-image: url(@(Model.isAmbery ? "https://www.aesop.com/u1nb1km7t5q7/6QvKv9jJidEiNdPHd3vFlh/607113dab7fb97a873fe9731b5408134/Aesop_Fragrance_Tool_Ambery_160x160px.png": ""));">Ambery</div>
-				</td>
-				<td>
-					<div class="color-box" style="background-image: url(@(Model.isResinous ? "https://www.aesop.com/u1nb1km7t5q7/2doHTBxoRmqA2A0AAzkOY3/602d6aabe64330be853e7d1315b36ee2/Aesop_Fragrance_Tool_Resinous_160x160px.png" : ""));">Resinous</div>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+    <table class="TypefragranceTable" style="overflow: hidden;">
+        <tbody>
+            <tr>
+                <td>
+                    <div class="color-box" style="background-image: url(@(Model.isFresh ? "https://www.aesop.com/u1nb1km7t5q7/4IlvsbgOoH7HIFnTiDGvZf/e5db8efc47e9c3f895be78009f5e1f80/Aesop_Fragrance_Tool_Fresh_160x160px.png" : ""));">Fresh</div>
+                </td>
+                <td>
+                    <div class="color-box" style="background-image: url(@(Model.isCitrus ? "https://www.aesop.com/u1nb1km7t5q7/6FUNM618nNAJsiSqQ22XxS/6e3e91d0c168a32e85d9d91a295f4b19/Aesop_Fragrance_Tool_Citrus_160x160px.png" : ""));">Citrus</div>
+                </td>
+                <td>
+                    <div class="color-box" style="background-image: url(@(Model.isMarine ? "https://www.aesop.com/u1nb1km7t5q7/7sV9RzJLztofG6nuxd5KEK/ca88d00baa19cfb9eded711f8f42cd52/Aesop_Fragrance_Tool_Marine_160x160px.png": ""));">Marine</div>
+                </td>
+                <td>
+                    <div class="color-box" style="background-image: url(@(Model.isGreen ? "https://www.aesop.com/u1nb1km7t5q7/4E8OrotpOjvuOKIz2Q9163/8e26c2963a1d760f61553b0232a86e2e/Aesop_Fragrance_Tool_Green_160x160px.png" : ""));">Green</div>
+                </td>
+                <td>
+                    <div class="color-box" style="background-image: url(@(Model.isHerbaceous ? "https://www.aesop.com/u1nb1km7t5q7/1MLxAgtQ22V9fvJqD2D95S/da133c2a417cf100692c049158cca3ed/Aesop_Fragrance_Tool_Swatch_Herbaceous_160x160px.png": ""));">Herbaceous</div>
+                </td>
+                <td>
+                    <div class="color-box" style="background-image: url(@(Model.isFloral ? "https://www.aesop.com/u1nb1km7t5q7/5bEc54Iiyl3apMzwSuUqvp/c0600c2f03356ffb1ecf62a9a2e88343/Aesop_Fragrance_Tool_Floral_160x160px.png": ""));">Floral</div>
+                </td>
+                <td>
+                    <div class="color-box" style="background-image: url(@(Model.isSpicy ? "https://www.aesop.com/u1nb1km7t5q7/2TGYXNuabu8DZjzBHXC9AQ/41a0e65847879c2977fafb2b91f7d78e/Aesop_Fragrance_Tool_Spicy_160x160px.png": ""));">Spicy</div>
+                </td>
+                <td>
+                    <div class="color-box" style="background-image: url(@(Model.isWoody ? "https://www.aesop.com/u1nb1km7t5q7/7MvWqFGR6jr0qWiNWq5T50/d280ab802ceec4d30a91302cbb54737d/Aesop_Fragrance_Tool_Woody_160x160px.png" : ""));">Woody</div>
+                </td>
+                <td>
+                    <div class="color-box" style="background-image: url(@(Model.isSmoky ? "https://www.aesop.com/u1nb1km7t5q7/2WzHqe9TXllqSheI9XFXJ8/f2ccf366263302bbe938062a925b21f2/Aesop_Fragrance_Tool_Smoky_160x160px.png" : ""));">Smoky</div>
+                </td>
+                <td>
+                    <div class="color-box" style="background-image: url(@(Model.isAmbery ? "https://www.aesop.com/u1nb1km7t5q7/6QvKv9jJidEiNdPHd3vFlh/607113dab7fb97a873fe9731b5408134/Aesop_Fragrance_Tool_Ambery_160x160px.png": ""));">Ambery</div>
+                </td>
+                <td>
+                    <div class="color-box" style="background-image: url(@(Model.isResinous ? "https://www.aesop.com/u1nb1km7t5q7/2doHTBxoRmqA2A0AAzkOY3/602d6aabe64330be853e7d1315b36ee2/Aesop_Fragrance_Tool_Resinous_160x160px.png" : ""));">Resinous</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 <h3 class="details_heading mt-4 mb-3">
-	<a data-testid="product-comparison-name" href="#" tabindex="0">Aromatically alike</a>
+    <a data-testid="product-comparison-name" href="#" tabindex="0">Aromatically alike</a>
 </h3>
-@foreach (var item in Model.Aroma)
+@if (Model.Aroma != null && Model.Aroma.Count > 0)
 {
-	<div class="details_KeyIngredients">
-		@item
-	</div>
+    foreach (var item in Model.Aroma)
+    {
+        <div class="details_KeyIngredients">
+            @item
+        </div>
+    }
 }

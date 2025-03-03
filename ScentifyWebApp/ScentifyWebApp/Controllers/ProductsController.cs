@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ScentifyWebApp.DAL.DB;
 using ScentifyWebApp.Models;
+using ScentifyWebApp.Models.Entities;
 
 namespace ScentifyWebApp.Controllers
 {
@@ -39,7 +40,21 @@ namespace ScentifyWebApp.Controllers
             return View(products?.Take(6));
         }
 
-        [HttpPost]
+		public async Task<IActionResult> FilterFragranceFamily(string fragranceFamily)
+		{
+			var products = await _context.Perfume.ToListAsync();
+            var filter = new List<Perfume>();
+            if (products?.Count > 0)
+            {
+                filter = products.Where(m => m.FragranceFamily.Contains(fragranceFamily))?.Take(6)?.ToList();
+            }
+
+            ViewData["fragranceFamily"] = fragranceFamily;
+
+			return View(filter);
+		}
+
+		[HttpPost]
         public async Task<IActionResult> LoadMoreProducts([FromBody] PaginationRequest request)
         {
             var products = await _context.Perfume.ToListAsync();
