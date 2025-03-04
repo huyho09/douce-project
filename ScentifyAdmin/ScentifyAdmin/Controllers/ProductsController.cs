@@ -111,6 +111,12 @@ namespace ScentifyAdmin.Controllers
 			return Content("/Products");
 		}
 
+		[HttpGet("review")]
+		public async Task<IActionResult> Review(DtoPerfume requestDTO)
+		{
+			return View(requestDTO);
+		}
+
 		private List<T> GetRandomItems<T>(List<T> list, int count)
 		{
 			return list.OrderBy(_ => Guid.NewGuid()).Take(count).ToList();

@@ -1,0 +1,182 @@
+﻿[
+  {
+    "id": "1",
+    "name": "Ouranon Eau de Parfum",
+    "image": "./images/gloam.png",
+    "description": "Frankincense, Hay, Myrrh",
+    "size": "50 mL",
+    "price": {
+      "amount": 165.00,
+      "currency": "€",
+      "unitPrice": "€330.00 per 100 ml"
+    }
+  },
+  {
+    "id": "2",
+    "name": "Aurora Mist",
+    "image": "./images/per_1.png",
+    "description": "Lavender, Citrus, Musk",
+    "size": "100 mL",
+    "price": {
+      "amount": 250.00,
+      "currency": "€",
+      "unitPrice": "€250.00 per 100 ml"
+    }
+  },
+  {
+    "id": "3",
+    "name": "Twilight Essence",
+    "image": "./images/per_2.png",
+    "description": "Rose, Sandalwood, Amber",
+    "size": "75 mL",
+    "price": {
+      "amount": 190.00,
+      "currency": "€",
+      "unitPrice": "€253.33 per 100 ml"
+    }
+  },
+  {
+    "id": "4",
+    "name": "Mystic Bloom",
+    "image": "./images/per_3.png",
+    "description": "Jasmine, Vanilla, Patchouli",
+    "size": "60 mL",
+    "price": {
+      "amount": 180.00,
+      "currency": "€",
+      "unitPrice": "€300.00 per 100 ml"
+    }
+  },
+  {
+    "id": "5",
+    "name": "Eternal Woods",
+    "image": "./images/per_4.png",
+    "description": "Cedarwood, Oud, Vetiver",
+    "size": "100 mL",
+    "price": {
+      "amount": 275.00,
+      "currency": "€",
+      "unitPrice": "€275.00 per 100 ml"
+    }
+  },
+  {
+    "id": "6",
+    "name": "Sunlit Breeze",
+    "image": "./images/perfs.png",
+    "description": "Citrus, Bergamot, Musk",
+    "size": "50 mL",
+    "price": {
+      "amount": 160.00,
+      "currency": "€",
+      "unitPrice": "€320.00 per 100 ml"
+    }
+  },
+  {
+    "id": "7",
+    "name": "Moonlight Whisper",
+    "image": "./images/per_1.png",
+    "description": "Iris, Violet, Cedar",
+    "size": "75 mL",
+    "price": {
+      "amount": 210.00,
+      "currency": "€",
+      "unitPrice": "€280.00 per 100 ml"
+    }
+  },
+  {
+    "id": "8",
+    "name": "Crimson Spice",
+    "image": "./images/per_2.png",
+    "description": "Cinnamon, Clove, Amber",
+    "size": "60 mL",
+    "price": {
+      "amount": 190.00,
+      "currency": "€",
+      "unitPrice": "€316.67 per 100 ml"
+    }
+  },
+  {
+    "id": "9",
+    "name": "Velvet Petals",
+    "image": "./images/per_3.png",
+    "description": "Peony, Rose, Musk",
+    "size": "100 mL",
+    "price": {
+      "amount": 260.00,
+      "currency": "€",
+      "unitPrice": "€260.00 per 100 ml"
+    }
+  },
+  {
+    "id": "10",
+    "name": "Golden Haze",
+    "image": "./images/per_4.png",
+    "description": "Saffron, Amber, Oud",
+    "size": "50 mL",
+    "price": {
+      "amount": 185.00,
+      "currency": "€",
+      "unitPrice": "€370.00 per 100 ml"
+    }
+  },
+  {
+    "id": "11",
+    "name": "Serene Blossom",
+    "image": "./images/per_1.png",
+    "description": "Cherry Blossom, Jasmine, Musk",
+    "size": "75 mL",
+    "price": {
+      "amount": 215.00,
+      "currency": "€",
+      "unitPrice": "€286.67 per 100 ml"
+    }
+  },
+  {
+    "id": "12",
+    "name": "Amber Twilight",
+    "image": "./images/perfs.png",
+    "description": "Amber, Vanilla, Tobacco",
+    "size": "60 mL",
+    "price": {
+      "amount": 200.00,
+      "currency": "€",
+      "unitPrice": "€333.33 per 100 ml"
+    }
+  },
+  {
+    "id": "13",
+    "name": "Ocean Drift",
+    "image": "./images/per_1.png",
+    "description": "Sea Salt, Sage, Musk",
+    "size": "100 mL",
+    "price": {
+      "amount": 270.00,
+      "currency": "€",
+      "unitPrice": "€270.00 per 100 ml"
+    }
+  },
+  {
+    "id": "14",
+    "name": "Floral Symphony",
+    "image": "./images/per_2.png",
+    "description": "Rose, Lily, Jasmine",
+    "size": "50 mL",
+    "price": {
+      "amount": 175.00,
+      "currency": "€",
+      "unitPrice": "€350.00 per 100 ml"
+    }
+  },
+  {
+    "id": "15",
+    "name": "Citrus Grove",
+    "image": "./images/per_4.png",
+    "description": "Orange, Lemon, Lime",
+    "size": "75 mL",
+    "price": {
+      "amount": 230.00,
+      "currency": "€",
+      "unitPrice": "€306.67 per 100 ml"
+    }
+  }
+]
