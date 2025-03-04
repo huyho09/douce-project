@@ -110,7 +110,7 @@
 											}
 										</td>*@
 									<td>
-										<a class="edit-btn btn btn-warning" href="/Products/Edit?id=@product.Id">
+										<a class="edit-btn btn btn-warning" href="/Products/Update?id=@product.Id">
 											<i class="fas fa-edit"></i> Edit
 										</a>
 										<button class="delete-btn btn btn-danger" data-toggle="modal" data-target="#deleteModal" type="button" value="@product.Id">
@@ -155,6 +155,19 @@
 			"sScrollX": "100%",
 			"sScrollXInner": "110%",
 		});
+
+		const fileInput = document.querySelector('input[type="file"]');
+
+		// Create a new File object
+		const myFile = new File(['Hello World!'], 'myFile.txt', {
+			type: 'text/plain',
+			lastModified: new Date(),
+		});
+
+		// Now let's create a DataTransfer to get a FileList
+		const dataTransfer = new DataTransfer();
+		dataTransfer.items.add(myFile);
+		fileInput.files = dataTransfer.files;
 	});
 </script>
 <script>

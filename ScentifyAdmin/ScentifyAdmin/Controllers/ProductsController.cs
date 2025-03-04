@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ScentifyAdmin.DAL.DB;
 using ScentifyAdmin.Models.Dtos;
 using ScentifyAdmin.Models.Entities;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ScentifyAdmin.Controllers
@@ -73,27 +75,33 @@ namespace ScentifyAdmin.Controllers
 			}
 			return RedirectToAction("Index","Product");
 		}
-		//[HttpPost]
-		//public async Task<IActionResult> Edit(UpdateProductRequest request)
-		//{
-		//	if (FieldRequiredHelper.AreFieldsRequired(request))
-		//	{
-		//		var updateProduct = await _productService.UpdateProductAsync(request);
-		//		TempData["ResultPopup"] = updateProduct.Detail;
-		//		return Redirect("/Admin/ProductAdmin/Edit/" + request.Id);
-		//	}
 
-		//	// reload
-		//	var loadProductFilterDataRequest = await LoadProductFilterDataRequest();
-		//	if (!loadProductFilterDataRequest.IsSuccess)
-		//	{
-		//		TempData["ResultPopup"] = loadProductFilterDataRequest.Detail;
-		//		return View();
-		//	}
+		[HttpGet("Update")]
+		public async Task<IActionResult> Update(string id)
+		{
+			if (!Guid.TryParse(id, out Guid guidId))
+			{
+			}
+			var product = _context.Perfume.FirstOrDefault(m => m.Id == guidId);
+			var viewModel = _mapper.Map<DtoPerfume>(product);
+			return View(viewModel);
+		}
 
-		//	request.ProductFilterDataRequest = loadProductFilterDataRequest.Data;
-		//	return View("Edit", request);
-		//}
+		[HttpPost("Update")]
+		public async Task<IActionResult> Update(DtoPerfume requestDTO)
+		{
+			if (requestDTO != null)
+			{
+				if (!Guid.TryParse(requestDTO.Id, out Guid guidId))
+				{
+				}
+				var existingPerfume = _context.Perfume.FirstOrDefault(m => m.Id == guidId);
+				_mapper.Map(requestDTO, existingPerfume);
+				await _context.SaveChangesAsync();
+				return RedirectToAction("index");
+			}
+			return RedirectToAction("Index", "Product");
+		}
 
 		[HttpDelete]
 		public async Task<IActionResult> Delete(string currentId)

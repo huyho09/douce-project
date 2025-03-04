@@ -1,4 +1,5 @@
-﻿using ScentifyAdmin.Models.Entities;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using ScentifyAdmin.Models.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace ScentifyAdmin.Models.Dtos
@@ -25,8 +26,13 @@ namespace ScentifyAdmin.Models.Dtos
         public string Composition { get; set; } = string.Empty;
 
         public string Gender { get; set; } = string.Empty; // "Male", "Female", "Unisex"
+		public IList<SelectListItem> GenderList { get; set; } = new List<SelectListItem> {
+				 new SelectListItem{Value = "Male", Text = "Male"},
+				 new SelectListItem{Value = "Female", Text = "Female"},
+				 new SelectListItem{Value = "Unisex", Text = "Unisex"},
+		};
 
-        public string FragranceFamily { get; set; } = string.Empty; // Nhóm hương chính (VD: Floral, Woody)
+		public string FragranceFamily { get; set; } = string.Empty; // Nhóm hương chính (VD: Floral, Woody)
 
         public int VolumeMl { get; set; }// Dung tích chai (VD: 30ml, 50ml, 100ml)
 
@@ -42,8 +48,13 @@ namespace ScentifyAdmin.Models.Dtos
         public int StockQuantity { get; set; } = 0; // Số lượng tồn kho
 
         public string Status { get; set; } = string.Empty; // Trạng thái: "Available", "Out of Stock", "Discontinued"
+		public IList<SelectListItem> StatusList { get; set; } = new List<SelectListItem> {
+				 new SelectListItem{Value = "Available", Text = "Available"},
+				 new SelectListItem{Value = "Out of Stock", Text = "Out of Stock"},
+				 new SelectListItem{Value = "Discontinued", Text = "Discontinued"},
+		};
 
-        public decimal AverageRating { get; set; } = 0; // Điểm đánh giá trung bình (từ 0 đến 5 sao)
+		public decimal AverageRating { get; set; } = 0; // Điểm đánh giá trung bình (từ 0 đến 5 sao)
 
         public int ReviewCount { get; set; } = 0; // Số lượng đánh giá
 
