@@ -33,8 +33,9 @@ function toggleCart() {
 
 $(document).ready(function () {
     // refresh data
-    reloadCart();
-    updatetotalQuantity();
+    reloadCart(function () {
+        updatetotalQuantity();
+    });
 
     $(".add-to-cart-btn").on("click", function () {
         let productId = $(this).data("id");
@@ -170,6 +171,7 @@ document.getElementById("btn-search").addEventListener("click", function () {
     searchInput.classList.toggle("active");
     if (searchInput.classList.contains("active")) {
         $(this).html("<svg class=\"custom-icon\">\r\n                            <use xlink:href=\"#close\"></use>\r\n                        </svg>");
+        $('.search-group-box input').focus();
     } else {
         $(this).html("<svg class=\"custom-icon\">\r\n                            <use xlink:href=\"#custom-search\"></use>\r\n                        </svg>");
     }
@@ -180,5 +182,14 @@ document.getElementById("btn-search-popup").addEventListener("click", function (
         $("#search-modal").modal("hide");
     } else {
         $("#search-modal").modal("show");
+        $('#search-modal .search-form input').focus();
     }
 });
+$(() => {
+    $('#search-modal').on('shown.bs.modal', function () {
+        requestAnimationFrame(() => {
+            $('#search-modal .search-form input')[0].focus();
+        });
+    });
+});
+

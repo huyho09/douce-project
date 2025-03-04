@@ -30,6 +30,11 @@ a[disabled]:focus {
   color: #d5b260;
 }
 
+@media (max-width: 768px) {
+  .card-wrapper {
+    padding: 20px 10px;
+  }
+}
 .text-wrapper {
   max-width: 100%;
   text-align: center;
@@ -764,6 +769,11 @@ hr {
 }
 /********************************************/
 /* Open Popup Button */
+body.modal-open {
+  overflow: auto !important;
+  padding-right: 0 !important; /* Prevents unwanted shifts */
+}
+
 .open-popup-btn {
   padding: 12px 20px;
   background: #fff;

@@ -311,6 +311,15 @@ main:has(.product-info) .product-card {
   height: 550px;
 }
 
+main:has(.product-info) .card {
+  height: 380px;
+}
+
+@media (max-width: 768px) {
+  main:has(.product-info) .product-card {
+    height: 450px;
+  }
+}
 .card-content {
   padding: 20px;
 }

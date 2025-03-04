@@ -59,6 +59,12 @@ a[disabled]:focus {
   color: $custom-color-4;
 }
 
+@media (max-width: 768px) {
+  .card-wrapper{
+    padding: 20px 10px;
+  }
+}
+
 .text-wrapper {
   max-width: 100%;
   text-align: center;
@@ -169,10 +175,12 @@ a[disabled]:focus {
     left: 50%;
     width: 80%;
     height: 3px;
-    background: linear-gradient(to right,
-        rgba(255, 215, 150, 0),
-        rgba(255, 215, 150, 0.8),
-        rgba(255, 215, 150, 0));
+    background: linear-gradient(
+      to right,
+      rgba(255, 215, 150, 0),
+      rgba(255, 215, 150, 0.8),
+      rgba(255, 215, 150, 0)
+    );
     transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
@@ -199,7 +207,6 @@ a[disabled]:focus {
     .add-to-cart-btn {
       background-color: $custom-color-3 !important;
     }
-
 
     .image-wrapper {
       position: relative;
@@ -267,7 +274,6 @@ a[disabled]:focus {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-
   .product-grid-item {
     padding: 0;
     border-color: rgba(255, 215, 150, 0.6);
@@ -593,7 +599,7 @@ body:has(.modal-backdrop.active) {
   }
 
   /* Ensure text and buttons are properly aligned */
-  .cart-item>* {
+  .cart-item > * {
     text-align: center;
   }
 
@@ -865,6 +871,11 @@ hr {
 /********************************************/
 
 /* Open Popup Button */
+body.modal-open {
+  overflow: auto !important;
+  padding-right: 0 !important; /* Prevents unwanted shifts */
+}
+
 .open-popup-btn {
   padding: 12px 20px;
   background: #fff;
@@ -1352,10 +1363,10 @@ input {
   }
 
   /* Move label when focused or filled */
-  .floating-group input:focus~label,
-  .floating-group input:not(:placeholder-shown)~label,
-  .floating-group select:focus~label,
-  .floating-group select:not([value=""])~label {
+  .floating-group input:focus ~ label,
+  .floating-group input:not(:placeholder-shown) ~ label,
+  .floating-group select:focus ~ label,
+  .floating-group select:not([value=""]) ~ label {
     top: -10px;
     font-size: 14px;
     color: $color_1;
@@ -1379,7 +1390,6 @@ input {
     /* Lighter shade on hover */
     box-shadow: 0px 4px 10px rgba(159, 95, 46, 0.4);
   }
-
 
   /* Right Section: Order Summary */
   .order-summary {
@@ -1562,7 +1572,6 @@ input {
       padding: 30px;
     }
   }
-
 
   .order-summary {
     margin-top: 20px;

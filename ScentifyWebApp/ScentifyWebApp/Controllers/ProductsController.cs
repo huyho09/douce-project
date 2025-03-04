@@ -56,15 +56,23 @@ namespace ScentifyWebApp.Controllers
 
         public async Task<IActionResult> Search(string searchInput)
         {
-            var products = await _context.Perfume.ToListAsync();
-            var filter = new List<Perfume>();
-            if (products?.Count > 0)
+            if (!string.IsNullOrEmpty(searchInput))
             {
-                filter = products.Where(m => m.Name.Contains(searchInput))?.Take(6)?.ToList();
-            }
+                var products = await _context.Perfume.ToListAsync();
+                var filter = new List<Perfume>();
+                if (products?.Count > 0)
+                {
+                    searchInput = searchInput.ToUpper();
+                    filter = products.Where(m => m.Name.ToUpper().Contains(searchInput)
+                                                || m.Description.ToUpper().Contains(searchInput)
+                                                || m.Description.ToUpper().Contains(searchInput)
+                                                || m.Perfumed_Notes.ToUpper().Contains(searchInput))?.Take(6)?.ToList();
+                }
 
-            ViewData["searchInput"] = searchInput;
-            return View(filter);
+                ViewData["searchInput"] = searchInput;
+                return View(filter);
+            }
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
