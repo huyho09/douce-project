@@ -11,6 +11,8 @@ namespace ScentifyWebApp.Models.Mappings
             CreateMap<Perfume, DtoPerfume>().ReverseMap()
                             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.ToString()));
 
-        }
+			CreateMap<Invoice, DtoInvoice>().ReverseMap()
+							.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.ToString()));
+		}
     }
 }

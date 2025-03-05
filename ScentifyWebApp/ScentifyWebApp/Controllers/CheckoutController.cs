@@ -4,15 +4,18 @@ using ScentifyWebApp.Services;
 namespace ScentifyWebApp.Controllers
 {
     public class CheckoutController : Controller
-    {
-        public CheckoutController(MomoService momoService)
-        {
+	{
+		private readonly CartService _cartService;
+		private readonly MomoService _momoService;
+
+		public CheckoutController(MomoService momoService
+            , CartService cartService)
+		{
+			_cartService = cartService;
             _momoService = momoService;
         }
 
-        private readonly MomoService _momoService;
-
-        public IActionResult Index()
+		public IActionResult Index()
         {
             return View();
         }

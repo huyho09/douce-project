@@ -12,6 +12,26 @@ namespace ScentifyWebApp.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Invoice",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CustomerInfo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InvoiceItems = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PaymentDate = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    PaymentMethod = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    OtherCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Shipping = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Noted = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Invoice", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Perfume",
                 columns: table => new
                 {
@@ -48,6 +68,9 @@ namespace ScentifyWebApp.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Invoice");
+
             migrationBuilder.DropTable(
                 name: "Perfume");
         }
