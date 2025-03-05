@@ -17,7 +17,9 @@ namespace ScentifyWebApp.Controllers
 
 		public IActionResult Index()
         {
-            return View();
+            var cartItems = _cartService.GetCart();
+
+			return View(cartItems);
         }
 
         // Endpoint to initiate a payment

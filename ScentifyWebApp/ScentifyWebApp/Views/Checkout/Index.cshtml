@@ -1,4 +1,10 @@
 ﻿@{
+    ViewData["Title"] = "Checkout page";
+}
+
+@model List<ScentifyWebApp.Models.CartItem>
+
+@{
     var orderId = Guid.NewGuid().ToString();
     double amount = 165000;
 }
@@ -15,21 +21,22 @@
             <!-- Row 1: Title, First Name, Last Name -->
             <div class="form-row">
                 <div class="floating-group">
-                    <select id="title" name="title" required>
+                    @* <select id="title" name="title" required>
                         <option selected value="Dr">Dr</option>
                         <option value="Mr">Mr</option>
                         <option value="Ms">Ms</option>
-                    </select>
+                    </select> *@
+                    <input type="text" id="first-name" name="first-name" placeholder="e.g. Dr, Mr, Ms, etc" value="Dr" required>
                     <label for="title">1. Title</label>
                 </div>
 
                 <div class="floating-group">
-                    <input type="text" id="first-name" name="first-name" value="John" required>
+                    <input type="text" id="first-name" name="first-name" placeholder="e.g. John" required>
                     <label for="first-name">2. First name</label>
                 </div>
 
                 <div class="floating-group">
-                    <input type="text" id="last-name" name="last-name" value="Smith" required>
+                    <input type="text" id="last-name" name="last-name" placeholder="e.g. Smith" required>
                     <label for="last-name">3. Last name</label>
                 </div>
             </div>
@@ -37,16 +44,17 @@
             <!-- Row 2: Country Selector, Address -->
             <div class="form-row">
                 <div class="floating-group">
-                    <select id="country" name="country" required>
+                    @* <select id="country" name="country" required>
                         <option value="france">France</option>
                         <option selected value="germany">Germany</option>
                         <option value="usa">USA</option>
-                    </select>
+                    </select> *@
+                    <input type="text" id="first-name" name="first-name" placeholder="e.g. France, Germany, etc" value="France" required>
                     <label for="country">4. Country / Region</label>
                 </div>
 
                 <div class="floating-group">
-                    <input type="text" id="address" name="address" value="1234 Elm Street, Apt 56, Springfield, IL 62704" required>
+                    <input type="text" id="address" name="address" placeholder="e.g. 1234 Elm Street, ..." required>
                     <label for="address">5. Address</label>
                 </div>
             </div>
@@ -70,11 +78,6 @@
                 <p class="product-size">50 mL</p>
                 <a href="#" class="remove">Remove</a>
             </div>
-            @* <select class="quantity">
-                <option>1</option>
-                <option selected>2</option>
-                <option>3</option>
-            </select> *@
             <input type="number" class="quantity form-control-sm w-25" value="2" />
             <span class="product-price">€165.00</span>
         </div>
