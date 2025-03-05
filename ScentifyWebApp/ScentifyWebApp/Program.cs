@@ -63,6 +63,7 @@ namespace ScentifyWebApp
             services.AddHttpContextAccessor();
             services.AddScoped<CartService>();
             services.AddHttpClient<MomoService>();
+            services.AddScoped<InvoiceService>();
             services.AddSession(); // Add this line to enable session
 
             // Add AutoMapper

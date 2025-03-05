@@ -88,6 +88,33 @@ function removeCartItem(productId) {
     });
 }
 
+function removeCartItemInCheckOut(_this, productId) {
+    var $this = $(_this);
+    $.ajax({
+        url: "/Cart/RemoveFromCart",
+        type: "POST",
+        data: { productId: productId },
+        success: function (response) {
+            reloadCart(function () {
+                //toggleCart();
+                updatetotalQuantity();
+                showNotiModal(response.message);
+                if (response.status === 200) {
+                    $this.closest(".product").remove();
+                }
+
+                // check empty
+                if ($('.order-summary .product').length == 0) {
+                    location.href = '/home';
+                }
+            });
+        },
+        error: function () {
+            console.error("Error removing product from cart.");
+        }
+    });
+}
+
 function updateCartItem(_this, productId) {
     clearTimeout(changeTimeout);
     changeTimeout = setTimeout(() => {
@@ -118,6 +145,41 @@ function clearAllCart() {
             reloadCart(function () {
                 updatetotalQuantity();
                 showNotiModal(response.message);
+            });
+        },
+        error: function () {
+            console.error("Error removing product from cart.");
+        }
+    });
+}
+
+function saveCart() {
+    let customerInfo = $("#checkout-form").serializeArray(); // Convert form data to array
+    let jsonData = {};
+
+    // Convert form array to JSON object
+    $.each(customerInfo, function () {
+        if (jsonData[this.name]) {
+            if (!Array.isArray(jsonData[this.name])) {
+                jsonData[this.name] = [jsonData[this.name]];
+            }
+            jsonData[this.name].push(this.value);
+        } else {
+            jsonData[this.name] = this.value;
+        }
+    });
+    $.ajax({
+        url: "/save-invoice",
+        type: "POST",
+        data: jsonData,
+        success: function (response) {
+            reloadCart(function () {
+                showNotiModal(response.message)
+                if (response.status === 200) {
+                    setTimeout(function () {
+                        location.reload();
+                    }, 10000);
+                }
             });
         },
         error: function () {

@@ -1263,7 +1263,7 @@ input {
   display: flex;
   width: 100%;
   height: 100%;
-  padding: 60px 100px 20px;
+  padding: 60px 150px 20px;
 
   /* Left Section: Form */
   .form-section {
@@ -1306,7 +1306,7 @@ input {
   .checkout-form {
     padding: 40px 20px 30px;
     display: flex;
-    gap: 60px;
+    gap: 30px;
     flex-direction: column;
     background: $color_7;
     border-radius: 10px;
@@ -1353,8 +1353,8 @@ input {
   /* Floating label */
   .floating-group label {
     position: absolute;
-    left: 5px;
-    top: 50%;
+    left: 20px;
+    top: 55%;
     transform: translateY(-50%);
     font-size: 16px;
     color: #777;
