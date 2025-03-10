@@ -101,6 +101,14 @@ function removeCartItemInCheckOut(_this, productId) {
                 showNotiModal(response.message);
                 if (response.status === 200) {
                     $this.closest(".product").remove();
+
+                    // update total text
+                    var sumPrice = sumTotalInCheckOut();
+                    $('#sub-total-price').text(sumPrice);
+                    $('#total-price').text(sumPrice);
+
+                    let totalQuantity = $('.product .quantity').toArray().reduce((sum, el) => sum + (parseFloat($(el).val()) || 0), 0);
+                    $('#total-quantity').text(totalQuantity);
                 }
 
                 // check empty
@@ -113,6 +121,19 @@ function removeCartItemInCheckOut(_this, productId) {
             console.error("Error removing product from cart.");
         }
     });
+}
+
+function sumTotalInCheckOut() {
+    var total = 0;
+    var $products = $('.product');
+    if ($products != null && $products.length > 0) {
+        $products.each((index, ele) => {
+            var quantity = $(ele).find('.quantity').val();
+            var price = $(ele).find('.product-price').text().trim();
+            total += (quantity * price);
+        });
+    }
+    return total;
 }
 
 function updateCartItem(_this, productId) {
@@ -135,6 +156,40 @@ function updateCartItem(_this, productId) {
             }
         });
     }, 1000);
+}
+
+function updateCartIteminCheckOut(_this, productId) {
+    clearTimeout(changeTimeout);
+    changeTimeout = setTimeout(() => {
+        var $this = $(_this);
+        var quantity = $this.val();
+        $.ajax({
+            url: "/Cart/UpdateQuantity",
+            type: "POST",
+            data: { productId: productId, quantity: quantity },
+            success: function (response) {
+                reloadCart(function () {
+                    //toggleCart();
+                    updatetotalQuantity();
+                    //showNotiModal(response.message);
+                    if (response.status === 200) {
+                        $this.closest(".product").find('.quantity').val(quantity);
+
+                        // update total text
+                        var sumPrice = sumTotalInCheckOut();
+                        $('#sub-total-price').text(sumPrice);
+                        $('#total-price').text(sumPrice);
+
+                        let totalQuantity = $('.product .quantity').toArray().reduce((sum, el) => sum + (parseFloat($(el).val()) || 0), 0);
+                        $('#total-quantity').text(totalQuantity);
+                    }
+                });
+            },
+            error: function () {
+                console.error("Error adding product to cart.");
+            }
+        },200);
+    });
 }
 
 function clearAllCart() {

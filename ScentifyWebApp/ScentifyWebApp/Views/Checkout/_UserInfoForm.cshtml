@@ -1,0 +1,67 @@
+﻿@using ScentifyWebApp.Models.Requests;
+@model CheckoutRequest
+
+<form asp-controller="Checkout" asp-action="save-invoice" method="post" class="checkout-form" id="checkout-form">
+    <input type="hidden" id="orderId" name="orderId" value="@ViewBag.OrderId" />
+    <input type="hidden" id="amount" name="amount" value="@ViewBag.Amount" />
+
+    <!-- Row 1: Title, First Name, Last Name -->
+    <div class="form-row">
+        <div class="floating-group">
+            @* <input asp-for="Title" placeholder="" value="Dr" data-required > *@
+            <!-- Hidden input to store selected value -->
+            <input type="hidden" asp-for="Title" id="selectedTitle">
+            <select id="customSelect" asp-for="Title" class="form-control">
+                <option value="Dr" selected>Dr</option>
+                <option value="Mr">Mr</option>
+                <option value="Ms">Ms</option>
+                <option value="Mrs">Mrs</option>
+            </select>
+            <label asp-for="Title">1. Title</label>
+            <span class="text-danger" asp-validation-for="Title"></span>
+        </div>
+
+        <div class="floating-group">
+            <input asp-for="FirstName" placeholder="" data-required>
+            <label asp-for="FirstName">2. First name</label>
+            <span class="text-danger" asp-validation-for="FirstName"></span>
+        </div>
+
+        <div class="floating-group">
+            <input asp-for="LastName" placeholder="" data-required>
+            <label asp-for="LastName">3. Last name</label>
+            <span class="text-danger" asp-validation-for="LastName"></span>
+        </div>
+    </div>
+
+    <!-- Row 2: Country, Address -->
+    <div class="form-row">
+        @* <div class="floating-group">
+            <input asp-for="Country" placeholder="" value="France" data-required>
+            <label asp-for="Country">4. Country / Region</label>
+            <span class="text-danger" asp-validation-for="Country"></span>
+        </div> *@
+
+        <div class="floating-group">
+            <input asp-for="Address" placeholder="" data-required>
+            <label asp-for="Address">5. Address</label>
+            <span class="text-danger" asp-validation-for="Address"></span>
+        </div>
+    </div>
+
+    <button class="continue-btn" type="submit">Confirm completed invoice</button>
+</form>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var selectElement = document.querySelector("#customSelect");
+
+        if (selectElement) {
+            $(selectElement).select2(); // Requires jQuery for now
+        }
+    });
+</script>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+}

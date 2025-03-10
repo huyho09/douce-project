@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ScentifyWebApp.Constant;
 using ScentifyWebApp.Models;
 using ScentifyWebApp.Models.Entities;
+using ScentifyWebApp.Models.ViewModels;
 using ScentifyWebApp.Services;
 using System.Text.Json;
 
@@ -28,7 +29,7 @@ namespace ScentifyWebApp.Controllers
             var cartItems = _cartService.GetCart();
             if (cartItems != null && cartItems.Count > 0)
             {
-                return View(cartItems);
+                return View(new CheckoutViewModel(cartItems));
             }
             return Redirect("home");
         }
@@ -55,6 +56,11 @@ namespace ScentifyWebApp.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View("~/Views/Cart/Index.cshtml", customerInfo);
+                }
+
                 var cart = _cartService.GetCart();
                 if (cart != null && cart.Count > 0)
                 {
