@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ScentifyWebApp.Models.Dtos;
 using ScentifyWebApp.Models.Entities;
+using ScentifyWebApp.Models.Requests;
 
 namespace ScentifyWebApp.Models.Mappings
 {
@@ -13,6 +14,9 @@ namespace ScentifyWebApp.Models.Mappings
 
 			CreateMap<Invoice, DtoInvoice>().ReverseMap()
 							.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.ToString()));
-		}
+
+            CreateMap<CheckoutRequest, CustomerInfo>();
+
+        }
     }
 }

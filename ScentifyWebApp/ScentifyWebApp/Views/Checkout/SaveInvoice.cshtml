@@ -1,10 +1,10 @@
-﻿@using ScentifyWebApp.Models.ViewModels;
+﻿@using ScentifyWebApp.Models.Requests;
 
 @{
     ViewData["Title"] = "Checkout page";
 }
 
-@model CheckoutViewModel
+@model CheckoutRequest
 
 
 <section class="checkout-container">
@@ -13,7 +13,7 @@
             <a href="/home">Home</a> &gt; <span class="active">Checkout</span>
         </nav>
         <h2>Where would you like your order sent?</h2>
-        @await Html.PartialAsync("_UserInfoForm", Model.CustomerInfo)
+        @await Html.PartialAsync("_UserInfoForm", Model)
     </div>
 
     <div class="order-summary">

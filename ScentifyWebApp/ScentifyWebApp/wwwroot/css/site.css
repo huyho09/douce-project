@@ -1215,7 +1215,7 @@ input {
 .checkout-container .floating-group label {
   position: absolute;
   left: 20px;
-  top: 55%;
+  top: 45%;
   transform: translateY(-50%);
   font-size: 16px;
   color: #777;

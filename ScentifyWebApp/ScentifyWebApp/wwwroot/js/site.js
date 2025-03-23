@@ -310,3 +310,13 @@ $(() => {
     });
 });
 
+function changeSelectTitle(_this) {
+    $("#selectedTitle").val($(_this).val());
+}
+
+$(document).ready(function () {
+    var errors = $('input').closest('.floating-group:has(.field-validation-error:not(:empty))');
+    if (errors?.length > 0) {
+        errors.first().find('input').focus();
+    }
+});
