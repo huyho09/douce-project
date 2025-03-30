@@ -45,11 +45,6 @@ namespace ScentifyAdmin.Controllers
 							var Ingredients = JsonConvert.DeserializeObject<List<Ingredient>>(item.Ingredients);
 							item.DtoIngredients = Ingredients;
 						}
-						if (!string.IsNullOrEmpty(item.Perfumed_Notes) && IsValidJson(item.Perfumed_Notes))
-						{
-							var PerfumedNotes = JsonConvert.DeserializeObject<PerfumedNote>(item.Perfumed_Notes);
-							item.Perfumed_Notes_DTO = PerfumedNotes != null ? PerfumedNotes : new PerfumedNote();
-						}
 					}
 				}
 			}
@@ -69,6 +64,7 @@ namespace ScentifyAdmin.Controllers
 			if (requestDTO != null)
 			{
 				var request = _mapper.Map<Perfume>(requestDTO);
+				request.PriceInfo = "";
 				_context.Perfume.Add(request);
 				await _context.SaveChangesAsync();
 				return RedirectToAction("index");

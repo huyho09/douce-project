@@ -4,28 +4,28 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ScentifyAdmin.Models.Dtos
 {
-    public class DtoPerfume
-    {
-        public string Id { get; set; }
+	public class DtoPerfume
+	{
+		public string Id { get; set; }
 
-        public string Name { get; set; } = string.Empty;
+		public string Name { get; set; } = string.Empty;
 
-        public string Brand { get; set; } = string.Empty;
+		public string Brand { get; set; } = string.Empty;
 
 		public string Manufacturer { get; set; } = string.Empty; // Nhà sản xuất (có thể khác thương hiệu)
 
-        public string ShortDescription { get; set; } = string.Empty;
+		public string ShortDescription { get; set; } = string.Empty;
 
-        public string Description { get; set; } = string.Empty;
+		public string Description { get; set; } = string.Empty;
+		public string TopPerfumed { get; set; } = string.Empty;
+		public string MiddlePerfumed { get; set; } = string.Empty;
+		public string BasePerfumed { get; set; } = string.Empty;
 
-        public string Perfumed_Notes { get; set; } = string.Empty;
 		public PerfumedNote Perfumed_Notes_DTO { get; set; }
 
-		public string Flacon { get; set; } = string.Empty;
+		public string Composition { get; set; } = string.Empty;
 
-        public string Composition { get; set; } = string.Empty;
-
-        public string Gender { get; set; } = string.Empty; // "Male", "Female", "Unisex"
+		public string Gender { get; set; } = string.Empty; // "Male", "Female", "Unisex"
 		public IList<SelectListItem> GenderList { get; set; } = new List<SelectListItem> {
 				 new SelectListItem{Value = "Male", Text = "Male"},
 				 new SelectListItem{Value = "Female", Text = "Female"},
@@ -34,43 +34,37 @@ namespace ScentifyAdmin.Models.Dtos
 
 		public string FragranceFamily { get; set; } = string.Empty; // Nhóm hương chính (VD: Floral, Woody)
 
-        public int VolumeMl { get; set; }// Dung tích chai (VD: 30ml, 50ml, 100ml)
+		public int VolumeMl { get; set; }// Dung tích chai (VD: 30ml, 50ml, 100ml)
 
 		public string Ingredients { get; set; } = string.Empty;
 		public List<Ingredient>? DtoIngredients { get; set; } // Nguyên liệu
 
-        public decimal Price { get; set; } = 0; // Giá bán (VNĐ hoặc USD)
+		public decimal Price { get; set; } = 0; // Giá bán (VNĐ hoặc USD)
 
-        public string UnitPrice { get; set; } = string.Empty; // e.g., "€275.00 per 100 ml"
+		public string UnitPrice { get; set; } = string.Empty; // e.g., "€275.00 per 100 ml"
 
-        public string Currency { get; set; } = string.Empty; // e.g., "€"
+		public string Currency { get; set; } = string.Empty; // e.g., "€"
 
-        public int StockQuantity { get; set; } = 0; // Số lượng tồn kho
+		public int StockQuantity { get; set; } = 0; // Số lượng tồn kho
+		public string PriceInfo { get; set; } = "";
 
-        public string Status { get; set; } = string.Empty; // Trạng thái: "Available", "Out of Stock", "Discontinued"
-		public IList<SelectListItem> StatusList { get; set; } = new List<SelectListItem> {
-				 new SelectListItem{Value = "Available", Text = "Available"},
-				 new SelectListItem{Value = "Out of Stock", Text = "Out of Stock"},
-				 new SelectListItem{Value = "Discontinued", Text = "Discontinued"},
+		public string Status { get; set; }
+		public IList<SelectListItem> StatusList { get; set; } = new List<SelectListItem>
+		{
+			new SelectListItem { Value = "Available", Text = "Available" },
+			new SelectListItem { Value = "Out of Stock", Text = "Out of Stock" },
+			new SelectListItem { Value = "Discontinued", Text = "Discontinued" }
 		};
 
-		public decimal AverageRating { get; set; } = 0; // Điểm đánh giá trung bình (từ 0 đến 5 sao)
 
-        public int ReviewCount { get; set; } = 0; // Số lượng đánh giá
+		public string ImageUrl { get; set; } = "/"; // URL hình ảnh sản phẩm
 
-        public string ImageUrl { get; set; } = "/"; // URL hình ảnh sản phẩm
-
-        public List<DtoPerfume> SimilarPerfumes { get; set; }
-
-        //public DateTime CreatedAt { get; set; } = DateTime.UtcNow; // Thời gian tạo bản ghi
-
-        //public DateTime UpdatedAt { get; set; } = DateTime.UtcNow; // Thời gian cập nhật gần nhất
-    }
-    public class PerfumedNote
-    {
-        public List<string> Top { get; set; }
-        public List<string> Middle { get; set; }
-        public List<string> Base { get; set; }
-    }
+	}
+	public class PerfumedNote
+	{
+		public List<string> Top { get; set; }
+		public List<string> Middle { get; set; }
+		public List<string> Base { get; set; }
+	}
 
 }

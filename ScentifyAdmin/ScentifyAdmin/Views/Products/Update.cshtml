@@ -35,18 +35,22 @@
 							<!-- Description -->
 							<div class="form-outline mb-4 col-lg-12">
 								<label class="form-label" for="Description">Description:</label>
-								<textarea asp-for="Description" class="form-control" required>@Model.Description</textarea>
+								<textarea asp-for="Description" class="form-control" required id="summernote">@Model.Description</textarea>
 							</div>
-							<!-- Perfumed Notes -->
+							<!-- Top Notes -->
 							<div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="Perfumed_Notes">Perfumed Notes:</label>
-								<input asp-for="Perfumed_Notes" class="form-control" autocomplete="off" value="@Model.Perfumed_Notes" />
-
+								<label class="form-label" for="TopPerfumed">Top Notes:</label>
+								<input asp-for="TopPerfumed" class="form-control" autocomplete="off" value="@Model.TopPerfumed" />
 							</div>
-							<!-- Flacon -->
+							<!-- Hear Notes -->
 							<div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="Flacon">Flacon:</label>
-								<input asp-for="Flacon" class="form-control" autocomplete="off" value="@Model.Flacon" />
+								<label class="form-label" for="MiddlePerfumed">Hear Notes:</label>
+								<input asp-for="MiddlePerfumed" class="form-control" autocomplete="off" value="@Model.MiddlePerfumed" />
+							</div>
+							<!-- Base Notes -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="BasePerfumed">Base Notes:</label>
+								<input asp-for="BasePerfumed" class="form-control" autocomplete="off" value="@Model.BasePerfumed" />
 							</div>
 							<!-- Composition -->
 							<div class="form-outline mb-4 col-lg-6">
@@ -89,18 +93,6 @@
 								<input asp-for="StockQuantity" type="number" class="form-control" min="0" value="@Model.StockQuantity" />
 							</div>
 
-							<!-- Average Rating -->
-							<div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="AverageRating">Average Rating:</label>
-								<input asp-for="AverageRating" type="number" class="form-control" step="0.01" />
-							</div>
-
-							<!-- Review Count -->
-							<div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="ReviewCount">Review Count:</label>
-								<input asp-for="ReviewCount" type="number" class="form-control" min="0" />
-							</div>
-
 							<!-- Status -->
 							<div class="form-outline mb-4 col-lg-6">
 								<label class="form-label" for="Status">Status:</label>
@@ -131,40 +123,60 @@
 </div>
 <script src="~/vendor/jquery/jquery.min.js"></script>
 <script>
-	document.getElementById('ImageUrl').addEventListener('change', function (event) {
-		let file = event.target.files[0];
-		if (file) {
-			let reader = new FileReader();
-			reader.onload = function (e) {
-				let preview = document.getElementById('previewImage');
-				if (!preview) {
-					preview = document.createElement('img');
-					preview.id = 'previewImage';
-					preview.className = 'img-thumbnail mt-2';
-					preview.style.maxWidth = '150px';
-					document.getElementById('ImageUrl').insertAdjacentElement('afterend', preview);
+	$(document).ready(function () {
+		document.getElementById('ImageUrl').addEventListener('change', function (event) {
+			let file = event.target.files[0];
+			if (file) {
+				let reader = new FileReader();
+				reader.onload = function (e) {
+					let preview = document.getElementById('previewImage');
+					if (!preview) {
+						preview = document.createElement('img');
+						preview.id = 'previewImage';
+						preview.className = 'img-thumbnail mt-2';
+						preview.style.maxWidth = '150px';
+						document.getElementById('ImageUrl').insertAdjacentElement('afterend', preview);
+					}
+					preview.src = e.target.result;
+				};
+				reader.readAsDataURL(file);
+				const dataTransfer = new DataTransfer();
+				dataTransfer.items.add(file);
+				document.getElementById('input_field').files = dataTransfer.files;
+			}
+		});
+		const filePath = $("#ImageUrl").attr("value");
+		const fileName = filePath.substring(filePath.lastIndexOf('/') + 1);
+
+		const fileInput = document.querySelector('input[type="file"]');
+
+		// Create a new File object
+		const myFile = new File([fileName], fileName, {
+			type: 'text/plain',
+			lastModified: new Date(),
+		});
+
+		// Now let's create a DataTransfer to get a FileList
+		const dataTransfer = new DataTransfer();
+		dataTransfer.items.add(myFile);
+		fileInput.files = dataTransfer.files;
+		$('#summernote').summernote({
+			callbacks: {
+				onImageLinkInsert: function (url) {
+					// url is the image url from the dialog
+					$img = $('<img>').attr({ src: url })
+					$summernote.summernote('insertNode', $img[0]);
 				}
-				preview.src = e.target.result;
-			};
-			reader.readAsDataURL(file);
-			const dataTransfer = new DataTransfer();
-			dataTransfer.items.add(file);
-			document.getElementById('input_field').files = dataTransfer.files;
-		}
+			},
+			height: 300,
+		});
+
+		// summernote.image.link.insert
+		$('#summernote').on('summernote.image.link.insert', function (we, url) {
+			// url is the image url from the dialog
+			$img = $('<img>').attr({ src: url })
+			$summernote.summernote('insertNode', $img[0]);
+		});
+	
 	});
-	const filePath = $("#ImageUrl").attr("value");
-	const fileName = filePath.substring(filePath.lastIndexOf('/') + 1);
-
-	const fileInput = document.querySelector('input[type="file"]');
-
-	// Create a new File object
-	const myFile = new File([fileName], fileName, {
-		type: 'text/plain',
-		lastModified: new Date(),
-	});
-
-	// Now let's create a DataTransfer to get a FileList
-	const dataTransfer = new DataTransfer();
-	dataTransfer.items.add(myFile);
-	fileInput.files = dataTransfer.files;
 </script>

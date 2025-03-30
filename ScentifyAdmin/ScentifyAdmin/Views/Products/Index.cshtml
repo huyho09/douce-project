@@ -7,6 +7,7 @@
 	.table th,
 	.table td {
 		min-width: 120px;
+		word-wrap: break-word;
 	}
 
 		.table th:last-child,
@@ -42,8 +43,9 @@
 							<th>Manufacturer</th>
 							<th>ShortDescription</th>
 							<th>Description</th>
-							<th>Perfumed Notes</th>
-							<th>Flacon</th>
+							<th>Top Notes</th>
+							<th>Hear Notes</th>
+							<th>Base Notes</th>
 							<th>Composition</th>
 							<th>Gender(use for Male/Female)</th>
 							<th>Fragrance Family</th>
@@ -54,8 +56,6 @@
 							<th>Currency</th>
 							<th>Stock Quantity</th>
 							<th>Status</th>
-							<th>Average Rating</th>
-							<th>Review Count</th>
 							<th>Image Url</th>
 							@*<th>Similar Perfumes</th>*@
 							<th>Action</th>
@@ -71,20 +71,10 @@
 									<td>@product.Brand</td>
 									<td>@product.Manufacturer</td>
 									<td>@product.ShortDescription</td>
-									<td>@product.Description</td>
-									<td>
-										@if (product.Perfumed_Notes_DTO != null)
-										{
-											<div>- Top: @string.Join(", ", product.Perfumed_Notes_DTO.Top)</div>
-											<div>- Middle: @string.Join(", ", product.Perfumed_Notes_DTO.Middle)</div>
-											<div>- Base: @string.Join(", ", product.Perfumed_Notes_DTO.Base)</div>
-										}
-										else if (!string.IsNullOrEmpty(product.Perfumed_Notes))
-										{
-											<div>@Html.Raw(product.Perfumed_Notes)</div>
-										}
-									</td>
-									<td>@product.Flacon</td>
+									<td>@(product.Description.Length > 100 ? product.Description.Substring(0, 100) + "..." : product.Description)</td>
+									<td>@product.TopPerfumed</td>
+									<td>@product.MiddlePerfumed</td>
+									<td>@product.BasePerfumed</td>
 									<td>@product.Composition</td>
 									<td>@product.Gender</td>
 									<td>@product.FragranceFamily</td>
@@ -100,8 +90,6 @@
 									<td>@product.Currency</td>
 									<td>@product.StockQuantity</td>
 									<td>@product.Status</td>
-									<td>@product.AverageRating</td>
-									<td>@product.ReviewCount</td>
 									<td>@product.ImageUrl</td>
 									@*	<td>
 											@if (product.SimilarPerfumes != null && product.SimilarPerfumes.Any())

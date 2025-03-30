@@ -34,18 +34,22 @@
 							<!-- Description -->
 							<div class="form-outline mb-4 col-lg-12">
 								<label class="form-label" for="Description">Description:</label>
-								<textarea asp-for="Description" class="form-control" required></textarea>
+								<textarea asp-for="Description" class="form-control" required id="summernote"></textarea>
 							</div>
-							<!-- Perfumed Notes -->
+							<!-- Top Notes -->
 							<div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="Perfumed_Notes">Perfumed Notes:</label>
-								<input asp-for="Perfumed_Notes" class="form-control" autocomplete="off" />
-
+								<label class="form-label" for="TopPerfumed">Top Notes:</label>
+								<input asp-for="TopPerfumed" class="form-control" autocomplete="off" />
 							</div>
-							<!-- Flacon -->
+							<!-- Hear Notes -->
 							<div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="Flacon">Flacon:</label>
-								<input asp-for="Flacon" class="form-control" autocomplete="off" />
+								<label class="form-label" for="MiddlePerfumed">Hear Notes:</label>
+								<input asp-for="MiddlePerfumed" class="form-control" autocomplete="off" />
+							</div>
+							<!-- Base Notes -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="BasePerfumed">Base Notes:</label>
+								<input asp-for="BasePerfumed" class="form-control" autocomplete="off" />
 							</div>
 							<!-- Composition -->
 							<div class="form-outline mb-4 col-lg-6">
@@ -92,25 +96,13 @@
 								<input asp-for="StockQuantity" type="number" class="form-control" min="0" />
 							</div>
 
-							<!-- Average Rating -->
-							<div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="AverageRating">Average Rating:</label>
-								<input asp-for="AverageRating" type="number" class="form-control" step="0.01" />
-							</div>
-
-							<!-- Review Count -->
-							<div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="ReviewCount">Review Count:</label>
-								<input asp-for="ReviewCount" type="number" class="form-control" min="0" />
-							</div>
-
 							<!-- Status -->
 							<div class="form-outline mb-4 col-lg-6">
 								<label class="form-label" for="Status">Status:</label>
 								<select asp-for="Status" class="form-control">
-									<option value="Available">Available</option>
-									<option value="Out of Stock">Out of Stock</option>
-									<option value="Discontinued">Discontinued</option>
+									<option value=1>Available</option>
+									<option value=2>Out of Stock</option>
+									<option value=3>Discontinued</option>
 								</select>
 							</div>
 
@@ -155,4 +147,26 @@
 	});
 
 	
+</script>
+<script>
+	$(document).ready(function () {
+		$('#summernote').summernote({
+			callbacks: {
+				onImageLinkInsert: function (url) {
+					// url is the image url from the dialog
+					$img = $('<img>').attr({ src: url })
+					$summernote.summernote('insertNode', $img[0]);
+				}
+			},
+			height: 300,
+		});
+
+		// summernote.image.link.insert
+		$('#summernote').on('summernote.image.link.insert', function (we, url) {
+			// url is the image url from the dialog
+			$img = $('<img>').attr({ src: url })
+			$summernote.summernote('insertNode', $img[0]);
+		});
+
+	});
 </script>
