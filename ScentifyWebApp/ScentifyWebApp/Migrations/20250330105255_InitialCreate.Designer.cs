@@ -12,7 +12,7 @@ using ScentifyWebApp.DAL.DB;
 namespace ScentifyWebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250330093038_InitialCreate")]
+    [Migration("20250330105255_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -78,8 +78,9 @@ namespace ScentifyWebApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");

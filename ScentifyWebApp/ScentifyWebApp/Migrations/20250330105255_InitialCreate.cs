@@ -28,7 +28,7 @@ namespace ScentifyWebApp.Migrations
                     MiddlePerfumed = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BasePerfumed = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PriceInfo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
