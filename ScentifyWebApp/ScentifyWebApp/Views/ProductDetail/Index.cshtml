@@ -1,0 +1,136 @@
+﻿@model ScentifyWebApp.Models.Dtos.DtoPerfume
+@{
+    ViewData["Title"] = $"{Model.Name} Details";
+}
+
+@if (Model != null)
+{
+    <!-- Main Content -->
+    <div class="container main d-flex">
+        <!-- Text Section -->
+        <div class="text-content">
+            <h1>@Model.Name</h1>
+            <p class="text-content-detail"><span style="padding-left: 40px;">@Model.ShortDescription</span></p>
+
+        </div>
+        <div class="product-display d-flex flex-column">
+            <img loading="lazy" alt="@Model.Name" src="@Url.Content(Model.ImageUrl.Replace("./","~/"))">
+            <div>
+                <button class="add-to-cart add-to-cart-btn" aria-label="Add to your cart - €@Model.Price" data-id="@Model.Id">Add to cart +</button>
+            </div>
+        </div>
+        <!-- Product Image & Info -->
+        <div class="product-display">
+
+            <div class="product-info">
+                <h3>$@Model?.Price</h3>
+                <div class="stars">
+                    ★★★★☆
+                </div>
+                <div class="details">@Model?.VolumeMl ml</div>
+                <div class="controls">
+                    @*<i class="fas fa-chevron-left"></i>
+					<i class="fas fa-chevron-right"></i>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Sections -->
+    <div class="info-sections">
+        <div class="section">
+            <div class="number">01</div>
+            <div class="title">DESCRIPTION</div>
+            <span class="text-content">@Model.Description</span>
+        </div>
+        <div class="section">
+            <div class="number">02</div>
+            <div class="title">PERFUMED NOTES</div>
+            <span class="text-content">@Html.Raw(Model.Perfumed_Notes)</span>
+        </div>
+        <div class="section">
+            <div class="number">03</div>
+            <div class="title">FLACON</div>
+            <span class="text-content">@Model.Flacon</span>
+        </div>
+        <div class="section">
+            <div class="number">04</div>
+            <div class="title">COMPOSITION</div>
+            <span class="text-content">@Model.Composition</span>
+        </div>
+    </div>
+
+    <!-- Second Section -->
+    <section class="second-section">
+        <div class="section-content container">
+            <h2 class="section-title">A Symphony of Nature’s Finest</h2>
+            <p class="section-subtitle">
+                A luxurious fusion of delicate florals and warm vanilla, crafted to evoke passion and timeless elegance.
+            </p>
+
+            @{
+                var ingredients = Model.DtoIngredients;
+                if (ingredients != null && ingredients.Count > 0)
+                {
+                    <!-- Ingredients Cards -->
+                    <div class="cards">
+                        @foreach (var ingredient in ingredients)
+                        {
+                            <div class="card">
+                                <img src="@ingredient.ImageUrl" alt="Bergamot">
+                                <h3>@ingredient.Name</h3>
+                                <p>@ingredient.Description</p>
+                            </div>
+                        }
+                    </div>
+                }
+            }
+
+            <!-- Navigation Controls -->
+            <!--<div class="nav-controls">
+            <button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+            <button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>-->
+        </div>
+    </section>
+
+    <!-- Third Section -->
+    <section class="third-section container">
+        <div class="section-content">
+            <!-- Heading -->
+            <div class="section-heading">
+                <p class="section-label">SIMILAR PRODUCTS</p>
+                <h2 class="section-title">The fragrance larger than life.</h2>
+            </div>
+            @{
+                var similarItems = Model.SimilarPerfumes;
+                if (similarItems != null && similarItems.Count > 0)
+                {
+                    var index = 1;
+                    <!-- Product Cards -->
+                    <div class="product-cards d-flex justify-content-center">
+                        @foreach (var similarItem in similarItems)
+                        {
+                            <a href="/products/details/@similarItem.Id" class="product-card">
+                                <img src="@similarItem.ImageUrl" alt="@similarItem.Name">
+                                <div class="card-content">
+                                    <h3>0@(index)</h3>
+                                    <h4>@similarItem.Name</h4>
+                                    <p>@similarItem.ShortDescription</p>
+                                    @*<a href="/products/details/@similarItem.Id" class="learn-more">LEARN MORE</a>*@
+                                </div>
+                            </a>
+                            index++;
+                        }
+                    </div>
+                }
+            }
+
+            <!-- Navigation Controls -->
+            <!--<div class="nav-controls">
+                <button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>-->
+        </div>
+    </section>
+}

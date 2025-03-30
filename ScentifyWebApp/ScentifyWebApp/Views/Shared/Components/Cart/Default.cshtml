@@ -1,0 +1,118 @@
+﻿@model List<CartItem>
+
+<!-- Modal Backdrop -->
+<div class="modal-backdrop" onclick="toggleCart()"></div>
+@{
+    double totalPrice = 0;
+}
+<!-- Cart Popup -->
+<div class="cart-container">
+    <div class="cart-header">
+        <p>Cart</p>
+        <button class="close-btn" onclick="toggleCart()">✕</button>
+    </div>
+    @if (Model.Count > 0)
+    {
+        foreach (var cartItem in Model)
+        {
+            var product = cartItem.Product;
+
+            <div class="cart-item">
+                <p class="product-name">@product.Name</p>
+                <p class="product-size">@product.VolumeMl</p>
+                @* <div class="product-quantity custom-dropdown">
+                    <select>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                        <option>13</option>
+                        <option>14</option>
+                        <option>15</option>
+                        <option>16</option>
+                        <option>17</option>
+                        <option>18</option>
+                        <option>19</option>
+                        <option>20</option>
+                    </select>
+                </div> *@
+                <div class="custom-dropdown">
+                    <button class="dropdown-toggle">
+                        <span class="selected-option">Select</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li data-value="1">1</li>
+                        <li data-value="2">2</li>
+                        <li data-value="3">3</li>
+                        <li data-value="4">4</li>
+                        <li data-value="5">5</li>
+                        <li data-value="6">6</li>
+                        <li data-value="7">7</li>
+                        <li data-value="8">8</li>
+                        <li data-value="9">9</li>
+                        <li data-value="10">10</li>
+                    </ul>
+                </div>
+
+                @* <p class="product-price">@product.Price.Currency @product.Price.Amount</p> *@
+                <button class="remove-btn">✕</button>
+            </div>
+
+            @* totalPrice += (double)product.Price.Amount; *@
+        }
+    }
+    else
+    {
+        <span class="fst-italic text-light text-decoration-underline">
+            You have no items in your cart
+        </span>
+    }
+
+    <div class="cart-infor float-end col-md-4 col-sm-12">
+        <div class="cart-info">
+            <div class="promo-code">
+                <p>Apply a promotional code</p>
+                <button type="button" class="expand-btn">+</button>
+            </div>
+
+            <p class="shipping-info">Enjoy complimentary standard shipping on all orders over 90 €.</p>
+
+            <div class="cart-total">
+                <p>Subtotal (Tax Incl.)</p>
+                <p class="total-price">€@totalPrice</p>
+            </div>
+
+            <a href="/Checkout/SaveInvoice" class="checkout-btn" onclick="">Checkout</a>
+
+            <div class="payment-methods">
+                <svg class="icon"><use xlink:href="#visa"></use></svg>
+                <svg class="icon"><use xlink:href="#mastercard"></use></svg>
+                <svg class="icon"><use xlink:href="#apple-pay"></use></svg>
+                <svg class="icon"><use xlink:href="#klarna"></use></svg>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Popup Overlay (Backdrop) -->
+<div class="popup-overlay" id="popupOverlay"></div>
+
+<!-- Popup Container -->
+<div class="popup-container" id="promoPopup">
+    <div class="popup-content">
+        <button class="close-btn" id="closePopup">&times;</button>
+        <h2>Apply a promotional code</h2>
+        <label for="promoCode">Promotional code</label>
+        <input type="text" id="promoCode" placeholder="Enter your code" />
+        <button class="apply-btn">Apply</button>
+    </div>
+</div>
+

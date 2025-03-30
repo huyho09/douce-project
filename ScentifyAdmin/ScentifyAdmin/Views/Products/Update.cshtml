@@ -1,0 +1,170 @@
+﻿@model ScentifyAdmin.Models.Dtos.DtoPerfume
+<div class="row justify-content-center">
+	<div class="col-xl-8 col-lg-12 col-md-7">
+		<div class="card o-hidden border-0 shadow-lg my-lg-5">
+			<div class="card-body p-0 card-login">
+				<div class="text-center">
+					<h1 class="h3 text-gray-900 mb-4 mt-5 font-weight-bold">CREATE CATEGORY ITEM</h1>
+				</div>
+				<div class="h-full overflow-hidden m-5">
+					<form asp-action="Update" class="needs-validation" method="post">
+						<div class="row">
+							<input type="text" asp-for="Id" id="productId" value="@Model.Id" hidden />
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Name">Name:</label>
+								<input asp-for="Name" required class="form-control" autocomplete="off" value="@Model.Name" />
+							</div>
+							<!-- Brand -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Brand">Brand:</label>
+								<input asp-for="Brand" class="form-control" autocomplete="off" value="@Model.Brand" />
+							</div>
+
+							<!-- Manufacturer -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Manufacturer">Manufacturer:</label>
+								<input asp-for="Manufacturer" class="form-control" autocomplete="off" value="@Model.Manufacturer" />
+							</div>
+
+							<!-- Short Description -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="ShortDescription">Short Description:</label>
+								<textarea asp-for="ShortDescription" class="form-control">@Model.ShortDescription</textarea>
+							</div>
+
+							<!-- Description -->
+							<div class="form-outline mb-4 col-lg-12">
+								<label class="form-label" for="Description">Description:</label>
+								<textarea asp-for="Description" class="form-control" required>@Model.Description</textarea>
+							</div>
+							<!-- Perfumed Notes -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Perfumed_Notes">Perfumed Notes:</label>
+								<input asp-for="Perfumed_Notes" class="form-control" autocomplete="off" value="@Model.Perfumed_Notes" />
+
+							</div>
+							<!-- Flacon -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Flacon">Flacon:</label>
+								<input asp-for="Flacon" class="form-control" autocomplete="off" value="@Model.Flacon" />
+							</div>
+							<!-- Composition -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Composition">Composition:</label>
+								<input asp-for="Composition" class="form-control" autocomplete="off" value="@Model.Composition" />
+							</div>
+							<!-- Gender -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Gender">Gender:</label>
+								@Html.DropDownListFor(m => m.Gender, Model.GenderList, new { @id = "Gender", @class = "form-control" })
+							</div>
+
+							<!-- Fragrance Family -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="FragranceFamily">Fragrance Family:</label>
+								<input asp-for="FragranceFamily" class="form-control" autocomplete="off" value="@Model.FragranceFamily" />
+							</div>
+
+							<!-- Volume (ml) -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="VolumeMl">Volume (ml):</label>
+								<input asp-for="VolumeMl" type="number" class="form-control" min="1" value="@Model.VolumeMl" />
+							</div>
+
+							<!-- Price -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Price">Price:</label>
+								<input asp-for="Price" type="number" class="form-control" step="0.01" value="@Model.Price" />
+							</div>
+
+							<!-- Currency -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Currency">Currency:</label>
+								<input asp-for="Currency" class="form-control" required value="@Model.Currency" />
+							</div>
+
+							<!-- Stock Quantity -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="StockQuantity">Stock Quantity:</label>
+								<input asp-for="StockQuantity" type="number" class="form-control" min="0" value="@Model.StockQuantity" />
+							</div>
+
+							<!-- Average Rating -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="AverageRating">Average Rating:</label>
+								<input asp-for="AverageRating" type="number" class="form-control" step="0.01" />
+							</div>
+
+							<!-- Review Count -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="ReviewCount">Review Count:</label>
+								<input asp-for="ReviewCount" type="number" class="form-control" min="0" />
+							</div>
+
+							<!-- Status -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Status">Status:</label>
+								@Html.DropDownListFor(m => m.Status, Model.StatusList, new { @id = "Status", @class = "form-control" })
+							</div>
+
+							<!-- Image Upload -->
+							<div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="ImageUrl">Product Image:</label>
+								<input type="file" name="ImageUrl" id="ImageUrl" class="form-control" accept="image/*" value="@Model.ImageUrl" />
+								@if (!string.IsNullOrEmpty(Model.ImageUrl))
+								{
+									<div class="mt-2">
+										<img id="previewImage" src="@Model.ImageUrl" alt="Current Image" class="img-thumbnail" style="max-width: 150px;">
+									</div>
+								}
+							</div>
+						</div>
+						<div class="mt-5 text-end">
+							<button type="submit" class="btn btn-primary">Update</button>
+							<a asp-action="Index" class="btn btn-secondary">Cancel</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script>
+	document.getElementById('ImageUrl').addEventListener('change', function (event) {
+		let file = event.target.files[0];
+		if (file) {
+			let reader = new FileReader();
+			reader.onload = function (e) {
+				let preview = document.getElementById('previewImage');
+				if (!preview) {
+					preview = document.createElement('img');
+					preview.id = 'previewImage';
+					preview.className = 'img-thumbnail mt-2';
+					preview.style.maxWidth = '150px';
+					document.getElementById('ImageUrl').insertAdjacentElement('afterend', preview);
+				}
+				preview.src = e.target.result;
+			};
+			reader.readAsDataURL(file);
+			const dataTransfer = new DataTransfer();
+			dataTransfer.items.add(file);
+			document.getElementById('input_field').files = dataTransfer.files;
+		}
+	});
+	const filePath = $("#ImageUrl").attr("value");
+	const fileName = filePath.substring(filePath.lastIndexOf('/') + 1);
+
+	const fileInput = document.querySelector('input[type="file"]');
+
+	// Create a new File object
+	const myFile = new File([fileName], fileName, {
+		type: 'text/plain',
+		lastModified: new Date(),
+	});
+
+	// Now let's create a DataTransfer to get a FileList
+	const dataTransfer = new DataTransfer();
+	dataTransfer.items.add(myFile);
+	fileInput.files = dataTransfer.files;
+</script>

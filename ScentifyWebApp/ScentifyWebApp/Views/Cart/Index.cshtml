@@ -1,0 +1,93 @@
+﻿@model List<CartItem>
+
+<!-- Modal Backdrop -->
+<div class="modal-backdrop" onclick="toggleCart()"></div>
+@{
+    double totalPrice = 0;
+    var validCard = false;
+}
+<!-- Cart Popup -->
+<div class="cart-container">
+    <div class="cart-header">
+        <p>Cart</p>
+
+        @if (Model != null && Model.Count > 0)
+        {
+            <a id="clear-all-cart" class="h6 link-light" href="javascript:void(0);" onclick="clearAllCart();">Clear all</a>
+        }
+
+        <button class="close-btn" onclick="toggleCart()">✖</button>
+    </div>
+    @if (Model != null && Model.Count > 0)
+    {
+        validCard = true;
+        foreach (var cartItem in Model)
+        {
+            var product = cartItem.Product;
+
+            <div class="cart-item">
+                <p class="product-name">@product.Name</p>
+                <p class="product-size">@product.VolumeMl mL</p>
+                <input type="number" min="1" value="@cartItem.Quantity" class="cart-quantity form-control w-75" onchange="updateCartItem(this,'@product.Id')" />
+
+                <p class="product-price">@product.Currency @product.Price</p>
+                <button class="remove-cart-btn" type="button" onclick="removeCartItem('@product.Id');">✕</button>
+            </div>
+
+            totalPrice += (double)(product.Price * cartItem.Quantity);
+        }
+
+        <div class="cart-infor float-end col-md-4 col-sm-12">
+            <div class="cart-info">
+                @* <div class="promo-code">
+                <p>Apply a promotional code</p>
+                <button type="button" class="expand-btn">+</button>
+            </div>
+
+            <p class="shipping-info">Enjoy complimentary standard shipping on all orders over 90 €.</p> *@
+
+                <div class="cart-total">
+                    <p>Subtotal (Tax Incl.)</p>
+                    <p class="total-price">€@totalPrice</p>
+                </div>
+
+                @if (!validCard)
+                {
+                    <a href="javascript:void(0);" class="checkout-btn" @Html.Raw(!validCard ? "disabled" : "")>Checkout</a>
+                }
+                else
+                {
+                    <a href="/Checkout" class="checkout-btn" @Html.Raw(!validCard ? "disabled" : "")>Checkout</a>
+                }
+
+                <div class="payment-methods">
+                    <svg class="icon"><use xlink:href="#visa"></use></svg>
+                    <svg class="icon"><use xlink:href="#mastercard"></use></svg>
+                    <svg class="icon"><use xlink:href="#apple-pay"></use></svg>
+                    <svg class="icon"><use xlink:href="#klarna"></use></svg>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <span class="fst-italic text-light text-decoration-underline">
+            You have no items in your cart
+        </span>
+    }
+</div>
+
+<!-- Popup Overlay (Backdrop) -->
+<div class="popup-overlay" id="popupOverlay"></div>
+
+<!-- Popup Container -->
+<div class="popup-container" id="promoPopup">
+    <div class="popup-content">
+        <button class="close-btn" id="closePopup">&times;</button>
+        <h2>Apply a promotional code</h2>
+        <label for="promoCode">Promotional code</label>
+        <input type="text" id="promoCode" placeholder="Enter your code" />
+        <button class="apply-btn">Apply</button>
+    </div>
+</div>
+

@@ -1,0 +1,54 @@
+﻿@model List<ScentifyWebApp.Models.CartItem>
+
+@{
+    var orderId = Guid.NewGuid().ToString();
+    var amount = Model.Sum(m => m.Quantity * m.Product.Price).ToString("N2");
+}
+
+<div class="price-details">
+    <div class="summary-item"><span>Total quantity</span><span id="total-quantity">@Model?.Sum(m=>m.Quantity)</span></div>
+    <div class="summary-item"><span>Subtotal</span><span id="sub-total-price">€@amount</span></div>
+    <div class="summary-item"><span>Shipping fee</span><span>€0.00</span></div>
+    <div class="summary-item"><span>Included taxes</span><span>€0.00</span></div>
+    <div class="summary-total"><span>Total</span><span id="total-price">@amount</span></div>
+</div>
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var cartItem in Model)
+    {
+        var perfume = cartItem.Product;
+        <div class="product">
+            <img src="@perfume.ImageUrl" alt="@perfume.Name">
+            <div class="product-details">
+                <p class="product-name">@perfume.Name</p>
+                <p class="product-size">@perfume.VolumeMl</p>
+                <button class="btn remove" type="button" onclick="removeCartItemInCheckOut(this,'@perfume.Id');">Remove</button>
+            </div>
+            <input type="number" class="quantity form-control-sm w-25" value="@cartItem.Quantity" min="1" onchange="updateCartIteminCheckOut(this,'@perfume.Id');" />
+            <span class="product-price">@perfume.Price.ToString("N2")</span>
+        </div>
+    }
+}
+
+<hr>
+
+<div class="section">
+    <img src="./images/sample.png" alt="Samples">
+    <div>
+        <p class="section-title">Complimentary samples</p>
+        <p>No samples</p>
+    </div>
+    <a href="#" class="edit">Edit</a>
+</div>
+
+<hr>
+
+<div class="section">
+    <img src="./images/gift.png" alt="Gift Option">
+    <div>
+        <p class="section-title">Is this order a gift?</p>
+    </div>
+    <a href="#" class="edit">Edit</a>
+</div>
+
+<button class="chat-btn">💬</button>

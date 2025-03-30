@@ -1,0 +1,121 @@
+﻿@using ScentifyWebApp.Models.Dtos;
+@using Newtonsoft.Json;
+
+@model (string title ,bool isMobile, List<DtoPerfume> perfumes)
+@{ 
+    List<string> perfumeImgs = new List<string>()
+    {
+        "/images/perfume/ANGELISM.png",
+        "/images/perfume/APHRODITE.png",
+        "/images/perfume/FORBIDDEN-SWEET.png",
+        "/images/perfume/FREQUENCE.png",
+        "/images/perfume/GILDED-TOBAC.png",
+        "/images/perfume/HANDS-OF-MIDAS.png"
+    };
+}
+
+<div class="mySwiperContainermySwiperContainer @(Model.isMobile ? "mySwiperMobileContainer" : "mySwiperContainer")">
+    <div class="display-header text-uppercase text-dark text-center pb-3">
+        <h2 class="display-7">@Model.title</h2>
+    </div>
+    <div #swiperRef="" class="swiper @(Model.isMobile ? "mySwiperMobile" : "mySwiper")">
+        <div class="swiper-wrapper">
+            @{
+                if (Model.perfumes != null && Model.perfumes.Count > 0)
+                {
+                    var indexPerfume = 0;
+                    @foreach (var perfume in Model.perfumes.Take(6))
+                    {
+                        <div class="swiper-slide">
+                            <a href="/products/details/@perfume.Id" target="_self">
+                                <img class="img-flacon" src="@(perfumeImgs[indexPerfume])" alt="@perfume.Name" />
+                            </a>
+                        </div>
+                        indexPerfume++;
+                    }
+                }
+            }
+        </div>
+        <div class="d-flex justify-content-center align-content-center">
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+
+    </div>
+    @* <div class="display-header text-dark text-center pb-3">
+		<div class="@(Model.isMobile ? "content-mobile-0 swiper-detail-mobile": "content-0 swiper-detail")">
+			<partial name="/Views/Shared/Components/Swiper/_SwiperContentDetailI.cshtml" model=@("FragranceName", new List<string>() {"Yuzu", "Vetiver Heart", "Basil" }, 2, "", "€143.00", "€286.01", true, true, false, true, false, false, false, false, false, false, false,
+                  new List<string>() {"Citrus Melange Body Cleanser", "Rind Concentrate Body Balm", "Olous Aromatique Room Spray" }) />
+		</div>
+		<div class="@(Model.isMobile ? "content-mobile-1 swiper-detail-mobile": "content-1 swiper-detail") d-none">
+			<partial name="/Views/Shared/Components/Swiper/_SwiperContentDetailI.cshtml" model=@("Karst Eau de Parfum", new List<string>() {"Juniper", "Cumin", "Sandalwood" }, 1, "50 mL", "€165.00", "€330.00", true, false, true, false, true, false, false, false, false, false, false,
+                  new List<string>() {"Resurrection Aromatique Hand Wash", "Kagerou Aromatique Incense", "Aganice Aromatique Candle" }) />
+		</div>
+		<div class="@(Model.isMobile ? "content-mobile-2 swiper-detail-mobile": "content-2 swiper-detail") d-none">
+			<partial name="/Views/Shared/Components/Swiper/_SwiperContentDetailI.cshtml" model=@("Virēre Eau de Parfum", new List<string>() {"Bergamot", "Fig", "Green Tea" }, 1, "50 mL", "€143.00", "", false, true, false, true, false, false, false, true, false, false, false,
+                  new List<string>() {"Kagerou Aromatique Incense", "Geranium Leaf Hydrating Body Treatment", "Resurrection Aromatique Hand Balm" }) />
+		</div>
+		<div class="@(Model.isMobile ? "content-mobile-3 swiper-detail-mobile": "content-3 swiper-detail") d-none">
+			<partial name="/Views/Shared/Components/Swiper/_SwiperContentDetailI.cshtml" model=@("Aurner Eau de Parfum", new List<string>() {"Magnolia Leaf", "Roman Chamomile", "Cedar Heart" }, 1, "50 mL", "€165.00", "", true, false, false, false, true, true, false, false, false, false, false,
+                  new List<string>() {"Kagerou Aromatique Incense", "Geranium Leaf Hydrating Body Treatment", "Resurrection Aromatique Hand Balm" }) />
+		</div>
+		<div class="@(Model.isMobile ? "content-mobile-4 swiper-detail-mobile": "content-4 swiper-detail") d-none">
+			<partial name="/Views/Shared/Components/Swiper/_SwiperContentDetailI.cshtml" model=@("Erémia Eau de Parfum", new List<string>() {"Galbanum", "Iris", "Yuzu" }, 1, "50 mL", "€165.00", "€330.00", false, true, false, true, false, true, false, false, false, false, false,
+                  new List<string>() {"Geranium Leaf Body Cleanser", "Geranium Leaf Hydrating Body Treatment", "Aganice Aromatique Candle" }) />
+		</div>
+		<div class="@(Model.isMobile ? "content-mobile-5 swiper-detail-mobile": "content-5 swiper-detail") d-none">
+			<partial name="/Views/Shared/Components/Swiper/_SwiperContentDetailI.cshtml" model=@("Gloam Eau de Parfum", new List<string>() {"Mimosa", "Saffron", "Iris" }, 1, "50 mL", "€165.00", "€330.00", false, false, false, true, false, true, true, false, false, false, false,
+                  new List<string>() {"A Rose By Any Other Name Body Cleanser", "Coriander Seed Body Cleanser", "Resurrection Aromatique Hand Balm" }) />
+		</div>
+		<div class="@(Model.isMobile ? "content-mobile-6 swiper-detail-mobile": "content-6 swiper-detail") d-none">
+			<partial name="/Views/Shared/Components/Swiper/_SwiperContentDetailI.cshtml" model=@("Rōzu Eau de Parfum", new List<string>() {"Rose", "Rose", "Guaiacwood" }, 1, "50 mL", "€165.00", "€330.00", false, false, false, true, false, true, false, true, false, false, false,
+                  new List<string>() {"A Rose By Any Other Name Body Cleanser", "Istros Aromatique Room Spray", "Déodorant" }) />
+		</div>
+		<div class="@(Model.isMobile ? "content-mobile-7 swiper-detail-mobile": "content-7 swiper-detail") d-none">
+			<partial name="/Views/Shared/Components/Swiper/_SwiperContentDetailI.cshtml" model=@("Marrakech Intense Eau de Parfum", new List<string>() {"Clove", "Sandalwood", "Cardamom" }, 2, "", "€143.00", "€286.01", false, false, false, false, false, true, true, true, false, false, false,
+                  new List<string>() {"Rejuvenate Intensive Body Balm", "Murasaki Aromatique Incense", "Moroccan Neroli Post-Shave Lotion" }) />
+		</div>
+		<div class="@(Model.isMobile ? "content-mobile-8 swiper-detail-mobile": "content-8 swiper-detail") d-none">
+			<partial name="/Views/Shared/Components/Swiper/_SwiperContentDetailI.cshtml" model=@("Hwyl Eau de Parfum", new List<string>() {"Cypress", "Frankincense", "Vetiver" }, 2, "", "€143.00", "€286.01", false, false, false, false, false, false, true, true, true, false, false,
+                  new List<string>() {"Redemption Body Scrub", "Reverence Aromatique Hand Balm", "Ptolemy Aromatique Candle" }) />
+		</div>
+	</div> *@
+
+    <div class="display-header text-dark text-center pb-3">
+        @{
+            if (Model.perfumes != null && Model.perfumes.Count > 0)
+            {
+                var index = 0;
+                @foreach (var perfume in Model.perfumes.Take(6))
+                {
+                    if (perfume.DtoIngredients!= null && perfume.DtoIngredients.Count() > 0)
+                    {
+                        var ingredients = perfume.DtoIngredients;
+
+                        <div class="@(Model.isMobile ? $"content-mobile-{index} swiper-detail-mobile": $"content-{index} swiper-detail") @(index == 0 ? "" :  "d-none")">
+                            <partial name="/Views/Shared/Components/Swiper/_SwiperContentDetailI.cshtml"
+                                     model=@( (perfume.Name,
+                                             ingredients?.Select(m => m.Name).ToList() ?? new List<string>(),
+                                             1,
+                                             perfume.VolumeMl,
+                                             $"{perfume.Currency} {perfume.Price}",
+                                             perfume.UnitPrice ?? "",
+                                             GetRandomBool(), GetRandomBool(), GetRandomBool(), GetRandomBool(),
+                                             GetRandomBool(), GetRandomBool(), GetRandomBool(), GetRandomBool(),
+                                             GetRandomBool(), GetRandomBool(), GetRandomBool(),
+                                             new List<string>()) ) />
+                        </div>
+                        index++;
+                    }
+                }
+            }
+        }
+    </div>
+</div>
+
+@functions {
+    public static bool GetRandomBool()
+    {
+        return Random.Shared.Next(2) == 0;
+    }
+}

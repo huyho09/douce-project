@@ -1,0 +1,155 @@
+﻿@model ScentifyWebApp.Models.ViewModels.HomeViewModel;
+
+@{
+	ViewData["Title"] = "Home Page";
+}
+
+<div id="carouselExample" class="carousel slide" data-ride="carousel">
+	<div class="carousel-inner">
+		<div class="carousel-item active position-relative">
+			<img class="d-block" src="~/images/BANNER/banner.png">
+			<a href="/products" class="btn text-uppercase btn-discount btn-contact-banner position-absolute">
+				Discover
+			</a>
+		</div>
+	</div>
+
+</div>
+@*<div class="subNavigation_subNavigation__b0ZiE" data-testid="category-navigation">
+		<div class="subNavigation_subNavContainerHolder__MyYfR">
+			<div class="subNavigation_subNavContainer__8LZ2X">
+				<div class="subNavigationList_subNavListsContainer__IyfDM" data-testid="CATEGORY_SUB_NAV">
+					<ul class="subNavigationList_subNavList__YlZCz">
+						<li class="subNavigationList_subNavListItem__phySy"><a class="Hyperlink_base__H3jim Hyperlink_left__UZaMy Hyperlink_dark__ROIlG subNavigationList_subNavLink__anNud" data-test-id="CATEGORY_SUB_NAV_ALL-FRAGRANCE" data-test-ref="CATEGORY_SUB_NAV_ITEM_LINK" data-testid="CATEGORY_SUB_NAV_ALL-FRAGRANCE" href="/Products" target="_self">All Fragrance</a></li>
+						<li class="subNavigationList_subNavListItem__phySy"><a class="Hyperlink_base__H3jim Hyperlink_left__UZaMy Hyperlink_dark__ROIlG subNavigationList_subNavLink__anNud" data-test-id="CATEGORY_SUB_NAV_FLORAL" data-test-ref="CATEGORY_SUB_NAV_ITEM_LINK" data-testid="CATEGORY_SUB_NAV_FLORAL" href="/Products/FilterFragranceFamily?fragranceFamily=Floral" target="_self">Floral</a></li>
+						<li class="subNavigationList_subNavListItem__phySy"><a class="Hyperlink_base__H3jim Hyperlink_left__UZaMy Hyperlink_dark__ROIlG subNavigationList_subNavLink__anNud" data-test-id="CATEGORY_SUB_NAV_FRESH" data-test-ref="CATEGORY_SUB_NAV_ITEM_LINK" data-testid="CATEGORY_SUB_NAV_FRESH" href="/Products/FilterFragranceFamily?fragranceFamily=Fresh" target="_self">Fresh</a></li>
+						<li class="subNavigationList_subNavListItem__phySy"><a class="Hyperlink_base__H3jim Hyperlink_left__UZaMy Hyperlink_dark__ROIlG subNavigationList_subNavLink__anNud" data-test-id="CATEGORY_SUB_NAV_WOODY" data-test-ref="CATEGORY_SUB_NAV_ITEM_LINK" data-testid="CATEGORY_SUB_NAV_WOODY" href="/Products/FilterFragranceFamily?fragranceFamily=Woody" target="_self">Woody</a></li>
+						<li class="subNavigationList_subNavListItem__phySy">
+							<a class="Hyperlink_base__H3jim Hyperlink_left__UZaMy Hyperlink_dark__ROIlG subNavigationList_subNavLink__anNud" data-test-id="CATEGORY_SUB_NAV_OPULENT" data-test-ref="CATEGORY_SUB_NAV_ITEM_LINK" data-testid="CATEGORY_SUB_NAV_OPULENT" href="/Products/FilterFragranceFamily?fragranceFamily=Opulent" target="_self">Opulent</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>*@
+<section id="mobile-products" class="product-store position-relative padding-large ">
+	<div class="container">
+		<div class="row">
+			<div class="display-header d-flex justify-content-between pb-3">
+				<h2 class="display-7 text-uppercase text-center">Begin exploring by fragrance family</h2>
+			</div>
+		</div>
+
+	</div>
+	<div class="row m-1">
+		<a class="col-lg-3 col-md-6 col-sm-12 p-1 d-flex justify-content-center align-items-center" href="/Products/FilterFragranceFamily?fragranceFamily=Floral">
+			<div class="flip-card">
+				<div class="flip-card-inner">
+					<div class="flip-card-front">
+						<div class="image-holder">
+							<img src="https://www.aesop.com/u1nb1km7t5q7/2hthaLRXLy8nsxiaCbCyq2/c1b27569f129f2b24fd06c5d420ad646/Aesop_Fragrance_2024_Web_Category_Page_Secondary_Menu_Floral_Desktop_1280x804px.jpg" alt="product-item" class="img-fluid">
+						</div>
+						<h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">Floral</h3>
+					</div>
+					<div class="flip-card-back">
+						<h3>Floral</h3>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+					</div>
+				</div>
+			</div>
+		</a>
+		<a class="col-lg-3 col-md-6 col-sm-12 p-1 d-flex justify-content-center align-items-center" href="/Products/FilterFragranceFamily?fragranceFamily=Fresh">
+			<div class="flip-card">
+				<div class="flip-card-inner">
+					<div class="flip-card-front">
+						<div class="image-holder">
+							<img src="https://www.aesop.com/u1nb1km7t5q7/7xLN21UUjQb29vqbzjKweA/b1b246e4e1e42eca1d9461963dcff2df/Aesop_Fragrance_2024_Web_Category_Page_Secondary_Menu_Fresh_Desktop_1280x804px.jpg" alt="product-item" class="img-fluid">
+						</div>
+						<h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">Fresh</h3>
+					</div>
+					<div class="flip-card-back">
+						<h3>Fresh</h3>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+					</div>
+				</div>
+			</div>
+		</a>
+		<a class="col-lg-3 col-md-6 col-sm-12 p-1 d-flex justify-content-center align-items-center" href="/Products/FilterFragranceFamily?fragranceFamily=Woody">
+			<div class="flip-card">
+				<div class="flip-card-inner">
+					<div class="flip-card-front">
+						<div class="image-holder">
+							<img src="https://www.aesop.com/u1nb1km7t5q7/2EurYl7oUUR1AgEUyVLyHL/b4fa9958e121ab8a07de13f82ba4b347/Aesop_Fragrance_2024_Web_Category_Page_Secondary_Menu_Woody_Desktop_1280x804px.jpg" alt="product-item" class="img-fluid">
+						</div>
+						<h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">Woody</h3>
+					</div>
+					<div class="flip-card-back">
+						<h3>Woody</h3>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+					</div>
+				</div>
+			</div>
+		</a>
+		<a class="col-lg-3 col-md-6 col-sm-12 p-1 d-flex justify-content-center align-items-center" href="/Products/FilterFragranceFamily?fragranceFamily=Opulent">
+			<div class="flip-card">
+				<div class="flip-card-inner">
+					<div class="flip-card-front">
+						<div class="image-holder">
+							<img src="https://www.aesop.com/u1nb1km7t5q7/2I1o09YtXkRr4OZg9vlwGB/8c3075fa27f58fe59443d7ead73f5804/Aesop_Fragrance_2024_Web_Category_Page_Secondary_Menu_Opulent_Desktop_1280x804px.jpg" alt="product-item" class="img-fluid">
+						</div>
+						<h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">Opulent</h3>
+					</div>
+					<div class="flip-card-back">
+						<h3>Opulent</h3>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+
+</section>
+
+<section id="yearly-sale" class="bg-light-blue overflow-hidden mt-5">
+	<div class="d-flex flex-wrap align-items-center position-relative w-100">
+		<img class="Image_picture" alt="Metal tray with flower, wood and dried flowers placed next to a hand holding Aurner EDP" loading="lazy" src="~/images/BANNER/banner_3_chai.png">
+		<div class="col-md-6 col-sm-12 position-absolute">
+			<div class="text-content offset-4 padding-medium">
+				<h3>A defiant bloom</h3>
+				<h2 class="Heading_base__RCdQN Heading_xLarge__AY5lq Heading_light__G2Y3e SectionHeading_heading__vDzj6">New Aurner Eau de Parfum</h2>
+				<div class="BodyCopy_copy__8BnZm">
+					<p class="Paragraph_base__CFztu Paragraph_light__GdrHW Contentful_contentful__richtext--whitespace__p8_HS" style="color:whitesmoke">Created with long-term collaborator Céline Barel, our latest fragrance subverts traditional expectations of a floral, with herbaceous Magnolia Leaf providing a nuanced expression of the bloom.</p>
+				</div>
+				<a href="/products" class="btn text-uppercase btn-discount">
+					Discover Aurner Eau de Parfum
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="testimonials" class="position-relative" style="margin-top: 100px">
+	<partial name="/Views/Shared/Components/Swiper/_SwiperContentList.cshtml" model=@("Compare our fragrances", true, Model.DtoPerfumes) />
+	<partial name="/Views/Shared/Components/Swiper/_SwiperContentList.cshtml" model=@("Compare our fragrances", false, Model.DtoPerfumes) />
+</section>
+
+<script>
+	function currentSlide(n) {
+		showSlides(slideIndex = n);
+	}
+
+	function showSlides(n) {
+		let i;
+		let slides = document.getElementsByClassName("carousel-item");
+		let dots = document.getElementsByClassName("dot");
+		if (n > slides.length) { slideIndex = 1 }
+		if (n < 1) { slideIndex = slides.length }
+		for (i = 0; i < slides.length; i++) {
+			slides[i].style.display = "none";
+		}
+		for (i = 0; i < dots.length; i++) {
+			dots[i].className = dots[i].className.replace(" active", "");
+		}
+		slides[slideIndex - 1].style.display = "block";
+		dots[slideIndex - 1].className += " active";
+	}
+</script>
