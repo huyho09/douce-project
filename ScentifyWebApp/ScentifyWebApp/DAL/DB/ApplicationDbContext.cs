@@ -9,6 +9,6 @@ namespace ScentifyWebApp.DAL.DB
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<Perfume> Perfume { get; set; }
-        public DbSet<Invoice> Invoice { get; set; }
+        //public DbSet<Invoice> Invoice { get; set; }
 	}
 }

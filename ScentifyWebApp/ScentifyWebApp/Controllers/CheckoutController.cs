@@ -55,6 +55,7 @@ namespace ScentifyWebApp.Controllers
             }
         }
 
+        // TODO
         // Endpoint to initiate a payment
         [HttpPost]
         public async Task<IActionResult> SaveInvoice(CheckoutRequest model)
@@ -91,25 +92,25 @@ namespace ScentifyWebApp.Controllers
 
                     //return Json(new { status = 200, message = $"Payment for your cart is pending confirmation..." });
 
-                    // TODO testing
-                    decimal amount = 1000000; // Amount in VND
-                    string orderId = DateTime.Now.Ticks.ToString(); // Unique Order ID
-                    string orderInfo = "Thanh toan don hang thoi gian: " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    string ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "113.172.172.158";
+                    //    // TODO testing
+                    //    decimal amount = 1000000; // Amount in VND
+                    //    string orderId = DateTime.Now.Ticks.ToString(); // Unique Order ID
+                    //    string orderInfo = "Thanh toan don hang thoi gian: " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    //    string ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "113.172.172.158";
 
-                    string url = VNPayHelper.GenerateVNPayUrl(
-                        amount: 1000000,
-                        orderId: "239315",
-                        orderInfo: "Thanh toan don hang thoi gian: 2025-03-23 09:49:52",
-                        returnUrl: "https://douce-dev.somee.com",
-                        ipAddress: "113.172.172.158"
-                    );
+                    //    string url = VNPayHelper.GenerateVNPayUrl(
+                    //        amount: 1000000,
+                    //        orderId: "239315",
+                    //        orderInfo: "Thanh toan don hang thoi gian: 2025-03-23 09:49:52",
+                    //        returnUrl: "https://douce-dev.somee.com",
+                    //        ipAddress: "113.172.172.158"
+                    //    );
 
-                    Console.WriteLine(url);
+                    //    Console.WriteLine(url);
 
-                    return Redirect(url);
+                    //    return Redirect(url);
                 }
-                ViewData["ErrorPay"] = "Payment for your cart failed.";
+                //ViewData["ErrorPay"] = "Payment for your cart failed.";
                 //return Json(new { status = 400, message = "Payment for your cart failed." });
             }
             catch (Exception ex)

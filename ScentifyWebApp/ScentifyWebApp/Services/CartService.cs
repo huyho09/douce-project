@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ScentifyWebApp.DAL.DB;
 using ScentifyWebApp.Models;
+using ScentifyWebApp.Models.Dtos;
 using ScentifyWebApp.Models.Entities;
 
 namespace ScentifyWebApp.Services
@@ -11,12 +13,15 @@ namespace ScentifyWebApp.Services
         private const string CartSessionKey = "Cart";
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
         public CartService(IHttpContextAccessor httpContextAccessor,
-            ApplicationDbContext context)
+            ApplicationDbContext context,
+            IMapper mapper)
         {
             _httpContextAccessor = httpContextAccessor;
             _context = context;
+            _mapper = mapper;
         }
 
         public List<CartItem> GetCart()
@@ -38,10 +43,11 @@ namespace ScentifyWebApp.Services
                 if (product != null)
                 {
                     var cart = GetCart();
-                    var cartItem = cart?.FirstOrDefault(p => p.Product.Id == product.Id);
+                    var cartItem = cart?.FirstOrDefault(p => Guid.Parse(p.Product.Id) == product.Id);
                     if (cartItem == null)
                     {
-                        cart.Add(new CartItem { Product = product, Quantity = quantity });
+                        var dtoProduct = _mapper.Map<DtoPerfume>(product);
+                        cart.Add(new CartItem { Product = dtoProduct, Quantity = quantity });
                     }
                     else
                     {
@@ -65,7 +71,7 @@ namespace ScentifyWebApp.Services
                 if (product != null)
                 {
                     var cart = GetCart();
-                    var cartItem = cart?.FirstOrDefault(p => p.Product.Id == product.Id);
+                    var cartItem = cart?.FirstOrDefault(p => Guid.Parse(p.Product.Id) == product.Id);
                     if (cartItem != null)
                     {
                         cartItem.Quantity = quantity;
@@ -90,7 +96,7 @@ namespace ScentifyWebApp.Services
                 var product = await RetrivePerfume(productId);
                 if (product != null)
                 {
-                    var cartItem = cart.FirstOrDefault(p => p.Product.Id == product.Id);
+                    var cartItem = cart.FirstOrDefault(p => Guid.Parse(p.Product.Id) == product.Id);
                     if (cartItem != null)
                     {
                         cart.Remove(cartItem);

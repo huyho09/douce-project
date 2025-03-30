@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ScentifyWebApp.Models.Entities.Perfume>?
+﻿@model IEnumerable<ScentifyWebApp.Models.Dtos.DtoPerfume>?
 
 @{
     ViewData["Title"] = $"{ViewData["fragranceFamily"]} Perfumes";
@@ -23,13 +23,13 @@
             <div class="product-grid">
                 @if (Model != null && Model?.Count() > 0)
                 {
-                    foreach (var product in Model)
+                    foreach (var perfume in Model)
                     {
                         <div class="product-grid-item">
                             <!-- Image -->
-                            <a href="/products/details/@product.Id" target="_self">
+                            <a href="/products/details/@perfume.Id" target="_self">
                                 <div class="image-wrapper">
-                                    <img alt="@product.Name" loading="lazy" src="@product.ImageUrl">
+                                    <img alt="@perfume.Name" loading="lazy" src="@perfume.ImageUrl">
                                 </div>
                             </a>
 
@@ -37,28 +37,28 @@
                             <div class="body-wrapper">
                                 <!-- Title -->
                                 <h4 class="product-title">
-                                    <a href="/products/details/@product.Id" target="_self">
-                                        @product.Name
+                                    <a href="/products/details/@perfume.Id" target="_self">
+                                        @perfume.Name
                                     </a>
                                 </h4>
 
                                 <!-- Description -->
-                                <p class="product-description">@product.Description</p>
+                                <p class="product-description">@perfume.Description</p>
 
                                 <!-- Price Info -->
                                 <div class="price-info">
-                                    <p class="product-size">@product.VolumeMl mL</p>
+                                    <p class="product-size">@perfume.VolumeMl mL</p>
                                     <div class="unit-pricing">
-                                        <span class="product-price">@product.Currency @product.Price</span>
+                                        <span class="product-price">@perfume.Currency @perfume.Price</span>
                                         <span>/</span>
-                                        <span class="unit-price">@product.UnitPrice</span>
+                                        <span class="unit-price">@perfume.UnitPrice</span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Call to Action -->
                             <div class="cta-wrapper">
-                                <button class="add-to-cart-btn" aria-label="Add to your cart - €@product.Price" data-id="@product.Id">Add to your cart</button>
+                                <button class="add-to-cart-btn" aria-label="Add to your cart - €@perfume.Price" data-id="@perfume.Id">Add to your cart</button>
                             </div>
                         </div>
                     }

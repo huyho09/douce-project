@@ -66,4 +66,11 @@ namespace ScentifyAdmin.Models.Dtos
 
         //public DateTime UpdatedAt { get; set; } = DateTime.UtcNow; // Thời gian cập nhật gần nhất
     }
+    public class PerfumedNote
+    {
+        public List<string> Top { get; set; }
+        public List<string> Middle { get; set; }
+        public List<string> Base { get; set; }
+    }
+
 }

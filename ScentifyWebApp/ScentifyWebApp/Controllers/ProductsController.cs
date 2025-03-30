@@ -1,9 +1,11 @@
 ﻿using System.IO;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ScentifyWebApp.DAL.DB;
 using ScentifyWebApp.Models;
+using ScentifyWebApp.Models.Dtos;
 using ScentifyWebApp.Models.Entities;
 
 namespace ScentifyWebApp.Controllers
@@ -11,10 +13,13 @@ namespace ScentifyWebApp.Controllers
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(ApplicationDbContext context,
+            IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         //private List<Product>? _products
@@ -37,16 +42,19 @@ namespace ScentifyWebApp.Controllers
         public async Task<IActionResult> Index()
         {
             var products = await _context.Perfume.ToListAsync();
-            return View(products?.Take(6));
+            var dtoProducts = _mapper.Map<List<DtoPerfume>>(products);
+            return View(dtoProducts?.Take(6));
         }
 
+        // TODO
 		public async Task<IActionResult> FilterFragranceFamily(string fragranceFamily)
 		{
 			var products = await _context.Perfume.ToListAsync();
-            var filter = new List<Perfume>();
+            var filter = new List<DtoPerfume>();
             if (products?.Count > 0)
             {
-                filter = products.Where(m => m.FragranceFamily.Contains(fragranceFamily))?.Take(6)?.ToList();
+                //filter = products.Where(m => m.FragranceFamily.Contains(fragranceFamily))?.Take(6)?.ToList();
+                filter = _mapper.Map<List<DtoPerfume>>(products);
             }
 
             ViewData["fragranceFamily"] = fragranceFamily;
@@ -54,19 +62,22 @@ namespace ScentifyWebApp.Controllers
 			return View(filter);
 		}
 
+        // TODO
         public async Task<IActionResult> Search(string searchInput)
         {
             if (!string.IsNullOrEmpty(searchInput))
             {
                 var products = await _context.Perfume.ToListAsync();
-                var filter = new List<Perfume>();
+                var filter = new List<DtoPerfume>();
                 if (products?.Count > 0)
                 {
                     searchInput = searchInput.ToUpper();
-                    filter = products.Where(m => m.Name.ToUpper().Contains(searchInput)
-                                                || m.Description.ToUpper().Contains(searchInput)
-                                                || m.Description.ToUpper().Contains(searchInput)
-                                                || m.Perfumed_Notes.ToUpper().Contains(searchInput))?.Take(6)?.ToList();
+                    var dtoProducts = _mapper.Map<List<DtoPerfume>>(products);
+
+                    filter = dtoProducts.Where(m => m.Name.ToUpper().Contains(searchInput)
+                                                || m.ShortDescription.ToUpper().Contains(searchInput))?.Take(6)?.ToList();
+                                                //|| m.Description.ToUpper().Contains(searchInput)
+                                                //|| m.Perfumed_Notes.ToUpper().Contains(searchInput)
                 }
 
                 ViewData["searchInput"] = searchInput;
@@ -81,7 +92,8 @@ namespace ScentifyWebApp.Controllers
             var products = await _context.Perfume.ToListAsync();
             if (products?.Count > 0)
             {
-                var pagedProducts = products.Skip((request.Page - 1) * request.Size).Take(request.Size).ToList();
+                var dtoProducts = _mapper.Map<List<DtoPerfume>>(products);
+                var pagedProducts = dtoProducts.Skip((request.Page - 1) * request.Size).Take(request.Size).ToList();
                 return Json(pagedProducts);
             }
             return Json(null);

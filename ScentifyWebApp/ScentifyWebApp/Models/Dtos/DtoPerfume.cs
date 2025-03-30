@@ -1,5 +1,4 @@
 ﻿using ScentifyWebApp.Models.Entities;
-using System.ComponentModel.DataAnnotations;
 
 namespace ScentifyWebApp.Models.Dtos
 {
