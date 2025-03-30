@@ -124,6 +124,23 @@ a[disabled]:focus {
 .product-grid-item .add-to-cart-btn {
   background-color: #0f0100 !important;
 }
+.product-grid-item .size-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: transparent;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+.product-grid-item .size-button:hover {
+  background-color: #9f5f2e !important;
+  cursor: pointer;
+  color: #fff;
+  border-color: #9f5f2e;
+}
 .product-grid-item::before {
   content: "";
   position: absolute;
@@ -292,7 +309,7 @@ a[disabled]:focus {
   font-size: 14px;
 }
 .body-wrapper p {
-  color: #666;
+  color: #fff;
   font-size: 14px;
   margin: 10px 0;
 }
@@ -771,7 +788,8 @@ hr {
 /* Open Popup Button */
 body.modal-open {
   overflow: auto !important;
-  padding-right: 0 !important; /* Prevents unwanted shifts */
+  padding-right: 0 !important;
+  /* Prevents unwanted shifts */
 }
 
 .open-popup-btn {
@@ -1477,13 +1495,20 @@ input {
 /* Style the Select2 container */
 .select2-container .select2-selection--single,
 .select2-container .selection .select2-selection {
-  height: 47px; /* Match input height */
-  background: transparent; /* Make background transparent */
-  border: 1px solid #777; /* Match input border */
-  border-radius: 5px; /* Match border radius */
-  padding: 8px 12px; /* Adjust padding */
-  font-size: 16px; /* Ensure font size consistency */
-  color: #fff; /* Match text color */
+  height: 47px;
+  /* Match input height */
+  background: transparent;
+  /* Make background transparent */
+  border: 1px solid #777;
+  /* Match input border */
+  border-radius: 5px;
+  /* Match border radius */
+  padding: 8px 12px;
+  /* Adjust padding */
+  font-size: 16px;
+  /* Ensure font size consistency */
+  color: #fff;
+  /* Match text color */
   display: flex;
   width: 100%;
   margin-top: 10px;
@@ -1501,7 +1526,8 @@ input {
 /* Remove default background on focus */
 .select2-container--default .select2-selection--single:focus {
   outline: none;
-  border-color: #777; /* Change border color on focus */
+  border-color: #777;
+  /* Change border color on focus */
 }
 
 /* Style the dropdown arrow */
@@ -1509,13 +1535,16 @@ input {
   margin-top: 17px;
 }
 .select2-container--default .select2-selection--single .select2-selection__arrow b {
-  border-color: #fff transparent transparent transparent; /* Match arrow color */
+  border-color: #fff transparent transparent transparent;
+  /* Match arrow color */
 }
 
 /* Style the dropdown options */
 .select2-container--default .select2-results__option {
-  background: #27130f; /* Dropdown background */
-  color: #fff; /* Text color */
+  background: #27130f;
+  /* Dropdown background */
+  color: #fff;
+  /* Text color */
 }
 
 /* Remove default select outline */
@@ -1525,12 +1554,15 @@ input {
 
 /* Match floating label style */
 .floating-group label {
-  color: #ccc; /* Label color */
+  color: #ccc;
+  /* Label color */
 }
 
 .select2-container--default .select2-results__option[aria-selected=true] {
-  background-color: #4c251d !important; /* A darker shade of #6c1d10 */
-  color: #fff !important; /* Keep text readable */
+  background-color: #4c251d !important;
+  /* A darker shade of #6c1d10 */
+  color: #fff !important;
+  /* Keep text readable */
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {

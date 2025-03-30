@@ -27,6 +27,8 @@
                 {
                     foreach (var product in Model)
                     {
+                        var priceInfoFirst = product.DtoPriceInfo?[0];
+                        var priceInfoSecond = product.DtoPriceInfo?[1];
                         <div class="product-grid-item">
                             <!-- Image -->
                             <a href="/products/details/@product.Id" target="_self">
@@ -45,23 +47,31 @@
                                 </h4>
 
                                 <!-- Description -->
-                                <p class="product-description">@product.Description</p>
+                                <p class="product-description">@product.ShortDescription</p>
 
                                 <!-- Price Info -->
-                                <div class="price-info">
-                                    <p class="product-size">@product.VolumeMl mL</p>
-                                    <div class="unit-pricing">
-                                        <span class="product-price">@product.Currency @product.Price</span>
-                                        <span>/</span>
-                                        <span class="unit-price">@product.UnitPrice</span>
-                                    </div>
+                                <div class="price-info row">
+                                    @if (priceInfoFirst != null)
+                                    {
+                                        <div class="col pr-1">
+                                            <p class="product-price">@priceInfoFirst.VolumeMl mL</p>
+                                            <a href="/products/details/@product.Id/@priceInfoFirst.VolumeMl" class="size-button" aria-label="@priceInfoFirst.Currency @priceInfoFirst.Price - @priceInfoFirst.VolumeMl mL" data-id="@product.Id">@priceInfoFirst.Currency @priceInfoFirst.Price</a>
+                                        </div>
+                                    }
+                                    @if (priceInfoSecond != null)
+                                    {
+                                        <div class="col">
+                                            <p class="product-price">@priceInfoSecond.VolumeMl mL</p>
+                                            <a href="/products/details/@product.Id/@priceInfoSecond.VolumeMl" class="size-button" aria-label="@priceInfoSecond.Currency @priceInfoSecond.Price - @priceInfoSecond.VolumeMl mL" data-id="@product.Id">@priceInfoSecond.Currency @priceInfoSecond.Price</a>
+                                        </div>
+                                    }
                                 </div>
                             </div>
 
                             <!-- Call to Action -->
-                            <div class="cta-wrapper">
-                                <button class="add-to-cart-btn" aria-label="Add to your cart - €@product.Price" data-id="@product.Id">Add to your cart</button>
-                            </div>
+                            @*  <div class="cta-wrapper">
+                                <button class="add-to-cart-btn" aria-label="Add to your cart - @priceInfo.Currency @priceInfo.Price" data-id="@product.Id">Add to your cart</button>
+                            </div> *@
                         </div>
                     }
                 }
@@ -120,7 +130,7 @@
                                     </a>
                                 </h4>
 
-                                <p class="product-description">${product.description}</p>
+                                <p class="product-description">${product.shortDescription}</p>
 
                                 <div class="price-info">
                                     <p class="product-size">${product.size}</p>

@@ -25,6 +25,8 @@
                 {
                     foreach (var product in Model)
                     {
+                        var priceInfo = product.DtoPriceInfo?.FirstOrDefault() ?? new ScentifyWebApp.Models.Entities.PriceInfo();
+
                         <div class="product-grid-item">
                             <!-- Image -->
                             <a href="/products/details/@product.Id" target="_self">
@@ -43,22 +45,20 @@
                                 </h4>
 
                                 <!-- Description -->
-                                <p class="product-description">@product.Description</p>
+                                <p class="product-description">@product.ShortDescription</p>
 
                                 <!-- Price Info -->
                                 <div class="price-info">
-                                    <p class="product-size">@product.VolumeMl mL</p>
+                                    <p class="product-size">@priceInfo.VolumeMl mL</p>
                                     <div class="unit-pricing">
-                                        <span class="product-price">@product.Currency @product.Price</span>
-                                        <span>/</span>
-                                        <span class="unit-price">@product.UnitPrice</span>
+                                        <span class="product-price">@priceInfo.Currency @priceInfo.Price</span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Call to Action -->
                             <div class="cta-wrapper">
-                                <button class="add-to-cart-btn" aria-label="Add to your cart - €@product.Price" data-id="@product.Id">Add to your cart</button>
+                                <button class="add-to-cart-btn" aria-label="Add to your cart - @priceInfo.Currency @priceInfo.Price" data-id="@product.Id">Add to your cart</button>
                             </div>
                         </div>
                     }
@@ -118,7 +118,7 @@
                                     </a>
                                 </h4>
 
-                                <p class="product-description">${product.description}</p>
+                                <p class="product-description">${product.shortDescription}</p>
 
                                 <div class="price-info">
                                     <p class="product-size">${product.size}</p>

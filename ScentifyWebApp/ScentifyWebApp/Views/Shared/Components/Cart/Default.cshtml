@@ -16,10 +16,11 @@
         foreach (var cartItem in Model)
         {
             var product = cartItem.Product;
+            var priceInfo = product.DtoPriceInfo?.FirstOrDefault() ?? new ScentifyWebApp.Models.Entities.PriceInfo();
 
             <div class="cart-item">
                 <p class="product-name">@product.Name</p>
-                <p class="product-size">@product.VolumeMl</p>
+                <p class="product-size">@priceInfo.VolumeMl</p>
                 @* <div class="product-quantity custom-dropdown">
                     <select>
                         <option>1</option>

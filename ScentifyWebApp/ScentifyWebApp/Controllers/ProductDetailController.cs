@@ -25,8 +25,8 @@ namespace ScentifyWebApp.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("details/{id}")]
-        public async Task<IActionResult> Index(string id)
+        [HttpGet("details/{id}/{sizeMl?}")]
+        public async Task<IActionResult> Index(string id, int? sizeMl)
         {
             if (!Guid.TryParse(id, out Guid guidId))
             {
@@ -34,6 +34,7 @@ namespace ScentifyWebApp.Controllers
             }
 
             var product = await _productDetail(guidId);
+            ViewData["sizeMl"] = sizeMl;
             return View(product);
         }
 
@@ -66,6 +67,13 @@ namespace ScentifyWebApp.Controllers
                     {
                         var dtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(perfume.Ingredients);
                         result.DtoIngredients = dtoIngredients;
+                    }
+
+                    // convert price info
+                    if (!string.IsNullOrEmpty(perfume.PriceInfo))
+                    {
+                        var dtoPriceInfos = JsonConvert.DeserializeObject<List<PriceInfo>>(perfume.PriceInfo);
+                        result.DtoPriceInfo = dtoPriceInfos;
                     }
                 }
             }

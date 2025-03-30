@@ -5,6 +5,8 @@
 
 @if (Model != null)
 {
+    var priceInfo = Model.DtoPriceInfo?.FirstOrDefault() ?? new ScentifyWebApp.Models.Entities.PriceInfo();
+
     <!-- Main Content -->
     <div class="container main d-flex">
         <!-- Text Section -->
@@ -16,18 +18,18 @@
         <div class="product-display d-flex flex-column">
             <img loading="lazy" alt="@Model.Name" src="@Url.Content(Model.ImageUrl.Replace("./","~/"))">
             <div>
-                <button class="add-to-cart add-to-cart-btn" aria-label="Add to your cart - €@Model.Price" data-id="@Model.Id">Add to cart +</button>
+                <button class="add-to-cart add-to-cart-btn" aria-label="Add to your cart - @priceInfo.Currency @priceInfo.Price" data-id="@Model.Id">Add to cart +</button>
             </div>
         </div>
         <!-- Product Image & Info -->
         <div class="product-display">
 
             <div class="product-info">
-                <h3>$@Model?.Price</h3>
-                <div class="stars">
+                <h3>@priceInfo.Currency @priceInfo.Price</h3>
+                @* <div class="stars">
                     ★★★★☆
-                </div>
-                <div class="details">@Model?.VolumeMl ml</div>
+                </div> *@
+                <div class="details">@priceInfo?.VolumeMl ml</div>
                 <div class="controls">
                     @*<i class="fas fa-chevron-left"></i>
 					<i class="fas fa-chevron-right"></i>*@
@@ -37,7 +39,7 @@
     </div>
 
     <!-- Info Sections -->
-    <div class="info-sections">
+    @* <div class="info-sections">
         <div class="section">
             <div class="number">01</div>
             <div class="title">DESCRIPTION</div>
@@ -58,7 +60,7 @@
             <div class="title">COMPOSITION</div>
             <span class="text-content">@Model.Composition</span>
         </div>
-    </div>
+    </div> *@
 
     <!-- Second Section -->
     <section class="second-section">

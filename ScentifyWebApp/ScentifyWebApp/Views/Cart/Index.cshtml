@@ -27,14 +27,14 @@
 
             <div class="cart-item">
                 <p class="product-name">@product.Name</p>
-                <p class="product-size">@product.VolumeMl mL</p>
+                <p class="product-size">@cartItem.VolumeMl mL</p>
                 <input type="number" min="1" value="@cartItem.Quantity" class="cart-quantity form-control w-75" onchange="updateCartItem(this,'@product.Id')" />
 
-                <p class="product-price">@product.Currency @product.Price</p>
+                <p class="product-price">@cartItem.Currency @cartItem.Price</p>
                 <button class="remove-cart-btn" type="button" onclick="removeCartItem('@product.Id');">✕</button>
             </div>
 
-            totalPrice += (double)(product.Price * cartItem.Quantity);
+            totalPrice += (double)(cartItem.Price * cartItem.Quantity);
         }
 
         <div class="cart-infor float-end col-md-4 col-sm-12">

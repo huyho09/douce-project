@@ -168,6 +168,25 @@ a[disabled]:focus {
     background-color: $custom-color-2 !important;
   }
 
+  .size-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: transparent;
+    border: 1px solid $color_1;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    color: $color_1;
+    transition: background-color 0.3s;
+  }
+
+  .size-button:hover {
+    background-color: $custom-color-3 !important;
+    cursor: pointer;
+    color: $color_1;
+    border-color: $custom-color-3;
+  }
+
   &::before {
     content: "";
     position: absolute;
@@ -175,12 +194,10 @@ a[disabled]:focus {
     left: 50%;
     width: 80%;
     height: 3px;
-    background: linear-gradient(
-      to right,
-      rgba(255, 215, 150, 0),
-      rgba(255, 215, 150, 0.8),
-      rgba(255, 215, 150, 0)
-    );
+    background: linear-gradient(to right,
+        rgba(255, 215, 150, 0),
+        rgba(255, 215, 150, 0.8),
+        rgba(255, 215, 150, 0));
     transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
@@ -305,7 +322,7 @@ a[disabled]:focus {
       opacity: 1;
 
       .add-to-cart-btn {
-        background-color: #9f5f2e !important;
+        background-color: $custom-color-3 !important;
       }
     }
   }
@@ -366,7 +383,7 @@ a[disabled]:focus {
   }
 
   p {
-    color: $color-text-light;
+    color: $color_1;
     font-size: $font-size-base;
     margin: 10px 0;
   }
@@ -599,7 +616,7 @@ body:has(.modal-backdrop.active) {
   }
 
   /* Ensure text and buttons are properly aligned */
-  .cart-item > * {
+  .cart-item>* {
     text-align: center;
   }
 
@@ -873,7 +890,8 @@ hr {
 /* Open Popup Button */
 body.modal-open {
   overflow: auto !important;
-  padding-right: 0 !important; /* Prevents unwanted shifts */
+  padding-right: 0 !important;
+  /* Prevents unwanted shifts */
 }
 
 .open-popup-btn {
@@ -1363,17 +1381,17 @@ input {
   }
 
   /* Move label when focused or filled */
-  .floating-group input:focus ~ label,
-  .floating-group input:not(:placeholder-shown) ~ label,
-  .floating-group select:focus ~ label,
-  .floating-group select:not([value=""]) ~ label {
+  .floating-group input:focus~label,
+  .floating-group input:not(:placeholder-shown)~label,
+  .floating-group select:focus~label,
+  .floating-group select:not([value=""])~label {
     top: -10px;
     font-size: 14px;
     color: $color_1;
   }
 
   .continue-btn {
-    background: #9f5f2e;
+    background: $custom-color-3;
     color: white;
     font-size: 16px;
     padding: 20px 30px;
@@ -1647,21 +1665,30 @@ input {
     // transition: transform 0.3s ease-in, opacity 0.3s ease-in;
   }
 }
+
 /*******************************************/
 /* Style the Select2 container */
 .select2-container .select2-selection--single,
 .select2-container .selection .select2-selection {
-  height: 47px; /* Match input height */
-  background: transparent; /* Make background transparent */
-  border: 1px solid #777; /* Match input border */
-  border-radius: 5px; /* Match border radius */
-  padding: 8px 12px; /* Adjust padding */
-  font-size: 16px; /* Ensure font size consistency */
-  color: #fff; /* Match text color */
+  height: 47px;
+  /* Match input height */
+  background: transparent;
+  /* Make background transparent */
+  border: 1px solid #777;
+  /* Match input border */
+  border-radius: 5px;
+  /* Match border radius */
+  padding: 8px 12px;
+  /* Adjust padding */
+  font-size: 16px;
+  /* Ensure font size consistency */
+  color: #fff;
+  /* Match text color */
   display: flex;
   width: 100%;
   margin-top: 10px;
   align-items: center;
+
   .select2-selection__rendered {
     color: #fff !important;
   }
@@ -1674,24 +1701,26 @@ input {
 /* Remove default background on focus */
 .select2-container--default .select2-selection--single:focus {
   outline: none;
-  border-color: #777; /* Change border color on focus */
+  border-color: #777;
+  /* Change border color on focus */
 }
 
 /* Style the dropdown arrow */
-.select2-container--default
-  .select2-selection--single
-  .select2-selection__arrow {
-    margin-top: 17px;
- 
-    b {
-    border-color: #fff transparent transparent transparent; /* Match arrow color */
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  margin-top: 17px;
+
+  b {
+    border-color: #fff transparent transparent transparent;
+    /* Match arrow color */
   }
 }
 
 /* Style the dropdown options */
 .select2-container--default .select2-results__option {
-  background: #27130f; /* Dropdown background */
-  color: #fff; /* Text color */
+  background: #27130f;
+  /* Dropdown background */
+  color: #fff;
+  /* Text color */
 }
 
 /* Remove default select outline */
@@ -1701,18 +1730,19 @@ input {
 
 /* Match floating label style */
 .floating-group label {
-  color: #ccc; /* Label color */
+  color: #ccc;
+  /* Label color */
 }
 
 .select2-container--default .select2-results__option[aria-selected="true"] {
-  background-color: lighten(#27130f, 10%) !important; /* A darker shade of #6c1d10 */
-  color: #fff !important; /* Keep text readable */
+  background-color: lighten(#27130f, 10%) !important;
+  /* A darker shade of #6c1d10 */
+  color: #fff !important;
+  /* Keep text readable */
 }
 
-.select2-container--default
-  .select2-selection--single
-  .select2-selection__rendered {
-  color: #fff!important;
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: #fff !important;
 }
 
 .select2-search--dropdown {
@@ -1721,7 +1751,7 @@ input {
 
 .select2-container--default .select2-results__option--highlighted[aria-selected],
 .select2-container--default .select2-results__option:hover {
-  background: lighten(#27130f, 10%)!important;
+  background: lighten(#27130f, 10%) !important;
 }
 
 .select2-search--dropdown {

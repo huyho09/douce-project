@@ -1,4 +1,4 @@
-﻿@model (string FragranceName, List<string> KeyIngredients, int NumberSize, int Size, string Price, string UnitPrice, bool isFresh, bool isCitrus, bool isMarine, bool isGreen, bool isHerbaceous, bool isFloral, bool isSpicy, bool isWoody, bool isSmoky, bool isAmbery, bool isResinous, List<string> Aroma)
+﻿@model (string FragranceName, List<string> KeyIngredients, int NumberSize, int Size, string Price, bool isFresh, bool isCitrus, bool isMarine, bool isGreen, bool isHerbaceous, bool isFloral, bool isSpicy, bool isWoody, bool isSmoky, bool isAmbery, bool isResinous, List<string> Aroma)
 
 @{ 
     var imgLogo = "/images/logo/logo-hinh-brown-01.png";
@@ -23,14 +23,7 @@
     @String.Join(", ", Model.KeyIngredients)
 </div>
 <div class="unitPricing">
-    @if (!string.IsNullOrEmpty(Model.Price) && !string.IsNullOrEmpty(Model.UnitPrice))
-    {
-        <span class="unitPricingPrice" data-testid="product-price">From @Model.Price</span>
-
-        <span class="unitPricingSlash">/</span>
-        <span class="unitPricingUnitPrice" data-testid="unit-price">@Model.UnitPrice</span>
-    }
-    else
+    @if (!string.IsNullOrEmpty(Model.Price))
     {
         <span class="unitPricingPrice" data-testid="product-price">@Model.Price</span>
     }

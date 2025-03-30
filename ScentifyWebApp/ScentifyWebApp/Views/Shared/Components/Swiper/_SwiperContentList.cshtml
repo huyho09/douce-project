@@ -90,6 +90,7 @@
                 {
                     if (perfume.DtoIngredients!= null && perfume.DtoIngredients.Count() > 0)
                     {
+                        var priceInfo = perfume.DtoPriceInfo?.FirstOrDefault() ?? new ScentifyWebApp.Models.Entities.PriceInfo();
                         var ingredients = perfume.DtoIngredients;
 
                         <div class="@(Model.isMobile ? $"content-mobile-{index} swiper-detail-mobile": $"content-{index} swiper-detail") @(index == 0 ? "" :  "d-none")">
@@ -97,9 +98,8 @@
                                      model=@( (perfume.Name,
                                              ingredients?.Select(m => m.Name).ToList() ?? new List<string>(),
                                              1,
-                                             perfume.VolumeMl,
-                                             $"{perfume.Currency} {perfume.Price}",
-                                             perfume.UnitPrice ?? "",
+                                             priceInfo.VolumeMl,
+                                             $"{priceInfo.Currency} {priceInfo.Price}",
                                              GetRandomBool(), GetRandomBool(), GetRandomBool(), GetRandomBool(),
                                              GetRandomBool(), GetRandomBool(), GetRandomBool(), GetRandomBool(),
                                              GetRandomBool(), GetRandomBool(), GetRandomBool(),

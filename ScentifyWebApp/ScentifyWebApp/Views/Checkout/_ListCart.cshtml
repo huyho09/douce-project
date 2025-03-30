@@ -2,7 +2,7 @@
 
 @{
     var orderId = Guid.NewGuid().ToString();
-    var amount = Model.Sum(m => m.Quantity * m.Product.Price).ToString("N2");
+    var amount = Model.Sum(m => m.Quantity * m.Price).ToString("N2");
 }
 
 <div class="price-details">
@@ -21,11 +21,11 @@
             <img src="@perfume.ImageUrl" alt="@perfume.Name">
             <div class="product-details">
                 <p class="product-name">@perfume.Name</p>
-                <p class="product-size">@perfume.VolumeMl</p>
+                <p class="product-size">@cartItem.VolumeMl</p>
                 <button class="btn remove" type="button" onclick="removeCartItemInCheckOut(this,'@perfume.Id');">Remove</button>
             </div>
             <input type="number" class="quantity form-control-sm w-25" value="@cartItem.Quantity" min="1" onchange="updateCartIteminCheckOut(this,'@perfume.Id');" />
-            <span class="product-price">@perfume.Price.ToString("N2")</span>
+            <span class="product-price">@cartItem.Price.ToString("N2")</span>
         </div>
     }
 }
