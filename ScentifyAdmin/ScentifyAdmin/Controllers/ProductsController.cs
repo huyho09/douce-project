@@ -5,10 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ScentifyAdmin.DAL.DB;
+using ScentifyAdmin.Libs;
 using ScentifyAdmin.Models.Dtos;
 using ScentifyAdmin.Models.Entities;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 
 namespace ScentifyAdmin.Controllers
 {
@@ -45,6 +47,15 @@ namespace ScentifyAdmin.Controllers
 							var Ingredients = JsonConvert.DeserializeObject<List<Ingredient>>(item.Ingredients);
 							item.DtoIngredients = Ingredients;
 						}
+						if (!string.IsNullOrEmpty(item.PriceInfo))
+						{
+							var PriceInfoData = item.PriceInfo;
+							var productSizes = JsonHelpers.ParseJson(PriceInfoData);
+							if(productSizes != null && productSizes.Any())
+							{
+								item.ProductSizes = productSizes;
+							}			
+						}
 					}
 				}
 			}
@@ -64,7 +75,10 @@ namespace ScentifyAdmin.Controllers
 			if (requestDTO != null)
 			{
 				var request = _mapper.Map<Perfume>(requestDTO);
-				request.PriceInfo = "";
+				var priceInfo = new List<PriceInfo>();
+				priceInfo.Add(new PriceInfo() { Price = requestDTO.Price1, VolumeMl = requestDTO.VolumeMl1, Currency = requestDTO.Currency });
+				priceInfo.Add(new PriceInfo() { Price = requestDTO.Price2, VolumeMl = requestDTO.VolumeMl2, Currency = requestDTO.Currency });
+				request.PriceInfo = JsonConvert.SerializeObject(priceInfo);
 				_context.Perfume.Add(request);
 				await _context.SaveChangesAsync();
 				return RedirectToAction("index");
@@ -80,6 +94,30 @@ namespace ScentifyAdmin.Controllers
 			}
 			var product = _context.Perfume.FirstOrDefault(m => m.Id == guidId);
 			var viewModel = _mapper.Map<DtoPerfume>(product);
+			if (product != null && !string.IsNullOrEmpty(product.PriceInfo))
+			{
+				var PriceInfoData = product.PriceInfo;
+				var productSizes = JsonHelpers.ParseJson(PriceInfoData);
+				if (productSizes != null && productSizes.Any())
+				{
+					viewModel.ProductSizes = productSizes;
+					for(var i = 0; i < productSizes.Count(); i++)
+					{
+						if(i == 0)
+						{
+							viewModel.Price1 = productSizes[i].Price;
+							viewModel.VolumeMl1 = productSizes[i].VolumeMl;
+							viewModel.Currency = productSizes[i].Currency;
+						}
+						if (i == 1)
+						{
+							viewModel.Price2 = productSizes[i].Price;
+							viewModel.VolumeMl2 = productSizes[i].VolumeMl;
+							viewModel.Currency = productSizes[i].Currency;
+						}
+					}
+				}
+			}
 			return View(viewModel);
 		}
 
@@ -92,7 +130,15 @@ namespace ScentifyAdmin.Controllers
 				{
 				}
 				var existingPerfume = _context.Perfume.FirstOrDefault(m => m.Id == guidId);
+				var priceInfo = new List<PriceInfo>();
+				priceInfo.Add(new PriceInfo() { Price = requestDTO.Price1, VolumeMl = requestDTO.VolumeMl1, Currency = requestDTO.Currency });
+				priceInfo.Add(new PriceInfo() { Price = requestDTO.Price2, VolumeMl = requestDTO.VolumeMl2, Currency = requestDTO.Currency });
+				
 				_mapper.Map(requestDTO, existingPerfume);
+				if (priceInfo != null && priceInfo.Any() && existingPerfume != null)
+				{
+					existingPerfume.PriceInfo = JsonConvert.SerializeObject(priceInfo);
+				}
 				await _context.SaveChangesAsync();
 				return RedirectToAction("index");
 			}
@@ -138,5 +184,6 @@ namespace ScentifyAdmin.Controllers
 			}
 			return false;
 		}
+
 	}
 }

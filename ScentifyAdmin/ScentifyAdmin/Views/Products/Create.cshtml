@@ -56,32 +56,29 @@
 								<label class="form-label" for="Composition">Composition:</label>
 								<input asp-for="Composition" class="form-control" autocomplete="off" />
 							</div>
-							<!-- Gender -->
+
+							<!-- Volume (ml) 1 -->
 							<div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="Gender">Gender:</label>
-								<select asp-for="Gender" class="form-control">
-									<option value="Male">Male</option>
-									<option value="Female">Female</option>
-									<option value="Unisex">Unisex</option>
-								</select>
+								<label class="form-label" for="VolumeMl1">Volume 1 (ml):</label>
+								<input asp-for="VolumeMl1" type="number" class="form-control" min="1" />
 							</div>
 
-							<!-- Fragrance Family -->
+							<!-- Price 1 -->
 							<div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="FragranceFamily">Fragrance Family:</label>
-								<input asp-for="FragranceFamily" class="form-control" autocomplete="off" />
+								<label class="form-label" for="Price1">Price 1:</label>
+								<input asp-for="Price1" type="number" class="form-control" step="0.01" />
 							</div>
 
-							<!-- Volume (ml) -->
+							<!-- Volume (ml) 2 -->
 							<div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="VolumeMl">Volume (ml):</label>
-								<input asp-for="VolumeMl" type="number" class="form-control" min="1" />
+								<label class="form-label" for="VolumeMl2">Volume 2 (ml):</label>
+								<input asp-for="VolumeMl2" type="number" class="form-control" min="1" />
 							</div>
 
-							<!-- Price -->
+							<!-- Price 2 -->
 							<div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="Price">Price:</label>
-								<input asp-for="Price" type="number" class="form-control" step="0.01" />
+								<label class="form-label" for="Price2">Price 2:</label>
+								<input asp-for="Price2" type="number" class="form-control" step="0.01" />
 							</div>
 
 							<!-- Currency -->
@@ -100,9 +97,9 @@
 							<div class="form-outline mb-4 col-lg-6">
 								<label class="form-label" for="Status">Status:</label>
 								<select asp-for="Status" class="form-control">
-									<option value=1>Available</option>
-									<option value=2>Out of Stock</option>
-									<option value=3>Discontinued</option>
+									<option value="Available">Available</option>
+									<option value="Out of Stock">Out of Stock</option>
+									<option value="Discontinued">Discontinued</option>
 								</select>
 							</div>
 

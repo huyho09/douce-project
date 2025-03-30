@@ -25,21 +25,16 @@ namespace ScentifyAdmin.Models.Dtos
 
 		public string Composition { get; set; } = string.Empty;
 
-		public string Gender { get; set; } = string.Empty; // "Male", "Female", "Unisex"
-		public IList<SelectListItem> GenderList { get; set; } = new List<SelectListItem> {
-				 new SelectListItem{Value = "Male", Text = "Male"},
-				 new SelectListItem{Value = "Female", Text = "Female"},
-				 new SelectListItem{Value = "Unisex", Text = "Unisex"},
-		};
-
 		public string FragranceFamily { get; set; } = string.Empty; // Nhóm hương chính (VD: Floral, Woody)
 
-		public int VolumeMl { get; set; }// Dung tích chai (VD: 30ml, 50ml, 100ml)
+		public int VolumeMl1 { get; set; }// Dung tích chai (VD: 30ml, 50ml, 100ml)
+		public int VolumeMl2 { get; set; }
 
 		public string Ingredients { get; set; } = string.Empty;
 		public List<Ingredient>? DtoIngredients { get; set; } // Nguyên liệu
 
-		public decimal Price { get; set; } = 0; // Giá bán (VNĐ hoặc USD)
+		public decimal Price1 { get; set; } = 0; // Giá bán (VNĐ hoặc USD)
+		public decimal Price2 { get; set; } = 0;
 
 		public string UnitPrice { get; set; } = string.Empty; // e.g., "€275.00 per 100 ml"
 
@@ -47,7 +42,7 @@ namespace ScentifyAdmin.Models.Dtos
 
 		public int StockQuantity { get; set; } = 0; // Số lượng tồn kho
 		public string PriceInfo { get; set; } = "";
-
+		public List<ProductSize> ProductSizes { get; set; }
 		public string Status { get; set; }
 		public IList<SelectListItem> StatusList { get; set; } = new List<SelectListItem>
 		{

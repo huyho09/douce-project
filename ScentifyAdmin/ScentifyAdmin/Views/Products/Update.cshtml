@@ -57,28 +57,29 @@
 								<label class="form-label" for="Composition">Composition:</label>
 								<input asp-for="Composition" class="form-control" autocomplete="off" value="@Model.Composition" />
 							</div>
-							<!-- Gender -->
+
+							<!-- Volume 1 (ml) -->
 							<div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="Gender">Gender:</label>
-								@Html.DropDownListFor(m => m.Gender, Model.GenderList, new { @id = "Gender", @class = "form-control" })
+								<label class="form-label" for="VolumeMl1">Volume 1 (ml):</label>
+								<input asp-for="VolumeMl1" type="number" class="form-control" min="1" value="@Model.VolumeMl1" />
 							</div>
 
-							<!-- Fragrance Family -->
+							<!-- Price 1 -->
 							<div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="FragranceFamily">Fragrance Family:</label>
-								<input asp-for="FragranceFamily" class="form-control" autocomplete="off" value="@Model.FragranceFamily" />
+								<label class="form-label" for="Price1">Price 1:</label>
+								<input asp-for="Price1" type="number" class="form-control" step="0.01" value="@Model.Price1" />
 							</div>
 
-							<!-- Volume (ml) -->
+							<!-- Volume 2 (ml) -->
 							<div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="VolumeMl">Volume (ml):</label>
-								<input asp-for="VolumeMl" type="number" class="form-control" min="1" value="@Model.VolumeMl" />
+								<label class="form-label" for="VolumeMl2">Volume 2 (ml):</label>
+								<input asp-for="VolumeMl2" type="number" class="form-control" min="1" value="@Model.VolumeMl2" />
 							</div>
 
-							<!-- Price -->
+							<!-- Price 2 -->
 							<div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="Price">Price:</label>
-								<input asp-for="Price" type="number" class="form-control" step="0.01" value="@Model.Price" />
+								<label class="form-label" for="Price2">Price 2:</label>
+								<input asp-for="Price2" type="number" class="form-control" step="0.01" value="@Model.Price2" />
 							</div>
 
 							<!-- Currency -->

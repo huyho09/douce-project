@@ -47,13 +47,8 @@
 							<th>Hear Notes</th>
 							<th>Base Notes</th>
 							<th>Composition</th>
-							<th>Gender(use for Male/Female)</th>
-							<th>Fragrance Family</th>
-							<th>Volume Ml</th>
 							<th>Ingredients</th>
-							<th>Price</th>
-							<th>Unit Price</th>
-							<th>Currency</th>
+							<th>Price infor</th>
 							<th>Stock Quantity</th>
 							<th>Status</th>
 							<th>Image Url</th>
@@ -76,18 +71,22 @@
 									<td>@product.MiddlePerfumed</td>
 									<td>@product.BasePerfumed</td>
 									<td>@product.Composition</td>
-									<td>@product.Gender</td>
-									<td>@product.FragranceFamily</td>
-									<td>@product.VolumeMl</td>
 									<td>
 										@if (product.DtoIngredients != null && product.DtoIngredients.Any())
 										{
 											@string.Join(", ", product.DtoIngredients.Select(i => i.Name))
 										}
 									</td>
-									<td>@product.Price</td>
-									<td>@product.UnitPrice</td>
-									<td>@product.Currency</td>
+									<td>
+										@if (product.ProductSizes != null && product.ProductSizes.Any())
+										{
+											foreach (var item in product.ProductSizes)
+											{
+												<p>@item.VolumeMl ml - @item.Price @item.Currency</p>
+											}
+
+										}
+									</td>
 									<td>@product.StockQuantity</td>
 									<td>@product.Status</td>
 									<td>@product.ImageUrl</td>
