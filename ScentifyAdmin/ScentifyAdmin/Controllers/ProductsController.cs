@@ -50,7 +50,7 @@ namespace ScentifyAdmin.Controllers
 						if (!string.IsNullOrEmpty(item.PriceInfo))
 						{
 							var PriceInfoData = item.PriceInfo;
-							var productSizes = JsonHelpers.ParseJson(PriceInfoData);
+							var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
 							if(productSizes != null && productSizes.Any())
 							{
 								item.ProductSizes = productSizes;
@@ -79,6 +79,18 @@ namespace ScentifyAdmin.Controllers
 				priceInfo.Add(new PriceInfo() { Price = requestDTO.Price1, VolumeMl = requestDTO.VolumeMl1, Currency = requestDTO.Currency });
 				priceInfo.Add(new PriceInfo() { Price = requestDTO.Price2, VolumeMl = requestDTO.VolumeMl2, Currency = requestDTO.Currency });
 				request.PriceInfo = JsonConvert.SerializeObject(priceInfo);
+				var fragranceNotes = new FragranceNote();
+				fragranceNotes.Fruity = requestDTO.Fruity;
+				fragranceNotes.Citrus = requestDTO.Citrus;
+				fragranceNotes.Floral = requestDTO.Floral;
+				fragranceNotes.Woody = requestDTO.Woody;
+				fragranceNotes.Musky = requestDTO.Musky;
+				fragranceNotes.Oriental = requestDTO.Oriental;
+				fragranceNotes.Spicy = requestDTO.Spicy;
+				fragranceNotes.Tobacco = requestDTO.Tobacco;
+				fragranceNotes.Gourmand = requestDTO.Gourmand;
+				request.FragranceNotes = JsonConvert.SerializeObject(fragranceNotes);
+
 				_context.Perfume.Add(request);
 				await _context.SaveChangesAsync();
 				return RedirectToAction("index");
@@ -97,7 +109,24 @@ namespace ScentifyAdmin.Controllers
 			if (product != null && !string.IsNullOrEmpty(product.PriceInfo))
 			{
 				var PriceInfoData = product.PriceInfo;
-				var productSizes = JsonHelpers.ParseJson(PriceInfoData);
+				var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
+				if (!string.IsNullOrEmpty(product.FragranceNotes))
+				{
+					var fragranceNotes = JsonHelpers.ParseJson<FragranceNote>(product.FragranceNotes);
+					if(fragranceNotes!= null && fragranceNotes.Any())
+					{
+						viewModel.Citrus = fragranceNotes[0].Citrus;
+						viewModel.Floral = fragranceNotes[0].Floral;
+						viewModel.Fruity = fragranceNotes[0].Fruity;
+						viewModel.Woody = fragranceNotes[0].Woody;
+						viewModel.Musky = fragranceNotes[0].Musky;
+						viewModel.Oriental = fragranceNotes[0].Oriental;
+						viewModel.Spicy = fragranceNotes[0].Spicy;
+						viewModel.Tobacco = fragranceNotes[0].Tobacco;
+						viewModel.Gourmand = fragranceNotes[0].Gourmand;
+					}
+				}
+				
 				if (productSizes != null && productSizes.Any())
 				{
 					viewModel.ProductSizes = productSizes;
@@ -133,11 +162,25 @@ namespace ScentifyAdmin.Controllers
 				var priceInfo = new List<PriceInfo>();
 				priceInfo.Add(new PriceInfo() { Price = requestDTO.Price1, VolumeMl = requestDTO.VolumeMl1, Currency = requestDTO.Currency });
 				priceInfo.Add(new PriceInfo() { Price = requestDTO.Price2, VolumeMl = requestDTO.VolumeMl2, Currency = requestDTO.Currency });
-				
+				var fragranceNotes = new FragranceNote();
+				fragranceNotes.Fruity = requestDTO.Fruity;
+				fragranceNotes.Citrus = requestDTO.Citrus;
+				fragranceNotes.Floral = requestDTO.Floral;
+				fragranceNotes.Woody = requestDTO.Woody;
+				fragranceNotes.Musky = requestDTO.Musky;
+				fragranceNotes.Oriental = requestDTO.Oriental;
+				fragranceNotes.Spicy = requestDTO.Spicy;
+				fragranceNotes.Tobacco = requestDTO.Tobacco;
+				fragranceNotes.Gourmand = requestDTO.Gourmand;
+
 				_mapper.Map(requestDTO, existingPerfume);
 				if (priceInfo != null && priceInfo.Any() && existingPerfume != null)
 				{
 					existingPerfume.PriceInfo = JsonConvert.SerializeObject(priceInfo);
+				}
+				if(fragranceNotes != null && priceInfo != null && existingPerfume != null)
+				{
+					existingPerfume.FragranceNotes = JsonConvert.SerializeObject(fragranceNotes);
 				}
 				await _context.SaveChangesAsync();
 				return RedirectToAction("index");

@@ -7,15 +7,10 @@ namespace ScentifyAdmin.Models.Dtos
 	public class DtoPerfume
 	{
 		public string Id { get; set; }
-
 		public string Name { get; set; } = string.Empty;
-
 		public string Brand { get; set; } = string.Empty;
-
-		public string Manufacturer { get; set; } = string.Empty; // Nhà sản xuất (có thể khác thương hiệu)
-
+		public string Manufacturer { get; set; } = string.Empty;
 		public string ShortDescription { get; set; } = string.Empty;
-
 		public string Description { get; set; } = string.Empty;
 		public string TopPerfumed { get; set; } = string.Empty;
 		public string MiddlePerfumed { get; set; } = string.Empty;
@@ -24,23 +19,27 @@ namespace ScentifyAdmin.Models.Dtos
 		public PerfumedNote Perfumed_Notes_DTO { get; set; }
 
 		public string Composition { get; set; } = string.Empty;
-
 		public string FragranceFamily { get; set; } = string.Empty; // Nhóm hương chính (VD: Floral, Woody)
-
-		public int VolumeMl1 { get; set; }// Dung tích chai (VD: 30ml, 50ml, 100ml)
+		public int VolumeMl1 { get; set; }
 		public int VolumeMl2 { get; set; }
-
 		public string Ingredients { get; set; } = string.Empty;
 		public List<Ingredient>? DtoIngredients { get; set; } // Nguyên liệu
-
-		public decimal Price1 { get; set; } = 0; // Giá bán (VNĐ hoặc USD)
+		public decimal Price1 { get; set; } = 0;
 		public decimal Price2 { get; set; } = 0;
+		public string Currency { get; set; } = string.Empty;
+		public string FragranceNotes { get; set; }
 
-		public string UnitPrice { get; set; } = string.Empty; // e.g., "€275.00 per 100 ml"
+		public bool Citrus { get; set; }
+		public bool Floral { get; set; }
+		public bool Fruity { get; set; }
+		public bool Woody { get; set; }
+		public bool Musky { get; set; }
+		public bool Oriental { get; set; }
+		public bool Spicy { get; set; }
+		public bool Tobacco { get; set; }
+		public bool Gourmand { get; set; }
 
-		public string Currency { get; set; } = string.Empty; // e.g., "€"
-
-		public int StockQuantity { get; set; } = 0; // Số lượng tồn kho
+		public int StockQuantity { get; set; } = 0;
 		public string PriceInfo { get; set; } = "";
 		public List<ProductSize> ProductSizes { get; set; }
 		public string Status { get; set; }

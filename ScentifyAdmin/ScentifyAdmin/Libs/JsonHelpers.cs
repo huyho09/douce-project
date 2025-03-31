@@ -5,17 +5,23 @@ namespace ScentifyAdmin.Libs
 {
 	public static class JsonHelpers
 	{
-		public static List<ProductSize> ParseJson(string json)
+		public static List<T> ParseJson<T>(string json)
 		{
+			if (string.IsNullOrWhiteSpace(json))
+			{
+				return new List<T>();
+			}
+
 			if (json.Trim().StartsWith("["))
 			{
-				return JsonConvert.DeserializeObject<List<ProductSize>>(json);
+				return JsonConvert.DeserializeObject<List<T>>(json);
 			}
 			else
 			{
-				var singleObject = JsonConvert.DeserializeObject<ProductSize>(json);
-				return new List<ProductSize> { singleObject };
+				var singleObject = JsonConvert.DeserializeObject<T>(json);
+				return new List<T> { singleObject };
 			}
 		}
+
 	}
 }

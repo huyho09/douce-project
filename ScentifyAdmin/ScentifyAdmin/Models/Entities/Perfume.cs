@@ -16,8 +16,9 @@ namespace ScentifyAdmin.Models.Entities
         public string Description { get; set; }
         public string Composition { get; set; }
         public string Ingredients { get; set; }
+        public string FragranceNotes { get; set; }
 
-        [Range(0, int.MaxValue)]
+		[Range(0, int.MaxValue)]
         public int StockQuantity { get; set; }
         public string TopPerfumed { get; set; }
         public string MiddlePerfumed { get; set; }
