@@ -1,7 +1,14 @@
-﻿@model (string FragranceName, List<string> KeyIngredients, int NumberSize, int Size, string Price, bool isFresh, bool isCitrus, bool isMarine, bool isGreen, bool isHerbaceous, bool isFloral, bool isSpicy, bool isWoody, bool isSmoky, bool isAmbery, bool isResinous, List<string> Aroma)
+﻿@using Newtonsoft.Json
+@using Newtonsoft.Json.Linq
 
-@{ 
+@* @model (string FragranceName, List<string> KeyIngredients, int NumberSize, int Size, string Price, bool isFresh, bool isCitrus, bool isMarine, bool isGreen, bool isHerbaceous, bool isFloral, bool isSpicy, bool isWoody, bool isSmoky, bool isAmbery, bool isResinous, List<string> Aroma) *@
+@model (string FragranceName, List<string> KeyIngredients, int NumberSize, int Size, string Price, dynamic FragranceNotes, List<string> Aroma)
+
+@{
     var imgLogo = "/images/logo/logo-hinh-brown-01.png";
+    var fragranceNotes = Model.FragranceNotes != null
+        ? JsonConvert.DeserializeObject<Dictionary<string, bool>>(Model.FragranceNotes.ToString())
+        : new Dictionary<string, bool>();
 }
 
 <style>
@@ -33,7 +40,7 @@
     <table class="TypefragranceTable" style="overflow: hidden;">
         <tbody>
             <tr>
-                <td class="">
+                @* <td class="">
 					<div class="color-box" style="background-image: url('@(Model.isFresh ? imgLogo : "")'); background-size:cover; background-position:center;">Fresh</div>
                 </td>
                 <td>
@@ -65,7 +72,26 @@
                 </td>
                 <td>
                     <div class="color-box" style="background-image: url('@(Model.isResinous ? imgLogo : "")'); background-size:cover; background-position:center;">Resinous</div>
-                </td>
+                </td> *@
+                
+                @if (fragranceNotes?.Count > 0)
+                {
+                    @foreach (var kvp in fragranceNotes)
+                    {
+                        var propName = kvp.Key;
+                        var propValue = kvp.Value;
+
+                        <td>
+                            <div class="color-box" style="background-image: url('@(propValue ? imgLogo : "")'); background-size:cover; background-position:center;">
+                                @propName
+                            </div>
+                        </td>
+                    }
+                }
+                else
+                {
+                    <td>No fragrance notes available</td>
+                }
             </tr>
         </tbody>
     </table>

@@ -22,8 +22,9 @@ namespace ScentifyWebApp.Models.Entities
         public string MiddlePerfumed { get; set; }
         public string BasePerfumed { get; set; }
         public string PriceInfo { get; set; }
+		public string FragranceNotes { get; set; }
 
-        [Required]
+		[Required]
         public string Status { get; set; }
         public string ImageUrl { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

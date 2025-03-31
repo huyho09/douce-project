@@ -22,5 +22,6 @@ namespace ScentifyWebApp.Models.Dtos
         //public DateTime CreatedAt { get; set; }
         //public DateTime UpdatedAt { get; set; }
         public List<DtoPerfume> SimilarPerfumes { get; set; }
-    }
+		public dynamic FragranceNotes { get; set; }
+	}
 }
