@@ -91,7 +91,33 @@ namespace ScentifyAdmin.Controllers
 				fragranceNotes.Gourmand = requestDTO.Gourmand;
 				request.FragranceNotes = JsonConvert.SerializeObject(fragranceNotes);
 
-				_context.Perfume.Add(request);
+				var ingredients = new List<Ingredient>()
+				{
+					new Ingredient()
+					{
+						ImageUrl = requestDTO.Ingredient_Img_1 ?? "",
+						Name = requestDTO.Ingredient_Name_1 ?? ""
+                    },
+                    new Ingredient()
+                    {
+                        ImageUrl = requestDTO.Ingredient_Img_2 ?? "",
+                        Name = requestDTO.Ingredient_Name_2 ?? ""
+                    },
+                    new Ingredient()
+                    {
+                        ImageUrl = requestDTO.Ingredient_Img_3 ?? "",
+                        Name = requestDTO.Ingredient_Name_3 ?? ""
+                    },
+                    new Ingredient()
+                    {
+                        ImageUrl = requestDTO.Ingredient_Img_4 ?? "",
+                        Name = requestDTO.Ingredient_Name_4 ?? ""
+                    }
+                };
+
+				request.Ingredients = JsonConvert.SerializeObject(ingredients);
+
+                _context.Perfume.Add(request);
 				await _context.SaveChangesAsync();
 				return RedirectToAction("index");
 			}
