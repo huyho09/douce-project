@@ -8,6 +8,9 @@
                 </div>
                 <div class="h-full overflow-hidden m-4">
                     <form asp-action="Create" class="needs-validation" method="post">
+                        @if(!string.IsNullOrEmpty(ViewData["ErrorSubmit"]?.ToString())){
+                            <p class="text-danger">@ViewData["ErrorSubmit"]</p>
+                        }
                         <div class="row">
                             <!-- Image Upload -->
                             <div class="form-outline mb-4 col-lg-5">
@@ -17,7 +20,11 @@
 								</div>
 								<input type="file" name="ImageUrl" id="ImageUrl" class="form-control" accept="image/*" required /> *@
                                 <div class="upload-placeholder" id="placeholder-0" onclick="document.getElementById('file-input-0').click()">
-                                    Upload Image
+                                    @if (!string.IsNullOrEmpty(Model.ImageUrl)) {
+                                        <img src="@Model.ImageUrl" class="uploaded-image" alt="Uploaded image">
+                                    } else {
+                                        @Html.Raw("Upload Image")
+                                    }
                                 </div>
                                 <input type="file" class="file-input" id="file-input-0" accept="image/*" onchange="uploadImage(0)">
                                 <input type="hidden" id="image-input-0" asp-for="ImageUrl" />
@@ -33,7 +40,7 @@
                             <!-- Top Notes -->
                             <div class="form-outline mb-4 col-lg-6">
                                 <label class="form-label" for="TopPerfumed">Top Notes:</label>
-                                <textarea asp-for="TopPerfumed" class="form-control" autocomplete="off"></textarea>
+                                <textarea asp-for="TopPerfumed" class="form-control" autocomplete="off">@Model.TopPerfumed</textarea>
                             </div>
                             <!-- Hear Notes -->
                             <div class="form-outline mb-4 col-lg-6">
@@ -129,7 +136,14 @@
                                     <div class="col-md-6">
                                         <!-- First Row: Image Upload -->
                                         <div class="upload-placeholder" id="placeholder-1" onclick="document.getElementById('file-input-1').click()">
-                                            Upload Ingredient Image
+                                            @if (!string.IsNullOrEmpty(Model.Ingredient_Img_1))
+                                            {
+                                                <img src="@Model.Ingredient_Img_1" class="uploaded-image" alt="Uploaded image">
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("Upload Ingredient Image")
+                                            }                                            
                                         </div>
                                         <input type="file" class="file-input" id="file-input-1" accept="image/*" onchange="uploadImage(1)">
                                         <input type="hidden" id="image-input-1" asp-for="Ingredient_Img_1" />
@@ -137,7 +151,14 @@
                                         <input type="text" class="form-control mb-3" placeholder="Enter the first ingredient's name..." asp-for="Ingredient_Name_1">
                                         <!-- Second Row: Image Upload -->
                                         <div class="upload-placeholder" id="placeholder-3" onclick="document.getElementById('file-input-3').click()">
-                                            Upload Ingredient Image
+                                            @if (!string.IsNullOrEmpty(Model.Ingredient_Img_3))
+                                            {
+                                                <img src="@Model.Ingredient_Img_3" class="uploaded-image" alt="Uploaded image">
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("Upload Ingredient Image")
+                                            }
                                         </div>
                                         <input type="file" class="file-input" id="file-input-3" accept="image/*" onchange="uploadImage(3)">
                                         <input type="hidden" id="image-input-3" asp-for="Ingredient_Img_3" />
@@ -149,7 +170,14 @@
                                     <div class="col-md-6">
                                         <!-- First Row: Image Upload -->
                                         <div class="upload-placeholder" id="placeholder-2" onclick="document.getElementById('file-input-2').click()">
-                                            Upload Ingredient Image
+                                            @if (!string.IsNullOrEmpty(Model.Ingredient_Img_2))
+                                            {
+                                                <img src="@Model.Ingredient_Img_2" class="uploaded-image" alt="Uploaded image">
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("Upload Ingredient Image")
+                                            }
                                         </div>
                                         <input type="file" class="file-input" id="file-input-2" accept="image/*" onchange="uploadImage(2)">
                                         <input type="hidden" id="image-input-2" asp-for="Ingredient_Img_2" />
@@ -157,7 +185,14 @@
                                         <input type="text" class="form-control mb-3" placeholder="Enter the third ingredient's name ..." asp-for="Ingredient_Name_2">
                                         <!-- Second Row: Image Upload -->
                                         <div class="upload-placeholder" id="placeholder-4" onclick="document.getElementById('file-input-4').click()">
-                                            Upload Ingredient Image
+                                            @if (!string.IsNullOrEmpty(Model.Ingredient_Img_4))
+                                            {
+                                                <img src="@Model.Ingredient_Img_4" class="uploaded-image" alt="Uploaded image">
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("Upload Ingredient Image")
+                                            }
                                         </div>
                                         <input type="file" class="file-input" id="file-input-4" accept="image/*" onchange="uploadImage(4)">
                                         <input type="hidden" id="image-input-4" asp-for="Ingredient_Img_4" />

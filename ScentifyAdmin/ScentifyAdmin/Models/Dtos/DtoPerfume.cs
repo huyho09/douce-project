@@ -60,7 +60,7 @@ namespace ScentifyAdmin.Models.Dtos
         public string Ingredient_Name_4 { get; set; } = "";
         public string Ingredient_Img_4 { get; set; } = "";
 
-        public string ImageUrl { get; set; } = "/"; // URL hình ảnh sản phẩm
+        public string ImageUrl { get; set; } = ""; // URL hình ảnh sản phẩm
 
     }
     public class PerfumedNote

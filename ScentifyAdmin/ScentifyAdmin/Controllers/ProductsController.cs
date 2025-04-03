@@ -51,10 +51,10 @@ namespace ScentifyAdmin.Controllers
 						{
 							var PriceInfoData = item.PriceInfo;
 							var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
-							if(productSizes != null && productSizes.Any())
+							if (productSizes != null && productSizes.Any())
 							{
 								item.ProductSizes = productSizes;
-							}			
+							}
 						}
 					}
 				}
@@ -72,56 +72,63 @@ namespace ScentifyAdmin.Controllers
 		[HttpPost("Create")]
 		public async Task<IActionResult> Create(DtoPerfume requestDTO)
 		{
-			if (requestDTO != null)
+			try
 			{
-				var request = _mapper.Map<Perfume>(requestDTO);
-				var priceInfo = new List<PriceInfo>();
-				priceInfo.Add(new PriceInfo() { Price = requestDTO.Price1, VolumeMl = requestDTO.VolumeMl1, Currency = requestDTO.Currency });
-				priceInfo.Add(new PriceInfo() { Price = requestDTO.Price2, VolumeMl = requestDTO.VolumeMl2, Currency = requestDTO.Currency });
-				request.PriceInfo = JsonConvert.SerializeObject(priceInfo);
-				var fragranceNotes = new FragranceNote();
-				fragranceNotes.Fruity = requestDTO.Fruity;
-				fragranceNotes.Citrus = requestDTO.Citrus;
-				fragranceNotes.Floral = requestDTO.Floral;
-				fragranceNotes.Woody = requestDTO.Woody;
-				fragranceNotes.Musky = requestDTO.Musky;
-				fragranceNotes.Oriental = requestDTO.Oriental;
-				fragranceNotes.Spicy = requestDTO.Spicy;
-				fragranceNotes.Tobacco = requestDTO.Tobacco;
-				fragranceNotes.Gourmand = requestDTO.Gourmand;
-				request.FragranceNotes = JsonConvert.SerializeObject(fragranceNotes);
+				if (requestDTO != null)
+				{
+					var request = _mapper.Map<Perfume>(requestDTO);
+					var priceInfo = new List<PriceInfo>();
+					priceInfo.Add(new PriceInfo() { Price = requestDTO.Price1, VolumeMl = requestDTO.VolumeMl1, Currency = requestDTO.Currency });
+					priceInfo.Add(new PriceInfo() { Price = requestDTO.Price2, VolumeMl = requestDTO.VolumeMl2, Currency = requestDTO.Currency });
+					request.PriceInfo = JsonConvert.SerializeObject(priceInfo);
+					var fragranceNotes = new FragranceNote();
+					fragranceNotes.Fruity = requestDTO.Fruity;
+					fragranceNotes.Citrus = requestDTO.Citrus;
+					fragranceNotes.Floral = requestDTO.Floral;
+					fragranceNotes.Woody = requestDTO.Woody;
+					fragranceNotes.Musky = requestDTO.Musky;
+					fragranceNotes.Oriental = requestDTO.Oriental;
+					fragranceNotes.Spicy = requestDTO.Spicy;
+					fragranceNotes.Tobacco = requestDTO.Tobacco;
+					fragranceNotes.Gourmand = requestDTO.Gourmand;
+					request.FragranceNotes = JsonConvert.SerializeObject(fragranceNotes);
 
-				var ingredients = new List<Ingredient>()
+					var ingredients = new List<Ingredient>()
 				{
 					new Ingredient()
 					{
 						ImageUrl = requestDTO.Ingredient_Img_1 ?? "",
 						Name = requestDTO.Ingredient_Name_1 ?? ""
-                    },
-                    new Ingredient()
-                    {
-                        ImageUrl = requestDTO.Ingredient_Img_2 ?? "",
-                        Name = requestDTO.Ingredient_Name_2 ?? ""
-                    },
-                    new Ingredient()
-                    {
-                        ImageUrl = requestDTO.Ingredient_Img_3 ?? "",
-                        Name = requestDTO.Ingredient_Name_3 ?? ""
-                    },
-                    new Ingredient()
-                    {
-                        ImageUrl = requestDTO.Ingredient_Img_4 ?? "",
-                        Name = requestDTO.Ingredient_Name_4 ?? ""
-                    }
-                };
+					},
+					new Ingredient()
+					{
+						ImageUrl = requestDTO.Ingredient_Img_2 ?? "",
+						Name = requestDTO.Ingredient_Name_2 ?? ""
+					},
+					new Ingredient()
+					{
+						ImageUrl = requestDTO.Ingredient_Img_3 ?? "",
+						Name = requestDTO.Ingredient_Name_3 ?? ""
+					},
+					new Ingredient()
+					{
+						ImageUrl = requestDTO.Ingredient_Img_4 ?? "",
+						Name = requestDTO.Ingredient_Name_4 ?? ""
+					}
+				};
 
-				request.Ingredients = JsonConvert.SerializeObject(ingredients);
+					request.Ingredients = JsonConvert.SerializeObject(ingredients);
 
-                _context.Perfume.Add(request);
-				await _context.SaveChangesAsync();
-				return RedirectToAction("index");
+					_context.Perfume.Add(request);
+					await _context.SaveChangesAsync();
+					return RedirectToAction("index");
+				}
+				return RedirectToAction("Index", "Product");
 			}
-			return RedirectToAction("Index","Product");
+			catch { }
+
+			ViewData["ErrorSubmit"] = "Submit failed!";
+			return View(requestDTO);
 		}
 
 		[HttpGet("Update")]
@@ -139,7 +146,7 @@ namespace ScentifyAdmin.Controllers
 				if (!string.IsNullOrEmpty(product.FragranceNotes))
 				{
 					var fragranceNotes = JsonHelpers.ParseJson<FragranceNote>(product.FragranceNotes);
-					if(fragranceNotes!= null && fragranceNotes.Any())
+					if (fragranceNotes != null && fragranceNotes.Any())
 					{
 						viewModel.Citrus = fragranceNotes[0].Citrus;
 						viewModel.Floral = fragranceNotes[0].Floral;
@@ -152,13 +159,13 @@ namespace ScentifyAdmin.Controllers
 						viewModel.Gourmand = fragranceNotes[0].Gourmand;
 					}
 				}
-				
+
 				if (productSizes != null && productSizes.Any())
 				{
 					viewModel.ProductSizes = productSizes;
-					for(var i = 0; i < productSizes.Count(); i++)
+					for (var i = 0; i < productSizes.Count(); i++)
 					{
-						if(i == 0)
+						if (i == 0)
 						{
 							viewModel.Price1 = productSizes[i].Price;
 							viewModel.VolumeMl1 = productSizes[i].VolumeMl;
@@ -204,7 +211,7 @@ namespace ScentifyAdmin.Controllers
 				{
 					existingPerfume.PriceInfo = JsonConvert.SerializeObject(priceInfo);
 				}
-				if(fragranceNotes != null && priceInfo != null && existingPerfume != null)
+				if (fragranceNotes != null && priceInfo != null && existingPerfume != null)
 				{
 					existingPerfume.FragranceNotes = JsonConvert.SerializeObject(fragranceNotes);
 				}
@@ -221,7 +228,7 @@ namespace ScentifyAdmin.Controllers
 			{
 			}
 			var product = _context.Perfume.FirstOrDefault(m => m.Id == guidId);
-			if(product != null)
+			if (product != null)
 			{
 				_context.Perfume.Remove(product);
 				await _context.SaveChangesAsync();

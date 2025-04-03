@@ -10,25 +10,25 @@ namespace ScentifyAdmin.Models.Entities
 
         [Required]
         public string Name { get; set; }
-        public string Brand { get; set; }
-        public string Manufacturer { get; set; }
-        public string ShortDescription { get; set; }
-        public string Description { get; set; }
-        public string Composition { get; set; }
-        public string Ingredients { get; set; }
-        public string FragranceNotes { get; set; }
+        public string Brand { get; set; } = string.Empty;
+        public string Manufacturer { get; set; } = string.Empty;
+		public string ShortDescription { get; set; } = string.Empty;
+		public string Description { get; set; } = string.Empty;
+		public string Composition { get; set; } = string.Empty;
+		public string Ingredients { get; set; } = string.Empty;
+		public string FragranceNotes { get; set; } = string.Empty;
 
 		[Range(0, int.MaxValue)]
         public int StockQuantity { get; set; }
-        public string TopPerfumed { get; set; }
-        public string MiddlePerfumed { get; set; }
-        public string BasePerfumed { get; set; }
-        public string PriceInfo { get; set; }
+        public string TopPerfumed { get; set; } = string.Empty;
+		public string MiddlePerfumed { get; set; } = string.Empty;
+		public string BasePerfumed { get; set; } = string.Empty;
+		public string PriceInfo { get; set; } = string.Empty;
 
-        [Required]
-        public string Status { get; set; }
-        public string ImageUrl { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+		[Required]
+        public string Status { get; set; } = "Available";
+		public string ImageUrl { get; set; } = string.Empty;
+		public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     }
 
@@ -41,8 +41,8 @@ namespace ScentifyAdmin.Models.Entities
 
     public class Ingredient
     {
-        public string Name { get; set; }
-        public string ImageUrl { get; set; }
-        public string Description { get; set; }
-    }
+        public string Name { get; set; } = string.Empty;
+		public string ImageUrl { get; set; } = string.Empty;
+		public string Description { get; set; } = string.Empty;
+	}
 }
