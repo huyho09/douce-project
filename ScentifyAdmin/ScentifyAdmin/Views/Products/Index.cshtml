@@ -6,19 +6,23 @@
 <style>
 	.table th,
 	.table td {
-		min-width: 120px;
-		word-wrap: break-word;
+	min-width: 120px;
+	word-wrap: break-word;
 	}
 
-		.table th:last-child,
-		.table td:last-child {
-			min-width: 200px;
-		}
+	.table th:last-child,
+	.table td:last-child {
+	min-width: 200px;
+	}
 
 	.dataTables_filter label {
-		width: 50%;
-		float: left;
-		margin-bottom: 25px;
+	width: 50%;
+	float: left;
+	margin-bottom: 25px;
+	}
+
+	.img-table{
+		width:50px;
 	}
 </style>
 
@@ -38,20 +42,21 @@
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
+							<th>Idx</th>
+							<th>Image Url</th>
 							<th>Name</th>
-							<th>Brand</th>
-							<th>Manufacturer</th>
+							<@* th>Brand</th>
+							<th>Manufacturer</th> *@
 							<th>ShortDescription</th>
-							<th>Description</th>
+							@* <th>Description</th> *@
 							<th>Top Notes</th>
 							<th>Hear Notes</th>
 							<th>Base Notes</th>
-							<th>Composition</th>
+							@* <th>Composition</th> *@
 							<th>Ingredients</th>
 							<th>Price infor</th>
-							<th>Stock Quantity</th>
-							<th>Status</th>
-							<th>Image Url</th>
+							@* <th>Stock Quantity</th> *@
+							@* <th>Status</th> *@
 							@*<th>Similar Perfumes</th>*@
 							<th>Action</th>
 						</tr>
@@ -59,18 +64,21 @@
 					<tbody>
 						@if (Model != null && Model?.Count() > 0)
 						{
+							var index = 1;
 							foreach (var product in Model)
 							{
 								<tr>
+									<td>@index</td>
+									<td><img class="img-table" src="@product.ImageUrl" alt="Alternate Text" /></td>
 									<td>@product.Name</td>
-									<td>@product.Brand</td>
-									<td>@product.Manufacturer</td>
+									@* <td>@product.Brand</td>
+									<td>@product.Manufacturer</td> *@
 									<td>@product.ShortDescription</td>
-									<td>@(product.Description.Length > 100 ? product.Description.Substring(0, 100) + "..." : product.Description)</td>
+									@* <td>@(product.Description.Length > 100 ? product.Description.Substring(0, 100) + "..." : product.Description)</td> *@
 									<td>@product.TopPerfumed</td>
 									<td>@product.MiddlePerfumed</td>
 									<td>@product.BasePerfumed</td>
-									<td>@product.Composition</td>
+									@* <td>@product.Composition</td> *@
 									<td>
 										@if (product.DtoIngredients != null && product.DtoIngredients.Any())
 										{
@@ -87,9 +95,8 @@
 
 										}
 									</td>
-									<td>@product.StockQuantity</td>
-									<td>@product.Status</td>
-									<td>@product.ImageUrl</td>
+									@* <td>@product.StockQuantity</td>
+									<td>@product.Status</td> *@
 									@*	<td>
 											@if (product.SimilarPerfumes != null && product.SimilarPerfumes.Any())
 											{
@@ -105,6 +112,7 @@
 										</button>
 									</td>
 								</tr>
+								index++;
 							}
 						}
 					</tbody>
