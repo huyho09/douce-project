@@ -38,3 +38,55 @@ function uploadImage(index) {
         reader.readAsDataURL(file);
     }
 }
+
+//function uploadImage(index) {
+//    const fileInput = document.getElementById(`file-input-${index}`);
+//    const placeholder = document.getElementById(`placeholder-${index}`);
+//    const imgInput = document.getElementById(`image-input-${index}`);
+//    const file = fileInput.files[0];
+
+//    if (file) {
+//        // Create a FormData object to send the file
+//        const formData = new FormData();
+//        formData.append('file', file);
+
+//        // Add product_id to the FormData (assuming product_id is available)
+//        const productId = $('#productId').val();
+//        formData.append('productId', productId);
+
+//        // Make an AJAX call to the UploadImage endpoint
+//        fetch('/api/image/upload', {
+//            method: 'POST',
+//            body: formData
+//        })
+//            .then(response => {
+//                if (!response.ok) {
+//                    throw new Error('Failed to upload image');
+//                }
+//                return response.json(); // Expecting the server to return JSON with the image URL
+//            })
+//            .then(data => {
+//                // Create an image element
+//                const img = document.createElement('img');
+//                img.src = data.imageUrl; // Use the URL returned from the server
+//                img.className = 'uploaded-image';
+//                img.alt = 'Uploaded image';
+
+//                // Replace the placeholder content with the new image
+//                placeholder.innerHTML = '';
+//                placeholder.appendChild(img);
+
+//                // Ensure the placeholder remains clickable for future uploads
+//                placeholder.onclick = () => document.getElementById(`file-input-${index}`).click();
+
+//                // Store the image URL in the hidden input (if needed)
+//                if (imgInput) {
+//                    imgInput.value = data.imageUrl;
+//                }
+//            })
+//            .catch(error => {
+//                console.error('Error uploading image:', error);
+//                alert('Failed to upload image. Please try again.');
+//            });
+//    }
+//}
