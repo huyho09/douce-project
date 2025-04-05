@@ -27,8 +27,8 @@
                 {
                     foreach (var product in Model)
                     {
-                        var priceInfoFirst = product.DtoPriceInfo?[0];
-                        var priceInfoSecond = product.DtoPriceInfo?[1];
+                        var priceInfoFirst = product.ProductSizes?[0];
+                        var priceInfoSecond = product.ProductSizes?[1];
                         <div class="product-grid-item">
                             <!-- Image -->
                             <a href="/products/details/@product.Id" target="_self">

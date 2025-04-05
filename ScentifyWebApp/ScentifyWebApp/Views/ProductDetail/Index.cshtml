@@ -5,7 +5,7 @@
 
 @if (Model != null)
 {
-    var priceInfo = Model.DtoPriceInfo?.FirstOrDefault() ?? new ScentifyWebApp.Models.Entities.PriceInfo();
+    var priceInfo = Model.ProductSizes?.FirstOrDefault();
 
     <!-- Main Content -->
     <div class="container main d-flex">

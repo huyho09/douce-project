@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ScentifyWebApp.DAL.DB;
+using ScentifyWebApp.Libs;
 using ScentifyWebApp.Models;
 using ScentifyWebApp.Models.Dtos;
 using ScentifyWebApp.Models.Entities;
@@ -34,7 +36,15 @@ namespace ScentifyWebApp.Controllers
             }
 
             var product = await _productDetail(guidId);
-            ViewData["sizeMl"] = sizeMl;
+            if(product != null && product.ProductSizes != null && product.ProductSizes.Any())
+            {
+                var ProductSizeCurrent = product.ProductSizes.Where(x => x.VolumeMl == sizeMl).ToList();
+                if(ProductSizeCurrent != null)
+                {
+                    product.ProductSizes = ProductSizeCurrent;
+				}
+			}
+			ViewData["sizeMl"] = sizeMl;
             return View(product);
         }
 
@@ -69,13 +79,16 @@ namespace ScentifyWebApp.Controllers
                         result.DtoIngredients = dtoIngredients;
                     }
 
-                    // convert price info
-                    if (!string.IsNullOrEmpty(perfume.PriceInfo))
-                    {
-                        var dtoPriceInfos = JsonConvert.DeserializeObject<List<PriceInfo>>(perfume.PriceInfo);
-                        result.DtoPriceInfo = dtoPriceInfos;
-                    }
-                }
+					if (!string.IsNullOrEmpty(perfume.PriceInfo))
+					{
+						var PriceInfoData = perfume.PriceInfo;
+						var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
+						if (productSizes != null && productSizes.Any())
+						{
+							result.ProductSizes = productSizes;
+						}
+					}
+				}
             }
             return result;
         }

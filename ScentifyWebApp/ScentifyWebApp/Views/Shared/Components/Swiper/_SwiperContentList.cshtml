@@ -88,9 +88,9 @@
                 var index = 0;
                 @foreach (var perfume in Model.perfumes.Take(6))
                 {
-                    if (perfume.DtoIngredients!= null && perfume.DtoIngredients.Count() > 0)
+                    if (perfume.ProductSizes != null && perfume.ProductSizes.Count() > 0)
                     {
-                        var priceInfo = perfume.DtoPriceInfo?.FirstOrDefault() ?? new ScentifyWebApp.Models.Entities.PriceInfo();
+                        var priceInfo = perfume.ProductSizes.FirstOrDefault();
                         var ingredients = perfume.DtoIngredients;
 
                         <div class="@(Model.isMobile ? $"content-mobile-{index} swiper-detail-mobile": $"content-{index} swiper-detail") @(index == 0 ? "" :  "d-none")">

@@ -25,7 +25,7 @@
                 {
                     foreach (var product in Model)
                     {
-                        var priceInfo = product.DtoPriceInfo?.FirstOrDefault() ?? new ScentifyWebApp.Models.Entities.PriceInfo();
+                        var priceInfo = product.ProductSizes?.FirstOrDefault();
 
                         <div class="product-grid-item">
                             <!-- Image -->

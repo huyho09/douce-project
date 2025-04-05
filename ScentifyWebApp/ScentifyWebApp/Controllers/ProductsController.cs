@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ScentifyWebApp.DAL.DB;
+using ScentifyWebApp.Libs;
 using ScentifyWebApp.Models;
 using ScentifyWebApp.Models.Dtos;
 using ScentifyWebApp.Models.Entities;
@@ -114,14 +115,17 @@ namespace ScentifyWebApp.Controllers
             dtoProducts = _mapper.Map<List<DtoPerfume>>(perfumes);
             for (int i = 0; i < dtoProducts.Count; i++)
             {
-                var priceInforStr = perfumes[i].PriceInfo;
-                if (!string.IsNullOrEmpty(priceInforStr))
-                {
-                    var priceInfo = JsonConvert.DeserializeObject<List<PriceInfo>>(priceInforStr);
-                    dtoProducts[i].DtoPriceInfo = priceInfo;
-                }
+				if (!string.IsNullOrEmpty(dtoProducts[i].PriceInfo))
+				{
+					var PriceInfoData = dtoProducts[i].PriceInfo;
+					var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
+					if (productSizes != null && productSizes.Any())
+					{
+						dtoProducts[i].ProductSizes = productSizes;
+					}
+				}
 
-                var ingredientsStr = perfumes[i].Ingredients;
+				var ingredientsStr = perfumes[i].Ingredients;
                 if (!string.IsNullOrEmpty(ingredientsStr))
                 {
                     var dtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(ingredientsStr);

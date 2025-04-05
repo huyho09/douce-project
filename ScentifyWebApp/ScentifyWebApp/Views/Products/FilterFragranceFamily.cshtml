@@ -25,7 +25,7 @@
                 {
                     foreach (var perfume in Model)
                     {
-                        var priceInfo = perfume.DtoPriceInfo?.FirstOrDefault() ?? new ScentifyWebApp.Models.Entities.PriceInfo();
+                        var priceInfo = perfume.ProductSizes?.FirstOrDefault();
 
                         <div class="product-grid-item">
                             <!-- Image -->

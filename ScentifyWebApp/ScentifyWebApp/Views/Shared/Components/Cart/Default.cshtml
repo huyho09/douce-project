@@ -16,7 +16,7 @@
         foreach (var cartItem in Model)
         {
             var product = cartItem.Product;
-            var priceInfo = product.DtoPriceInfo?.FirstOrDefault() ?? new ScentifyWebApp.Models.Entities.PriceInfo();
+            var priceInfo = product.ProductSizes?.FirstOrDefault();
 
             <div class="cart-item">
                 <p class="product-name">@product.Name</p>
