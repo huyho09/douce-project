@@ -1,111 +1,68 @@
 ﻿@using Newtonsoft.Json
 @using Newtonsoft.Json.Linq
-
-@* @model (string FragranceName, List<string> KeyIngredients, int NumberSize, int Size, string Price, bool isFresh, bool isCitrus, bool isMarine, bool isGreen, bool isHerbaceous, bool isFloral, bool isSpicy, bool isWoody, bool isSmoky, bool isAmbery, bool isResinous, List<string> Aroma) *@
-@model (string FragranceName, List<string> KeyIngredients, int NumberSize, int Size, string Price, dynamic FragranceNotes, List<string> Aroma)
+@using ScentifyWebApp.Models.Dtos
+@model DtoPerfume
 
 @{
-    var imgLogo = "/images/logo/logo-hinh-brown-01.png";
-    var fragranceNotes = Model.FragranceNotes != null
-        ? JsonConvert.DeserializeObject<Dictionary<string, bool>>(Model.FragranceNotes.ToString())
-        : new Dictionary<string, bool>();
+	var imgLogo = "/images/logo/logo-hinh-brown-01.png";
+	var fragranceNotes = Model.FragranceNotes != null
+		? JsonConvert.DeserializeObject<Dictionary<string, bool>>(Model.FragranceNotes.ToString())
+		: new Dictionary<string, bool>();
 }
 
 <style>
-    tbody {
-        display: flex;
-        font-family: Suisse, sans-serif;
-        font-size: 0.875rem;
-        max-width: 100vw;
-        overflow-x: auto;
-        list-style: none;
-        margin: 0px auto -50px;
-        padding: 0px 20px 50px;
-    }
+	tbody {
+		display: flex;
+		font-family: Suisse, sans-serif;
+		font-size: 0.875rem;
+		max-width: 100vw;
+		overflow-x: auto;
+		list-style: none;
+		margin: 0px auto -50px;
+		padding: 0px 20px 50px;
+	}
 </style>
 <h3 class="details_heading mb-2">
-    <a data-testid="product-comparison-name" href="#" tabindex="0">@Model.FragranceName</a>
+	<a data-testid="product-comparison-name" href="#" tabindex="0">@Model.Name</a>
 </h3>
-<div class="details_KeyIngredients">
-    @String.Join(", ", Model.KeyIngredients)
-</div>
+@if (Model.DtoIngredients != null && Model.DtoIngredients.Any())
+{
+	<div class="details_KeyIngredients">
+		@String.Join(", ", Model.DtoIngredients.Select(m => m.Name).ToList())
+	</div>
+}
 <div class="unitPricing">
-    @if (!string.IsNullOrEmpty(Model.Price))
-    {
-        <span class="unitPricingPrice" data-testid="product-price">@Model.Price</span>
-    }
+	@if (Model.ProductSizes != null && Model.ProductSizes.Count() > 0)
+	{
+		var firstProductSizes = Model.ProductSizes.FirstOrDefault();
+		<span class="unitPricingPrice" data-testid="product-price">@firstProductSizes.Price - @firstProductSizes.VolumeMl ml</span>
+	}
 </div>
 
 <div class="color-notes-table">
-    <table class="TypefragranceTable" style="overflow: hidden;">
-        <tbody>
-            <tr>
-                @* <td class="">
-					<div class="color-box" style="background-image: url('@(Model.isFresh ? imgLogo : "")'); background-size:cover; background-position:center;">Fresh</div>
-                </td>
-                <td>
-                    <div class="color-box" style="background-image: url('@(Model.isCitrus ? imgLogo : "")'); background-size:cover; background-position:center;">Citrus</div>
-                </td>
-                <td>
-                    <div class="color-box" style="background-image: url('@(Model.isMarine ? imgLogo: "")'); background-size:cover; background-position:center;">Marine</div>
-                </td>
-                <td>
-                    <div class="color-box" style="background-image: url('@(Model.isGreen ? imgLogo : "")'); background-size:cover; background-position:center;">Green</div>
-                </td>
-                <td>
-                    <div class="color-box" style="background-image: url('@(Model.isHerbaceous ? imgLogo: "")'); background-size:cover; background-position:center;">Herbaceous</div>
-                </td>
-                <td>
-                    <div class="color-box" style="background-image: url('@(Model.isFloral ? imgLogo: "")'); background-size:cover; background-position:center;">Floral</div>
-                </td>
-                <td>
-                    <div class="color-box" style="background-image: url('@(Model.isSpicy ? imgLogo: "")'); background-size:cover; background-position:center;">Spicy</div>
-                </td>
-                <td>
-                    <div class="color-box" style="background-image: url('@(Model.isWoody ? imgLogo : "")'); background-size:cover; background-position:center;">Woody</div>
-                </td>
-                <td>
-                    <div class="color-box" style="background-image: url('@(Model.isSmoky ? imgLogo : "")'); background-size:cover; background-position:center;">Smoky</div>
-                </td>
-                <td>
-                    <div class="color-box" style="background-image: url('@(Model.isAmbery ? imgLogo: "")'); background-size:cover; background-position:center;">Ambery</div>
-                </td>
-                <td>
-                    <div class="color-box" style="background-image: url('@(Model.isResinous ? imgLogo : "")'); background-size:cover; background-position:center;">Resinous</div>
-                </td> *@
-                
-                @if (fragranceNotes?.Count > 0)
-                {
-                    @foreach (var kvp in fragranceNotes)
-                    {
-                        var propName = kvp.Key;
-                        var propValue = kvp.Value;
+	<table class="TypefragranceTable" style="overflow: hidden;">
+		<tbody>
+			<tr>
+				@if (fragranceNotes?.Count > 0)
+				{
+					@foreach (var kvp in fragranceNotes)
+					{
+						var propName = kvp.Key;
+						var propValue = kvp.Value;
 
-                        <td>
-                            <div class="color-box" style="background-image: url('@(propValue ? imgLogo : "")'); background-size:cover; background-position:center;">
-                                @propName
-                            </div>
-                        </td>
-                    }
-                }
-                else
-                {
-                    <td>No fragrance notes available</td>
-                }
-            </tr>
-        </tbody>
-    </table>
+						<td>
+							<div class="color-box" style="background-image: url('@(propValue ? imgLogo : "")'); background-size:cover; background-position:center;">
+								@propName
+							</div>
+						</td>
+					}
+				}
+				else
+				{
+					<td>No fragrance notes available</td>
+				}
+			</tr>
+		</tbody>
+	</table>
 </div>
 
-@if (Model.Aroma != null && Model.Aroma.Count > 0)
-{
-    <h3 class="details_heading mt-4 mb-3">
-        <a data-testid="product-comparison-name" href="#" tabindex="0">Aromatically alike</a>
-    </h3>
-    foreach (var item in Model.Aroma)
-    {
-        <div class="details_KeyIngredients">
-            @item
-        </div>
-    }
-}
