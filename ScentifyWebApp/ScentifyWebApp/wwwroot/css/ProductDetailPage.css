@@ -1,4 +1,4 @@
-/* Reset */
+﻿/* Reset */
 /* Header */
 /* Main Content */
 /* Image & Info */
@@ -71,8 +71,7 @@
 .product-display img {
   width: 300px;
   height: auto;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   filter: drop-shadow(0 10px 10px #9f5f2e);
 }
 
@@ -190,18 +189,17 @@
 .card {
   flex: 1;
   max-width: 380px;
-  background: #ffd8a9;
+  background-color: transparent;
   border-radius: 15px;
   padding: 30px 20px;
   text-align: center;
   transition: 0.4s;
-  box-shadow: 0 5px 10px #cc5500;
+  box-shadow: 0 0px 5px #d5b260;
 }
 .card img {
   width: 180px;
   margin-bottom: 20px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   transition: 0.3s;
   margin: 0 auto;
   /* Ensures horizontal centering */
@@ -210,15 +208,25 @@
 .card h3 {
   margin: 15px 0;
   font-size: 1.4em;
-  color: #aa4406;
+  color: #d5b260;
 }
 .card p {
-  color: #6c1d10;
+  color: #d5b260;
   font-size: 1em;
 }
 .card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 25px #cc5500;
+  box-shadow: 0 5px 20px #d5b260;
+}
+
+.section-label p {
+  color: #fffef2;
+  line-height: 1.5;
+  text-align: justify;
+  margin-bottom: 100px;
+}
+.section-label p img {
+  margin-top: 1.5rem;
 }
 
 .card.center {
@@ -262,7 +270,7 @@
 }
 
 .third-section {
-  padding: 60px 30px;
+  padding: 20px 30px 50px;
   color: #d5b260;
   position: relative;
 }
@@ -303,8 +311,7 @@
 .product-card img {
   width: 100%;
   height: auto;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 main:has(.product-info) .product-card {
@@ -509,4 +516,4 @@ main:has(.product-info) .card {
   .product-cards::-webkit-scrollbar {
     display: none;
   }
-}/*# sourceMappingURL=ProductDetailPage.css.map */
+}

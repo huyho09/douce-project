@@ -219,41 +219,52 @@ $custom-color-4: #d5b260;
 }
 
 .card {
-  flex: 1;
-  max-width: 380px;
-  background: $color_2;
-  border-radius: 15px;
-  padding: 30px 20px;
-  text-align: center;
-  transition: 0.4s;
-  // cursor: pointer;
-  box-shadow: 0 5px 10px $color_3;
+    flex: 1;
+    max-width: 380px;
+    background-color: transparent;
+    border-radius: 15px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: 0.4s;
+    // cursor: pointer;
+    box-shadow: 0 0px 5px $custom-color-4;
 
-  img {
-    width: 180px;
-    margin-bottom: 20px;
-    object-fit: contain;
-    transition: 0.3s;
-    margin: 0 auto;
-    /* Ensures horizontal centering */
-    display: block;
-  }
+    img {
+        width: 180px;
+        margin-bottom: 20px;
+        object-fit: contain;
+        transition: 0.3s;
+        margin: 0 auto;
+        /* Ensures horizontal centering */
+        display: block;
+    }
 
-  h3 {
-    margin: 15px 0;
-    font-size: 1.4em;
-    color: $color_4;
-  }
+    h3 {
+        margin: 15px 0;
+        font-size: 1.4em;
+        color: $custom-color-4;
+    }
 
-  p {
-    color: $color_6;
-    font-size: 1em;
-  }
+    p {
+        color: $custom-color-4;
+        font-size: 1em;
+    }
 
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 25px $color_3;
-  }
+    &:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 5px 20px $custom-color-4;
+    }
+}
+.section-label {
+    p {
+        color: $color_7;
+        line-height: 1.5;
+        text-align: justify;
+        margin-bottom: 100px;
+        img{
+            margin-top: 1.5rem;
+        }
+    }
 }
 
 .card.center {
@@ -301,7 +312,7 @@ $custom-color-4: #d5b260;
 }
 
 .third-section {
-  padding: 60px 30px;
+  padding: 20px 30px 50px;
   color: $custom-color-4;
   position: relative;
 }

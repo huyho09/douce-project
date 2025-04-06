@@ -37,7 +37,7 @@ namespace ScentifyWebApp.Models.Dtos
         public bool Spicy { get; set; }
         public bool Tobacco { get; set; }
         public bool Gourmand { get; set; }
-
+        public int CurrentSize { get; set; } = 0;
         public int StockQuantity { get; set; } = 0;
         public string PriceInfo { get; set; } = "";
         public List<ProductSize>? ProductSizes { get; set; }

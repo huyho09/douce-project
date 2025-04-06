@@ -160,22 +160,24 @@ namespace ScentifyAdmin.Controllers
                         viewModel.Tobacco = fragranceNotes[0].Tobacco;
                         viewModel.Gourmand = fragranceNotes[0].Gourmand;
                     }
-                    var ingredients = JsonConvert.SerializeObject(product.Ingredients);
-                    if (!string.IsNullOrEmpty(ingredients))
+                    if (!string.IsNullOrEmpty(product.Ingredients))
                     {
-                        viewModel.DtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(ingredients);
-                        if (viewModel.DtoIngredients != null) {
-                            viewModel.Ingredient_Img_1 = viewModel.DtoIngredients[1]?.ImageUrl ?? "";
-                            viewModel.Ingredient_Img_2 = viewModel.DtoIngredients[2]?.ImageUrl ?? "";
-                            viewModel.Ingredient_Img_3 = viewModel.DtoIngredients[3]?.ImageUrl ?? "";
-                            viewModel.Ingredient_Img_4 = viewModel.DtoIngredients[4]?.ImageUrl ??"";
-                            viewModel.Ingredient_Name_1 = viewModel.DtoIngredients[1]?.Name ?? "";
-                            viewModel.Ingredient_Name_2 = viewModel.DtoIngredients[2]?.Name ?? "";
-                            viewModel.Ingredient_Name_3 = viewModel.DtoIngredients[3]?.Name ?? "";
-                            viewModel.Ingredient_Name_4 = viewModel.DtoIngredients[4]?.Name ?? "";
-                        }
-                    }
-                }
+                        viewModel.DtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(product.Ingredients);
+						if (viewModel.DtoIngredients != null)
+						{
+							viewModel.Ingredient_Img_1 = viewModel.DtoIngredients.Count > 0 ? viewModel.DtoIngredients[0]?.ImageUrl ?? "" : "";
+							viewModel.Ingredient_Img_2 = viewModel.DtoIngredients.Count > 1 ? viewModel.DtoIngredients[1]?.ImageUrl ?? "" : "";
+							viewModel.Ingredient_Img_3 = viewModel.DtoIngredients.Count > 2 ? viewModel.DtoIngredients[2]?.ImageUrl ?? "" : "";
+							viewModel.Ingredient_Img_4 = viewModel.DtoIngredients.Count > 3 ? viewModel.DtoIngredients[3]?.ImageUrl ?? "" : "";
+
+							viewModel.Ingredient_Name_1 = viewModel.DtoIngredients.Count > 0 ? viewModel.DtoIngredients[0]?.Name ?? "" : "";
+							viewModel.Ingredient_Name_2 = viewModel.DtoIngredients.Count > 1 ? viewModel.DtoIngredients[1]?.Name ?? "" : "";
+							viewModel.Ingredient_Name_3 = viewModel.DtoIngredients.Count > 2 ? viewModel.DtoIngredients[2]?.Name ?? "" : "";
+							viewModel.Ingredient_Name_4 = viewModel.DtoIngredients.Count > 3 ? viewModel.DtoIngredients[3]?.Name ?? "" : "";
+						}
+
+					}
+				}
 
                 if (productSizes != null && productSizes.Any())
                 {

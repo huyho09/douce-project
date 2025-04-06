@@ -247,28 +247,6 @@
 </div>
 <script src="~/vendor/jquery/jquery.min.js"></script>
 <script>
-    document.getElementById('ImageUrl').addEventListener('change', function (event) {
-        let file = event.target.files[0];
-        if (file) {
-            let reader = new FileReader();
-            reader.onload = function (e) {
-                let preview = document.getElementById('previewImage');
-                if (!preview) {
-                    preview = document.createElement('img');
-                    preview.id = 'previewImage';
-                    preview.className = 'img-thumbnail mt-2';
-                    preview.style.maxWidth = '150px';
-                    document.getElementById('ImageUrl').insertAdjacentElement('afterend', preview);
-                }
-                preview.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
-
-</script>
-<script>
     $(document).ready(function () {
         $('#summernote').summernote({
             callbacks: {

@@ -26,7 +26,7 @@ namespace ScentifyWebApp.Controllers
         }
 
         [HttpGet("details/{id}/{sizeMl?}")]
-        public async Task<IActionResult> Index(string id, int? sizeMl)
+        public async Task<IActionResult> Index(string id, int sizeMl = 0)
         {
             if (!Guid.TryParse(id, out Guid guidId))
             {
@@ -34,15 +34,15 @@ namespace ScentifyWebApp.Controllers
             }
 
             var product = await _productDetail(guidId);
-            if (product != null && product.ProductSizes != null && product.ProductSizes.Any())
-            {
-                var ProductSizeCurrent = product.ProductSizes.Where(x => x.VolumeMl == sizeMl).ToList();
-                if (ProductSizeCurrent != null && ProductSizeCurrent?.Count > 0)
-                {
-                    product.ProductSizes = ProductSizeCurrent;
-                }
-            }
-            ViewData["sizeMl"] = sizeMl;
+            //if (product != null && product.ProductSizes != null && product.ProductSizes.Any())
+            //{
+            //    var ProductSizeCurrent = product.ProductSizes.Where(x => x.VolumeMl == sizeMl).ToList();
+            //    if (ProductSizeCurrent != null && ProductSizeCurrent?.Count > 0)
+            //    {
+            //        product.ProductSizes = ProductSizeCurrent;
+            //    }
+            //}       
+            product.CurrentSize = sizeMl;
             return View(product);
         }
 
