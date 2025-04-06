@@ -253,43 +253,24 @@
 <script src="~/admin/vendor/jquery/jquery.min.js"></script>
 
 <script>
-    $(document).ready(function () {
-        // document.getElementById('ImageUrl').addEventListener('change', function (event) {
-        //     let file = event.target.files[0];
-        //     if (file) {
-        //         let reader = new FileReader();
-        //         reader.onload = function (e) {
-        //             let preview = document.getElementById('previewImage');
-        //             if (!preview) {
-        //                 preview = document.createElement('img');
-        //                 preview.id = 'previewImage';
-        //                 preview.className = 'img-thumbnail mt-2';
-        //                 preview.style.maxWidth = '150px';
-        //                 document.getElementById('ImageUrl').insertAdjacentElement('afterend', preview);
-        //             }
-        //             preview.src = e.target.result;
-        //         };
-        //         reader.readAsDataURL(file);
-        //     }
-        // });
+	$(document).ready(function () {
+		$('#summernote').summernote({
+			callbacks: {
+				onImageLinkInsert: function (url) {
+					// url is the image url from the dialog
+					$img = $('<img>').attr({ src: url })
+					$summernote.summernote('insertNode', $img[0]);
+				}
+			},
+			height: 300,
+		});
 
-        $('#summernote').summernote({
-            callbacks: {
-                onImageLinkInsert: function (url) {
-                    // url is the image url from the dialog
-                    $img = $('<img>').attr({ src: url })
-                    $summernote.summernote('insertNode', $img[0]);
-                }
-            },
-            height: 300,
-        });
+		// summernote.image.link.insert
+		$('#summernote').on('summernote.image.link.insert', function (we, url) {
+			// url is the image url from the dialog
+			$img = $('<img>').attr({ src: url })
+			$summernote.summernote('insertNode', $img[0]);
+		});
 
-        // summernote.image.link.insert
-        $('#summernote').on('summernote.image.link.insert', function (we, url) {
-            // url is the image url from the dialog
-            $img = $('<img>').attr({ src: url })
-            $summernote.summernote('insertNode', $img[0]);
-        });
-
-    });
+	});
 </script>
