@@ -2,7 +2,7 @@
 
 namespace ScentifyWebApp.Models.ViewModels
 {
-	public class HomeViewModel
+    public class HomeViewModel
     {
         public List<DtoPerfume>? DtoPerfumes { get; set; }
     }

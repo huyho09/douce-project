@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ScentifyWebApp.Models.Entities;
-using System.Collections.Generic;
 
 namespace ScentifyWebApp.DAL.DB
 {
@@ -10,5 +9,5 @@ namespace ScentifyWebApp.DAL.DB
 
         public DbSet<Perfume> Perfume { get; set; }
         //public DbSet<Invoice> Invoice { get; set; }
-	}
+    }
 }

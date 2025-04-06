@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ScentifyWebApp.DAL.DB;
 using ScentifyWebApp.Libs;
-using ScentifyWebApp.Models;
 using ScentifyWebApp.Models.Dtos;
 using ScentifyWebApp.Models.Entities;
 
@@ -36,15 +34,15 @@ namespace ScentifyWebApp.Controllers
             }
 
             var product = await _productDetail(guidId);
-            if(product != null && product.ProductSizes != null && product.ProductSizes.Any())
+            if (product != null && product.ProductSizes != null && product.ProductSizes.Any())
             {
                 var ProductSizeCurrent = product.ProductSizes.Where(x => x.VolumeMl == sizeMl).ToList();
-                if(ProductSizeCurrent != null)
+                if (ProductSizeCurrent != null && ProductSizeCurrent?.Count > 0)
                 {
                     product.ProductSizes = ProductSizeCurrent;
-				}
-			}
-			ViewData["sizeMl"] = sizeMl;
+                }
+            }
+            ViewData["sizeMl"] = sizeMl;
             return View(product);
         }
 
@@ -79,16 +77,16 @@ namespace ScentifyWebApp.Controllers
                         result.DtoIngredients = dtoIngredients;
                     }
 
-					if (!string.IsNullOrEmpty(perfume.PriceInfo))
-					{
-						var PriceInfoData = perfume.PriceInfo;
-						var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
-						if (productSizes != null && productSizes.Any())
-						{
-							result.ProductSizes = productSizes;
-						}
-					}
-				}
+                    if (!string.IsNullOrEmpty(perfume.PriceInfo))
+                    {
+                        var PriceInfoData = perfume.PriceInfo;
+                        var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
+                        if (productSizes != null && productSizes.Any())
+                        {
+                            result.ProductSizes = productSizes;
+                        }
+                    }
+                }
             }
             return result;
         }

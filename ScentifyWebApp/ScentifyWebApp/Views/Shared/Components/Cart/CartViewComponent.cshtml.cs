@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ScentifyWebApp.Models;
-using ScentifyWebApp.Services;
+using ScentifyWebApp.Services.Contracts;
 
 namespace ScentifyWebApp.Views.Shared.Components.Cart
 {
     public class CartViewComponent : ViewComponent
     {
-        private readonly CartService _cartService;
+        private readonly ICartService _cartService;
 
-        public CartViewComponent(CartService cartService)
+        public CartViewComponent(ICartService cartService)
         {
             _cartService = cartService;
         }

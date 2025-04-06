@@ -1,0 +1,192 @@
+﻿@model List<ScentifyWebApp.Models.Dtos.DtoPerfume>?
+@{
+	ViewData["Title"] = "List Perfumes";
+	Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+	.table th,
+	.table td {
+	min-width: 120px;
+	word-wrap: break-word;
+	}
+
+	.table th:last-child,
+	.table td:last-child {
+	min-width: 200px;
+	}
+
+	.dataTables_filter label {
+	width: 50%;
+	float: left;
+	margin-bottom: 25px;
+	}
+
+	.img-table{
+		width:50px;
+	}
+</style>
+
+<div class="container-fluid">
+
+	<!-- Page Heading -->
+	<h1 class="h3 mb-2 text-gray-800">Products</h1>
+
+
+	<!-- DataTales Example -->
+	<div class="card shadow mb-4">
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary"></h6>
+		</div>
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+					<thead>
+						<tr>
+							@* <th>Idx</th> *@
+							<th>Action</th>
+							<th>Image Url</th>
+							<th>Name</th>
+							@* <th>Brand</th>
+							<th>Manufacturer</th> *@
+							<th>ShortDescription</th>
+							@* <th>Description</th> *@
+							<th>Top Notes</th>
+							<th>Hear Notes</th>
+							<th>Base Notes</th>
+							@* <th>Composition</th> *@
+							<th>Ingredients</th>
+							<th>Price infor</th>
+							@* <th>Stock Quantity</th> *@
+							@* <th>Status</th> *@
+							@*<th>Similar Perfumes</th>*@
+						</tr>
+					</thead>
+					<tbody>
+						@if (Model != null && Model?.Count() > 0)
+						{
+							@* var index = 1; *@
+							foreach (var product in Model)
+							{
+								<tr>
+									@* <td>@index</td> *@
+									<td>
+										<a class="edit-btn btn btn-warning" href="/Products/Update?id=@product.Id">
+											<i class="fas fa-edit"></i> Edit
+										</a>
+										<button class="delete-btn btn btn-danger" data-toggle="modal" data-target="#deleteModal" type="button" value="@product.Id">
+											<i class="fas fa-trash-alt"></i> Delete
+										</button>
+									</td>
+									<td><img class="img-table" src="@product.ImageUrl" alt="Alternate Text" /></td>
+									<td>@product.Name</td>
+									@* <td>@product.Brand</td>
+									<td>@product.Manufacturer</td> *@
+									<td>@product.ShortDescription</td>
+									@* <td>@(product.Description.Length > 100 ? product.Description.Substring(0, 100) + "..." : product.Description)</td> *@
+									<td>@product.TopPerfumed</td>
+									<td>@product.MiddlePerfumed</td>
+									<td>@product.BasePerfumed</td>
+									@* <td>@product.Composition</td> *@
+									<td>
+										@if (product.DtoIngredients != null && product.DtoIngredients.Any())
+										{
+											@string.Join(", ", product.DtoIngredients.Select(i => i.Name))
+										}
+									</td>
+									<td>
+										@if (product.ProductSizes != null && product.ProductSizes.Any())
+										{
+											foreach (var item in product.ProductSizes)
+											{
+												<p>@item.VolumeMl ml - @item.Price @item.Currency</p>
+											}
+
+										}
+									</td>
+									@* <td>@product.StockQuantity</td>
+									<td>@product.Status</td> *@
+									@*	<td>
+											@if (product.SimilarPerfumes != null && product.SimilarPerfumes.Any())
+											{
+												@string.Join(", ", product.SimilarPerfumes.Select(i => i.Name))
+											}
+										</td>*@
+								</tr>
+								@* index++; *@
+							}
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<!-- Delete Modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	 aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Confirm Delete?</h5>
+				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">Please confirm the request to delete this item? Click "Delete" to confirm...</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+				<button class="btn btn-primary" id="btn-delete-product" onclick="DeleteCategory()">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="~/admin/vendor/jquery/jquery.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$('#dataTable').dataTable({
+			"sScrollX": "100%",
+			"sScrollXInner": "110%",
+		});
+
+		// const fileInput = document.querySelector('input[type="file"]');
+
+		// // Create a new File object
+		// const myFile = new File(['Hello World!'], 'myFile.txt', {
+		// 	type: 'text/plain',
+		// 	lastModified: new Date(),
+		// });
+
+		// // Now let's create a DataTransfer to get a FileList
+		// const dataTransfer = new DataTransfer();
+		// dataTransfer.items.add(myFile);
+		// fileInput.files = dataTransfer.files;
+
+		$(".delete-btn").bind("click", function () {
+			var value = $(this)[0].value;
+			currentId = value;
+		})
+		function DeleteCategory() {
+			$.ajax({
+				url: '/products',
+				type: 'DELETE',
+				data: { currentId: currentId },
+				beforeSend: function () {
+					appendLoading();
+				},
+				success: function (data) {
+					document.location.href = document.location.origin + data;
+				},
+				complete: function () {
+					hideLoading();
+				},
+				error: function () {
+					alert('Error deleting the product category.');
+				}
+			});
+		}
+	});
+</script>

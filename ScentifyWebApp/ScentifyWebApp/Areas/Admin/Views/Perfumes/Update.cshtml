@@ -1,0 +1,335 @@
+﻿@{
+    ViewData["Title"] = "Update Perfume";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model ScentifyWebApp.Models.Dtos.DtoPerfume
+<div class="row justify-content-center">
+    <div class="col-xl-8 col-lg-12 col-md-7">
+        <div class="card o-hidden border-0 shadow-lg my-lg-5">
+            <div class="card-body p-0 card-login">
+                <div class="text-center">
+                    <h1 class="h3 text-gray-900 mb-4 mt-5 font-weight-bold">@Model.Name DETAILS</h1>
+                </div>
+                <div class="h-full overflow-hidden m-5">
+                    <form asp-action="Update" class="needs-validation" method="post">
+                        <input type="text" asp-for="Id" id="productId" value="@Model.Id" hidden />
+                        @if (!string.IsNullOrEmpty(ViewData["ErrorSubmit"]?.ToString()))
+                        {
+                            <p class="text-danger">@ViewData["ErrorSubmit"]</p>
+                        }
+                        <div class="row">
+                            <!-- Image Upload -->
+                            <div class="form-outline mb-4 col-lg-5">
+                                <label class="form-label" for="ImageUrl">Product Image:</label>
+                                @* <div class="mb-2">
+									<img id="previewImage" src="@Model.ImageUrl" alt="Current Image" class="img-thumbnail" style="max-width: 150px;">
+								</div>
+								<input type="file" name="ImageUrl" id="ImageUrl" class="form-control" accept="image/*" required /> *@
+                                <div class="upload-placeholder" id="placeholder-0" onclick="document.getElementById('file-input-0').click()">
+                                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                                    {
+                                        <img src="@Model.ImageUrl" class="uploaded-image" alt="Uploaded image">
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw("Upload Image")
+                                    }
+                                </div>
+                                <input type="file" class="file-input" id="file-input-0" accept="image/*" onchange="uploadImage(0)">
+                                <input type="hidden" id="image-input-0" asp-for="ImageUrl" />
+                            </div>
+                            <hr />
+                            <div class="col-lg-5"></div>
+
+                            <div class="form-outline mb-4 col-lg-12">
+                                <label class="form-label" for="Name">Name:</label>
+                                <input asp-for="Name" required class="form-control" autocomplete="off" />
+                            </div>
+
+                            <!-- Top Notes -->
+                            <div class="form-outline mb-4 col-lg-6">
+                                <label class="form-label" for="TopPerfumed">Top Notes:</label>
+                                <textarea asp-for="TopPerfumed" class="form-control" autocomplete="off">@Model.TopPerfumed</textarea>
+                            </div>
+                            <!-- Hear Notes -->
+                            <div class="form-outline mb-4 col-lg-6">
+                                <label class="form-label" for="MiddlePerfumed">Hear Notes:</label>
+                                <textarea asp-for="MiddlePerfumed" class="form-control" autocomplete="off"></textarea>
+                            </div>
+                            <!-- Base Notes -->
+                            <div class="form-outline mb-4 col-lg-6">
+                                <label class="form-label" for="BasePerfumed">Base Notes:</label>
+                                <textarea asp-for="BasePerfumed" class="form-control" autocomplete="off"></textarea>
+                            </div>
+
+                            <!-- Brand -->
+                            @* <div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Brand">Brand:</label>
+								<input asp-for="Brand" class="form-control" autocomplete="off" />
+							</div> *@
+
+                            <!-- Manufacturer -->
+                            @* <div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Manufacturer">Manufacturer:</label>
+								<input asp-for="Manufacturer" class="form-control" autocomplete="off" />
+							</div> *@
+
+                            <!-- Short Description -->
+                            <div class="form-outline mb-4 col-lg-6">
+                                <label class="form-label" for="ShortDescription">Short Description:</label>
+                                <textarea asp-for="ShortDescription" class="form-control"></textarea>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="form-outline mb-4 col-lg-12">
+                                <label class="form-label" for="Description">Description:</label>
+                                <textarea asp-for="Description" class="form-control" id="summernote"></textarea>
+                            </div>
+                            <!-- Composition -->
+                            @* <div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Composition">Composition:</label>
+								<input asp-for="Composition" class="form-control" autocomplete="off" />
+							</div> *@
+
+                            <!-- Volume (ml) 1 -->
+                            <div class="form-outline mb-4 col-lg-6">
+                                <label class="form-label" for="VolumeMl1">Volume 1 (ml):</label>
+                                <input asp-for="VolumeMl1" type="number" class="form-control" min="0" step="0" />
+                            </div>
+
+                            <!-- Volume (ml) 2 -->
+                            <div class="form-outline mb-4 col-lg-6">
+                                <label class="form-label" for="VolumeMl2">Volume 2 (ml):</label>
+                                <input asp-for="VolumeMl2" type="number" class="form-control" min="0" />
+                            </div>
+
+                            <!-- Price 1 -->
+                            <div class="form-outline mb-4 col-lg-6">
+                                <label class="form-label" for="Price1">Price 1 (VND):</label>
+                                <input asp-for="Price1" type="number" class="form-control" step="0.01" min="0" />
+                            </div>
+
+                            <!-- Price 2 -->
+                            <div class="form-outline mb-4 col-lg-6">
+                                <label class="form-label" for="Price2">Price 2 (VND):</label>
+                                <input asp-for="Price2" type="number" class="form-control" step="0.01" min="0" />
+                            </div>
+
+                            <!-- Currency -->
+                            @* <div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Currency">Currency:</label>
+								<input asp-for="Currency" class="form-control" required />
+							</div> *@
+
+                            <!-- Stock Quantity -->
+                            @* <div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="StockQuantity">Stock Quantity:</label>
+								<input asp-for="StockQuantity" type="number" class="form-control" min="0" />
+							</div> *@
+
+                            <!-- Status -->
+                            @* <div class="form-outline mb-4 col-lg-6">
+								<label class="form-label" for="Status">Status:</label>
+								<select asp-for="Status" class="form-control">
+									<option value="Available">Available</option>
+									<option value="Out of Stock">Out of Stock</option>
+									<option value="Discontinued">Discontinued</option>
+								</select>
+							</div> *@
+
+                            <!-- Ingredients -->
+                            <div class="form-outline mb-4 col-sm-12 col-md-8">
+                                <label>Set Ingredients: </label>
+                                <div class="row">
+                                    <!-- First Column -->
+                                    <div class="col-md-6">
+                                        <!-- First Row: Image Upload -->
+                                        <div class="upload-placeholder" id="placeholder-1" onclick="document.getElementById('file-input-1').click()">
+                                            @if (!string.IsNullOrEmpty(Model.Ingredient_Img_1))
+                                            {
+                                                <img src="@Model.Ingredient_Img_1" class="uploaded-image" alt="Uploaded image">
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("Upload Ingredient Image")
+                                            }
+                                        </div>
+                                        <input type="file" class="file-input" id="file-input-1" accept="image/*" onchange="uploadImage(1)">
+                                        <input type="hidden" id="image-input-1" asp-for="Ingredient_Img_1" />
+                                        <!-- Title Input -->
+                                        <input type="text" class="form-control mb-3" placeholder="Enter the first ingredient's name..." asp-for="Ingredient_Name_1">
+                                        <!-- Second Row: Image Upload -->
+                                        <div class="upload-placeholder" id="placeholder-3" onclick="document.getElementById('file-input-3').click()">
+                                            @if (!string.IsNullOrEmpty(Model.Ingredient_Img_3))
+                                            {
+                                                <img src="@Model.Ingredient_Img_3" class="uploaded-image" alt="Uploaded image">
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("Upload Ingredient Image")
+                                            }
+                                        </div>
+                                        <input type="file" class="file-input" id="file-input-3" accept="image/*" onchange="uploadImage(3)">
+                                        <input type="hidden" id="image-input-3" asp-for="Ingredient_Img_3" />
+                                        <!-- Title Input -->
+                                        <input type="text" class="form-control mb-3" placeholder="Enter the second ingredient's name..." asp-for="Ingredient_Name_3">
+                                    </div>
+
+                                    <!-- Second Column -->
+                                    <div class="col-md-6">
+                                        <!-- First Row: Image Upload -->
+                                        <div class="upload-placeholder" id="placeholder-2" onclick="document.getElementById('file-input-2').click()">
+                                            @if (!string.IsNullOrEmpty(Model.Ingredient_Img_2))
+                                            {
+                                                <img src="@Model.Ingredient_Img_2" class="uploaded-image" alt="Uploaded image">
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("Upload Ingredient Image")
+                                            }
+                                        </div>
+                                        <input type="file" class="file-input" id="file-input-2" accept="image/*" onchange="uploadImage(2)">
+                                        <input type="hidden" id="image-input-2" asp-for="Ingredient_Img_2" />
+                                        <!-- Title Input -->
+                                        <input type="text" class="form-control mb-3" placeholder="Enter the third ingredient's name ..." asp-for="Ingredient_Name_2">
+                                        <!-- Second Row: Image Upload -->
+                                        <div class="upload-placeholder" id="placeholder-4" onclick="document.getElementById('file-input-4').click()">
+                                            @if (!string.IsNullOrEmpty(Model.Ingredient_Img_4))
+                                            {
+                                                <img src="@Model.Ingredient_Img_4" class="uploaded-image" alt="Uploaded image">
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("Upload Ingredient Image")
+                                            }
+                                        </div>
+                                        <input type="file" class="file-input" id="file-input-4" accept="image/*" onchange="uploadImage(4)">
+                                        <input type="hidden" id="image-input-4" asp-for="Ingredient_Img_4" />
+                                        <!-- Title Input -->
+                                        <input type="text" class="form-control mb-3" placeholder="Enter the fourth ingredient's name..." asp-for="Ingredient_Name_4">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fragrance Notes -->
+                            <div class="form-outline mb-4 col-sm-12 col-md-4">
+                                <label class="mb-4">Fragrance Notes:</label><br />
+
+                                <input type="checkbox" id="Citrus" asp-for="Citrus" />
+                                <label for="Citrus">Citrus</label><br />
+
+                                <input type="checkbox" id="Floral" asp-for="Floral" />
+                                <label for="Floral">Floral</label><br />
+
+                                <input type="checkbox" id="Fruity" asp-for="Fruity" />
+                                <label for="Fruity">Fruity</label><br />
+
+                                <input type="checkbox" id="Woody" asp-for="Woody" />
+                                <label for="Woody">Woody</label><br />
+
+                                <input type="checkbox" id="Musky" asp-for="Musky" />
+                                <label for="Musky">Musky</label><br />
+
+                                <input type="checkbox" id="Oriental" asp-for="Oriental" />
+                                <label for="Oriental">Oriental</label><br />
+
+                                <input type="checkbox" id="Spicy" asp-for="Spicy" />
+                                <label for="Spicy">Spicy</label><br />
+
+                                <input type="checkbox" id="Tobacco" asp-for="Tobacco" />
+                                <label for="Tobacco">Tobacco</label><br />
+
+                                <input type="checkbox" id="Gourmand" asp-for="Gourmand" />
+                                <label for="Gourmand">Gourmand</label><br />
+                            </div>
+
+                        </div>
+                        <div class="mt-5 text-end">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/admin/vendor/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // document.getElementById('ImageUrl').addEventListener('change', function (event) {
+        //     let file = event.target.files[0];
+        //     if (file) {
+        //         let reader = new FileReader();
+        //         reader.onload = function (e) {
+        //             let preview = document.getElementById('previewImage');
+        //             if (!preview) {
+        //                 preview = document.createElement('img');
+        //                 preview.id = 'previewImage';
+        //                 preview.className = 'img-thumbnail mt-2';
+        //                 preview.style.maxWidth = '150px';
+        //                 document.getElementById('ImageUrl').insertAdjacentElement('afterend', preview);
+        //             }
+        //             preview.src = e.target.result;
+        //         };
+        //         reader.readAsDataURL(file);
+        //     }
+        // });
+
+        // document.getElementById('ImageUrl').addEventListener('change', function (event) {
+        //     let file = event.target.files[0];
+        //     if (file) {
+        //         let reader = new FileReader();
+        //         reader.onload = function (e) {
+        //             let preview = document.getElementById('previewImage');
+        //             if (!preview) {
+        //                 preview = document.createElement('img');
+        //                 preview.id = 'previewImage';
+        //                 preview.className = 'img-thumbnail mt-2';
+        //                 preview.style.maxWidth = '150px';
+        //                 document.getElementById('ImageUrl').insertAdjacentElement('afterend', preview);
+        //             }
+        //             preview.src = e.target.result;
+        //         };
+        //         reader.readAsDataURL(file);
+        //         const dataTransfer = new DataTransfer();
+        //         dataTransfer.items.add(file);
+        //         document.getElementById('input_field').files = dataTransfer.files;
+        //     }
+        // });
+        // const filePath = $("#ImageUrl").attr("value");
+        // const fileName = filePath.substring(filePath.lastIndexOf('/') + 1);
+
+        // const fileInput = document.querySelector('input[type="file"]');
+
+        // // Create a new File object
+        // const myFile = new File([fileName], fileName, {
+        //     type: 'text/plain',
+        //     lastModified: new Date(),
+        // });
+
+        // // Now let's create a DataTransfer to get a FileList
+        // const dataTransfer = new DataTransfer();
+        // dataTransfer.items.add(myFile);
+        // fileInput.files = dataTransfer.files;
+        $('#summernote').summernote({
+            callbacks: {
+                onImageLinkInsert: function (url) {
+                    // url is the image url from the dialog
+                    $img = $('<img>').attr({ src: url })
+                    $summernote.summernote('insertNode', $img[0]);
+                }
+            },
+            height: 300,
+        });
+
+        // summernote.image.link.insert
+        $('#summernote').on('summernote.image.link.insert', function (we, url) {
+            // url is the image url from the dialog
+            $img = $('<img>').attr({ src: url })
+            $summernote.summernote('insertNode', $img[0]);
+        });
+
+    });
+</script>

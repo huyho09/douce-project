@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ScentifyWebApp.Services;
+using ScentifyWebApp.Services.Contracts;
 
 namespace ScentifyWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private readonly CartService _cartService;
+        private readonly ICartService _cartService;
 
-        public CartController(CartService cartService)
+        public CartController(ICartService cartService)
         {
             _cartService = cartService;
         }

@@ -115,17 +115,17 @@ namespace ScentifyWebApp.Controllers
             dtoProducts = _mapper.Map<List<DtoPerfume>>(perfumes);
             for (int i = 0; i < dtoProducts.Count; i++)
             {
-				if (!string.IsNullOrEmpty(dtoProducts[i].PriceInfo))
-				{
-					var PriceInfoData = dtoProducts[i].PriceInfo;
-					var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
-					if (productSizes != null && productSizes.Any())
-					{
-						dtoProducts[i].ProductSizes = productSizes;
-					}
-				}
+                if (!string.IsNullOrEmpty(dtoProducts[i].PriceInfo))
+                {
+                    var PriceInfoData = dtoProducts[i].PriceInfo;
+                    var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
+                    if (productSizes != null && productSizes.Any())
+                    {
+                        dtoProducts[i].ProductSizes = productSizes;
+                    }
+                }
 
-				var ingredientsStr = perfumes[i].Ingredients;
+                var ingredientsStr = perfumes[i].Ingredients;
                 if (!string.IsNullOrEmpty(ingredientsStr))
                 {
                     var dtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(ingredientsStr);

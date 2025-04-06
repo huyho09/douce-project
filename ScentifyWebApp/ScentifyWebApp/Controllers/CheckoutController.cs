@@ -4,7 +4,7 @@ using ScentifyWebApp.Constant;
 using ScentifyWebApp.Models;
 using ScentifyWebApp.Models.Entities;
 using ScentifyWebApp.Models.Requests;
-using ScentifyWebApp.Services;
+using ScentifyWebApp.Services.Contracts;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -14,14 +14,14 @@ namespace ScentifyWebApp.Controllers
     [Route("Checkout")]
     public class CheckoutController : Controller
     {
-        private readonly CartService _cartService;
-        private readonly MomoService _momoService;
-        private readonly InvoiceService _invoiceService;
+        private readonly ICartService _cartService;
+        private readonly IMomoService _momoService;
+        private readonly IInvoiceService _invoiceService;
         private readonly IMapper _mapper;
 
-        public CheckoutController(MomoService momoService
-            , CartService cartService,
-            InvoiceService invoiceService,
+        public CheckoutController(IMomoService momoService
+            , ICartService cartService,
+            IInvoiceService invoiceService,
             IMapper mapper)
         {
             _cartService = cartService;

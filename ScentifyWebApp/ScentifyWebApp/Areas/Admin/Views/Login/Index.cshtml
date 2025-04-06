@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewData["Title"] = "Login Admin";
+}
+
+@using ScentifyWebApp.Models.Requests
+@model LoginRequest
+
+<style>
+    .bg-login-admin {
+        background-color: rgba(57, 160, 202, 0.5);
+        background: url(/admin/img/natalia-y-10tQtmdHMIY-unsplash.jpg);
+        background-size: cover;
+    }
+</style>
+
+<!-- Outer Row -->
+<div class="row justify-content-center">
+
+    <div class="col-xl-8 col-lg-12 col-md-7">
+
+        @* <a class="small float-right" href="/loginstaff">Or go to login staff...</a><br /> *@
+        <div class="card o-hidden border-0 shadow-lg my-lg-5">
+            <div class="card-body p-0 card-login">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h3 text-gray-900 mb-4">ADMIN LOGIN</h1>
+                        </div>
+                        @using (Html.BeginForm("Invoke", "Login", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(m => m.ReturnValue)
+
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.UserName, new { @id = "userName", @class = "form-control form-control-user", placeholder = "Enter User Name...", autocomplete = "off" })
+                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.PasswordFor(m => m.Password, new { @id = "password", @class = "form-control form-control-user", placeholder = "Enter Password...", autocomplete = "off" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox small">
+                                    @Html.CheckBoxFor(m => m.IsRememberMe, new { @id = "isCheckRemember", @class = "custom-control-input" })
+                                    <label class="custom-control-label" for="isCheckRemember">
+                                        Remember
+                                        Me
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" id="btnLogin" class="btn btn-primary btn-user btn-block">
+                                Login
+                            </button>
+                            <br />
+                            @if (!string.IsNullOrEmpty(ViewBag?.ErrorMessage))
+                            {
+                                <p class="text-danger">@ViewBag.ErrorMessage</p>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+@*
+<script>
+        document.getElementById("btnLogin").onclick(function () {
+            var data = {
+                UserName: $("#userName").val(),
+                Password: $("#password").val(),
+                IsRememberMe: $("#isCheckRemember").prop("checked")
+            };
+
+            $.ajax({
+                type: "POST", // or "GET" depending on your requirements
+                url: "/Admin/LoginAdmin/Invoke",
+                data: data,
+                success: function (result) {
+                    // Handle the success response
+                    console.log(result);
+                    if (result.IsSuccess == true) {
+
+                    }else{
+
+                    }
+                },
+                error: function (error) {
+                    // Handle the error response
+                    console.error("Error:", error);
+                }
+            });
+        });
+</script>
+ *@
