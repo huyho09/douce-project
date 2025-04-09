@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ScentifyWebApp.DAL.DB;
+using ScentifyWebApp.Libs;
 using ScentifyWebApp.Models;
 using ScentifyWebApp.Models.Dtos;
 using ScentifyWebApp.Models.Entities;
@@ -36,7 +37,7 @@ namespace ScentifyWebApp.Services.Implementations
             return JsonConvert.DeserializeObject<List<CartItem>>(cartJson) ?? new List<CartItem>();
         }
 
-        public async Task<Perfume?> AddToCart(string productId, int quantity)
+        public async Task<Perfume?> AddToCart(string productId, int quantity, int volume)
         {
             try
             {
@@ -48,7 +49,14 @@ namespace ScentifyWebApp.Services.Implementations
                     if (cartItem == null)
                     {
                         var dtoProduct = _mapper.Map<DtoPerfume>(product);
-                        cart.Add(new CartItem { Product = dtoProduct, Quantity = quantity });
+                        dtoProduct.CurrentSize = volume;
+						var PriceInfoData = dtoProduct.PriceInfo;
+						var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
+						if (productSizes != null && productSizes.Any())
+						{
+							dtoProduct.ProductSizes = productSizes;
+						}
+						cart.Add(new CartItem { Product = dtoProduct, Quantity = quantity });
                     }
                     else
                     {

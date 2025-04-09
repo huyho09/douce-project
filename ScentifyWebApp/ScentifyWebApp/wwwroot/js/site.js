@@ -40,11 +40,11 @@ $(document).ready(function () {
     $(".add-to-cart-btn").on("click", function () {
         let productId = $(this).data("id");
         let quantity = 1; // Default to 1 if not provided
-
+        let currentSize = $(this).data("currentSize");
         $.ajax({
             url: "/Cart/AddToCart",
             type: "POST",
-            data: { productId: productId, quantity: quantity },
+            data: { productId: productId, quantity: quantity, volume: currentSize },
             success: function (response) {
                 reloadCart(function () {
                     updatetotalQuantity();

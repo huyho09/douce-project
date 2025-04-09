@@ -7,7 +7,7 @@ namespace ScentifyWebApp.Services.Contracts
     {
         public List<CartItem> GetCart();
 
-        public Task<Perfume?> AddToCart(string productId, int quantity);
+        public Task<Perfume?> AddToCart(string productId, int quantity, int volume);
 
         public Task<Perfume?> UpdateQuatity(string productId, int quantity);
 

@@ -19,12 +19,12 @@ namespace ScentifyWebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToCart(string productId, int quantity)
+        public async Task<IActionResult> AddToCart(string productId, int quantity, int volume)
         {
             try
             {
                 // Add to cart logic
-                var addedPerfume = await _cartService.AddToCart(productId, quantity);
+                var addedPerfume = await _cartService.AddToCart(productId, quantity, volume);
                 if (addedPerfume == null)
                 {
                     return Json(new { status = 400, message = "Adding the perfume to the cart failed." });

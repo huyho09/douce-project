@@ -1,54 +1,55 @@
 ﻿@using ScentifyWebApp.Models.Requests;
 
 @{
-    ViewData["Title"] = "Checkout page";
+	ViewData["Title"] = "Checkout page";
 }
 
 @model CheckoutRequest
 
 
 <section class="checkout-container">
-    <div class="form-section">
-        <nav class="breadcrumb">
-            <a href="/home">Home</a> &gt; <span class="active">Checkout</span>
-        </nav>
-        <h2>Where would you like your order sent?</h2>
-        @await Html.PartialAsync("_UserInfoForm", Model)
-    </div>
+	<div class="form-section justify-content-start">
+		<nav class="breadcrumb">
+			<a href="/home">Home</a> &gt; <span class="active">Checkout</span>
+		</nav>
+		<h2><strong>Payment method</strong></h2>
+		@*@await Html.PartialAsync("_UserInfoForm", Model)*@
+		<p>
+			Noted: Để order sản phẩm, bạn có thể liên lạc với chủ shop thông qua <a class="link-light" href="https://www.facebook.com/">Fanpage</a> hoặc zalo <a class="link-light" href="javascript:void(0);">090 999 9877</a>
+		</p>
+	</div>
 
-    <div class="order-summary">
-        @await Html.PartialAsync("_ListCart", Model.CartItems)
-    </div>
+	<div class="order-summary">
+			@await Html.PartialAsync("_ListCart", Model.CartItems)
+		</div>
 </section>
 
-<script>
-    document.querySelector('header.custom-navbar').style.display = 'none';
-</script>
+
 
 @* <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        document.getElementById("checkout-form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent form from reloading the page
+		document.addEventListener("DOMContentLoaded", () => {
+			document.getElementById("checkout-form").addEventListener("submit", function(event) {
+				event.preventDefault(); // Prevent form from reloading the page
 
-            const orderId = document.getElementById("orderId").value;
-            const amount = document.getElementById("amount").value;
+				const orderId = document.getElementById("orderId").value;
+				const amount = document.getElementById("amount").value;
 
-            fetch("/pay?orderId=" + orderId + "&amount=" + amount, {
-                method: "POST"
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.payUrl) {
-                    // Redirect user to MoMo payment page
-                    window.location.href = data.payUrl;
-                } else {
-                    document.getElementById("paymentResult").innerHTML = `<p style="color: red;">Error: ${data.message}</p>`;
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                document.getElementById("paymentResult").innerHTML = `<p style="color: red;">Failed to connect to payment API.</p>`;
-            });
-        });
-    });
-</script> *@
+				fetch("/pay?orderId=" + orderId + "&amount=" + amount, {
+					method: "POST"
+				})
+				.then(response => response.json())
+				.then(data => {
+					if (data.payUrl) {
+						// Redirect user to MoMo payment page
+						window.location.href = data.payUrl;
+					} else {
+						document.getElementById("paymentResult").innerHTML = `<p style="color: red;">Error: ${data.message}</p>`;
+					}
+				})
+				.catch(error => {
+					console.error("Error:", error);
+					document.getElementById("paymentResult").innerHTML = `<p style="color: red;">Failed to connect to payment API.</p>`;
+				});
+			});
+		});
+	</script> *@
