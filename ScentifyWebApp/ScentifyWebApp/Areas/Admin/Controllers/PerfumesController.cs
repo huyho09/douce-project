@@ -259,9 +259,9 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                     existingPerfume.FragranceNotes = JsonConvert.SerializeObject(fragranceNotes);
                 }
                 await _context.SaveChangesAsync();
-                return Redirect("/Products/Update?id=" + requestDTO.Id);
+                return Redirect("/admin/perfumes/Update?id=" + requestDTO.Id);
             }
-            return RedirectToAction("Index", "Product");
+            return RedirectToAction("Index", "perfumes");
         }
 
         [HttpDelete]
@@ -277,7 +277,7 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            return Content("/Products");
+            return Content("/admin/perfumes");
         }
 
         [HttpPost("/api/image/upload")]
