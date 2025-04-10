@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ScentifyWebApp.Services.Contracts;
 
 namespace ScentifyWebApp.Controllers
@@ -42,12 +43,12 @@ namespace ScentifyWebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateQuantity(string productId, int quantity)
+        public async Task<IActionResult> UpdateQuantity(string productId, int quantity, int volume)
         {
             try
             {
                 // Add to cart logic
-                var updatedPerfume = await _cartService.UpdateQuatity(productId, quantity);
+                var updatedPerfume = await _cartService.UpdateQuantity(productId, quantity, volume);
                 if (updatedPerfume == null)
                 {
                     return Json(new { status = 400, message = "Updating the perfume to the cart failed." });
@@ -65,7 +66,7 @@ namespace ScentifyWebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RemoveFromCart(string productId)
+        public async Task<IActionResult> RemoveFromCart(string productId, int volume)
         {
             try
             {
@@ -75,7 +76,7 @@ namespace ScentifyWebApp.Controllers
                 }
 
                 // Remove cart logic
-                var removeCart = await _cartService.RemoveFromCart(productId);
+                var removeCart = await _cartService.RemoveFromCart(productId, volume);
                 if (removeCart == null)
                 {
                     return Json(new { status = 400, message = "Removing the perfume to the cart failed." });

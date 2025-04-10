@@ -34,52 +34,54 @@ namespace ScentifyWebApp.Controllers
 
         private async Task<HomeViewModel> RetrieveHomeViewData()
         {
-            var homeView = new HomeViewModel();
-            var products = await _context.Perfume.ToListAsync();
+            var products = await _context.Perfume.Take(6).ToListAsync();
 
-            if (products?.Count > 0)
+            if (products is not { Count: > 0 })
+                return new HomeViewModel();
+
+            var mappedPerfumes = _mapper.Map<List<DtoPerfume>>(products);
+
+            for (int i = 0; i < products.Count; i++)
             {
-                var perfumes = GetRandomItems(products, 6);
-                var mappingList = _mapper.Map<List<DtoPerfume>>(perfumes);
+                var product = products[i];
+                var dto = mappedPerfumes[i];
 
-                // convert ingredients
-                for (int i = 0; i < perfumes.Count; i++)
+                if (!string.IsNullOrWhiteSpace(product.Ingredients))
                 {
-                    if (!string.IsNullOrEmpty(perfumes[i].Ingredients))
+                    dto.DtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(product.Ingredients);
+                }
+
+                if (!string.IsNullOrWhiteSpace(product.PriceInfo))
+                {
+                    var productSizes = JsonHelpers.ParseJson<ProductSize>(product.PriceInfo);
+                    if (productSizes?.Any() == true)
                     {
-                        var dtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(perfumes[i].Ingredients);
-                        mappingList[i].DtoIngredients = dtoIngredients;
-                    }
-                    if (!string.IsNullOrEmpty(perfumes[i].PriceInfo))
-                    {
-                        var PriceInfoData = perfumes[i].PriceInfo;
-                        var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
-                        if (productSizes != null && productSizes.Any())
-                        {
-                            mappingList[i].ProductSizes = productSizes;
-                        }
-                    }
-                    if (!string.IsNullOrEmpty(perfumes[i].FragranceNotes))
-                    {
-                        var fragranceNotes = JsonHelpers.ParseJson<FragranceNote>(perfumes[i].FragranceNotes);
-                        if (fragranceNotes != null && fragranceNotes.Any())
-                        {
-                            mappingList[i].Citrus = fragranceNotes[0].Citrus;
-                            mappingList[i].Floral = fragranceNotes[0].Floral;
-                            mappingList[i].Fruity = fragranceNotes[0].Fruity;
-                            mappingList[i].Woody = fragranceNotes[0].Woody;
-                            mappingList[i].Musky = fragranceNotes[0].Musky;
-                            mappingList[i].Oriental = fragranceNotes[0].Oriental;
-                            mappingList[i].Spicy = fragranceNotes[0].Spicy;
-                            mappingList[i].Tobacco = fragranceNotes[0].Tobacco;
-                            mappingList[i].Gourmand = fragranceNotes[0].Gourmand;
-                        }
+                        dto.ProductSizes = productSizes;
                     }
                 }
 
-                homeView.DtoPerfumes = mappingList;
+                if (!string.IsNullOrWhiteSpace(product.FragranceNotes))
+                {
+                    var notes = JsonHelpers.ParseJson<FragranceNote>(product.FragranceNotes)?.FirstOrDefault();
+                    if (notes is not null)
+                    {
+                        dto.Citrus = notes.Citrus;
+                        dto.Floral = notes.Floral;
+                        dto.Fruity = notes.Fruity;
+                        dto.Woody = notes.Woody;
+                        dto.Musky = notes.Musky;
+                        dto.Oriental = notes.Oriental;
+                        dto.Spicy = notes.Spicy;
+                        dto.Tobacco = notes.Tobacco;
+                        dto.Gourmand = notes.Gourmand;
+                    }
+                }
             }
-            return homeView;
+
+            return new HomeViewModel
+            {
+                DtoPerfumes = mappedPerfumes
+            };
         }
 
         private List<T> GetRandomItems<T>(List<T> list, int count)

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
 using ScentifyWebApp.DAL.DB;
 using ScentifyWebApp.Libs;
@@ -17,9 +18,7 @@ namespace ScentifyWebApp.Services.Implementations
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public CartService(IHttpContextAccessor httpContextAccessor,
-            ApplicationDbContext context,
-            IMapper mapper)
+        public CartService(IHttpContextAccessor httpContextAccessor, ApplicationDbContext context, IMapper mapper)
         {
             _httpContextAccessor = httpContextAccessor;
             _context = context;
@@ -28,120 +27,87 @@ namespace ScentifyWebApp.Services.Implementations
 
         public List<CartItem> GetCart()
         {
-            var session = _httpContextAccessor.HttpContext.Session;
-            var cartJson = session.GetString(CartSessionKey);
-            if (cartJson == null)
-            {
-                return new List<CartItem>();
-            }
-            return JsonConvert.DeserializeObject<List<CartItem>>(cartJson) ?? new List<CartItem>();
+            var cartJson = _httpContextAccessor.HttpContext?.Session.GetString(CartSessionKey);
+            return string.IsNullOrEmpty(cartJson)
+                ? new List<CartItem>()
+                : JsonConvert.DeserializeObject<List<CartItem>>(cartJson) ?? new List<CartItem>();
         }
 
         public async Task<Perfume?> AddToCart(string productId, int quantity, int volume)
         {
-            try
+            var product = await RetrievePerfumeAsync(productId);
+            if (product == null) return null;
+
+            var cart = GetCart();
+            var existingItem = cart.FirstOrDefault(p => Guid.Parse(p.Product.Id) == product.Id && p.VolumeMl == volume);
+
+            if (existingItem != null)
             {
-                var product = await RetrivePerfume(productId);
-                if (product != null)
-                {
-                    var cart = GetCart();
-                    var cartItem = cart?.FirstOrDefault(p => Guid.Parse(p.Product.Id) == product.Id);
-                    if (cartItem == null)
-                    {
-                        var dtoProduct = _mapper.Map<DtoPerfume>(product);
-                        dtoProduct.CurrentSize = volume;
-						var PriceInfoData = dtoProduct.PriceInfo;
-						var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
-						if (productSizes != null && productSizes.Any())
-						{
-							dtoProduct.ProductSizes = productSizes;
-						}
-						cart.Add(new CartItem { Product = dtoProduct, Quantity = quantity });
-                    }
-                    else
-                    {
-                        cartItem.Quantity += quantity;
-                    }
-                    SaveCart(cart);
-                    return product;
-                }
+                existingItem.Quantity += quantity;
             }
-            catch (Exception ex)
+            else
             {
+                var dto = _mapper.Map<DtoPerfume>(product);
+                dto.CurrentSize = volume;
+
+                dto.ProductSizes = JsonHelpers.ParseJson<ProductSize>(dto.PriceInfo) ?? new List<ProductSize>();
+                cart.Add(new CartItem { Product = dto, Quantity = quantity, VolumeMl = volume });
             }
-            return null;
+
+            SaveCart(cart);
+            return product;
         }
 
-        public async Task<Perfume?> UpdateQuatity(string productId, int quantity)
+        public async Task<Perfume?> UpdateQuantity(string productId, int quantity, int volume)
         {
-            try
-            {
-                var product = await RetrivePerfume(productId);
-                if (product != null)
-                {
-                    var cart = GetCart();
-                    var cartItem = cart?.FirstOrDefault(p => Guid.Parse(p.Product.Id) == product.Id);
-                    if (cartItem != null)
-                    {
-                        cartItem.Quantity = quantity;
+            var product = await RetrievePerfumeAsync(productId);
+            if (product == null) return null;
 
-                        SaveCart(cart);
-                        return product;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-            }
-            return null;
+            var cart = GetCart();
+            var cartItem = cart.FirstOrDefault(p => Guid.Parse(p.Product.Id) == product.Id && p.VolumeMl == volume);
+
+            if (cartItem == null) return null;
+
+            cartItem.Quantity = quantity;
+            SaveCart(cart);
+            return product;
         }
 
-        public async Task<Perfume?> RemoveFromCart(string productId)
+        public async Task<Perfume?> RemoveFromCart(string productId, int volume)
         {
-            try
-            {
-                var cart = GetCart();
+            var product = await RetrievePerfumeAsync(productId);
+            if (product == null) return null;
 
-                var product = await RetrivePerfume(productId);
-                if (product != null)
-                {
-                    var cartItem = cart.FirstOrDefault(p => Guid.Parse(p.Product.Id) == product.Id);
-                    if (cartItem != null)
-                    {
-                        cart.Remove(cartItem);
-                        SaveCart(cart);
-                        return product;
-                    }
-                }
+            var cart = GetCart();
+            var cartItem = cart.FirstOrDefault(p => Guid.Parse(p.Product.Id) == product.Id && p.VolumeMl == volume);
 
-            }
-            catch (Exception ex)
-            {
-            }
-            return null;
+            if (cartItem == null) return null;
+
+            cart.Remove(cartItem);
+            SaveCart(cart);
+            return product;
         }
 
         public void ClearCart()
         {
-            var session = _httpContextAccessor.HttpContext.Session;
-            session.Remove(CartSessionKey);
+            _httpContextAccessor.HttpContext?.Session.Remove(CartSessionKey);
         }
 
         private void SaveCart(List<CartItem> cart)
         {
-            var session = _httpContextAccessor.HttpContext.Session;
+            var session = _httpContextAccessor.HttpContext?.Session;
+            if (session == null) return;
+
             var cartJson = JsonConvert.SerializeObject(cart);
             session.SetString(CartSessionKey, cartJson);
         }
 
-        private async Task<Perfume?> RetrivePerfume(string productId)
+        private async Task<Perfume?> RetrievePerfumeAsync(string productId)
         {
-            if (!Guid.TryParse(productId, out Guid guidId))
-            {
-                return null;
-            }
-            var products = await _context.Perfume.ToListAsync();
-            return products.FirstOrDefault(p => p.Id == guidId);
+            return Guid.TryParse(productId, out var guidId)
+                ? await _context.Perfume.FindAsync(guidId)
+                : null;
         }
     }
+
 }

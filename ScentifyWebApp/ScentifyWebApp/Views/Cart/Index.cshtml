@@ -23,17 +23,17 @@
 		foreach (var cartItem in Model)
 		{
 			var product = cartItem.Product;
-			var currentProductSizes = product.ProductSizes.FirstOrDefault(x => x.VolumeMl == product.CurrentSize);
+			var currentProductSizes = product.ProductSizes?.FirstOrDefault(x => x.VolumeMl == product.CurrentSize);
 			<div class="cart-item">
 				<p class="product-name">@product.Name</p>
 				<p class="product-size">@product.CurrentSize mL</p>
 				<input type="number" min="1" value="@cartItem.Quantity" class="cart-quantity form-control w-75" onchange="updateCartItem(this,'@product.Id')" />
 
-				<p class="product-price">@cartItem.Currency @currentProductSizes.Price</p>
-				<button class="remove-cart-btn" type="button" onclick="removeCartItem('@product.Id');">✕</button>
+				<p class="product-price">@cartItem.Currency @currentProductSizes?.Price</p>
+				<button class="remove-cart-btn" type="button" onclick="removeCartItem('@product.Id', @product.CurrentSize);">✕</button>
 			</div>
 
-			totalPrice += (double)(currentProductSizes.Price * cartItem.Quantity);
+			totalPrice += (double)(currentProductSizes?.Price * cartItem.Quantity ?? 0);
 		}
 
 		<div class="cart-infor float-end col-md-4 col-sm-12">
@@ -47,7 +47,7 @@
 
 				<div class="cart-total">
 					<p>Subtotal</p>
-					<p class="total-price">@totalPrice @Model.FirstOrDefault().Currency</p>
+					<p class="total-price">@totalPrice @Model.FirstOrDefault()?.Currency</p>
 				</div>
 
 				@if (!validCard)

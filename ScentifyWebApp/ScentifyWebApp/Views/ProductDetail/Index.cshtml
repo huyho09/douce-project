@@ -166,11 +166,11 @@
 		$("input[name='sku']:radio").change(function () {
 			var price = $(this).data("price") || "";
 			var currency = $(this).data("currency") || "";
-			var currency = $(this).data("volume") || 0;
+			var volume = $(this).data("volume") || 0;
 			if (price && currency) {
 				$("#the-price-currency").text(price + " " + currency);
 			}
-			$(".add-to-cart-btn").attr("data-current-size", currency);
+			$(".add-to-cart-btn").attr("data-current-size", volume);
 		});
 		$("*").each(function () {
 			var color = $(this).css("color");

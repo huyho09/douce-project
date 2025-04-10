@@ -41,96 +41,84 @@ namespace ScentifyWebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var products = await _context.Perfume.ToListAsync();
-
-            var dtoProducts = new List<DtoPerfume>();
-            if (products.Count > 0)
-            {
-                dtoProducts = _mapper.Map<List<DtoPerfume>>(products);
-                ConvertDtoProducts(ref dtoProducts, products);
-            }
-
-            return View(dtoProducts?.Take(6));
+            var products = await _context.Perfume.Take(6).ToListAsync();
+            var dtoProducts = _mapper.Map<List<DtoPerfume>>(products);
+            ConvertDtoProducts(dtoProducts, products);
+            return View(dtoProducts);
         }
 
-        // TODO
-        public async Task<IActionResult> FilterFragranceFamily(string fragranceFamily)
-        {
-            var products = await _context.Perfume.ToListAsync();
-            var filter = new List<DtoPerfume>();
-            if (products?.Count > 0)
-            {
-                //filter = products.Where(m => m.FragranceFamily.Contains(fragranceFamily))?.Take(6)?.ToList();
-                filter = _mapper.Map<List<DtoPerfume>>(products);
-                ConvertDtoProducts(ref filter, products);
-            }
+        //public async Task<IActionResult> FilterFragranceFamily(string fragranceFamily)
+        //{
+        //    if (string.IsNullOrWhiteSpace(fragranceFamily))
+        //        return View(new List<DtoPerfume>());
 
-            ViewData["fragranceFamily"] = fragranceFamily;
+        //    var products = await _context.Perfume
+        //        .Where(p => p.FragranceFamily.Contains(fragranceFamily))
+        //        .Take(6)
+        //        .ToListAsync();
 
-            return View(filter);
-        }
+        //    var dtoProducts = _mapper.Map<List<DtoPerfume>>(products);
+        //    ConvertDtoProducts(dtoProducts, products);
 
-        // TODO
+        //    ViewData["fragranceFamily"] = fragranceFamily;
+        //    return View(dtoProducts);
+        //}
+
         public async Task<IActionResult> Search(string searchInput)
         {
-            if (!string.IsNullOrEmpty(searchInput))
-            {
-                var products = await _context.Perfume.ToListAsync();
-                var filter = new List<DtoPerfume>();
-                if (products?.Count > 0)
-                {
-                    searchInput = searchInput.ToUpper();
-                    var dtoProducts = _mapper.Map<List<DtoPerfume>>(products);
+            if (string.IsNullOrWhiteSpace(searchInput))
+                return RedirectToAction("Index");
 
-                    filter = dtoProducts.Where(m => m.Name.ToUpper().Contains(searchInput)
-                                                || m.ShortDescription.ToUpper().Contains(searchInput))?.Take(6)?.ToList();
-                    //|| m.Description.ToUpper().Contains(searchInput)
-                    //|| m.Perfumed_Notes.ToUpper().Contains(searchInput)
-                    if (filter?.Count > 0)
-                        ConvertDtoProducts(ref filter, products);
-                }
+            searchInput = searchInput.ToUpper();
 
-                ViewData["searchInput"] = searchInput;
-                return View(filter);
-            }
-            return RedirectToAction("Index");
+            var products = await _context.Perfume
+                .Where(p => p.Name.ToUpper().Contains(searchInput)
+                         || p.ShortDescription.ToUpper().Contains(searchInput))
+                .Take(6)
+                .ToListAsync();
+
+            var dtoProducts = _mapper.Map<List<DtoPerfume>>(products);
+            ConvertDtoProducts(dtoProducts, products);
+
+            ViewData["searchInput"] = searchInput;
+            return View(dtoProducts);
         }
 
         [HttpPost]
         public async Task<IActionResult> LoadMoreProducts([FromBody] PaginationRequest request)
         {
-            var products = await _context.Perfume.ToListAsync();
-            if (products?.Count > 0)
-            {
-                var dtoProducts = _mapper.Map<List<DtoPerfume>>(products);
-                var pagedProducts = dtoProducts.Skip((request.Page - 1) * request.Size).Take(request.Size).ToList();
-                ConvertDtoProducts(ref pagedProducts, products);
-                return Json(pagedProducts);
-            }
-            return Json(null);
+            var products = await _context.Perfume
+                .Skip((request.Page - 1) * request.Size)
+                .Take(request.Size)
+                .ToListAsync();
+
+            var dtoProducts = _mapper.Map<List<DtoPerfume>>(products);
+            ConvertDtoProducts(dtoProducts, products);
+
+            return Json(dtoProducts);
         }
 
-        private void ConvertDtoProducts(ref List<DtoPerfume> dtoProducts, List<Perfume> perfumes)
+
+        private void ConvertDtoProducts(List<DtoPerfume> dtoProducts, List<Perfume> perfumes)
         {
-            dtoProducts = _mapper.Map<List<DtoPerfume>>(perfumes);
             for (int i = 0; i < dtoProducts.Count; i++)
             {
-                if (!string.IsNullOrEmpty(dtoProducts[i].PriceInfo))
+                var perfume = perfumes[i];
+                var dto = dtoProducts[i];
+
+                if (!string.IsNullOrEmpty(dto.PriceInfo))
                 {
-                    var PriceInfoData = dtoProducts[i].PriceInfo;
-                    var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
-                    if (productSizes != null && productSizes.Any())
+                    var productSizes = JsonHelpers.ParseJson<ProductSize>(dto.PriceInfo);
+                    if (productSizes?.Any() == true)
                     {
-                        dtoProducts[i].ProductSizes = productSizes;
+                        dto.ProductSizes = productSizes;
                     }
                 }
 
-                var ingredientsStr = perfumes[i].Ingredients;
-                if (!string.IsNullOrEmpty(ingredientsStr))
-                {
-                    var dtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(ingredientsStr);
-                    dtoProducts[i].DtoIngredients = dtoIngredients;
-                }
+                //if (!string.IsNullOrEmpty(perfume.Ingredients))
+                //{
+                //    dto.DtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(perfume.Ingredients);
+                //}
             }
         }
     }

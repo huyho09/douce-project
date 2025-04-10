@@ -26,7 +26,7 @@ namespace ScentifyWebApp.Controllers
         }
 
         [HttpGet("details/{id}/{sizeMl?}")]
-        public async Task<IActionResult> Index(string id, int sizeMl = 0)
+        public async Task<IActionResult> Index(string id, int? sizeMl)
         {
             if (!Guid.TryParse(id, out Guid guidId))
             {
@@ -42,54 +42,51 @@ namespace ScentifyWebApp.Controllers
             //        product.ProductSizes = ProductSizeCurrent;
             //    }
             //}       
-            product.CurrentSize = sizeMl;
+            product.CurrentSize = sizeMl ?? product.ProductSizes?.FirstOrDefault()?.VolumeMl ?? 0;
             return View(product);
         }
 
         private async Task<DtoPerfume> _productDetail(Guid id)
         {
-            //string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "data", "product.json");
-            var result = new DtoPerfume();
-            //if (!System.IO.File.Exists(filePath))
-            //{
-            //	throw new Exception("Product data file not found.");
-            //}
+            // Step 1: Fetch the perfume by ID
+            var perfume = await _context.Perfume
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p => p.Id == id);
 
-            //var jsonData = System.IO.File.ReadAllText(filePath);
-            //var products = JsonConvert.DeserializeObject<List<Product>>(jsonData);
-            var products = await _context.Perfume.ToListAsync();
-            if (products != null && products.Count > 0)
+            if (perfume == null)
+                return new DtoPerfume(); // or handle differently (e.g., return null or throw)
+
+            var dtoPerfume = _mapper.Map<DtoPerfume>(perfume);
+
+            // Step 2: Parse Ingredients if available
+            if (!string.IsNullOrWhiteSpace(perfume.Ingredients))
             {
-                var perfume = products.FirstOrDefault(x => x.Id == id);
-                if (perfume != null)
+                dtoPerfume.DtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(perfume.Ingredients);
+            }
+
+            // Step 3: Parse PriceInfo and map sizes
+            if (!string.IsNullOrWhiteSpace(perfume.PriceInfo))
+            {
+                var sizes = JsonHelpers.ParseJson<ProductSize>(perfume.PriceInfo);
+                if (sizes?.Any() == true)
                 {
-                    result = _mapper.Map<DtoPerfume>(perfume);
-                    List<Perfume> randomPerfumes = GetRandomItems(products, 3);
-
-                    // get similar 
-                    var mappingList = _mapper.Map<List<DtoPerfume>>(randomPerfumes);
-                    result.SimilarPerfumes = mappingList;
-
-                    // convert ingredients
-                    if (!string.IsNullOrEmpty(perfume.Ingredients))
-                    {
-                        var dtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(perfume.Ingredients);
-                        result.DtoIngredients = dtoIngredients;
-                    }
-
-                    if (!string.IsNullOrEmpty(perfume.PriceInfo))
-                    {
-                        var PriceInfoData = perfume.PriceInfo;
-                        var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
-                        if (productSizes != null && productSizes.Any())
-                        {
-                            result.ProductSizes = productSizes;
-                        }
-                    }
+                    dtoPerfume.ProductSizes = sizes;
                 }
             }
-            return result;
+
+            // Step 4: Fetch 3 random similar perfumes (excluding current)
+            var similarPerfumes = await _context.Perfume
+                .AsNoTracking()
+                .Where(p => p.Id != id)
+                .OrderBy(p => Guid.NewGuid()) // lightweight random sort in SQL
+                .Take(3)
+                .ToListAsync();
+
+            dtoPerfume.SimilarPerfumes = _mapper.Map<List<DtoPerfume>>(similarPerfumes);
+
+            return dtoPerfume;
         }
+
 
         private List<T> GetRandomItems<T>(List<T> list, int count)
         {

@@ -40,7 +40,7 @@ $(document).ready(function () {
     $(".add-to-cart-btn").on("click", function () {
         let productId = $(this).data("id");
         let quantity = 1; // Default to 1 if not provided
-        let currentSize = $(this).data("currentSize");
+        let currentSize = $('.product-info input:checked').data('volume');
         $.ajax({
             url: "/Cart/AddToCart",
             type: "POST",
@@ -70,11 +70,11 @@ function reloadCart(callback) {
         .catch(error => console.error("Failed to reload cart:", error));
 }
 
-function removeCartItem(productId) {
+function removeCartItem(productId, volume) {
     $.ajax({
         url: "/Cart/RemoveFromCart",
         type: "POST",
-        data: { productId: productId },
+        data: { productId: productId, volume: volume },
         success: function (response) {
             reloadCart(function () {
                 toggleCart();
@@ -88,12 +88,12 @@ function removeCartItem(productId) {
     });
 }
 
-function removeCartItemInCheckOut(_this, productId) {
+function removeCartItemInCheckOut(_this, productId, volume) {
     var $this = $(_this);
     $.ajax({
         url: "/Cart/RemoveFromCart",
         type: "POST",
-        data: { productId: productId },
+        data: { productId: productId, volume: volume },
         success: function (response) {
             reloadCart(function () {
                 //toggleCart();
@@ -141,10 +141,11 @@ function updateCartItem(_this, productId) {
     changeTimeout = setTimeout(() => {
         var $this = $(_this);
         var quantity = $this.val();
+        var volume = $('.product-info input:checked').data('volume');
         $.ajax({
             url: "/Cart/UpdateQuantity",
             type: "POST",
-            data: { productId: productId, quantity: quantity },
+            data: { productId: productId, quantity: quantity, volume: volume },
             success: function (response) {
                 reloadCart(function () {
                     toggleCart();
@@ -163,10 +164,12 @@ function updateCartIteminCheckOut(_this, productId) {
     changeTimeout = setTimeout(() => {
         var $this = $(_this);
         var quantity = $this.val();
+        var volume = $('.product-info input:checked').data('volume');
+
         $.ajax({
             url: "/Cart/UpdateQuantity",
             type: "POST",
-            data: { productId: productId, quantity: quantity },
+            data: { productId: productId, quantity: quantity, volume: volume },
             success: function (response) {
                 reloadCart(function () {
                     //toggleCart();
@@ -188,7 +191,7 @@ function updateCartIteminCheckOut(_this, productId) {
             error: function () {
                 console.error("Error adding product to cart.");
             }
-        },200);
+        }, 200);
     });
 }
 

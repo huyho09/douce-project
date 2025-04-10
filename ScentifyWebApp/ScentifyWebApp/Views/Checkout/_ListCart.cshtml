@@ -17,7 +17,7 @@
             <div class="product-details">
                 <p class="product-name">@perfume.Name</p>
                 <p class="product-size">@cartItem.VolumeMl</p>
-                <button class="btn remove" type="button" onclick="removeCartItemInCheckOut(this,'@perfume.Id');">Remove</button>
+                <button class="btn remove" type="button" onclick="removeCartItemInCheckOut(this,'@perfume.Id', @perfume.CurrentSize);">Remove</button>
             </div>
             <input type="number" class="quantity form-control-sm w-25" value="@cartItem.Quantity" min="1" onchange="updateCartIteminCheckOut(this,'@perfume.Id');" />
             <span class="product-price">@currentProductSizes.Price.ToString("N2")</span>

@@ -320,6 +320,15 @@
                 </div>
             </div>
         </div>
+
+        <!-- Loading Spinner (hidden by default) -->
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="loading-spinner">
+                <div class="spinner-circle"></div>
+                <span class="loading-text">Loading...</span>
+            </div>
+        </div>
+
     </main>
 
 
@@ -446,5 +455,83 @@
             }
         });
     </script>
+
+    <script>
+        (function () {
+            const showLoading = () => {
+                const overlay = document.getElementById('loadingOverlay');
+                if (overlay) overlay.style.display = 'flex';
+            };
+
+            const interceptLinks = () => {
+                document.querySelectorAll('a[href]').forEach(link => {
+                    link.addEventListener('click', e => {
+                        const href = link.getAttribute('href');
+                        const target = link.getAttribute('target');
+
+                        if (!href || href.startsWith('#') || target === '_blank' || link.hasAttribute("data-ignore-loading") || href.includes('javascript'))
+                            return;
+
+                        showLoading();
+                    });
+                });
+            };
+
+            const interceptForms = () => {
+                document.querySelectorAll('form').forEach(form => {
+                    form.addEventListener('submit', () => {
+                        if (!form.hasAttribute("data-ignore-loading")) {
+                            showLoading();
+                        }
+                    });
+                });
+            };
+
+            const interceptNavigation = () => {
+                const originalPush = history.pushState;
+                const originalReplace = history.replaceState;
+
+                history.pushState = function () {
+                    showLoading();
+                    return originalPush.apply(this, arguments);
+                };
+
+                history.replaceState = function () {
+                    showLoading();
+                    return originalReplace.apply(this, arguments);
+                };
+
+                window.addEventListener("beforeunload", () => {
+                    showLoading();
+                });
+            };
+
+            const interceptLocationRedirects = () => {
+                const originalAssign = window.location.assign;
+                const originalReplace = window.location.replace;
+
+                window.location.assign = function () {
+                    showLoading();
+                    return originalAssign.apply(window.location, arguments);
+                };
+
+                window.location.replace = function () {
+                    showLoading();
+                    return originalReplace.apply(window.location, arguments);
+                };
+
+                // Note: We can't override location.href directly
+            };
+
+            document.addEventListener('DOMContentLoaded', () => {
+                interceptLinks();
+                interceptForms();
+                interceptNavigation();
+                interceptLocationRedirects();
+            });
+        })();
+    </script>
+
+
 </body>
 </html>
