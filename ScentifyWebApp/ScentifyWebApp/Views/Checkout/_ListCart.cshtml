@@ -20,7 +20,7 @@
                 <button class="btn remove" type="button" onclick="removeCartItemInCheckOut(this,'@perfume.Id', @perfume.CurrentSize);">Bỏ</button>
             </div>
             <input type="number" class="quantity form-control-sm w-25" value="@cartItem.Quantity" min="1" onchange="updateCartIteminCheckOut(this,'@perfume.Id');" />
-            <span class="product-price">@currentProductSizes.Price.ToString("N2")</span>
+            <span class="product-price">@currentProductSizes.Price.ToString("N0")</span>
         </div>
         amount += currentProductSizes.Price * cartItem.Quantity;
     }
@@ -29,7 +29,7 @@
 <hr>
 <div class="price-details">
 	<div class="summary-item"><span>Tổng số lượng</span><span id="total-quantity">@Model?.Sum(m => m.Quantity)</span></div>
-	<div class="summary-total"><span>Tổng hoá đơn</span><span id="total-price">@amount @Model.FirstOrDefault().Currency</span></div>
+	<div class="summary-total"><span>Tổng hoá đơn</span><span id="total-price">@amount.ToString("N0") @Model.FirstOrDefault().Currency</span></div>
 </div>
 
 @*<div class="section">

@@ -35,7 +35,7 @@
 		<div class="product-display">
 
 			<div class="product-info">
-				<h3 id="the-price-currency">@priceInfo.Price @priceInfo.Currency</h3>
+				<h3 id="the-price-currency">@priceInfo.Price.ToString("N0") @priceInfo.Currency</h3>
 				@if (Model.ProductSizes != null && Model.ProductSizes.Any())
 				{
 					<ul class="RadioGroup_base__ttFz5 ProductDetailBody_variants__0uwqK Transition_shiftInDownEnterDone__X_OxP">

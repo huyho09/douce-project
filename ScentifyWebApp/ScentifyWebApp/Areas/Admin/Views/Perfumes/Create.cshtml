@@ -67,7 +67,7 @@
                             <!-- Description -->
                             <div class="form-outline mb-4 col-lg-12">
                                 <label class="form-label" for="Description">Description:</label>
-                                <textarea id="Description" name="Description" class="form-control" id="summernote">@Model?.Description</textarea>
+                                <textarea id="Description" name="Description" class="form-control">@Model?.Description</textarea>
                             </div>
 
                             <!-- Volume (ml) 1 -->
@@ -223,7 +223,7 @@
 
 <script>
     $(document).ready(function () {
-        $('#summernote').summernote({
+		$('#Description').summernote({
             callbacks: {
                 onImageLinkInsert: function (url) {
                     // url is the image url from the dialog
@@ -232,10 +232,12 @@
                 }
             },
             height: 300,
+			fontNames: ['Serif', 'Open Sans', 'Sans', 'sans-serif', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Comfortaa'],
+			fontNamesIgnoreCheck: ['Serif', 'Open Sans', 'Sans', 'sans-serif', 'Comfortaa']
         });
 
         // summernote.image.link.insert
-        $('#summernote').on('summernote.image.link.insert', function (we, url) {
+		$('#Description').on('summernote.image.link.insert', function (we, url) {
             // url is the image url from the dialog
             $img = $('<img>').attr({ src: url })
             $summernote.summernote('insertNode', $img[0]);
