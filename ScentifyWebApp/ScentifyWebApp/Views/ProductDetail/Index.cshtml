@@ -82,11 +82,17 @@
 				<span class="text-content">@Model.Composition</span>
 			</div>
 		</div> *@
-
 	<!-- Second Section -->
 	<section class="second-section">
 		<div class="section-content container">
 			<h2 class="section-title">Các nốt hương chính</h2>
+			<p class="col-md-8 col-sm-12">
+				<ul class="home-detail" style="text-align: left; padding-left:0px;">
+					<li>Hương đầu: @Model.TopPerfumed</li>
+					<li>Hương giữa: @Model.MiddlePerfumed</li>
+					<li>Hương giữa: @Model.BasePerfumed</li>
+				</ul>
+			</p>
 			@{
 				var ingredients = Model.DtoIngredients;
 				if (ingredients != null && ingredients.Count > 0)
@@ -95,7 +101,7 @@
 					<div class="cards">
 						@foreach (var ingredient in ingredients)
 						{
-							<div class="card">
+							<div class="card car-no-border">
 								<img src="@ingredient.ImageUrl" alt="Bergamot">
 								<h3>@ingredient.Name</h3>
 								<p>@ingredient.Description</p>
@@ -109,22 +115,9 @@
 
 			<!-- Navigation Controls -->
 			<!--<div class="nav-controls">
-			<button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
-			<button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
-			</div>-->
-		</div>
-	</section>
-	<section>
-		<div class="text-wrapper container">
-			<header class="section-heading">
-			</header>
-			<p class="col-md-8 col-sm-12">
-				<ul class="home-detail">
-					<li><strong>Hương đầu:</strong> @Model.TopPerfumed</li>
-					<li><strong>Hương giữa:</strong> @Model.MiddlePerfumed</li>
-					<li><strong>Hương giữa:</strong> @Model.BasePerfumed</li>
-				</ul>
-			</p>
+	<button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+	<button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+	</div>-->
 		</div>
 	</section>
 	@if (!string.IsNullOrEmpty(Model.Description))

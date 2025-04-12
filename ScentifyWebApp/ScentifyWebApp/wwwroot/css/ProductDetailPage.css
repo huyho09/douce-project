@@ -226,6 +226,18 @@
   box-shadow: 0 5px 20px #d5b260;
 }
 
+.car-no-border {
+  box-shadow: none !important;
+}
+
+.car-no-border:hover {
+  box-shadow: 0 0px 5px #d5b260 !important;
+}
+.car-no-border:hover:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 5px 20px #d5b260;
+}
+
 .section-label p {
   color: #fffef2;
   line-height: 1.5;
@@ -358,6 +370,11 @@ main:has(.product-info) .card {
   font-size: 1.1em;
   line-height: 2rem;
   margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
 }
 
 .learn-more {
