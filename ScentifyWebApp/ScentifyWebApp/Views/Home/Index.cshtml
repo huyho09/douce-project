@@ -9,16 +9,16 @@
 		<div class="carousel-item active position-relative">
 			<img class="d-block" src="~/images/BANNER/banner.png">
 			<a href="/products" class="btn text-uppercase btn-discount btn-contact-banner position-absolute">
-				About Us
+				VỀ CHÚNG TÔI
 			</a>
 		</div>
 	</div>
 </div>
-<section id="testimonials" class="position-relative" style="margin-top: 100px">
-	<partial name="/Views/Shared/Components/Swiper/_SwiperContentList.cshtml" model=@("Compare our fragrances", true, Model.DtoPerfumes) />
-	<partial name="/Views/Shared/Components/Swiper/_SwiperContentList.cshtml" model=@("Compare our fragrances", false, Model.DtoPerfumes) />
+<section id="testimonials" class="position-relative" style="margin-top: 100px; margin-bottom: 80px;">
+	<partial name="/Views/Shared/Components/Swiper/_SwiperContentList.cshtml" model=@("Nước hoa Douce", true, Model.DtoPerfumes) />
+	<partial name="/Views/Shared/Components/Swiper/_SwiperContentList.cshtml" model=@("Nước hoa Douce", false, Model.DtoPerfumes) />
 </section>
-<section id="yearly-sale" class="bg-light-blue overflow-hidden mt-5">
+<section id="yearly-sale" class="bg-light-blue overflow-hidden mt-5 mb-5">
 	<div class="d-flex flex-wrap align-items-center position-relative w-100">
 		<img class="Image_picture" alt="Metal tray with flower, wood and dried flowers placed next to a hand holding Aurner EDP" loading="lazy" src="~/images/BANNER/banner_3_chai.png">
 		<div class="col-md-6 col-sm-12 position-absolute">
@@ -29,21 +29,21 @@
 					<p class="Paragraph_base__CFztu Paragraph_light__GdrHW Contentful_contentful__richtext--whitespace__p8_HS" style="color:whitesmoke">Created with long-term collaborator Céline Barel, our latest fragrance subverts traditional expectations of a floral, with herbaceous Magnolia Leaf providing a nuanced expression of the bloom.</p>
 				</div>
 				<a href="/products" class="btn text-uppercase btn-discount">
-					Discover Aurner Eau de Parfum
+					VỀ CHÚNG TÔI
 				</a>
 			</div>
 		</div>
 	</div>
 </section>
-<section id="mobile-products" class="product-store position-relative padding-large ">
-	<div class="container">
+<section id="mobile-products" class="product-store position-relative mt-5 padding-medium ">
+	<div class="container mb-5">
 		<div class="row">
-			<div class="display-header d-flex justify-content-between pb-3">
-				<h2 class="display-7 text-uppercase text-center">Begin exploring by fragrance family</h2>
+			<div class="display-header d-flex justify-content-between pb-2">
+				<h2 class="display-7 text-center title-section">Câu chuyện mùi hương</h2>
 			</div>
 		</div>
 	</div>
-	<div class="row m-1">
+	<div class="row m-1 d-flex justify-content-center">
 		<div class="col-lg-3 col-md-6 col-sm-12 p-1 d-flex justify-content-center align-items-center" @* href="/Products/FilterFragranceFamily?fragranceFamily=Floral" *@>
 			<div class="flip-card">
 				<div class="flip-card-inner">
@@ -51,11 +51,12 @@
 						<div class="image-holder">
 							<img src="https://www.aesop.com/u1nb1km7t5q7/2hthaLRXLy8nsxiaCbCyq2/c1b27569f129f2b24fd06c5d420ad646/Aesop_Fragrance_2024_Web_Category_Page_Secondary_Menu_Floral_Desktop_1280x804px.jpg" alt="product-item" class="img-fluid">
 						</div>
-						<h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">Floral</h3>
+						<h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">CHỌN LỌC ...</h3>
 					</div>
 					<div class="flip-card-back">
-						<h3>Floral</h3>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+						<p>
+							Douce tập trung khai thác các thiết kế hương hoàn hảo nhất thông qua quá trình tuyển chọn nguyên liệu đầu vào và phân tích dựa trên các thang đo hương quy chuẩn, kết hợp cùng nồng độ tinh đầu đậm đặc tạo nên một cấu trúc mùi hương vững chắc có chiều sâu và rõ nét.
+						</p>
 					</div>
 				</div>
 			</div>
@@ -67,11 +68,12 @@
 						<div class="image-holder">
 							<img src="https://www.aesop.com/u1nb1km7t5q7/7xLN21UUjQb29vqbzjKweA/b1b246e4e1e42eca1d9461963dcff2df/Aesop_Fragrance_2024_Web_Category_Page_Secondary_Menu_Fresh_Desktop_1280x804px.jpg" alt="product-item" class="img-fluid">
 						</div>
-						<h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">Fresh</h3>
+						<h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">HÀNH TRÌNH HƯƠNG GIÁ TRỊ</h3>
 					</div>
 					<div class="flip-card-back">
-						<h3>Fresh</h3>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+						<p>
+							Hành trình hương sống động và giá trị thông qua quá trình biến chuyển chậm rãi, chắc chắn, nhờ tinh dầu cao cấp nhập khẩu, mang lại trải nghiệm tinh tế và cuốn hút.
+						</p>
 					</div>
 				</div>
 			</div>
@@ -83,35 +85,34 @@
 						<div class="image-holder">
 							<img src="https://www.aesop.com/u1nb1km7t5q7/2EurYl7oUUR1AgEUyVLyHL/b4fa9958e121ab8a07de13f82ba4b347/Aesop_Fragrance_2024_Web_Category_Page_Secondary_Menu_Woody_Desktop_1280x804px.jpg" alt="product-item" class="img-fluid">
 						</div>
-						<h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">Woody</h3>
+						<h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">TINH KHIẾT & ĐẬM ĐẶC</h3>
 					</div>
 					<div class="flip-card-back">
-						<h3>Woody</h3>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-3 col-md-6 col-sm-12 p-1 d-flex justify-content-center align-items-center" @* href="/Products/FilterFragranceFamily?fragranceFamily=Opulent" *@>
-			<div class="flip-card">
-				<div class="flip-card-inner">
-					<div class="flip-card-front">
-						<div class="image-holder">
-							<img src="https://www.aesop.com/u1nb1km7t5q7/2I1o09YtXkRr4OZg9vlwGB/8c3075fa27f58fe59443d7ead73f5804/Aesop_Fragrance_2024_Web_Category_Page_Secondary_Menu_Opulent_Desktop_1280x804px.jpg" alt="product-item" class="img-fluid">
-						</div>
-						<h3 class="Heading_base__RCdQN Heading_xSmall__59wqx Heading_dark__LDoGH GridBlockItem_gridItemCopy__kWIsl GridBlockItem_light__N8Mr7">Opulent</h3>
-					</div>
-					<div class="flip-card-back">
-						<h3>Opulent</h3>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+						<p>
+							Extrait De Parfum còn được gọi là nước hoa tinh khiết (pure perfume) là phân loại nước hoa chứa hàm lượng tinh dầu cao nhất, có khả năng lưu hương và phạm vi tỏa hương cực ấn tượng.
+						</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 </section>
-
+<section style="margin-top: 50px; margin-bottom: 80px;">
+	<div class="text-wrapper container">
+		<header class="section-heading">
+		</header>
+		<p class="col-md-8 col-sm-12">
+			<ul class="home-detail">
+				<li>QUÁ TRÌNH CHỌN MÙI/ TINH DẦU: TỈ MỈ</li>
+				<li>NỐT HƯƠNG DÀY, BUNG TỎA MẠNH</li>
+				<li>TÔ NÉT VẼ NHIỀU LÀN DỄ NHẬN RA HƠN GẠCH NHẸ</li>
+				<li>HÀNH TRÌNH HƯƠNG: từng tầng hương đi qa, từng nốt hương hiển thị đều rõ rệt</li>
+				<li>Bán kính toả hương của loại nước hoa này đạt đến 2m.</li>
+				<li>NGƯỠNG NHẬN BIẾT MÙI THẤP</li>
+			</ul>
+		</p>
+	</div>
+</section>
 @*Email plugin here *@
 
 <script>

@@ -85,26 +85,31 @@ $custom-color-4: #d5b260;
 }
 
 .product-display {
-  text-align: center;
-  position: relative;
-
-  img {
+    text-align: center;
+    position: relative;
     width: 300px;
     height: auto;
     object-fit: contain;
     filter: drop-shadow(0 10px 10px $custom-color-3);
-  }
+
+    img {
+        margin-top: 15px;
+    }
 }
-
-.product-info {
-  margin-top: 20px;
-  text-align: center;
-
-  h3 {
-    font-size: 2em;
+.img-product-bigger {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
     margin-bottom: 10px;
-    color: $color_2;
-  }
+}
+.product-info {
+    margin-top: 20px;
+    text-align: center;
+
+    h3 {
+        font-size: 2em;
+        margin-bottom: 10px;
+        color: $color_2;
+    }
 }
 
 .stars {

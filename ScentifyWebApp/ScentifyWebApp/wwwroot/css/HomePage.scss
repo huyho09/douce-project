@@ -288,8 +288,23 @@ iframe {
 	font-weight: 700;
 	isolation: isolate;
 	line-height: 1.33;
-	top: 10px;
+	top: 20px;
 	left: 20px;
+}
+.home-detail {
+	color: $color_1;
+	font-family: $font-family_2;
+	font-size: 16px;
+	list-style-type: none;
+	letter-spacing: 1px;
+
+	li {
+		padding: 5px;
+
+		strong {
+			color: $custom-color-4;
+		}
+	}
 }
 
 .GridBlockItem_gridItemCopy__kWIsl.GridBlockItem_dark__CfoXX {
@@ -298,6 +313,7 @@ iframe {
 
 .GridBlockItem_gridItemCopy__kWIsl.GridBlockItem_light__N8Mr7 {
 	color: $color_7;
+	text-shadow: 0 0 20px $custom-color-4;
 }
 
 .image-holder {
@@ -1190,8 +1206,8 @@ iframe {
 	text-decoration: underline;
 }
 .btn-contact-banner {
-	right: 300px;
-	top: 100px;
+	right: 200px;
+	bottom: 100px;
 }
 
 .flip-card {
@@ -1249,6 +1265,14 @@ iframe {
 	color: white;
 	transform: rotateY(180deg);
 	border-radius: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	p {
+		color: white;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
 }
 
 @media only screen and (min-width: 1025px) {

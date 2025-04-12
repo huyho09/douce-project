@@ -2,6 +2,16 @@
 @{
 	ViewData["Title"] = $"{Model.Name} Details";
 }
+@{
+	var imgProductBigger = "";
+	if (Model.ProductSizes != null && Model.ProductSizes.Count() > 1)
+	{
+		var firstSized = Model.ProductSizes[0].VolumeMl;
+		var secondSized = Model.ProductSizes[1].VolumeMl;
+		var biggerSized = firstSized > secondSized ? firstSized : secondSized;
+		imgProductBigger = Model.CurrentSize == biggerSized ? "img-product-bigger" : "";
+	}
+}
 
 @if (Model != null)
 {
@@ -16,7 +26,7 @@
 
 		</div>
 		<div class="product-display d-flex flex-column">
-			<img loading="lazy" alt="@Model.Name" src="@Url.Content(Model.ImageUrl.Replace("./", "~/"))">
+			<img id="img-product" class="@imgProductBigger" loading="lazy" alt="@Model.Name" src="@Url.Content(Model.ImageUrl.Replace("./", "~/"))">
 			<div>
 				<button class="add-to-cart add-to-cart-btn" data-current-size="@Model.CurrentSize" aria-label="Add to your cart - @priceInfo.Currency @priceInfo.Price" data-id="@Model.Id">Add to cart +</button>
 			</div>
@@ -76,11 +86,7 @@
 	<!-- Second Section -->
 	<section class="second-section">
 		<div class="section-content container">
-			<h2 class="section-title">A Symphony of Nature’s Finest</h2>
-			<p class="section-subtitle">
-				A luxurious fusion of delicate florals and warm vanilla, crafted to evoke passion and timeless elegance.
-			</p>
-
+			<h2 class="section-title">Các nốt hương chính</h2>
 			@{
 				var ingredients = Model.DtoIngredients;
 				if (ingredients != null && ingredients.Count > 0)
@@ -108,13 +114,26 @@
 			</div>-->
 		</div>
 	</section>
+	<section>
+		<div class="text-wrapper container">
+			<header class="section-heading">
+			</header>
+			<p class="col-md-8 col-sm-12">
+				<ul class="home-detail">
+					<li><strong>Hương đầu:</strong> @Model.TopPerfumed</li>
+					<li><strong>Hương giữa:</strong> @Model.MiddlePerfumed</li>
+					<li><strong>Hương giữa:</strong> @Model.BasePerfumed</li>
+				</ul>
+			</p>
+		</div>
+	</section>
 	@if (!string.IsNullOrEmpty(Model.Description))
 	{
 		<section class="third-section container mb-0">
 			<div class="section-content">
 				<!-- Heading -->
 				<div class="section-heading">
-					<h2 class="section-title">Description</h2>
+					<h2 class="section-title">Mô tả</h2>
 					<div class="section-label">@Html.Raw(Model.Description)</div>
 				</div>
 			</div>
@@ -125,8 +144,7 @@
 		<div class="section-content">
 			<!-- Heading -->
 			<div class="section-heading">
-				<p class="section-label">SIMILAR PRODUCTS</p>
-				<h2 class="section-title">The fragrance larger than life.</h2>
+				<h2 class="section-title">Những sản phẩm tương tự</h2>
 			</div>
 			@{
 				var similarItems = Model.SimilarPerfumes;
@@ -167,6 +185,7 @@
 			var price = $(this).data("price") || "";
 			var currency = $(this).data("currency") || "";
 			var volume = $(this).data("volume") || 0;
+			$("#img-product").toggleClass("img-product-bigger");
 			if (price && currency) {
 				$("#the-price-currency").text(price + " " + currency);
 			}
