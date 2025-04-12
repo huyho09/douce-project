@@ -34,8 +34,24 @@
 <div class="unitPricing">
 	@if (Model.ProductSizes != null && Model.ProductSizes.Count() > 0)
 	{
-		var firstProductSizes = Model.ProductSizes.FirstOrDefault();
-		<span class="unitPricingPrice" data-testid="product-price">@firstProductSizes.Price - @firstProductSizes.VolumeMl ml</span>
+		var priceInfoFirst = Model.ProductSizes?[0];
+		var priceInfoSecond = Model.ProductSizes?[1];
+		<div class="d-flex justify-content-center mt-3">
+			@if (priceInfoFirst != null)
+			{
+				<div class="" style="margin-right: 15px">
+					<p class="product-price">@priceInfoFirst.VolumeMl mL</p>
+					<a href="/products/details/@Model.Id/@priceInfoFirst.VolumeMl" class="size-button" aria-label="@priceInfoFirst.Currency @priceInfoFirst.Price - @priceInfoFirst.VolumeMl mL" data-id="@Model.Id">@priceInfoFirst.Currency @priceInfoFirst.Price</a>
+				</div>
+			}
+			@if (priceInfoSecond != null)
+			{
+				<div class="">
+					<p class="product-price">@priceInfoSecond.VolumeMl mL</p>
+					<a href="/products/details/@Model.Id/@priceInfoSecond.VolumeMl" class="size-button" aria-label="@priceInfoSecond.Currency @priceInfoSecond.Price - @priceInfoSecond.VolumeMl mL" data-id="@Model.Id">@priceInfoSecond.Currency @priceInfoSecond.Price</a>
+				</div>
+			}
+		</div>
 	}
 </div>
 

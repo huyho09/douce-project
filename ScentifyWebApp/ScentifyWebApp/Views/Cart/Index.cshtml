@@ -8,8 +8,7 @@
 <!-- Cart Popup -->
 <div class="cart-container">
 	<div class="cart-header">
-		<p>Cart</p>
-
+		<p>Giỏ hàng</p>
 		@if (Model != null && Model.Count > 0)
 		{
 			<a id="clear-all-cart" class="h6 link-light" href="javascript:void(0);" onclick="clearAllCart();">Clear all</a>
@@ -46,17 +45,17 @@
 					<p class="shipping-info">Enjoy complimentary standard shipping on all orders over 90 €.</p> *@
 
 				<div class="cart-total">
-					<p>Subtotal</p>
+					<p>Tổng phụ</p>
 					<p class="total-price">@totalPrice @Model.FirstOrDefault()?.Currency</p>
 				</div>
 
 				@if (!validCard)
 				{
-					<a href="javascript:void(0);" class="checkout-btn" @Html.Raw(!validCard ? "disabled" : "")>Checkout</a>
+					<a href="javascript:void(0);" class="checkout-btn" @Html.Raw(!validCard ? "disabled" : "")>Thanh toán</a>
 				}
 				else
 				{
-					<a href="/Checkout" class="checkout-btn" @Html.Raw(!validCard ? "disabled" : "")>Checkout</a>
+					<a href="/Checkout" class="checkout-btn" @Html.Raw(!validCard ? "disabled" : "")>Thanh toán</a>
 				}
 
 				@*<div class="payment-methods">
