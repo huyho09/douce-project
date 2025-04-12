@@ -1,34 +1,35 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="author" content="">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <title>@ViewData["Title"] - ScentifyWebApp</title>
-    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ScentifyWebApp.styles.css" asp-append-version="true" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="author" content="">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<title>@ViewData["Title"] - ScentifyWebApp</title>
+	<link rel="stylesheet" href="~/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/ScentifyWebApp.styles.css" asp-append-version="true" />
 
-    <!--Integrate CSS-->
-    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="~/css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/HomePage.css" />
-    <link rel="stylesheet" href="~/css/ProductDetailPage.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-    <!--Integrate JS-->
-    <script src="js/modernizr.js"></script>
+	<!--Integrate CSS-->
+	<link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="~/css/style.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="~/css/HomePage.css" />
+	<link rel="stylesheet" href="~/css/ProductDetailPage.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+	<!--Integrate JS-->
+	<script src="js/modernizr.js"></script>
 
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<!-- Bootstrap Icons -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" tabindex="0">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -37,13 +38,13 @@
             <path fill="currentColor" d="M19 3C13.488 3 9 7.488 9 13c0 2.395.84 4.59 2.25 6.313L3.281 27.28l1.439 1.44l7.968-7.969A9.922 9.922 0 0 0 19 23c5.512 0 10-4.488 10-10S24.512 3 19 3zm0 2c4.43 0 8 3.57 8 8s-3.57 8-8 8s-8-3.57-8-8s3.57-8 8-8z" />
         </symbol>
         <symbol id="custom-search" viewBox="0 0 24 24">
-            <circle cx="10" cy="10" r="7" stroke="black" stroke-width="2" fill="none" />
-            <line x1="15" y1="15" x2="20" y2="20" stroke="black" stroke-width="2" />
+            <circle cx="10" cy="10" r="7" stroke="goldenrod" stroke-width="2" fill="none" />
+            <line x1="15" y1="15" x2="20" y2="20" stroke="goldenrod" stroke-width="2" />
         </symbol>
         <symbol id="custom-cart" viewBox="0 0 24 24">
-            <path d="M3 3h2l3 12h10l3-9H6" stroke="black" stroke-width="2" fill="none" />
-            <circle cx="9" cy="19" r="2" fill="black" />
-            <circle cx="17" cy="19" r="2" fill="black" />
+            <path d="M3 3h2l3 12h10l3-9H6" stroke="goldenrod" stroke-width="2" fill="none" />
+            <circle cx="9" cy="19" r="2" fill="goldenrod" />
+            <circle cx="17" cy="19" r="2" fill="goldenrod" />
         </symbol>
         <symbol xmlns="http://www.w3.org/2000/svg" id="user" viewBox="0 0 16 16">
             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
@@ -143,114 +144,11 @@
         </symbol>
     </svg>
 
-    @* <div class="search-popup">
-			<div class="search-popup-container">
-
-				<form role="search" method="get" class="search-form" action="">
-					<input type="search" id="search-form" class="search-field" placeholder="Type and press enter" value="" name="s" />
-					<button type="submit" class="search-submit"><svg class="search"><use xlink:href="#search"></use></svg></button>
-				</form>
-
-				<h5 class="cat-list-title">Browse Categories</h5>
-
-				<ul class="cat-list">
-					<li class="cat-list-item">
-						<a href="#" title="Mobile Phones">Mobile Phones</a>
-					</li>
-					<li class="cat-list-item">
-						<a href="#" title="Smart Watches">Smart Watches</a>
-					</li>
-					<li class="cat-list-item">
-						<a href="#" title="Headphones">Headphones</a>
-					</li>
-					<li class="cat-list-item">
-						<a href="#" title="Accessories">Accessories</a>
-					</li>
-					<li class="cat-list-item">
-						<a href="#" title="Monitors">Monitors</a>
-					</li>
-					<li class="cat-list-item">
-						<a href="#" title="Speakers">Speakers</a>
-					</li>
-					<li class="cat-list-item">
-						<a href="#" title="Memory Cards">Memory Cards</a>
-					</li>
-				</ul>
-
-			</div>
-		</div>
-		<header id="header" class="site-header header-scrolled position-fixed text-black bg-light">
-			<nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
-				<div class="container-fluid">
-					<a class="navbar-brand" href="index.html">
-						<img src="images/main-logo.png" class="logo">
-					</a>
-					<button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
-						<svg class="navbar-icon">
-							<use xlink:href="#navbar-icon"></use>
-						</svg>
-					</button>
-					<div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
-						<div class="offcanvas-header px-4 pb-0">
-							<a class="navbar-brand" href="index.html">
-								<img src="images/main-logo.png" class="logo">
-							</a>
-							<button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
-						</div>
-						<div class="offcanvas-body">
-							<ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
-								<li class="nav-item">
-									<a class="nav-link me-4 active" href="/home">Home</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link me-4" href="/products">Products</a>
-								</li>
-								@* <li class="nav-item dropdown">
-										<a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pages</a>
-										<ul class="dropdown-menu">
-											<li>
-												<a href="about.html" class="dropdown-item">About</a>
-											</li>
-										</ul>
-									</li>*@
-    @*<li class="nav-item">
-									<div class="user-items ps-5">
-										<ul class="d-flex justify-content-end list-unstyled">
-											<li class="search-item pe-3">
-												<a href="#" class="search-button">
-													<svg class="search">
-														<use xlink:href="#search"></use>
-													</svg>
-												</a>
-											</li>
-											<li class="pe-3">
-												<a href="#">
-													<svg class="user">
-														<use xlink:href="#user"></use>
-													</svg>
-												</a>
-											</li>
-											<li>
-												<a href="cart.html">
-													<svg class="cart">
-														<use xlink:href="#cart"></use>
-													</svg>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</nav>
-		</header> *@
-
+   
     <header class="custom-navbar">
         <nav class="custom-nav-container">
             <!-- Left: Logo -->
-            <a href="/" class="custom-logo"><img src="~/images/logo/logo-text brown-01.png" style="width: 90px;" /></a>
+            <a href="/" class="custom-logo"><img src="~/images/logo/logo-text-01.png" style="width: 90px;" /></a>
 
             <!-- Centered Navigation Links -->
             <ul class="custom-nav-links">
