@@ -360,6 +360,11 @@
                 if (overlay) overlay.style.display = 'flex';
             };
 
+            const hideLoading = () => {
+                const overlay = document.getElementById('loadingOverlay');
+                if (overlay) overlay.style.display = '';
+            };
+
             const interceptLinks = () => {
                 document.querySelectorAll('a[href]').forEach(link => {
                     link.addEventListener('click', e => {
@@ -370,6 +375,10 @@
                             return;
 
                         showLoading();
+
+                        if (e.ctrlKey || e.metaKey || e.button === 1) {
+                            hideLoading();
+                        }
                     });
                 });
             };

@@ -2086,6 +2086,7 @@ section.third-section.container table tr td p {
     margin-bottom: 30px;
 	min-width: 180px;
 	text-transform: none;
+	// color: $color-white!important;
 }
 
 section.third-section.container table tr td img {
@@ -2098,7 +2099,12 @@ section.third-section.container table tr td img {
 		flex-direction: column;
 	}
 
-	main:has(.product-info) .card:first-child{
+	main:has(.product-info) .card:first-child {
 		margin-left: 200px;
+	}
+
+	
+	main:has(.product-info) .product-card:first-child {
+		margin-left: 700px;
 	}
 }

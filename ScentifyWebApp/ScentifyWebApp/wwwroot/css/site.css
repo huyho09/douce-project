@@ -1949,4 +1949,7 @@ section.third-section.container table tr td img {
   main:has(.product-info) .card:first-child {
     margin-left: 200px;
   }
+  main:has(.product-info) .product-card:first-child {
+    margin-left: 700px;
+  }
 }/*# sourceMappingURL=site.css.map */

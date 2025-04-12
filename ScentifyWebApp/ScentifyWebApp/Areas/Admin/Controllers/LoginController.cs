@@ -42,7 +42,7 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                     if (findAdmin.IsSuccess)
                     {
                         // set current user to session (save)
-                        //_baseHttpContext.SetSession(SessionKeyConstant.LOGIN_RESULT, findAdmin);
+                        _baseHttpContext.SetSession("LOGIN_RESULT", findAdmin);
                         TempData["ResultPopup"] = findAdmin.Detail;
 
                         if (!string.IsNullOrEmpty(request.ReturnValue))

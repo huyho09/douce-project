@@ -59,3 +59,40 @@ body {
 form.needs-validation {
     padding: 0 5px;
 }
+
+/*Dark mode editor CSS*/
+.note-editor.note-frame {
+    background-color: #2e2e2e;
+    color: #f1f1f1;
+    border: 1px solid #444;
+}
+
+.note-toolbar {
+    background-color: #3a3a3a;
+    border-bottom: 1px solid #444;
+}
+
+.note-btn {
+    background-color: #444;
+    color: #f1f1f1;
+    border: 1px solid #555;
+}
+
+    .note-btn:hover,
+    .note-btn:focus {
+        background-color: #555;
+        color: #fff;
+    }
+
+.note-editable {
+    background-color: #2e2e2e;
+    color: #f1f1f1;
+}
+
+.note-popover .popover-content,
+.note-air-popover .popover-content {
+    background-color: #3a3a3a;
+    color: #f1f1f1;
+    border: 1px solid #555;
+}
+/*Dark mode editor CSS*/

@@ -2,21 +2,21 @@
 {
     public interface IBaseHttpContext
     {
-        ///// <summary>
-        ///// Gets the session.
-        ///// </summary>
-        ///// <typeparam name="TData">The type of the data.</typeparam>
-        ///// <param name="key">The key.</param>
-        ///// <returns></returns>
-        //TData GetSession<TData>(string key)
-        //    where TData : class;
+        /// <summary>
+        /// Gets the session.
+        /// </summary>
+        /// <typeparam name="TData">The type of the data.</typeparam>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
+        TData GetSession<TData>(string key)
+            where TData : class;
 
-        ///// <summary>
-        ///// Sets the session.
-        ///// </summary>
-        ///// <param name="key">The key.</param>
-        ///// <param name="data">The data.</param>
-        //void SetSession(string key, object data);
+        /// <summary>
+        /// Sets the session.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="data">The data.</param>
+        void SetSession(string key, object data);
 
         /// <summary>
         /// Clears all session.

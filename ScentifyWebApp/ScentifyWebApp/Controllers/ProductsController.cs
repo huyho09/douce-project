@@ -7,6 +7,9 @@ using ScentifyWebApp.Libs;
 using ScentifyWebApp.Models;
 using ScentifyWebApp.Models.Dtos;
 using ScentifyWebApp.Models.Entities;
+using ScentifyWebApp.Services.Contracts;
+using ScentifyWebApp.Services.Implementations;
+using System.Collections.Generic;
 
 namespace ScentifyWebApp.Controllers
 {
@@ -14,10 +17,13 @@ namespace ScentifyWebApp.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IBaseHttpContext _baseHttpContext;
 
         public ProductsController(ApplicationDbContext context,
+            IBaseHttpContext baseHttpContext,
             IMapper mapper)
         {
+            _baseHttpContext = baseHttpContext;
             _context = context;
             _mapper = mapper;
         }
@@ -41,7 +47,8 @@ namespace ScentifyWebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var products = await _context.Perfume.Take(6).ToListAsync();
+            var products = await _context.Perfume.AsNoTracking().ToListAsync();
+            _baseHttpContext.SetSession("Products", products);
             var dtoProducts = _mapper.Map<List<DtoPerfume>>(products);
             ConvertDtoProducts(dtoProducts, products);
             return View(dtoProducts);
@@ -72,9 +79,9 @@ namespace ScentifyWebApp.Controllers
             searchInput = searchInput.ToUpper();
 
             var products = await _context.Perfume
+                .AsNoTracking()
                 .Where(p => p.Name.ToUpper().Contains(searchInput)
                          || p.ShortDescription.ToUpper().Contains(searchInput))
-                .Take(6)
                 .ToListAsync();
 
             var dtoProducts = _mapper.Map<List<DtoPerfume>>(products);
@@ -87,15 +94,30 @@ namespace ScentifyWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> LoadMoreProducts([FromBody] PaginationRequest request)
         {
-            var products = await _context.Perfume
-                .Skip((request.Page - 1) * request.Size)
-                .Take(request.Size)
-                .ToListAsync();
+            var products = _baseHttpContext.GetSession<List<Perfume>>("Products");
 
-            var dtoProducts = _mapper.Map<List<DtoPerfume>>(products);
+            if (products == null || !products.Any())
+            {
+                products = await _context.Perfume.AsNoTracking().ToListAsync();
+                _baseHttpContext.SetSession("Products", products); // Save to session if needed
+            }
+
+            var skip = (request.Page - 1) * request.Size;
+            var filterProducts = products
+                .Skip(skip)
+                .Take(request.Size)
+                .ToList();
+
+            var dtoProducts = _mapper.Map<List<DtoPerfume>>(filterProducts);
             ConvertDtoProducts(dtoProducts, products);
 
-            return Json(dtoProducts);
+            bool isEnd = skip + request.Size >= products.Count;
+
+            return Json(new
+            {
+                products = dtoProducts,
+                isEnd
+            });
         }
 
 
