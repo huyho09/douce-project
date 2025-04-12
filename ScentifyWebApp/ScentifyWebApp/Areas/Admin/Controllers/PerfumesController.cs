@@ -12,7 +12,7 @@ using ScentifyWebApp.Models.Entities;
 namespace ScentifyWebApp.Areas.Admin.Controllers
 {
     //[Route("perfumes")]
-    public class PerfumesController : BaseAdminController
+	public class PerfumesController : BaseAdminController
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;

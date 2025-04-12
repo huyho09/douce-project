@@ -164,29 +164,30 @@
 		// const dataTransfer = new DataTransfer();
 		// dataTransfer.items.add(myFile);
 		// fileInput.files = dataTransfer.files;
-
-		$(".delete-btn").bind("click", function () {
-			var value = $(this)[0].value;
-			currentId = value;
-		})
-		function DeleteCategory() {
-			$.ajax({
-				url: '/products',
-				type: 'DELETE',
-				data: { currentId: currentId },
-				beforeSend: function () {
-					appendLoading();
-				},
-				success: function (data) {
-					document.location.href = document.location.origin + data;
-				},
-				complete: function () {
-					hideLoading();
-				},
-				error: function () {
-					alert('Error deleting the product category.');
-				}
-			});
-		}
 	});
+</script>
+<script>
+	$(".delete-btn").bind("click", function () {
+		var value = $(this)[0].value;
+		currentId = value;
+	})
+	function DeleteCategory() {
+		$.ajax({
+			url: '/Perfumes/Delete',
+			type: 'DELETE',
+			data: { currentId: currentId },
+			beforeSend: function () {
+				appendLoading();
+			},
+			success: function (data) {
+				document.location.href = document.location.origin + data;
+			},
+			complete: function () {
+				hideLoading();
+			},
+			error: function () {
+				alert('Error deleting the product category.');
+			}
+		});
+	}
 </script>
