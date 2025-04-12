@@ -12,126 +12,87 @@
                     <h1 class="h3 text-gray-900 mb-4 mt-5 font-weight-bold">CREATE CATEGORY ITEM</h1>
                 </div>
                 <div class="h-full overflow-hidden m-4">
-                    <form asp-action="Create" class="needs-validation" method="post">
-                        @if(!string.IsNullOrEmpty(ViewData["ErrorSubmit"]?.ToString())){
+                    <form asp-area="Admin" asp-action="Create" asp-controller="Perfumes" class="needs-validation" method="post" novalidate>
+                        @if (!string.IsNullOrEmpty(ViewData["ErrorSubmit"]?.ToString()))
+                        {
                             <p class="text-danger">@ViewData["ErrorSubmit"]</p>
                         }
                         <div class="row">
                             <!-- Image Upload -->
                             <div class="form-outline mb-4 col-lg-5">
                                 <label class="form-label" for="ImageUrl">Product Image:</label>
-                                @* <div class="mb-2">
-									<img id="previewImage" src="@Model.ImageUrl" alt="Current Image" class="img-thumbnail" style="max-width: 150px;">
-								</div>
-								<input type="file" name="ImageUrl" id="ImageUrl" class="form-control" accept="image/*" required /> *@
                                 <div class="upload-placeholder" id="placeholder-0" onclick="document.getElementById('file-input-0').click()">
-                                    @if (!string.IsNullOrEmpty(Model.ImageUrl)) {
+                                    @if (!string.IsNullOrEmpty(Model?.ImageUrl))
+                                    {
                                         <img src="@Model.ImageUrl" class="uploaded-image" alt="Uploaded image">
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         @Html.Raw("Upload Image")
                                     }
                                 </div>
                                 <input type="file" class="file-input" id="file-input-0" accept="image/*" onchange="uploadImage(0)">
-                                <input type="hidden" id="image-input-0" asp-for="ImageUrl" />
+                                <input type="hidden" asp-for="ImageUrl" id="image-input-0" name="ImageUrl" value="@Model?.ImageUrl" />
                             </div>
                             <hr />
                             <div class="col-lg-5"></div>
 
                             <div class="form-outline mb-4 col-lg-12">
                                 <label class="form-label" for="Name">Name:</label>
-                                <input asp-for="Name" required class="form-control" autocomplete="off" />
+                                <input id="Name" name="Name" required class="form-control" autocomplete="off" value="@Model?.Name" />
                             </div>
 
                             <!-- Top Notes -->
                             <div class="form-outline mb-4 col-lg-6">
                                 <label class="form-label" for="TopPerfumed">Top Notes:</label>
-                                <textarea asp-for="TopPerfumed" class="form-control" autocomplete="off">@Model.TopPerfumed</textarea>
+                                <textarea id="TopPerfumed" name="TopPerfumed" class="form-control" autocomplete="off">@Model?.TopPerfumed</textarea>
                             </div>
                             <!-- Middle Notes -->
                             <div class="form-outline mb-4 col-lg-6">
                                 <label class="form-label" for="MiddlePerfumed">Middle Notes:</label>
-                                <textarea asp-for="MiddlePerfumed" class="form-control" autocomplete="off"></textarea>
+                                <textarea id="MiddlePerfumed" name="MiddlePerfumed" class="form-control" autocomplete="off">@Model?.MiddlePerfumed</textarea>
                             </div>
                             <!-- Base Notes -->
                             <div class="form-outline mb-4 col-lg-6">
                                 <label class="form-label" for="BasePerfumed">Base Notes:</label>
-                                <textarea asp-for="BasePerfumed" class="form-control" autocomplete="off"></textarea>
+                                <textarea id="BasePerfumed" name="BasePerfumed" class="form-control" autocomplete="off">@Model?.BasePerfumed</textarea>
                             </div>
-
-                            <!-- Brand -->
-                            @* <div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="Brand">Brand:</label>
-								<input asp-for="Brand" class="form-control" autocomplete="off" />
-							</div> *@
-
-                            <!-- Manufacturer -->
-                            @* <div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="Manufacturer">Manufacturer:</label>
-								<input asp-for="Manufacturer" class="form-control" autocomplete="off" />
-							</div> *@
 
                             <!-- Short Description -->
                             <div class="form-outline mb-4 col-lg-6">
                                 <label class="form-label" for="ShortDescription">Short Description:</label>
-                                <textarea asp-for="ShortDescription" class="form-control"></textarea>
+                                <textarea id="ShortDescription" name="ShortDescription" class="form-control">@Model?.ShortDescription</textarea>
                             </div>
 
                             <!-- Description -->
                             <div class="form-outline mb-4 col-lg-12">
                                 <label class="form-label" for="Description">Description:</label>
-                                <textarea asp-for="Description" class="form-control" id="summernote"></textarea>
+                                <textarea id="Description" name="Description" class="form-control" id="summernote">@Model?.Description</textarea>
                             </div>
-                            <!-- Composition -->
-                            @* <div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="Composition">Composition:</label>
-								<input asp-for="Composition" class="form-control" autocomplete="off" />
-							</div> *@
 
                             <!-- Volume (ml) 1 -->
                             <div class="form-outline mb-4 col-lg-6">
                                 <label class="form-label" for="VolumeMl1">Volume 1 (ml):</label>
-                                <input asp-for="VolumeMl1" type="number" class="form-control" min="0" step="0" />
+                                <input id="VolumeMl1" name="VolumeMl1" type="number" class="form-control" min="0" step="0" value="@Model?.VolumeMl1" />
                             </div>
 
                             <!-- Volume (ml) 2 -->
                             <div class="form-outline mb-4 col-lg-6">
                                 <label class="form-label" for="VolumeMl2">Volume 2 (ml):</label>
-                                <input asp-for="VolumeMl2" type="number" class="form-control" min="0" />
+                                <input id="VolumeMl2" name="VolumeMl2" type="number" class="form-control" min="0" value="@Model?.VolumeMl2" />
                             </div>
 
                             <!-- Price 1 -->
                             <div class="form-outline mb-4 col-lg-6">
                                 <label class="form-label" for="Price1">Price 1 (VND):</label>
-                                <input asp-for="Price1" type="number" class="form-control" step="0.01" min="0" />
+                                <input id="Price1" name="Price1" type="number" class="form-control" step="0.01" min="0" value="@Model?.Price1" />
                             </div>
 
                             <!-- Price 2 -->
                             <div class="form-outline mb-4 col-lg-6">
                                 <label class="form-label" for="Price2">Price 2 (VND):</label>
-                                <input asp-for="Price2" type="number" class="form-control" step="0.01" min="0" />
+                                <input id="Price2" name="Price2" type="number" class="form-control" step="0.01" min="0" value="@Model?.Price2" />
                             </div>
-
-                            <!-- Currency -->
-                            @* <div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="Currency">Currency:</label>
-								<input asp-for="Currency" class="form-control" required />
-							</div> *@
-
-                            <!-- Stock Quantity -->
-                            @* <div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="StockQuantity">Stock Quantity:</label>
-								<input asp-for="StockQuantity" type="number" class="form-control" min="0" />
-							</div> *@
-
-                            <!-- Status -->
-                            @* <div class="form-outline mb-4 col-lg-6">
-								<label class="form-label" for="Status">Status:</label>
-								<select asp-for="Status" class="form-control">
-									<option value="Available">Available</option>
-									<option value="Out of Stock">Out of Stock</option>
-									<option value="Discontinued">Discontinued</option>
-								</select>
-							</div> *@
 
                             <!-- Ingredients -->
                             <div class="form-outline mb-4 col-sm-12 col-md-8">
@@ -141,22 +102,22 @@
                                     <div class="col-md-6">
                                         <!-- First Row: Image Upload -->
                                         <div class="upload-placeholder" id="placeholder-1" onclick="document.getElementById('file-input-1').click()">
-                                            @if (!string.IsNullOrEmpty(Model.Ingredient_Img_1))
+                                            @if (!string.IsNullOrEmpty(Model?.Ingredient_Img_1))
                                             {
                                                 <img src="@Model.Ingredient_Img_1" class="uploaded-image" alt="Uploaded image">
                                             }
                                             else
                                             {
                                                 @Html.Raw("Upload Ingredient Image")
-                                            }                                            
+                                            }
                                         </div>
                                         <input type="file" class="file-input" id="file-input-1" accept="image/*" onchange="uploadImage(1)">
-                                        <input type="hidden" id="image-input-1" asp-for="Ingredient_Img_1" />
+                                        <input type="hidden" asp-for="Ingredient_Img_1" id="image-input-1" name="Ingredient_Img_1" value="@Model?.Ingredient_Img_1" />
                                         <!-- Title Input -->
-                                        <input type="text" class="form-control mb-3" placeholder="Enter the first ingredient's name..." asp-for="Ingredient_Name_1">
+                                        <input type="text" class="form-control mb-3" placeholder="Enter the first ingredient's name..." id="Ingredient_Name_1" name="Ingredient_Name_1" value="@Model?.Ingredient_Name_1">
                                         <!-- Second Row: Image Upload -->
                                         <div class="upload-placeholder" id="placeholder-3" onclick="document.getElementById('file-input-3').click()">
-                                            @if (!string.IsNullOrEmpty(Model.Ingredient_Img_3))
+                                            @if (!string.IsNullOrEmpty(Model?.Ingredient_Img_3))
                                             {
                                                 <img src="@Model.Ingredient_Img_3" class="uploaded-image" alt="Uploaded image">
                                             }
@@ -166,16 +127,16 @@
                                             }
                                         </div>
                                         <input type="file" class="file-input" id="file-input-3" accept="image/*" onchange="uploadImage(3)">
-                                        <input type="hidden" id="image-input-3" asp-for="Ingredient_Img_3" />
+                                        <input type="hidden" id="image-input-3" asp-for="Ingredient_Img_3" name="Ingredient_Img_3" value="@Model?.Ingredient_Img_3" />
                                         <!-- Title Input -->
-                                        <input type="text" class="form-control mb-3" placeholder="Enter the second ingredient's name..." asp-for="Ingredient_Name_3">
+                                        <input type="text" class="form-control mb-3" placeholder="Enter the second ingredient's name..." id="Ingredient_Name_3" name="Ingredient_Name_3" value="@Model?.Ingredient_Name_3">
                                     </div>
 
                                     <!-- Second Column -->
                                     <div class="col-md-6">
                                         <!-- First Row: Image Upload -->
                                         <div class="upload-placeholder" id="placeholder-2" onclick="document.getElementById('file-input-2').click()">
-                                            @if (!string.IsNullOrEmpty(Model.Ingredient_Img_2))
+                                            @if (!string.IsNullOrEmpty(Model?.Ingredient_Img_2))
                                             {
                                                 <img src="@Model.Ingredient_Img_2" class="uploaded-image" alt="Uploaded image">
                                             }
@@ -185,12 +146,12 @@
                                             }
                                         </div>
                                         <input type="file" class="file-input" id="file-input-2" accept="image/*" onchange="uploadImage(2)">
-                                        <input type="hidden" id="image-input-2" asp-for="Ingredient_Img_2" />
+                                        <input type="hidden" id="image-input-2" asp-for="Ingredient_Img_2" name="Ingredient_Img_2" value="@Model?.Ingredient_Img_2" />
                                         <!-- Title Input -->
-                                        <input type="text" class="form-control mb-3" placeholder="Enter the third ingredient's name ..." asp-for="Ingredient_Name_2">
+                                        <input type="text" class="form-control mb-3" placeholder="Enter the third ingredient's name ..." id="Ingredient_Name_2" name="Ingredient_Name_2" value="@Model?.Ingredient_Name_2">
                                         <!-- Second Row: Image Upload -->
                                         <div class="upload-placeholder" id="placeholder-4" onclick="document.getElementById('file-input-4').click()">
-                                            @if (!string.IsNullOrEmpty(Model.Ingredient_Img_4))
+                                            @if (!string.IsNullOrEmpty(Model?.Ingredient_Img_4))
                                             {
                                                 <img src="@Model.Ingredient_Img_4" class="uploaded-image" alt="Uploaded image">
                                             }
@@ -200,9 +161,9 @@
                                             }
                                         </div>
                                         <input type="file" class="file-input" id="file-input-4" accept="image/*" onchange="uploadImage(4)">
-                                        <input type="hidden" id="image-input-4" asp-for="Ingredient_Img_4" />
+                                        <input type="hidden" id="image-input-4" asp-for="Ingredient_Img_4" name="Ingredient_Img_4" value="@Model?.Ingredient_Img_4" />
                                         <!-- Title Input -->
-                                        <input type="text" class="form-control mb-3" placeholder="Enter the fourth ingredient's name..." asp-for="Ingredient_Name_4">
+                                        <input type="text" class="form-control mb-3" placeholder="Enter the fourth ingredient's name..." id="Ingredient_Name_4" name="Ingredient_Name_4" value="@Model?.Ingredient_Name_4">
                                     </div>
                                 </div>
                             </div>
@@ -211,37 +172,45 @@
                             <div class="form-outline mb-4 col-sm-12 col-md-4">
                                 <label class="mb-4">Fragrance Notes:</label><br />
 
-                                <input type="checkbox" id="Citrus" asp-for="Citrus" />
+                                <input type="hidden" name="Citrus" value="@(Model?.Citrus == true ? "true" : "false")" />
+                                <input type="checkbox" id="Citrus" name="Citrus" value="true" @(Model?.Citrus == true ? "checked" : "") />
                                 <label for="Citrus">Citrus</label><br />
 
-                                <input type="checkbox" id="Floral" asp-for="Floral" />
+                                <input type="hidden" name="Floral" value="@(Model?.Floral == true ? "true" : "false")" />
+                                <input type="checkbox" id="Floral" name="Floral" value="true" @(Model?.Floral == true ? "checked" : "") />
                                 <label for="Floral">Floral</label><br />
 
-                                <input type="checkbox" id="Fruity" asp-for="Fruity" />
+                                <input type="hidden" name="Fruity" value="@(Model?.Fruity == true ? "true" : "false")" />
+                                <input type="checkbox" id="Fruity" name="Fruity" value="true" @(Model?.Fruity == true ? "checked" : "") />
                                 <label for="Fruity">Fruity</label><br />
 
-                                <input type="checkbox" id="Woody" asp-for="Woody" />
+                                <input type="hidden" name="Woody" value="@(Model?.Woody == true ? "true" : "false")" />
+                                <input type="checkbox" id="Woody" name="Woody" value="true" @(Model?.Woody == true ? "checked" : "") />
                                 <label for="Woody">Woody</label><br />
 
-                                <input type="checkbox" id="Musky" asp-for="Musky" />
+                                <input type="hidden" name="Musky" value="@(Model?.Musky == true ? "true" : "false")" />
+                                <input type="checkbox" id="Musky" name="Musky" value="true" @(Model?.Musky == true ? "checked" : "") />
                                 <label for="Musky">Musky</label><br />
 
-                                <input type="checkbox" id="Oriental" asp-for="Oriental" />
+                                <input type="hidden" name="Oriental" value="@(Model?.Oriental == true ? "true" : "false")" />
+                                <input type="checkbox" id="Oriental" name="Oriental" value="true" @(Model?.Oriental == true ? "checked" : "") />
                                 <label for="Oriental">Oriental</label><br />
 
-                                <input type="checkbox" id="Spicy" asp-for="Spicy" />
+                                <input type="hidden" name="Spicy" value="@(Model?.Spicy == true ? "true" : "false")" />
+                                <input type="checkbox" id="Spicy" name="Spicy" value="true" @(Model?.Spicy == true ? "checked" : "") />
                                 <label for="Spicy">Spicy</label><br />
 
-                                <input type="checkbox" id="Tobacco" asp-for="Tobacco" />
+                                <input type="hidden" name="Tobacco" value="@(Model?.Tobacco == true ? "true" : "false")" />
+                                <input type="checkbox" id="Tobacco" name="Tobacco" value="true" @(Model?.Tobacco == true ? "checked" : "") />
                                 <label for="Tobacco">Tobacco</label><br />
 
-                                <input type="checkbox" id="Gourmand" asp-for="Gourmand" />
+                                <input type="hidden" name="Gourmand" value="@(Model?.Gourmand == true ? "true" : "false")" />
+                                <input type="checkbox" id="Gourmand" name="Gourmand" value="true" @(Model?.Gourmand == true ? "checked" : "") />
                                 <label for="Gourmand">Gourmand</label><br />
                             </div>
-
                         </div>
                         <div class="mt-5 text-end">
-                            <button type="submit" class="btn btn-primary">Submit Form</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
                             <a asp-action="Index" class="btn btn-secondary">Cancel</a>
                         </div>
                     </form>
@@ -253,24 +222,45 @@
 <script src="~/admin/vendor/jquery/jquery.min.js"></script>
 
 <script>
-	$(document).ready(function () {
-		$('#summernote').summernote({
-			callbacks: {
-				onImageLinkInsert: function (url) {
-					// url is the image url from the dialog
-					$img = $('<img>').attr({ src: url })
-					$summernote.summernote('insertNode', $img[0]);
-				}
-			},
-			height: 300,
-		});
+    $(document).ready(function () {
+        $('#summernote').summernote({
+            callbacks: {
+                onImageLinkInsert: function (url) {
+                    // url is the image url from the dialog
+                    $img = $('<img>').attr({ src: url })
+                    $summernote.summernote('insertNode', $img[0]);
+                }
+            },
+            height: 300,
+        });
 
-		// summernote.image.link.insert
-		$('#summernote').on('summernote.image.link.insert', function (we, url) {
-			// url is the image url from the dialog
-			$img = $('<img>').attr({ src: url })
-			$summernote.summernote('insertNode', $img[0]);
-		});
+        // summernote.image.link.insert
+        $('#summernote').on('summernote.image.link.insert', function (we, url) {
+            // url is the image url from the dialog
+            $img = $('<img>').attr({ src: url })
+            $summernote.summernote('insertNode', $img[0]);
+        });
 
-	});
+         // Select all checkboxes in the Fragrance Notes section
+        const checkboxes = document.querySelectorAll('.form-outline input[type="checkbox"]');
+
+        // Add an event listener to each checkbox
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                // Get the name of the checkbox (e.g., "Citrus" from id="Citrus")
+                const checkboxName = this.id;
+
+                // Find the corresponding hidden input with the same name (e.g., name="Citrus")
+                const hiddenInput = document.querySelector(`input[type="hidden"][name="${checkboxName}"]`);
+
+                // Update the hidden input's value based on checkbox state
+                if (hiddenInput) {
+                    hiddenInput.value = this.checked ? 'true' : 'false';
+                }
+            });
+
+            // Trigger the change event on page load to set initial values
+            checkbox.dispatchEvent(new Event('change'));
+        });
+    });
 </script>

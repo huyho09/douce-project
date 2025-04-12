@@ -11,8 +11,8 @@ using ScentifyWebApp.Models.Entities;
 
 namespace ScentifyWebApp.Areas.Admin.Controllers
 {
-    //[Route("perfumes")]
-	public class PerfumesController : BaseAdminController
+    //[Route("Perfumes")]
+    public class PerfumesController : BaseAdminController
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -69,7 +69,8 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
         }
 
 
-        [HttpPost("Create")]
+        //[HttpPost("Create")]
+        [HttpPost]
         public async Task<IActionResult> Create(DtoPerfume requestDTO)
         {
             try
@@ -123,7 +124,6 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                     await _context.SaveChangesAsync();
                     return RedirectToAction("index");
                 }
-                return RedirectToAction("Index", "Product");
             }
             catch { }
 
@@ -131,78 +131,85 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
             return View(requestDTO);
         }
 
-		//[HttpGet("Update")]
-		public async Task<IActionResult> Update(string id)
-		{
-			if (!Guid.TryParse(id, out Guid guidId))
-			{
-			}
-			var product = _context.Perfume.FirstOrDefault(m => m.Id == guidId);
-			var viewModel = _mapper.Map<DtoPerfume>(product);
-			if (product != null && !string.IsNullOrEmpty(product.PriceInfo))
-			{
-				var PriceInfoData = product.PriceInfo;
-				var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
-				if (!string.IsNullOrEmpty(product.FragranceNotes))
-				{
-					var fragranceNotes = JsonHelpers.ParseJson<FragranceNote>(product.FragranceNotes);
-					if (fragranceNotes != null && fragranceNotes.Any())
-					{
-						viewModel.Citrus = fragranceNotes[0].Citrus;
-						viewModel.Floral = fragranceNotes[0].Floral;
-						viewModel.Fruity = fragranceNotes[0].Fruity;
-						viewModel.Woody = fragranceNotes[0].Woody;
-						viewModel.Musky = fragranceNotes[0].Musky;
-						viewModel.Oriental = fragranceNotes[0].Oriental;
-						viewModel.Spicy = fragranceNotes[0].Spicy;
-						viewModel.Tobacco = fragranceNotes[0].Tobacco;
-						viewModel.Gourmand = fragranceNotes[0].Gourmand;
-					}
-					if (!string.IsNullOrEmpty(product.Ingredients))
-					{
-						viewModel.DtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(product.Ingredients);
-						if (viewModel.DtoIngredients != null)
-						{
-							viewModel.Ingredient_Img_1 = viewModel.DtoIngredients.Count > 0 ? viewModel.DtoIngredients[0]?.ImageUrl ?? "" : "";
-							viewModel.Ingredient_Img_2 = viewModel.DtoIngredients.Count > 1 ? viewModel.DtoIngredients[1]?.ImageUrl ?? "" : "";
-							viewModel.Ingredient_Img_3 = viewModel.DtoIngredients.Count > 2 ? viewModel.DtoIngredients[2]?.ImageUrl ?? "" : "";
-							viewModel.Ingredient_Img_4 = viewModel.DtoIngredients.Count > 3 ? viewModel.DtoIngredients[3]?.ImageUrl ?? "" : "";
+        //[HttpGet("Update")]
+        public async Task<IActionResult> Update(string id)
+        {
+            if (!Guid.TryParse(id, out Guid guidId))
+            {
+            }
+            var product = _context.Perfume.FirstOrDefault(m => m.Id == guidId);
+            var viewModel = _mapper.Map<DtoPerfume>(product);
+            if (product != null && !string.IsNullOrEmpty(product.PriceInfo))
+            {
+                var PriceInfoData = product.PriceInfo;
+                var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
+                if (!string.IsNullOrEmpty(product.FragranceNotes))
+                {
+                    var fragranceNotes = JsonHelpers.ParseJson<FragranceNote>(product.FragranceNotes);
+                    if (fragranceNotes != null && fragranceNotes.Any())
+                    {
+                        viewModel.Citrus = fragranceNotes[0].Citrus;
+                        viewModel.Floral = fragranceNotes[0].Floral;
+                        viewModel.Fruity = fragranceNotes[0].Fruity;
+                        viewModel.Woody = fragranceNotes[0].Woody;
+                        viewModel.Musky = fragranceNotes[0].Musky;
+                        viewModel.Oriental = fragranceNotes[0].Oriental;
+                        viewModel.Spicy = fragranceNotes[0].Spicy;
+                        viewModel.Tobacco = fragranceNotes[0].Tobacco;
+                        viewModel.Gourmand = fragranceNotes[0].Gourmand;
+                    }
+                    if (!string.IsNullOrEmpty(product.Ingredients))
+                    {
+                        viewModel.DtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(product.Ingredients);
+                        if (viewModel.DtoIngredients != null)
+                        {
+                            viewModel.Ingredient_Img_1 = viewModel.DtoIngredients.Count > 0 ? viewModel.DtoIngredients[0]?.ImageUrl ?? "" : "";
+                            viewModel.Ingredient_Img_2 = viewModel.DtoIngredients.Count > 1 ? viewModel.DtoIngredients[1]?.ImageUrl ?? "" : "";
+                            viewModel.Ingredient_Img_3 = viewModel.DtoIngredients.Count > 2 ? viewModel.DtoIngredients[2]?.ImageUrl ?? "" : "";
+                            viewModel.Ingredient_Img_4 = viewModel.DtoIngredients.Count > 3 ? viewModel.DtoIngredients[3]?.ImageUrl ?? "" : "";
 
-							viewModel.Ingredient_Name_1 = viewModel.DtoIngredients.Count > 0 ? viewModel.DtoIngredients[0]?.Name ?? "" : "";
-							viewModel.Ingredient_Name_2 = viewModel.DtoIngredients.Count > 1 ? viewModel.DtoIngredients[1]?.Name ?? "" : "";
-							viewModel.Ingredient_Name_3 = viewModel.DtoIngredients.Count > 2 ? viewModel.DtoIngredients[2]?.Name ?? "" : "";
-							viewModel.Ingredient_Name_4 = viewModel.DtoIngredients.Count > 3 ? viewModel.DtoIngredients[3]?.Name ?? "" : "";
-						}
+                            viewModel.Ingredient_Name_1 = viewModel.DtoIngredients.Count > 0 ? viewModel.DtoIngredients[0]?.Name ?? "" : "";
+                            viewModel.Ingredient_Name_2 = viewModel.DtoIngredients.Count > 1 ? viewModel.DtoIngredients[1]?.Name ?? "" : "";
+                            viewModel.Ingredient_Name_3 = viewModel.DtoIngredients.Count > 2 ? viewModel.DtoIngredients[2]?.Name ?? "" : "";
+                            viewModel.Ingredient_Name_4 = viewModel.DtoIngredients.Count > 3 ? viewModel.DtoIngredients[3]?.Name ?? "" : "";
+                        }
 
-					}
-				}
+                    }
+                }
 
-				if (productSizes != null && productSizes.Any())
-				{
-					viewModel.ProductSizes = productSizes;
-					for (var i = 0; i < productSizes.Count(); i++)
-					{
-						if (i == 0)
-						{
-							viewModel.Price1 = productSizes[i].Price;
-							viewModel.VolumeMl1 = productSizes[i].VolumeMl;
-							viewModel.Currency = productSizes[i].Currency;
-						}
-						if (i == 1)
-						{
-							viewModel.Price2 = productSizes[i].Price;
-							viewModel.VolumeMl2 = productSizes[i].VolumeMl;
-							viewModel.Currency = productSizes[i].Currency;
-						}
-					}
-				}
-			}
-			return View(viewModel);
-		}
+                if (productSizes != null && productSizes.Any())
+                {
+                    viewModel.ProductSizes = productSizes;
+                    for (var i = 0; i < productSizes.Count(); i++)
+                    {
+                        if (i == 0)
+                        {
+                            viewModel.Price1 = productSizes[i].Price;
+                            viewModel.VolumeMl1 = productSizes[i].VolumeMl;
+                            viewModel.Currency = productSizes[i].Currency;
+                        }
+                        if (i == 1)
+                        {
+                            viewModel.Price2 = productSizes[i].Price;
+                            viewModel.VolumeMl2 = productSizes[i].VolumeMl;
+                            viewModel.Currency = productSizes[i].Currency;
+                        }
+                    }
+                }
+            }
+            return View(viewModel);
+        }
 
-		[HttpPost("Update")]
+        //[HttpPost("Update")]
+        [HttpPost]
         public async Task<IActionResult> Update(DtoPerfume requestDTO)
         {
+            //if (requestDTO == null || !ModelState.IsValid)
+            //{
+            //    ViewData["ErrorSubmit"] = "Invalid data submitted.";
+            //    return View(requestDTO ?? new DtoPerfume());
+            //}
+
             if (requestDTO != null)
             {
                 if (!Guid.TryParse(requestDTO.Id, out Guid guidId))
@@ -259,11 +266,12 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                     existingPerfume.FragranceNotes = JsonConvert.SerializeObject(fragranceNotes);
                 }
                 await _context.SaveChangesAsync();
-                return Redirect("/admin/perfumes/Update?id=" + requestDTO.Id);
             }
-            return RedirectToAction("Index", "perfumes");
+            return Redirect("/admin/perfumes/Update?id=" + requestDTO?.Id);
+            //return RedirectToAction("Index", "perfumes");
         }
 
+        //[HttpDelete("Delete")]
         [HttpDelete]
         public async Task<IActionResult> Delete(string currentId)
         {

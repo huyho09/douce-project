@@ -25,7 +25,9 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            if (_baseHttpContext.HttpContext().User.Identity?.IsAuthenticated == false)
+                return View();
+            return Redirect("/Admin/Dashboard");
         }
 
         [HttpPost]
