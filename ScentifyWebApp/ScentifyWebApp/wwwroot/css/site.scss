@@ -461,7 +461,7 @@ a[disabled]:focus {
 	// Outline Load More Button
 	.load-more-btn {
 		background-color: transparent;
-		color: $color-text;
+		color: $color-white;
 		text-decoration: none;
 		padding: 12px 24px;
 		font-size: $font-size-lg;
@@ -473,12 +473,12 @@ a[disabled]:focus {
 		letter-spacing: 0.1em;
 		font-weight: 600;
 		gap: 10px;
-		border: 1px solid $color-black;
+		border: 1px solid $color-white;
 		border-radius: 6px;
 		// Hover State
 		&:hover {
 			background-color: rgba(51, 51, 51, 0.05);
-			color: $color-hover;
+			color: $color_7;
 			box-shadow: inset 0 0 0 2px rgba(51, 51, 51, 0.4);
 			transform: translateY(-2px);
 		}
@@ -2079,5 +2079,26 @@ body.has-tabbed .RadioGroup_radio__hnn9G:focus-within:after {
 
 	100% {
 		content: '';
+	}
+}
+
+section.third-section.container table tr td p {
+    margin-bottom: 30px;
+	min-width: 180px;
+	text-transform: none;
+}
+
+section.third-section.container table tr td img {
+    margin-top: 0;
+}
+
+@media (max-width: 768px) {
+	section.third-section.container table tr td {
+		display: flex;
+		flex-direction: column;
+	}
+
+	main:has(.product-info) .card:first-child{
+		margin-left: 200px;
 	}
 }
