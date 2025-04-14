@@ -495,6 +495,8 @@ iframe {
 }
 
 #testimonials {
+	margin-top: 100px;
+	margin-bottom: 80px;
 	h2 {
 		font-family: $font-family_6;
 		font-size: 1.5rem;
@@ -1275,6 +1277,7 @@ iframe {
 	}
 }
 
+
 @media only screen and (min-width: 1025px) {
 	.subNavigation_subNavContainer__8LZ2X {
 		border-bottom: unset;
@@ -1381,9 +1384,17 @@ iframe {
 		margin-left: 3rem;
 	}
 
+	#testimonials {
+		margin-top: 40px;
+		margin-bottom: 30px;
+	}
+	#mobile-products {
+		padding-top: 0em;
+		padding-bottom: 2em;
+	}
 	.Image_picture {
 		width: 100%;
-		min-height: 50vh !important;
+		min-height: 70vh !important;
 		height: 100%;
 		object-fit: cover;
 		vertical-align: middle;

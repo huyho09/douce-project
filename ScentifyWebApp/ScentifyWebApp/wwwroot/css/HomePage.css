@@ -393,6 +393,10 @@ iframe {
   opacity: 1;
 }
 
+#testimonials {
+  margin-top: 100px;
+  margin-bottom: 80px;
+}
 #testimonials h2 {
   font-family: Montserrat;
   font-size: 1.5rem;
@@ -1171,9 +1175,17 @@ iframe {
   .swiper-button-next {
     margin-left: 3rem;
   }
+  #testimonials {
+    margin-top: 40px;
+    margin-bottom: 30px;
+  }
+  #mobile-products {
+    padding-top: 0em;
+    padding-bottom: 2em;
+  }
   .Image_picture {
     width: 100%;
-    min-height: 50vh !important;
+    min-height: 70vh !important;
     height: 100%;
     object-fit: cover;
     vertical-align: middle;
