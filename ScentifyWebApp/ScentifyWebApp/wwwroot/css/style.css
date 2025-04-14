@@ -73,7 +73,7 @@ html {
   box-sizing: border-box;
 }
 body {
-    font-family: var(--body-font);
+    font-family: Montserrat;
     font-size: 14px;
     font-weight: 500;
     line-height: 1.6;
@@ -81,8 +81,9 @@ body {
     background-color: #fffef2;
 }
 p {
-  font-size: 1.2em;
-  color: var(--gray-color-500);
+    font-size: 1.2em;
+    color: var(--gray-color-500);
+    font-family: Montserrat;
 }
 ul.inner-list li {
    font-size: 1.2em;

@@ -180,7 +180,7 @@
 			var volume = $(this).data("volume") || 0;
 			$("#img-product").toggleClass("img-product-bigger");
 			if (price && currency) {
-				$("#the-price-currency").text(price + " " + currency);
+				$("#the-price-currency").text(price.toLocaleString("en-US", { maximumFractionDigits: 0 }) + " " + currency);
 			}
 			$(".add-to-cart-btn").attr("data-current-size", volume);
 		});
