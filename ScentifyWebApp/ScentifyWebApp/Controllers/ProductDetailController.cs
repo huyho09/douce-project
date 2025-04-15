@@ -49,42 +49,50 @@ namespace ScentifyWebApp.Controllers
         private async Task<DtoPerfume> _productDetail(Guid id)
         {
             // Step 1: Fetch the perfume by ID
-            var perfume = await _context.Perfume
+            var perfumes = await _context.Perfume
                 .AsNoTracking()
-                .FirstOrDefaultAsync(p => p.Id == id);
+                .Where(p => p.Id == id)
+                .Select(p => new DtoPerfume
+                        {
+                            Id = p.Id.ToString(),
+                            Name = p.Name,
+                            Brand = p.Brand,
+                            ImageUrl = p.ImageUrl,
+                            TopPerfumed = p.TopPerfumed,
+                            MiddlePerfumed = p.MiddlePerfumed,
+                            BasePerfumed = p.BasePerfumed,
+                            FragranceNotes = p.FragranceNotes,
+                            Description = p.Description,
+                            // Parse JSON inline
+                            DtoIngredients = !string.IsNullOrWhiteSpace(p.Ingredients)
+                            ? JsonConvert.DeserializeObject<List<Ingredient>>(p.Ingredients)
+                            : new List<Ingredient>(),
+
+                            ProductSizes = !string.IsNullOrWhiteSpace(p.PriceInfo)
+                            ? JsonHelpers.ParseJson<ProductSize>(p.PriceInfo)
+                            : new List<ProductSize>(),
+
+                            SimilarPerfumes = _context.Perfume
+                            .AsNoTracking()
+                            .Where(sp => sp.Id != p.Id)
+                            .Take(3)
+                            .Select(sp => new DtoPerfume
+                            {
+                                Id = sp.Id.ToString(),
+                                Name = sp.Name,
+                                Brand = sp.Brand,
+                                ImageUrl = sp.ImageUrl,
+                                ShortDescription = sp.ShortDescription
+                            })
+                    .ToList()
+                })
+                .ToListAsync();
+            var perfume = perfumes.FirstOrDefault();
 
             if (perfume == null)
                 return new DtoPerfume(); // or handle differently (e.g., return null or throw)
 
-            var dtoPerfume = _mapper.Map<DtoPerfume>(perfume);
-
-            // Step 2: Parse Ingredients if available
-            if (!string.IsNullOrWhiteSpace(perfume.Ingredients))
-            {
-                dtoPerfume.DtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(perfume.Ingredients);
-            }
-
-            // Step 3: Parse PriceInfo and map sizes
-            if (!string.IsNullOrWhiteSpace(perfume.PriceInfo))
-            {
-                var sizes = JsonHelpers.ParseJson<ProductSize>(perfume.PriceInfo);
-                if (sizes?.Any() == true)
-                {
-                    dtoPerfume.ProductSizes = sizes;
-                }
-            }
-
-            // Step 4: Fetch 3 random similar perfumes (excluding current)
-            var similarPerfumes = await _context.Perfume
-                .AsNoTracking()
-                .Where(p => p.Id != id)
-                .OrderBy(p => Guid.NewGuid()) // lightweight random sort in SQL
-                .Take(3)
-                .ToListAsync();
-
-            dtoPerfume.SimilarPerfumes = _mapper.Map<List<DtoPerfume>>(similarPerfumes);
-
-            return dtoPerfume;
+            return perfume;
         }
 
 

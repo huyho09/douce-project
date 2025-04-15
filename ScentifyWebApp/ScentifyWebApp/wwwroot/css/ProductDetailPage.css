@@ -1,4 +1,4 @@
-﻿/* Reset */
+/* Reset */
 /* Header */
 /* Main Content */
 /* Image & Info */
@@ -59,7 +59,8 @@
   position: relative;
   width: 300px;
   height: auto;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   filter: drop-shadow(0 5px 10px #9f5f2e);
 }
 .product-display img {
@@ -196,7 +197,8 @@
 .card img {
   width: 180px;
   margin-bottom: 20px;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   transition: 0.3s;
   margin: 0 auto;
   /* Ensures horizontal centering */
@@ -316,7 +318,8 @@
 .product-card img {
   width: 100%;
   height: auto;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 main:has(.product-info) .product-card {
@@ -546,4 +549,4 @@ main:has(.product-info) .card {
   .product-cards::-webkit-scrollbar {
     display: none;
   }
-}
+}/*# sourceMappingURL=ProductDetailPage.css.map */

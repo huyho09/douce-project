@@ -16,7 +16,7 @@ namespace ScentifyWebApp.Models.Dtos
         public string BasePerfumed { get; set; } = string.Empty;
 
         public PerfumedNote? Perfumed_Notes_DTO { get; set; }
-        public List<DtoPerfume> SimilarPerfumes { get; set; }
+        public List<DtoPerfume>? SimilarPerfumes { get; set; }
         public string Composition { get; set; } = "";
         public string FragranceFamily { get; set; } = ""; // Nhóm hương chính (VD: Floral, Woody)
         public int VolumeMl1 { get; set; }
@@ -41,6 +41,7 @@ namespace ScentifyWebApp.Models.Dtos
         public int StockQuantity { get; set; } = 0;
         public string PriceInfo { get; set; } = "";
         public List<ProductSize>? ProductSizes { get; set; }
+        public FragranceNote? FragranceNoteObj { get; set; }
         public string Status { get; set; } = "Available";
 
         public IList<SelectListItem> StatusList { get; set; } = new List<SelectListItem>

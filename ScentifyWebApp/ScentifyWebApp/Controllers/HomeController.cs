@@ -34,53 +34,36 @@ namespace ScentifyWebApp.Controllers
 
         private async Task<HomeViewModel> RetrieveHomeViewData()
         {
-            var products = await _context.Perfume.Take(6).ToListAsync();
-
-            if (products is not { Count: > 0 })
-                return new HomeViewModel();
-
-            var mappedPerfumes = _mapper.Map<List<DtoPerfume>>(products);
-
-            for (int i = 0; i < products.Count; i++)
+            var products = await _context.Perfume.Take(6).Select(p => new DtoPerfume
             {
-                var product = products[i];
-                var dto = mappedPerfumes[i];
+                Id = p.Id.ToString(),
+                Name = p.Name,
+                Brand = p.Brand,
+                ImageUrl = p.ImageUrl,
+                TopPerfumed = p.TopPerfumed,
+                MiddlePerfumed = p.MiddlePerfumed,
+                BasePerfumed = p.BasePerfumed,
 
-                if (!string.IsNullOrWhiteSpace(product.Ingredients))
-                {
-                    dto.DtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(product.Ingredients);
-                }
+                // Parse JSON inline
+                DtoIngredients = !string.IsNullOrWhiteSpace(p.Ingredients)
+                ? JsonConvert.DeserializeObject<List<Ingredient>>(p.Ingredients)
+                : new List<Ingredient>(),
 
-                if (!string.IsNullOrWhiteSpace(product.PriceInfo))
-                {
-                    var productSizes = JsonHelpers.ParseJson<ProductSize>(product.PriceInfo);
-                    if (productSizes?.Any() == true)
-                    {
-                        dto.ProductSizes = productSizes;
-                    }
-                }
+                ProductSizes = !string.IsNullOrWhiteSpace(p.PriceInfo)
+                ? JsonHelpers.ParseJson<ProductSize>(p.PriceInfo)
+                : new List<ProductSize>(),
 
-                if (!string.IsNullOrWhiteSpace(product.FragranceNotes))
-                {
-                    var notes = JsonHelpers.ParseJson<FragranceNote>(product.FragranceNotes)?.FirstOrDefault();
-                    if (notes is not null)
-                    {
-                        dto.Citrus = notes.Citrus;
-                        dto.Floral = notes.Floral;
-                        dto.Fruity = notes.Fruity;
-                        dto.Woody = notes.Woody;
-                        dto.Musky = notes.Musky;
-                        dto.Oriental = notes.Oriental;
-                        dto.Spicy = notes.Spicy;
-                        dto.Tobacco = notes.Tobacco;
-                        dto.Gourmand = notes.Gourmand;
-                    }
-                }
-            }
+                // Fragrance notes object parsing
+                //FragranceNoteObj = !string.IsNullOrWhiteSpace(p.FragranceNotes)
+                //? JsonHelpers.ParseJson<FragranceNote>(p.FragranceNotes).FirstOrDefault()
+                //: null
+                FragranceNotes = p.FragranceNotes
+            })
+        .ToListAsync();
 
             return new HomeViewModel
             {
-                DtoPerfumes = mappedPerfumes
+                DtoPerfumes = products
             };
         }
 

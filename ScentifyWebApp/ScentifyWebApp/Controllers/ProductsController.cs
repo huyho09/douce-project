@@ -47,11 +47,22 @@ namespace ScentifyWebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var products = await _context.Perfume.AsNoTracking().ToListAsync();
-            _baseHttpContext.SetSession("Products", products);
-            var dtoProducts = _mapper.Map<List<DtoPerfume>>(products);
-            ConvertDtoProducts(dtoProducts, products);
-            return View(dtoProducts);
+            var products = await _context.Perfume.AsNoTracking().Select(p => new DtoPerfume
+                {
+                    Id = p.Id.ToString(),
+                    Name = p.Name,
+                    ShortDescription = p.ShortDescription,
+                    Brand = p.Brand,
+                    ImageUrl = p.ImageUrl,
+                    TopPerfumed = p.TopPerfumed,
+                    MiddlePerfumed = p.MiddlePerfumed,
+                    BasePerfumed = p.BasePerfumed,
+                    ProductSizes = !string.IsNullOrWhiteSpace(p.PriceInfo)
+                    ? JsonHelpers.ParseJson<ProductSize>(p.PriceInfo)
+                    : new List<ProductSize>()
+                })
+            .ToListAsync();
+            return View(products);
         }
 
         //public async Task<IActionResult> FilterFragranceFamily(string fragranceFamily)
@@ -82,25 +93,44 @@ namespace ScentifyWebApp.Controllers
                 .AsNoTracking()
                 .Where(p => p.Name.ToUpper().Contains(searchInput)
                          || p.ShortDescription.ToUpper().Contains(searchInput))
-                .ToListAsync();
-
-            var dtoProducts = _mapper.Map<List<DtoPerfume>>(products);
-            ConvertDtoProducts(dtoProducts, products);
+                .Select(p => new DtoPerfume
+                {
+                    Id = p.Id.ToString(),
+                    Name = p.Name,
+                    ShortDescription = p.ShortDescription,
+                    Brand = p.Brand,
+                    ImageUrl = p.ImageUrl,
+                    TopPerfumed = p.TopPerfumed,
+                    MiddlePerfumed = p.MiddlePerfumed,
+                    BasePerfumed = p.BasePerfumed,
+                    ProductSizes = !string.IsNullOrWhiteSpace(p.PriceInfo)
+                    ? JsonHelpers.ParseJson<ProductSize>(p.PriceInfo)
+                    : new List<ProductSize>()
+                })
+            .ToListAsync();
 
             ViewData["searchInput"] = searchInput;
-            return View(dtoProducts);
+            return View(products);
         }
 
         [HttpPost]
         public async Task<IActionResult> LoadMoreProducts([FromBody] PaginationRequest request)
         {
-            var products = _baseHttpContext.GetSession<List<Perfume>>("Products");
-
-            if (products == null || !products.Any())
+            var products = await _context.Perfume.AsNoTracking().Select(p => new DtoPerfume
             {
-                products = await _context.Perfume.AsNoTracking().ToListAsync();
-                _baseHttpContext.SetSession("Products", products); // Save to session if needed
-            }
+                Id = p.Id.ToString(),
+                Name = p.Name,
+                ShortDescription = p.ShortDescription,
+                Brand = p.Brand,
+                ImageUrl = p.ImageUrl,
+                TopPerfumed = p.TopPerfumed,
+                MiddlePerfumed = p.MiddlePerfumed,
+                BasePerfumed = p.BasePerfumed,
+                ProductSizes = !string.IsNullOrWhiteSpace(p.PriceInfo)
+                    ? JsonHelpers.ParseJson<ProductSize>(p.PriceInfo)
+                    : new List<ProductSize>()
+            })
+            .ToListAsync();
 
             var skip = (request.Page - 1) * request.Size;
             var filterProducts = products
@@ -108,14 +138,11 @@ namespace ScentifyWebApp.Controllers
                 .Take(request.Size)
                 .ToList();
 
-            var dtoProducts = _mapper.Map<List<DtoPerfume>>(filterProducts);
-            ConvertDtoProducts(dtoProducts, products);
-
             bool isEnd = skip + request.Size >= products.Count;
 
             return Json(new
             {
-                products = dtoProducts,
+                products = products,
                 isEnd
             });
         }

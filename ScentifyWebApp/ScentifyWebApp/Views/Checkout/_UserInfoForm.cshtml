@@ -9,7 +9,7 @@
         }
         <!-- Row 1: Title, First Name, Last Name -->
         <div class="form-row">
-            <div class="floating-group">
+            @* <div class="floating-group">
                 <input type="hidden" asp-for="Title" id="selectedTitle" value="Dr">
                 <select id="customSelect" asp-for="Title" class="form-control" data-required onchange="changeSelectTitle(this);">
                     <option value="Dr" selected>Dr</option>
@@ -19,23 +19,29 @@
                 </select>
                 <label asp-for="Title">1. Title</label>
                 <span class="text-danger" asp-validation-for="Title"></span>
-            </div>
+            </div> *@
 
             <div class="floating-group">
-                <input asp-for="FirstName" placeholder="" class="form-control" data-required />
-                <label asp-for="FirstName">2. First name</label>
-                <span class="text-danger" asp-validation-for="FirstName"></span>
+                <input asp-for="FullName" placeholder="" class="form-control" data-required />
+                <label asp-for="FullName">1. Họ tên</label>
+                <span class="text-danger" asp-validation-for="FullName"></span>
             </div>
 
-            <div class="floating-group">
+            @* <div class="floating-group">
                 <input asp-for="LastName" placeholder="" class="form-control" data-required />
                 <label asp-for="LastName">3. Last name</label>
                 <span class="text-danger" asp-validation-for="LastName"></span>
+            </div> *@
+
+            <div class="floating-group">
+                <input asp-for="PhoneNumber" placeholder="" class="form-control" data-required />
+                <label asp-for="PhoneNumber">2. Số điện thoại</label>
+                <span class="text-danger" asp-validation-for="PhoneNumber"></span>
             </div>
         </div>
 
         <!-- Row 2: Email, Phone Number -->
-        <div class="form-row">
+        @* <div class="form-row">
             <div class="floating-group">
                 <input asp-for="EmailAddress" placeholder="" class="form-control" data-required />
                 <label asp-for="EmailAddress">4. Email Address</label>
@@ -47,39 +53,39 @@
                 <label asp-for="PhoneNumber">5. Phone Number</label>
                 <span class="text-danger" asp-validation-for="PhoneNumber"></span>
             </div>
-        </div>
+        </div> *@
 
         <!-- Row 3: Address -->
         <div class="form-row">
             <div class="floating-group">
                 <input asp-for="Address" placeholder="" class="form-control" data-required />
-                <label asp-for="Address">6. Address</label>
+                <label asp-for="Address">3. Thông tin địa chỉ nhà</label>
                 <span class="text-danger" asp-validation-for="Address"></span>
             </div>
         </div>
 
-        <button class="continue-btn" type="submit">Confirm completed invoice</button>
+        <button class="continue-btn" type="submit">Hoàn tất</button>
     </form>
 </div>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var selectElement = document.querySelector("#customSelect");
+    // document.addEventListener("DOMContentLoaded", function () {
+    //     var selectElement = document.querySelector("#customSelect");
 
-        if (selectElement) {
-            $(selectElement).select2(); // Requires jQuery for now
-        }
-    });
+    //     if (selectElement) {
+    //         $(selectElement).select2(); // Requires jQuery for now
+    //     }
+    // });
 </script>
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $("#customSelect").select2({
-                placeholder: "Select a title",
-                allowClear: true
-            });
-        });
+        // $(document).ready(function () {
+        //     $("#customSelect").select2({
+        //         placeholder: "Select a title",
+        //         allowClear: true
+        //     });
+        // });
     </script>
 }

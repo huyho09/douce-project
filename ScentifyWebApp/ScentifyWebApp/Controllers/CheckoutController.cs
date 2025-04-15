@@ -74,14 +74,14 @@ namespace ScentifyWebApp.Controllers
                 if (cart != null && cart.Count > 0)
                 {
 
-                    //var customerInfo = _mapper.Map<CustomerInfo>(model);
-                    //var newInvoice = CreateInvoiceModel(cart, customerInfo);
-                    ////await _invoiceService.InsertInvoiceAsync(newInvoice);
+                    var customerInfo = _mapper.Map<CustomerInfo>(model);
+                    var newInvoice = CreateInvoiceModel(cart, customerInfo);
+                    //await _invoiceService.InsertInvoiceAsync(newInvoice); -- TODO
 
-                    //// reset cart
-                    ////_cartService.ClearCart();
+                    // reset cart
+                    _cartService.ClearCart();
 
-                    //// Generate VNPay payment URL
+                    // Generate VNPay payment URL
                     //var orderId = Guid.NewGuid().ToString();
                     //var amount = cart.Sum(m => m.Quantity * m.Product.Price);
 
@@ -90,7 +90,7 @@ namespace ScentifyWebApp.Controllers
                     //// Directly redirect to VNPay payment URL
                     //return Redirect(vnpayPaymentUrl);
 
-                    //return Json(new { status = 200, message = $"Payment for your cart is pending confirmation..." });
+                    return Json(new { status = 200, message = $"Payment for your cart is pending confirmation..." });
 
                     //    // TODO testing
                     //    decimal amount = 1000000; // Amount in VND

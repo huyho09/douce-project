@@ -104,9 +104,22 @@ namespace ScentifyWebApp.Services.Implementations
 
         private async Task<Perfume?> RetrievePerfumeAsync(string productId)
         {
-            return Guid.TryParse(productId, out var guidId)
-                ? await _context.Perfume.FindAsync(guidId)
-                : null;
+            if(Guid.TryParse(productId, out var guidId))
+            {
+                var perfumes = await _context.Perfume
+                                .AsNoTracking()
+                                .Where(m => m.Id == guidId)
+                                .Select(p => new Perfume
+                                {
+                                    Id = p.Id,
+                                    Name = p.Name,
+                                    ImageUrl = p.ImageUrl,
+                                    PriceInfo = p.PriceInfo
+
+                                }).ToListAsync();
+                return perfumes.FirstOrDefault();
+            }
+            return null;
         }
     }
 

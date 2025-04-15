@@ -1,4 +1,4 @@
-﻿/* The dots/bullets/indicators */
+/* The dots/bullets/indicators */
 /* Fading animation */
 @keyframes fade {
   from {
@@ -60,18 +60,21 @@ ahover {
 .carousel-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .carousel-item video {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 iframe {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .dot {
@@ -334,7 +337,8 @@ iframe {
   width: 100%;
   min-height: 80vh;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   vertical-align: middle;
 }
 
@@ -369,7 +373,8 @@ iframe {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   filter: brightness(50%);
 }
 
@@ -1056,7 +1061,6 @@ iframe {
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
@@ -1076,7 +1080,8 @@ iframe {
   border-radius: 20px;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .flip-card-back {
@@ -1145,12 +1150,14 @@ iframe {
   .carousel-item img {
     width: 100%;
     height: 220px;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
   }
   .carousel-item video {
     width: 100%;
     height: 220px;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
   }
   .mySwiperContainer {
     display: none !important;
@@ -1161,7 +1168,8 @@ iframe {
   iframe {
     width: 100%;
     height: 220px;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
   }
   .carousel-control-next {
     top: 40px;
@@ -1187,7 +1195,8 @@ iframe {
     width: 100%;
     min-height: 70vh !important;
     height: 100%;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
     vertical-align: middle;
   }
   .text-content {
@@ -1276,4 +1285,4 @@ iframe {
   .FlyinPanel_footer__PvryQ {
     padding: 0 80px;
   }
-}
+}/*# sourceMappingURL=HomePage.css.map */

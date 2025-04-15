@@ -15,7 +15,7 @@ namespace ScentifyWebApp.Services.Implementations
 
         public async Task InsertInvoiceAsync(Invoice invoice)
         {
-            //await _context.Invoice.AddAsync(invoice);
+            await _context.Invoice.AddAsync(invoice);
             await _context.SaveChangesAsync();
         }
     }

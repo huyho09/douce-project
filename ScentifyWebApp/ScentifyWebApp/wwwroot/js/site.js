@@ -129,7 +129,7 @@ function sumTotalInCheckOut() {
     if ($products != null && $products.length > 0) {
         $products.each((index, ele) => {
             var quantity = $(ele).find('.quantity').val();
-            var price = $(ele).find('.product-price').text().trim();
+            var price = $(ele).find('.product-price').text().trim().replace(',', '');
             total += (quantity * price);
         });
     }
@@ -159,12 +159,11 @@ function updateCartItem(_this, productId) {
     }, 1000);
 }
 
-function updateCartIteminCheckOut(_this, productId) {
+function updateCartIteminCheckOut(_this, productId, volume) {
     clearTimeout(changeTimeout);
     changeTimeout = setTimeout(() => {
         var $this = $(_this);
         var quantity = $this.val();
-        var volume = $('.product-info input:checked').data('volume');
 
         $.ajax({
             url: "/Cart/UpdateQuantity",
