@@ -82,7 +82,7 @@ body {
 }
 p {
     font-size: 1.2em;
-    color: var(--gray-color-500);
+    color: #fffef2;
     font-family: Montserrat;
 }
 ul.inner-list li {

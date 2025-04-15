@@ -1,0 +1,23 @@
+﻿@model ScentifyWebApp.Models.ViewModels.ContactUsViewModel;
+
+<section class="podium-section">
+	<div class="podium-ref-div">
+		<div class="product-commerce-cards">
+		</div>
+	</div>
+</section>
+<section class="third-section container podium-section">
+	<div class="section-content">
+		<!-- Heading -->
+		<div class="section-heading">
+			@if (!string.IsNullOrEmpty(Model.Title))
+			{
+				<h2 class="section-title pb-3">@Model.Title</h2>
+			}
+			@if (!string.IsNullOrEmpty(Model.Body))
+			{
+				<div class="text-white" style="letter-spacing:2px;">@Html.Raw(Model.Body)</div>
+			}
+		</div>
+	</div>
+</section>

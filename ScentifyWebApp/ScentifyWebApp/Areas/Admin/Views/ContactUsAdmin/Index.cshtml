@@ -1,0 +1,66 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+	Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+	.modal-content {
+		color: black !important;
+	}
+</style>
+@model ScentifyWebApp.Models.ViewModels.ContactUsViewModel
+
+<div class="row justify-content-center">
+	<div class="col-xl-8 col-lg-12 col-md-7">
+		<div class="card o-hidden border-0 shadow-lg my-lg-5">
+			<div class="card-body p-0 card-login">
+				<div class="text-center">
+					<h1 class="h3 text-gray-900 mb-4 mt-5 font-weight-bold">Contact Us</h1>
+				</div>
+				<div class="h-full overflow-hidden m-5">
+					<form asp-area="Admin" asp-controller="ContactUsAdmin" asp-action="Update" class="needs-validation" method="post" novalidate>
+						<div class="row">
+							<div class="form-outline mb-4 col-lg-12">
+								<label class="form-label" for="Title">Title:</label>
+								<input asp-for="Title" name="Title" required class="form-control" autocomplete="off" value="@Model.Title" />
+							</div>
+							<!-- Body -->
+							<div class="form-outline mb-4 col-lg-12">
+								<label class="form-label" for="Body">Content:</label>
+								<textarea asp-for="Body" name="Body" class="form-control" required id="summernote">@Model.Body</textarea>
+							</div>
+						</div>
+						<div class="mt-5 text-end">
+							<button type="submit" class="btn btn-primary">Update</button>
+							<a asp-action="Index" class="btn btn-secondary">Cancel</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="~/admin/vendor/jquery/jquery.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$('#summernote').summernote({
+			callbacks: {
+				onImageLinkInsert: function (url) {
+					// url is the image url from the dialog
+					$img = $('<img>').attr({ src: url })
+					$summernote.summernote('insertNode', $img[0]);
+				}
+			},
+			height: 300,
+			fontNames: ['Montserrat', 'Serif', 'Open Sans', 'Sans', 'sans-serif', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Comfortaa'],
+			fontNamesIgnoreCheck: ['Montserrat', 'Serif', 'Open Sans', 'Sans', 'sans-serif', 'Comfortaa']
+		});
+
+		// summernote.image.link.insert
+		$('#summernote').on('summernote.image.link.insert', function (we, url) {
+			// url is the image url from the dialog
+			$img = $('<img>').attr({ src: url })
+			$summernote.summernote('insertNode', $img[0]);
+		});
+
+	});
+</script>
