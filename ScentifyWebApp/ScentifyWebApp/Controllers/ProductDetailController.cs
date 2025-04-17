@@ -49,50 +49,48 @@ namespace ScentifyWebApp.Controllers
         private async Task<DtoPerfume> _productDetail(Guid id)
         {
             // Step 1: Fetch the perfume by ID
-            var perfumes = await _context.Perfume
+            var p = await _context.Perfume
+                                .AsNoTracking()
+                                .FirstOrDefaultAsync(p => p.Id == id);
+
+            var dto = new DtoPerfume
+            {
+                Id = p.Id.ToString(),
+                Name = p.Name,
+                Brand = p.Brand,
+                TopPerfumed = p.TopPerfumed,
+                MiddlePerfumed = p.MiddlePerfumed,
+                BasePerfumed = p.BasePerfumed,
+                FragranceNotes = p.FragranceNotes,
+                Description = p.Description,
+                DtoIngredients = !string.IsNullOrWhiteSpace(p.Ingredients)
+                   ? JsonConvert.DeserializeObject<List<Ingredient>>(p.Ingredients)
+                   : new List<Ingredient>(),
+                ProductSizes = !string.IsNullOrWhiteSpace(p.PriceInfo)
+                   ? JsonHelpers.ParseJson<ProductSize>(p.PriceInfo)
+                   : new List<ProductSize>()
+            };
+
+            // Step 3: Fetch similar perfumes separately
+            dto.SimilarPerfumes = await _context.Perfume
                 .AsNoTracking()
-                .Where(p => p.Id == id)
-                .Select(p => new DtoPerfume
-                        {
-                            Id = p.Id.ToString(),
-                            Name = p.Name,
-                            Brand = p.Brand,
-                            ImageUrl = p.ImageUrl,
-                            TopPerfumed = p.TopPerfumed,
-                            MiddlePerfumed = p.MiddlePerfumed,
-                            BasePerfumed = p.BasePerfumed,
-                            FragranceNotes = p.FragranceNotes,
-                            Description = p.Description,
-                            // Parse JSON inline
-                            DtoIngredients = !string.IsNullOrWhiteSpace(p.Ingredients)
-                            ? JsonConvert.DeserializeObject<List<Ingredient>>(p.Ingredients)
-                            : new List<Ingredient>(),
-
-                            ProductSizes = !string.IsNullOrWhiteSpace(p.PriceInfo)
-                            ? JsonHelpers.ParseJson<ProductSize>(p.PriceInfo)
-                            : new List<ProductSize>(),
-
-                            SimilarPerfumes = _context.Perfume
-                            .AsNoTracking()
-                            .Where(sp => sp.Id != p.Id)
-                            .Take(3)
-                            .Select(sp => new DtoPerfume
-                            {
-                                Id = sp.Id.ToString(),
-                                Name = sp.Name,
-                                Brand = sp.Brand,
-                                ImageUrl = sp.ImageUrl,
-                                ShortDescription = sp.ShortDescription
-                            })
-                    .ToList()
+                .Where(sp => sp.Id != p.Id)
+                .Select(sp => new DtoPerfume
+                {
+                    Id = sp.Id.ToString(),
+                    Name = sp.Name,
+                    Brand = sp.Brand,
+                    ShortDescription = sp.ShortDescription,
+                    ProductSizes = !string.IsNullOrWhiteSpace(sp.PriceInfo)
+                        ? JsonHelpers.ParseJson<ProductSize>(sp.PriceInfo)
+                        : new List<ProductSize>()
                 })
                 .ToListAsync();
-            var perfume = perfumes.FirstOrDefault();
 
-            if (perfume == null)
-                return new DtoPerfume(); // or handle differently (e.g., return null or throw)
+            //if (p == null)
+            //    return new DtoPerfume(); // or handle differently (e.g., return null or throw)
 
-            return perfume;
+            return dto;
         }
 
 

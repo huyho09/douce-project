@@ -73,6 +73,11 @@
   margin-bottom: 10px;
 }
 
+.img-small {
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
+}
+
 .product-info {
   margin-top: 20px;
   text-align: center;

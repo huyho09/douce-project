@@ -34,7 +34,7 @@
                             <!-- Image -->
                             <a href="/products/details/@product.Id" target="_self">
                                 <div class="image-wrapper">
-                                    <img alt="@product.Name" loading="lazy" src="@product.ImageUrl">
+                                    <img alt="@product.Name" loading="lazy" src="@priceInfoFirst?.ImageUrl">
                                 </div>
                             </a>
 
@@ -134,7 +134,7 @@
                 item.innerHTML = `
                     <div class="image-wrapper">
                         <a href="/products/details/${product.id}" target="_self">
-                            <img alt="${product.name}" loading="lazy" src="${product.imageUrl}">
+                            <img alt="${product.name}" loading="lazy" src="${product.ProductSizes[0]?.imageUrl}">
                         </a>
                     </div>
 

@@ -92,6 +92,10 @@ $custom-color-4: #d5b260;
 	margin-bottom: 10px;
 }
 
+.img-small{
+	object-fit: scale-down;
+}
+
 .product-info {
 	margin-top: 20px;
 	text-align: center;

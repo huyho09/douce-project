@@ -13,7 +13,7 @@
         var perfume = cartItem.Product;
         var currentProductSizes = perfume.ProductSizes?.FirstOrDefault(x => x.VolumeMl == perfume.CurrentSize);
         <div class="product">
-            <img src="@perfume.ImageUrl" alt="@perfume.Name">
+            <img src="@currentProductSizes?.ImageUrl" alt="@perfume.Name">
             <div class="product-details">
                 <p class="product-name">@perfume.Name</p>
                 <p class="product-size">@cartItem.VolumeMl mL - @currentProductSizes?.Price.ToString("N0") VND</p>

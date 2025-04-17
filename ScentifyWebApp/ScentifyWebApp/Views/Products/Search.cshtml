@@ -11,11 +11,13 @@
                 <div class="text-wrapper">
                     <header class="section-heading">
                         @* <b>A bold and unorthodox collection</b> *@
-                        <h2>Finding @ViewData["searchInput"]...</h2>
+                        <h2>Tìm kiếm nước hoa @ViewData["searchInput"]...</h2>
                     </header>
-                    <p class="col-md-6 col-sm-12">
-                        Comprising six unique fragrances, Othertopias is a series of eaux de parfum designed to
-                        transport wearers to realms both real and imagined.
+                    <p class="col-md-8 col-sm-12">
+                        Trải nghiệm cùng TRANSMUTÉ không đơn thuần là sự đắm chìm trong hương thơm, mà là một nghi thức hóa thân Doucé kiến tạo - nơi hương thơm không chỉ bao bọc mà còn trở thành một phần của bản thể.
+                        <br />
+                        <br />
+                        Những sáng tạo hương TRANSMUTÉ tỏa ra, thấm sâu vào từng chuyển động, như một lớp da thứ hai, như khí chất bẩm sinh. Chúng không rời rạc mà kết tinh trong dòng chảy của chính bạn, lan tỏa mạnh mẽ nhưng liền mạch, quấn lấy thân thể như một dấu ấn vĩnh cửu của sự biến đổi.
                     </p>
                 </div>
             </div>
@@ -32,7 +34,7 @@
                             <!-- Image -->
                             <a href="/products/details/@product.Id" target="_self">
                                 <div class="image-wrapper">
-                                    <img alt="@product.Name" loading="lazy" src="@product.ImageUrl">
+                                    <img alt="@product.Name" loading="lazy" src="@priceInfoFirst?.ImageUrl">
                                 </div>
                             </a>
 
@@ -132,7 +134,7 @@
                 item.innerHTML = `
                     <div class="image-wrapper">
                         <a href="/products/details/${product.id}" target="_self">
-                            <img alt="${product.name}" loading="lazy" src="${product.imageUrl}">
+                            <img alt="${product.name}" loading="lazy" src="${product.ProductSizes[0]?.imageUrl}">
                         </a>
                     </div>
 

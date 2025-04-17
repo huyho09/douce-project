@@ -78,7 +78,7 @@
 											<i class="fas fa-trash-alt"></i> Delete
 										</button>
 									</td>
-									<td><img class="img-table" src="@product.ImageUrl" alt="Alternate Text" /></td>
+									<td><img class="img-table" src="@product.ProductSizes?.FirstOrDefault()?.ImageUrl" alt="Alternate Text" /></td>
 									<td>@product.Name</td>
 									@* <td>@product.Brand</td>
 									<td>@product.Manufacturer</td> *@

@@ -27,39 +27,25 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
         //[HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
-            var products = await _context.Perfume.ToListAsync();
-            var result = new List<DtoPerfume>();
-            if (products != null && products.Count > 0)
+            var products = await _context.Perfume.AsNoTracking().Select(p => new DtoPerfume
             {
-                result = _mapper.Map<List<DtoPerfume>>(products);
-                List<Perfume> randomPerfumes = GetRandomItems(products, 3);
-
-                // get similar 
-                var mappingList = _mapper.Map<List<DtoPerfume>>(randomPerfumes);
-                // Assign similar perfumes
-                if (result != null && result.Any())
-                {
-                    foreach (var item in result)
-                    {
-                        //item.SimilarPerfumes = mappingList;
-                        if (!string.IsNullOrEmpty(item.Ingredients))
-                        {
-                            var Ingredients = JsonConvert.DeserializeObject<List<Ingredient>>(item.Ingredients);
-                            item.DtoIngredients = Ingredients;
-                        }
-                        if (!string.IsNullOrEmpty(item.PriceInfo))
-                        {
-                            var PriceInfoData = item.PriceInfo;
-                            var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
-                            if (productSizes != null && productSizes.Any())
-                            {
-                                item.ProductSizes = productSizes;
-                            }
-                        }
-                    }
-                }
-            }
-            return View(result);
+                Id = p.Id.ToString(),
+                Name = p.Name,
+                ShortDescription = p.ShortDescription,
+                Brand = p.Brand,
+                //ImageUrl = p.ImageUrl,
+                TopPerfumed = p.TopPerfumed,
+                MiddlePerfumed = p.MiddlePerfumed,
+                BasePerfumed = p.BasePerfumed,
+                DtoIngredients = !string.IsNullOrWhiteSpace(p.Ingredients)
+                            ? JsonConvert.DeserializeObject<List<Ingredient>>(p.Ingredients)
+                            : new List<Ingredient>(),
+                ProductSizes = !string.IsNullOrWhiteSpace(p.PriceInfo)
+                    ? JsonHelpers.ParseJson<ProductSize>(p.PriceInfo)
+                    : new List<ProductSize>()
+            })
+            .ToListAsync();
+            return View(products);
         }
         //[HttpGet("Create")]
         public IActionResult Create()
@@ -79,8 +65,8 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                 {
                     var request = _mapper.Map<Perfume>(requestDTO);
                     var priceInfo = new List<PriceInfo>();
-                    priceInfo.Add(new PriceInfo() { Price = requestDTO.Price1, VolumeMl = requestDTO.VolumeMl1, Currency = requestDTO.Currency });
-                    priceInfo.Add(new PriceInfo() { Price = requestDTO.Price2, VolumeMl = requestDTO.VolumeMl2, Currency = requestDTO.Currency });
+                    priceInfo.Add(new PriceInfo() { Price = requestDTO.Price1, VolumeMl = requestDTO.VolumeMl1, Currency = requestDTO.Currency, ImageUrl = requestDTO.ImageUrl1 });
+                    priceInfo.Add(new PriceInfo() { Price = requestDTO.Price2, VolumeMl = requestDTO.VolumeMl2, Currency = requestDTO.Currency, ImageUrl = requestDTO.ImageUrl2 });
                     request.PriceInfo = JsonConvert.SerializeObject(priceInfo);
                     var fragranceNotes = new FragranceNote();
                     fragranceNotes.Fruity = requestDTO.Fruity;
@@ -187,12 +173,14 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                             viewModel.Price1 = productSizes[i].Price;
                             viewModel.VolumeMl1 = productSizes[i].VolumeMl;
                             viewModel.Currency = productSizes[i].Currency;
+                            viewModel.ImageUrl1 = productSizes[i].ImageUrl;
                         }
                         if (i == 1)
                         {
                             viewModel.Price2 = productSizes[i].Price;
                             viewModel.VolumeMl2 = productSizes[i].VolumeMl;
                             viewModel.Currency = productSizes[i].Currency;
+                            viewModel.ImageUrl2 = productSizes[i].ImageUrl;
                         }
                     }
                 }
@@ -217,8 +205,8 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                 }
                 var existingPerfume = _context.Perfume.FirstOrDefault(m => m.Id == guidId);
                 var priceInfo = new List<PriceInfo>();
-                priceInfo.Add(new PriceInfo() { Price = requestDTO.Price1, VolumeMl = requestDTO.VolumeMl1, Currency = requestDTO.Currency });
-                priceInfo.Add(new PriceInfo() { Price = requestDTO.Price2, VolumeMl = requestDTO.VolumeMl2, Currency = requestDTO.Currency });
+                priceInfo.Add(new PriceInfo() { Price = requestDTO.Price1, VolumeMl = requestDTO.VolumeMl1, Currency = requestDTO.Currency, ImageUrl = requestDTO.ImageUrl1 });
+                priceInfo.Add(new PriceInfo() { Price = requestDTO.Price2, VolumeMl = requestDTO.VolumeMl2, Currency = requestDTO.Currency, ImageUrl = requestDTO.ImageUrl2 });
                 var fragranceNotes = new FragranceNote();
                 fragranceNotes.Fruity = requestDTO.Fruity;
                 fragranceNotes.Citrus = requestDTO.Citrus;

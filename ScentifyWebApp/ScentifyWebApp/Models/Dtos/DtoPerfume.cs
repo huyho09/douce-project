@@ -19,6 +19,8 @@ namespace ScentifyWebApp.Models.Dtos
         public List<DtoPerfume>? SimilarPerfumes { get; set; }
         public string Composition { get; set; } = "";
         public string FragranceFamily { get; set; } = ""; // Nhóm hương chính (VD: Floral, Woody)
+        public string ImageUrl1 { get; set; } = "";
+        public string ImageUrl2 { get; set; } = "";
         public int VolumeMl1 { get; set; }
         public int VolumeMl2 { get; set; }
         public string Ingredients { get; set; } = "";

@@ -39,7 +39,7 @@ namespace ScentifyWebApp.Controllers
                 Id = p.Id.ToString(),
                 Name = p.Name,
                 Brand = p.Brand,
-                ImageUrl = p.ImageUrl,
+                //ImageUrl = p.ImageUrl,
                 TopPerfumed = p.TopPerfumed,
                 MiddlePerfumed = p.MiddlePerfumed,
                 BasePerfumed = p.BasePerfumed,
