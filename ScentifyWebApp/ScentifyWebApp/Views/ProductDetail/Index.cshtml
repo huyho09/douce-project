@@ -146,7 +146,7 @@
                     <div class="product-cards d-flex justify-content-center">
                         @foreach (var similarItem in similarItems)
                         {
-                            var img1 = similarItem.ProductSizes?[0]?.ImageUrl.Replace("./", "~/");
+                            var img1 = similarItem.ProductSizes?[0].ImageUrl != null ? similarItem.ProductSizes?[0].ImageUrl.Replace("./", "~/") : "";
                             <a href="/products/details/@similarItem.Id" class="product-card">
                                 <img src="@img1" alt="@similarItem.Name">
                                 <div class="card-content">

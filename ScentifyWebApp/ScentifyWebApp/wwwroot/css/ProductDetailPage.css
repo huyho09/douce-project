@@ -1,4 +1,4 @@
-/* Reset */
+﻿/* Reset */
 /* Header */
 /* Main Content */
 /* Image & Info */
@@ -59,8 +59,7 @@
   position: relative;
   width: 300px;
   height: auto;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   filter: drop-shadow(0 5px 10px #9f5f2e);
 }
 .product-display img {
@@ -74,8 +73,7 @@
 }
 
 .img-small {
-  -o-object-fit: scale-down;
-     object-fit: scale-down;
+  object-fit: scale-down;
 }
 
 .product-info {
@@ -202,8 +200,7 @@
 .card img {
   width: 180px;
   margin-bottom: 20px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   transition: 0.3s;
   margin: 0 auto;
   /* Ensures horizontal centering */
@@ -307,8 +304,9 @@
 }
 
 .product-card {
+  background-color: transparent;
+  border: 1px solid #9f5f2e;
   flex: 1;
-  background: #9f5f2e;
   border-radius: 20px;
   overflow: hidden;
   transition: transform 0.4s;
@@ -319,16 +317,16 @@
 }
 .product-card:hover {
   transform: translateY(-15px);
+  filter: drop-shadow(0 5px 10px #9f5f2e);
 }
 .product-card img {
   width: 100%;
   height: auto;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 main:has(.product-info) .product-card {
-  height: 550px;
+  height: 400px;
 }
 
 main:has(.product-info) .card {
@@ -554,4 +552,4 @@ main:has(.product-info) .card {
   .product-cards::-webkit-scrollbar {
     display: none;
   }
-}/*# sourceMappingURL=ProductDetailPage.css.map */
+}

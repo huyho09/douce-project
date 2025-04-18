@@ -349,8 +349,9 @@ $custom-color-4: #d5b260;
 }
 
 .product-card {
+	background-color: transparent;
+	border: 1px solid $custom-color-3;
 	flex: 1;
-	background: $custom-color-3;
 	border-radius: 20px;
 	overflow: hidden;
 	transition: transform 0.4s;
@@ -361,6 +362,7 @@ $custom-color-4: #d5b260;
 
 	&:hover {
 		transform: translateY(-15px);
+		filter: drop-shadow(0 5px 10px $custom-color-3);
 	}
 
 	img {
@@ -371,7 +373,7 @@ $custom-color-4: #d5b260;
 }
 
 main:has(.product-info) .product-card {
-	height: 550px;
+	height: 400px;
 }
 
 main:has(.product-info) .card {
