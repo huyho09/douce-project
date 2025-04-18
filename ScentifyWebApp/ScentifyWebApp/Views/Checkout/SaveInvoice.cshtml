@@ -1,29 +1,50 @@
 ﻿@using ScentifyWebApp.Models.Requests;
 
 @{
-	ViewData["Title"] = "Checkout page";
+    ViewData["Title"] = "Checkout page";
 }
 
 @model CheckoutRequest
 
 
-<section class="checkout-container">
-	<div class="form-section justify-content-start">
-		<nav class="breadcrumb">
-			<a href="/home">Trang chủ</a> &gt; <span class="active">Thanh Toán</span>
-		</nav>
-		<h2><strong>Phương thức thanh toán</strong></h2>
-		@await Html.PartialAsync("_UserInfoForm", Model)
-		@* <p>
-			Noted: Để order sản phẩm, bạn có thể liên lạc với chủ shop thông qua <a class="link-light" href="https://www.facebook.com/">Fanpage</a> hoặc zalo <a class="link-light" href="javascript:void(0);">090 999 9877</a>
-		</p> *@
-	</div>
+@if (Model.IsSuccessed == true)
+{
+    <div b-69tm1zl051="" class="modal fade noti-modal show" id="successModal" tabindex="-1" style="display: block; padding-right: 15px;" aria-modal="true" role="dialog">
+        <div b-69tm1zl051="" class="modal-dialog modal-dialog-centered">
+            <div b-69tm1zl051="" class="modal-content">
+                <div b-69tm1zl051="" class="modal-body text-center">
+                    <h3 b-69tm1zl051="" class="modal-title text-light h5">Notification</h3>
+                    <p b-69tm1zl051="" class="mt-4" id="infoMessage">Đã tiếp nhận đơn hàng thành công!</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<div class="order-summary">
-			@await Html.PartialAsync("_ListCart", Model.CartItems)
-		</div>
-</section>
+    <section class="checkout-container">
+        <div class="form-section justify-content-start success-container">
+            <p id="success-checkout-msg">
+                🎉Chúc mừng: Thông tin đơn hàng đã được ghi nhận, bạn có thể liên lạc với chủ shop thông qua <a class="link-light" href="https://www.facebook.com/">Fanpage</a> hoặc zalo <a class="link-light" href="javascript:void(0);">090 999 9877</a>
+            </p>
+        </div>
+    </section>
+    <script src="~/admin/vendor/jquery/jquery.min.js"></script>
+}
+else
+{
+    <section class="checkout-container">
+        <div class="form-section justify-content-start">
+            <nav class="breadcrumb">
+                <a href="/home">Trang chủ</a> &gt; <span class="active">Thanh Toán</span>
+            </nav>
+            <h2><strong>Phương thức thanh toán</strong></h2>
+            @await Html.PartialAsync("_UserInfoForm", Model)
+        </div>
 
+        <div class="order-summary">
+            @await Html.PartialAsync("_ListCart", Model.CartItems)
+        </div>
+    </section>
+}
 
 
 @* <script>

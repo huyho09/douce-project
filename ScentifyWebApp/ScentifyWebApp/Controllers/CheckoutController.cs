@@ -76,7 +76,7 @@ namespace ScentifyWebApp.Controllers
 
                     var customerInfo = _mapper.Map<CustomerInfo>(model);
                     var newInvoice = CreateInvoiceModel(cart, customerInfo);
-                    //await _invoiceService.InsertInvoiceAsync(newInvoice); -- TODO
+                    await _invoiceService.InsertInvoiceAsync(newInvoice);
 
                     // reset cart
                     _cartService.ClearCart();
@@ -90,7 +90,8 @@ namespace ScentifyWebApp.Controllers
                     //// Directly redirect to VNPay payment URL
                     //return Redirect(vnpayPaymentUrl);
 
-                    return Json(new { status = 200, message = $"Payment for your cart is pending confirmation..." });
+                    model.IsSuccessed = true;
+                    //return Json(new { status = 200, message = $"Payment for your cart is pending confirmation..." });
 
                     //    // TODO testing
                     //    decimal amount = 1000000; // Amount in VND
@@ -109,6 +110,7 @@ namespace ScentifyWebApp.Controllers
                     //    Console.WriteLine(url);
 
                     //    return Redirect(url);
+                    return View(model);
                 }
                 //ViewData["ErrorPay"] = "Payment for your cart failed.";
                 //return Json(new { status = 400, message = "Payment for your cart failed." });
@@ -119,19 +121,21 @@ namespace ScentifyWebApp.Controllers
                 //return Json(new { status = 500, message = "An error occurred while payment for your cart" });
             }
 
-            return View(model);
+            return Redirect("/home");
         }
 
         private Invoice CreateInvoiceModel(List<CartItem> cartItems, CustomerInfo customerInfo)
         {
+            var convertInvoiceItem = cartItems.Select(item => new InvoiceItem(item));
+
             return new Invoice()
             {
                 CustomerInfo = JsonSerializer.Serialize(customerInfo),
                 Discount = 0,
-                InvoiceItems = JsonSerializer.Serialize(cartItems),
+                InvoiceItems = JsonSerializer.Serialize(convertInvoiceItem),
                 OtherCost = 0,
                 Noted = "",
-                PaymentDate = DateTime.UtcNow.ToString("yyyy-MM-dd hh-mm"),
+                PaymentDate = DateTime.Now,
                 PaymentMethod = "Cash",
                 Shipping = 0,
                 Status = InvoiceStatus.PENDING

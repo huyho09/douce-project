@@ -60,6 +60,32 @@ function ClickLogOut() {
     });
 }
 
+function updateInvoiceStatus(status) {
+    let selectedRows = [];
+    $('.row-check:checked').each(function () {
+        let row = $(this).closest('tr').attr('data-id');
+        selectedRows.push(row);
+    });
+
+    if (selectedRows.length > 0) {
+        $.ajax({
+            url: "/Invoices/UpdateInvoiceStatus",
+            type: "POST",
+            data: { invoiceIds: selectedRows, status: status },
+            success: function (response) {
+                alert('Successful!');
+                location.reload();
+            },
+            error: function () {
+                console.error("Error updateInvoiceStatus!");
+                alert('Failed');
+            }
+        });
+    } else {
+        alert('Please select at least one item!');
+    }
+}
+
 //function uploadImage(index) {
 //    const fileInput = document.getElementById(`file-input-${index}`);
 //    const placeholder = document.getElementById(`placeholder-${index}`);

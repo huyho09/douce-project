@@ -96,3 +96,27 @@ form.needs-validation {
     border: 1px solid #555;
 }
 /*Dark mode editor CSS*/
+
+/* Checkbox column width */
+th.checkbox-column,
+td.checkbox-column,
+th.index,
+td.index {
+    width: 50px!important;
+    min-width: 50px!important;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Checkbox appearance (optional) */
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* Optional hover effect for rows */
+#dataTable tbody tr:hover {
+    background-color: #f9f9f9;
+}
+

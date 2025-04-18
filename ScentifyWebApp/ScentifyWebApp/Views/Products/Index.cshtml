@@ -101,6 +101,8 @@
     const itemsPerPage = 3;
 
     async function loadMoreProducts() {
+        showLoading();
+
         const response = await fetch(`/Products/LoadMoreProducts`, {
             method: 'POST',
             headers: {
@@ -134,7 +136,7 @@
                 item.innerHTML = `
                     <div class="image-wrapper">
                         <a href="/products/details/${product.id}" target="_self">
-                            <img alt="${product.name}" loading="lazy" src="${product.ProductSizes[0]?.imageUrl}">
+                            <img alt="${product.name}" loading="lazy" src="${product.productSizes[0]?.imageUrl}">
                         </a>
                     </div>
 
@@ -163,6 +165,7 @@
             if (isEnd) {
                 document.querySelector('.load-more-btn').style.display = 'none';
             }
+            hideLoading();
         } else {
             $('.load-more-btn').hide();
         }

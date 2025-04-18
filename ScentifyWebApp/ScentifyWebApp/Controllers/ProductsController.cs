@@ -19,6 +19,7 @@ namespace ScentifyWebApp.Controllers
         private readonly IMapper _mapper;
         private readonly IBaseHttpContext _baseHttpContext;
 
+
         public ProductsController(ApplicationDbContext context,
             IBaseHttpContext baseHttpContext,
             IMapper mapper)
@@ -113,6 +114,7 @@ namespace ScentifyWebApp.Controllers
             return View(products);
         }
 
+        // Con bi loi - mai check lai
         [HttpPost]
         public async Task<IActionResult> LoadMoreProducts([FromBody] PaginationRequest request)
         {
@@ -142,7 +144,7 @@ namespace ScentifyWebApp.Controllers
 
             return Json(new
             {
-                products = products,
+                products = filterProducts,
                 isEnd
             });
         }

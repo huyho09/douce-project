@@ -1,0 +1,200 @@
+﻿@using ScentifyWebApp.Constant
+@using ScentifyWebApp.Models.Entities
+@model List<ScentifyWebApp.Models.Dtos.DtoInvoice>?
+@{
+    ViewData["Title"] = "Invoices";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .table th,
+    .table td {
+    min-width: 120px;
+    word-wrap: break-word;
+    }
+
+    .table th:last-child,
+    .table td:last-child {
+    min-width: 200px;
+    }
+
+    .dataTables_filter label {
+    width: 50%;
+    float: left;
+    margin-bottom: 25px;
+    }
+
+    .img-table {
+    width: 50px;
+    }
+</style>
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Products</h1>
+
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary"></h6>
+        </div>
+        <div class="card-body">
+            <div class="d-flex align-items-center mb-3" style="gap: 30px;">
+                <label class="me-2 fw-bold">Update status:</label>
+                <button type="button" class="btn btn-warning me-2" id="btnPending">Reset to New</button>
+                <button type="button" class="btn btn-success me-2" id="btnCompleted">Set to Completed</button>
+                <button type="button" class="btn btn-danger" id="btnCancelled">Set to Cancelled</button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="checkbox-column text-center">
+                                <input type="checkbox" id="checkAll" />
+                            </th>
+                            <th class="index">Index</th>
+                            <th>Status</th>
+                            <th>Customer Name</th>
+                            <th>Paymend Date</th>
+                            <th>Customer Address</th>
+                            <th>Customer PhoneNumber</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model?.Count() > 0)
+                        {
+                            var index = 1;
+                            foreach (var invoice in Model)
+                            {
+                                <tr data-id="@invoice.Id">
+                                    <td class="checkbox-column text-center">
+                                        <input type="checkbox" class="row-check" />
+                                    </td>
+                                    <td class="index">@index</td>
+                                    <td>
+                                        @{
+                                            switch (invoice.Status)
+                                            {
+                                                case InvoiceStatus.ACTIVE:
+                                                    <button class="btn btn-success">Completed</button>
+                                                    break;
+                                                case InvoiceStatus.PENDING:
+                                                    <button class="btn btn-warning">New Invoice</button>
+                                                    break;
+                                                case InvoiceStatus.CANCELLED:
+                                                    <button class="btn btn-danger">Cancelled</button>
+                                                    break;
+                                                default:
+
+                                                    break;
+                                            }
+                                        }
+                                    </td>
+                                    <td>@invoice.DtoCustomerInfo?.FullName</td>
+                                    <td>@invoice.PaymentDate</td>
+                                    <td>@invoice.DtoCustomerInfo?.Address</td>
+                                    <td>@invoice.DtoCustomerInfo?.PhoneNumber</td>
+                                    <td>
+                                        @if (invoice.DtoInvoiceItems != null && invoice.DtoInvoiceItems.Any())
+                                        {
+                                            @Html.Raw(string.Join("<br />", invoice.DtoInvoiceItems.Select(i => $"✅ {i.PerfumeName}({i.VolumeMl} mL - {i.Price.ToString("N0")} VND): {i.Quantity}sp")))
+                                        }
+                                    </td>
+                                    <td>@sumTotal(invoice.DtoInvoiceItems)?.ToString("N0") VND</td>
+                                </tr>
+                                index++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Delete Modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirm Delete?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Please confirm the request to delete this item? Click "Delete" to confirm...</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-primary" id="btn-delete-product" onclick="DeleteCategory()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // sort date for datatable
+        $.fn.dataTable.moment('DD/MM/YY HH:mm'); // your format here
+        $('#dataTable').dataTable({
+            "pageLength": 100,
+            "sScrollX": "100%",
+            "sScrollXInner": "110%",
+            "dom": 'Bfrtip',
+            "buttons": [
+                {
+                    extend: 'excelHtml5',
+                    text: 'Export to Excel',
+                    title: 'Invoice Data',
+                    exportOptions: {
+                        columns: ':visible' // export all visible columns
+                    }
+                }
+            ]
+        });
+
+        $(document).ready(function () {
+            let table = $('#dataTable').DataTable();
+
+            // Handle "check all"
+            $('#checkAll').on('change', function () {
+                $('.row-check').prop('checked', $(this).is(':checked'));
+            });
+
+            // If any checkbox is unchecked, uncheck the "check all"
+            $(document).on('change', '.row-check', function () {
+                if (!$(this).is(':checked')) {
+                    $('#checkAll').prop('checked', false);
+                } else if ($('.row-check:checked').length === $('.row-check').length) {
+                    $('#checkAll').prop('checked', true);
+                }
+            });
+        });
+            $('#btnPending').click(function () {
+                    updateInvoiceStatus(3);
+                });
+
+                $('#btnCompleted').click(function () {
+                    updateInvoiceStatus(1);
+                });
+
+                $('#btnCancelled').click(function () {
+                    updateInvoiceStatus(4);
+                });
+    });
+</script>
+
+@functions {
+    decimal? sumTotal(List<InvoiceItem>? invoiceItems)
+    {
+        return invoiceItems?.Count > 0 ? invoiceItems?.Sum(m => m?.Quantity * m?.Price) : 0;
+    }
+}

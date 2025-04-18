@@ -28,17 +28,17 @@ namespace ScentifyWebApp.Controllers
                 var addedPerfume = await _cartService.AddToCart(productId, quantity, volume);
                 if (addedPerfume == null)
                 {
-                    return Json(new { status = 400, message = "Adding the perfume to the cart failed." });
+                    return Json(new { status = 400, message = "Thêm vào giỏ hàng thất bại!" });
                 }
 
-                return Json(new { status = 200, message = $"{addedPerfume.Name} added {quantity} to cart successfully 🎉" });
+                return Json(new { status = 200, message = $"Đã thêm {quantity} {addedPerfume.Name} vào giỏ hàng thành công 🎉" });
             }
             catch (Exception ex)
             {
                 // Log the exception (replace with your logging system)
                 Console.WriteLine($"Error: {ex.Message}");
 
-                return Json(new { status = 500, message = "An error occurred while adding the perfume to the cart." });
+                return Json(new { status = 500, message = "Có lỗi xảy ra không thể thêm vào giỏ hàng!" });
             }
         }
 
@@ -51,17 +51,17 @@ namespace ScentifyWebApp.Controllers
                 var updatedPerfume = await _cartService.UpdateQuantity(productId, quantity, volume);
                 if (updatedPerfume == null)
                 {
-                    return Json(new { status = 400, message = "Updating the perfume to the cart failed." });
+                    return Json(new { status = 400, message = "Sửa sản phẩm trong giỏ hàng thất bại!" });
                 }
 
-                return Json(new { status = 200, message = $"{updatedPerfume.Name} updated {quantity} to cart successfully 🎉" });
+                return Json(new { status = 200, message = $"Đã cập nhật {quantity} sản phẩm {updatedPerfume.Name} trong giỏ hàng thành công 🎉" });
             }
             catch (Exception ex)
             {
                 // Log the exception (replace with your logging system)
                 Console.WriteLine($"Error: {ex.Message}");
 
-                return Json(new { status = 500, message = "An error occurred while updating the perfume to the cart." });
+                return Json(new { status = 500, message = "Có lỗi xảy ra không thể sửa sản phẩm trong giỏ hàng!" });
             }
         }
 
@@ -79,17 +79,17 @@ namespace ScentifyWebApp.Controllers
                 var removeCart = await _cartService.RemoveFromCart(productId, volume);
                 if (removeCart == null)
                 {
-                    return Json(new { status = 400, message = "Removing the perfume to the cart failed." });
+                    return Json(new { status = 400, message = "Xóa sản phẩm khỏi giỏ hàng thất bại!" });
                 }
 
-                return Json(new { status = 200, message = $"{removeCart.Name} removed to cart successfully." });
+                return Json(new { status = 200, message = $"Đã xóa sản phẩm {removeCart.Name} khỏi giỏ hàng thành công!" });
             }
             catch (Exception ex)
             {
                 // Log the exception (replace with your logging system)
                 Console.WriteLine($"Error: {ex.Message}");
 
-                return Json(new { status = 500, message = "An error occurred while removing the perfume to the cart." });
+                return Json(new { status = 500, message = "Có lỗi xảy ra không thể xóa sản phẩm khỏi giỏ hàng!" });
             }
         }
 

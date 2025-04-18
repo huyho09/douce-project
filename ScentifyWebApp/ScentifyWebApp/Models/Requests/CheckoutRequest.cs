@@ -36,6 +36,8 @@ namespace ScentifyWebApp.Models.Requests
 
         public List<CartItem> CartItems { get; set; }
 
+        public bool IsSuccessed { get; set; } = false;
+
         public CheckoutRequest() { }
         public CheckoutRequest(List<CartItem> cartItems)
         {

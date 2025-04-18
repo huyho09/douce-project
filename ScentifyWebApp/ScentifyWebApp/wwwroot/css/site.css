@@ -1228,7 +1228,8 @@ input {
   font-size: unset;
   max-width: unset;
 }
-.checkout-container .checkout-form {
+.checkout-container .checkout-form,
+.checkout-container .success-container {
   padding: 40px 20px 30px;
   display: flex;
   gap: 30px;

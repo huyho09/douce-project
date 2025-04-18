@@ -113,7 +113,10 @@ function removeCartItemInCheckOut(_this, productId, volume) {
 
                 // check empty
                 if ($('.order-summary .product').length == 0) {
-                    location.href = '/home';
+                    showNotiModal("Giỏ hàng đã trống!");
+                    setTimeout(function () {
+                        location.href = '/home';
+                    }, 1000);
                 }
             });
         },
@@ -320,5 +323,34 @@ $(document).ready(function () {
     var errors = $('input').closest('.floating-group:has(.field-validation-error:not(:empty))');
     if (errors?.length > 0) {
         errors.first().find('input').focus();
+    }
+});
+
+$(document).on("ready", function () {
+    if ($("#successModal").length > 0) {
+        setTimeout(function () {
+            $("#successModal").on('hide.bs.modal', function () {
+                let modal = $(this).find(".modal-dialog");
+                modal.addClass("hide-animation");
+            });
+
+            $("#successModal").on('hidden.bs.modal', function () {
+                let modal = $(this).find(".modal-dialog");
+                modal.removeClass("hide-animation"); // Reset animation
+            });
+
+            $("#successModal").on("click", function (e) {
+                // If the click is NOT inside the modal-dialog, hide the modal
+                if (!$(e.target).closest(".modal-dialog").length) {
+                    $(this).removeClass("show");
+                    $(this).attr("style", "");
+                }
+            });
+
+            setTimeout(function () {
+                $("#successModal").removeClass("show");
+                $("#successModal").attr("style", "");
+            }, 7000);
+        }, 1000);
     }
 });
