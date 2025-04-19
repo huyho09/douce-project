@@ -61,12 +61,14 @@
 			<tr>
 				@if (fragranceNotes?.Count > 0)
 				{
+					var hasScrolled = false;
 					@foreach (var kvp in fragranceNotes)
 					{
 						var propName = kvp.Key;
 						var propValue = kvp.Value;
-
-						<td>
+						var scrollClass = (!hasScrolled && propValue) ? "scroll-target" : "";
+						if (propValue) hasScrolled = true;
+						<td class="@scrollClass">
 							<div class="color-box" style="background-image: url('@(propValue ? imgLogo : "")'); background-size:cover; background-position:center;">
 								@propName
 							</div>
@@ -81,4 +83,15 @@
 		</tbody>
 	</table>
 </div>
-
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const scrollTarget = document.querySelector('.scroll-target');
+		if (scrollTarget) {
+			scrollTarget.scrollIntoView({
+				behavior: 'smooth',
+				block: 'nearest',
+				inline: 'start'
+			});
+		}
+	});
+</script>
