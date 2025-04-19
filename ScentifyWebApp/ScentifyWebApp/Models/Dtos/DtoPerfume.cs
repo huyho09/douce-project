@@ -64,6 +64,8 @@ namespace ScentifyWebApp.Models.Dtos
 
         public string ImageUrl { get; set; } = ""; // URL hình ảnh sản phẩm
 
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }
     public class PerfumedNote
     {

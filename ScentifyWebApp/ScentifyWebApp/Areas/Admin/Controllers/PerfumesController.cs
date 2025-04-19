@@ -105,6 +105,7 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                 };
 
                     request.Ingredients = JsonConvert.SerializeObject(ingredients);
+                    request.CreatedAt = DateTime.Now;
 
                     _context.Perfume.Add(request);
                     await _context.SaveChangesAsync();
@@ -244,6 +245,7 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
 
                 requestDTO.Ingredients = JsonConvert.SerializeObject(ingredients);
 
+                requestDTO.CreatedAt = existingPerfume.CreatedAt;
                 _mapper.Map(requestDTO, existingPerfume);
                 if (priceInfo != null && priceInfo.Any() && existingPerfume != null)
                 {

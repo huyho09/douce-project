@@ -42,7 +42,7 @@
                         {
                             <li class="RadioGroup_radio__hnn9G">
                                 <label class="RadioGroup_label__ACZd_" for="size-@item.VolumeMl">
-                                    <input aria-checked="@(Model.CurrentSize == item.VolumeMl)" class="RadioGroup_input__fjmeL" data-test-ref="PRODUCT_DETAIL_VARIANT_SELECT" data-volume="@item.VolumeMl" data-price="@item.Price" data-currency="@item.Currency" id="size-@item.VolumeMl" name="sku" tabindex="0" type="radio" value="@item.VolumeMl" @(Model.CurrentSize == item.VolumeMl ? "checked" : "")>
+                                    <input aria-checked="@(Model.CurrentSize == item.VolumeMl)" class="RadioGroup_input__fjmeL" data-test-ref="PRODUCT_DETAIL_VARIANT_SELECT" data-volume="@item.VolumeMl" data-price="@item.Price.ToString("N0")" data-currency="@item.Currency" id="size-@item.VolumeMl" name="sku" tabindex="0" type="radio" value="@item.VolumeMl" @(Model.CurrentSize == item.VolumeMl ? "checked" : "")>
                                     <span class="RadioGroup_pot__g3kNx RadioGroup_dark__cngsS"></span>
                                     <span class="RadioGroup_labelContent__48GiJ RadioGroup_dark__cngsS">@item.VolumeMl mL</span>
                                 </label>

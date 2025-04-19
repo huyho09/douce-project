@@ -34,7 +34,7 @@ namespace ScentifyWebApp.Controllers
 
         private async Task<HomeViewModel> RetrieveHomeViewData()
         {
-            var products = await _context.Perfume.Take(6).Select(p => new DtoPerfume
+            var products = await _context.Perfume.Take(6).OrderBy(m => m.CreatedAt).Select(p => new DtoPerfume
             {
                 Id = p.Id.ToString(),
                 Name = p.Name,

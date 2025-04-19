@@ -114,7 +114,6 @@ namespace ScentifyWebApp.Controllers
             return View(products);
         }
 
-        // Con bi loi - mai check lai
         [HttpPost]
         public async Task<IActionResult> LoadMoreProducts([FromBody] PaginationRequest request)
         {

@@ -54,7 +54,7 @@ namespace ScentifyWebApp.Models.Entities
         [Required]
         public string Status { get; set; } = "Available";
         public string ImageUrl { get; set; } = string.Empty;
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     }
 
