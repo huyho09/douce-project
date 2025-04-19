@@ -2,17 +2,7 @@
 @using Newtonsoft.Json;
 
 @model (string title, bool isMobile, List<DtoPerfume> perfumes)
-@{
-	List<string> perfumeImgs = new List<string>()
-{
-		"/images/perfume/ANGELISM.png",
-		"/images/perfume/APHRODITE.png",
-		"/images/perfume/FORBIDDEN-SWEET.png",
-		"/images/perfume/FREQUENCE.png",
-		"/images/perfume/GILDED-TOBAC.png",
-		"/images/perfume/HANDS-OF-MIDAS.png"
-	};
-}
+
 @if (Model.perfumes != null && Model.perfumes.Count > 0)
 {
 	<div class="mySwiperContainermySwiperContainer @(Model.isMobile ? "mySwiperMobileContainer" : "mySwiperContainer")">
@@ -25,9 +15,10 @@
 					var indexPerfume = 0;
 					@foreach (var perfume in Model.perfumes.Take(6))
 					{
+						var imgNo1 = perfume.ProductSizes?[0].ImageUrl != null ? perfume.ProductSizes?[0].ImageUrl.Replace("./", "~/") : "";
 						<div class="swiper-slide">
 							<a href="/products/details/@perfume.Id" target="_self">
-								<img class="img-flacon" src="@(perfumeImgs[indexPerfume])" alt="@perfume.Name" />
+								<img class="img-flacon" src="@imgNo1" alt="@perfume.Name" />
 							</a>
 						</div>
 						indexPerfume++;
