@@ -365,9 +365,26 @@
 					var activeIndex = swiperMobile.activeIndex;
 					$('.swiper-detail-mobile').addClass('d-none');
                     $('.content-mobile-' + activeIndex).removeClass('d-none');
+                    scrollToIndex();
 				}
             }
-		});
+        });
+		let hasScrolledToTarget = false;
+
+		function scrollToIndex() {
+			const visibleSlide = document.querySelector('.swiper-detail-mobile:not(.d-none)');
+			if (!visibleSlide) return;
+
+			const scrollTarget = visibleSlide.querySelector('.scroll-target');
+			if (scrollTarget) {
+				scrollTarget.scrollIntoView({
+					behavior: 'smooth',
+					block: 'nearest',
+					inline: 'start'
+				});
+			}
+        }
+        scrollToIndex();
     </script>
 
     <script>
