@@ -297,7 +297,7 @@
                                 </i>
                             </a>
                         </li>
-                     
+
                     </ul>
                 </section>
                 <section class="FooterBlock_base__lzouW FooterBlock_light__JdnEy Footer-block-item col-md-4 mt-5 col-sm-12" style="height: 500px">
@@ -336,53 +336,53 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
     <script>
-		var swiper = new Swiper(".mySwiper", {
-			slidesPerView: 8,
-			centeredSlides: true,
-			spaceBetween: 30,
-			navigation: {
-				nextEl: ".swiper-button-next",
-				prevEl: ".swiper-button-prev",
-			},
-			on: {
-				slideChange: function () {
-					var activeIndex = swiper.activeIndex;
-					$('.swiper-detail').addClass('d-none');
-					$('.content-' + activeIndex).removeClass('d-none');
-				}
-			}	
-		});
-		var swiperMobile = new Swiper(".mySwiperMobile", {
-			slidesPerView: 3,
-			centeredSlides: true,
-			spaceBetween: 30,
-			navigation: {
-				nextEl: ".swiper-button-next",
-				prevEl: ".swiper-button-prev",
-			},
-			on: {
-				slideChange: function () {
-					var activeIndex = swiperMobile.activeIndex;
-					$('.swiper-detail-mobile').addClass('d-none');
-                    $('.content-mobile-' + activeIndex).removeClass('d-none');
-                    scrollToIndex();
-				}
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 8,
+            centeredSlides: true,
+            spaceBetween: 30,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            on: {
+                slideChange: function () {
+                    var activeIndex = swiper.activeIndex;
+                    $('.swiper-detail').addClass('d-none');
+                    $('.content-' + activeIndex).removeClass('d-none');
+                }
             }
         });
-		let hasScrolledToTarget = false;
+        var swiperMobile = new Swiper(".mySwiperMobile", {
+            slidesPerView: 3,
+            centeredSlides: true,
+            spaceBetween: 30,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            on: {
+                slideChange: function () {
+                    var activeIndex = swiperMobile.activeIndex;
+                    $('.swiper-detail-mobile').addClass('d-none');
+                    $('.content-mobile-' + activeIndex).removeClass('d-none');
+                    scrollToIndex();
+                }
+            }
+        });
+        let hasScrolledToTarget = false;
 
-		function scrollToIndex() {
-			const visibleSlide = document.querySelector('.swiper-detail-mobile:not(.d-none)');
-			if (!visibleSlide) return;
+        function scrollToIndex() {
+            const visibleSlide = document.querySelector('.swiper-detail-mobile:not(.d-none)');
+            if (!visibleSlide) return;
 
-			const scrollTarget = visibleSlide.querySelector('.scroll-target');
-			if (scrollTarget) {
-				scrollTarget.scrollIntoView({
-					behavior: 'smooth',
-					block: 'nearest',
-					inline: 'start'
-				});
-			}
+            const scrollTarget = visibleSlide.querySelector('.scroll-target');
+            if (scrollTarget) {
+                scrollTarget.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'start'
+                });
+            }
         }
         scrollToIndex();
     </script>
@@ -468,6 +468,19 @@
             interceptNavigation();
             interceptLocationRedirects();
         });
+
+        window.addEventListener('pageshow', function(event) {
+          // On pageshow: if event.persisted is true, the page was restored from bfcache.
+          if (event.persisted) {
+            // Hide or remove the loading overlay element
+            var overlay = document.getElementById('loadingOverlay');
+            if (overlay) {
+              overlay.style.display = 'none';
+              // or overlay.classList.add('hidden'), or whichever method your app uses
+            }
+          }
+        });
+
     </script>
 
 
