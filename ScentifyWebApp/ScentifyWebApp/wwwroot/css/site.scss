@@ -124,6 +124,7 @@ a[disabled]:focus {
 
 .product-description {
 	color: $color_7 !important;
+	min-height: 65px;
 }
 
 .section-heading {
@@ -217,6 +218,7 @@ a[disabled]:focus {
 		border-color: rgba(255, 215, 150, 0.6);
 		/* Brighter gold on hover */
 		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+
 		/* Adds a soft hover shadow */
 		// transform: translateY(-5px); /* Slight lift effect */
 		&::before {
@@ -242,7 +244,7 @@ a[disabled]:focus {
 			justify-content: center;
 
 			img {
-				width: 100%;
+				width: 55%;
 				height: 100%;
 				object-fit: contain;
 				transition: transform 0.6s ease-in-out, opacity 0.3s ease-in-out;
@@ -315,6 +317,7 @@ a[disabled]:focus {
 		border-color: $custom-color-3;
 	}
 }
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
 	.product-grid-item {
@@ -334,7 +337,7 @@ a[disabled]:focus {
 			justify-content: center;
 
 			img {
-				width: 100%;
+				width: 55%;
 				height: 100%;
 				-o-object-fit: contain;
 				object-fit: contain;
@@ -375,7 +378,7 @@ a[disabled]:focus {
 		border-radius: 8px;
 		display: block;
 		margin: 0 auto;
-		width: 100%;
+		width: 55%;
 		height: 100%;
 		// opacity: 0.5;
 		object-fit: contain;
@@ -458,6 +461,7 @@ a[disabled]:focus {
 .load-more-container {
 	text-align: center;
 	margin: 60px 0;
+
 	// Outline Load More Button
 	.load-more-btn {
 		background-color: transparent;
@@ -475,6 +479,7 @@ a[disabled]:focus {
 		gap: 10px;
 		border: 1px solid $color-white;
 		border-radius: 6px;
+
 		// Hover State
 		&:hover {
 			background-color: rgba(51, 51, 51, 0.05);
@@ -482,16 +487,19 @@ a[disabled]:focus {
 			box-shadow: inset 0 0 0 2px rgba(51, 51, 51, 0.4);
 			transform: translateY(-2px);
 		}
+
 		// Focus State (Accessible Outline)
 		&:focus {
 			outline: none;
 			box-shadow: inset 0 0 0 2px rgba(51, 51, 51, 0.4), 0 0 0 3px rgba(51, 51, 51, 0.3);
 		}
+
 		// Active State
 		&:active {
 			background-color: rgba(51, 51, 51, 0.1);
 			transform: translateY(1px);
 		}
+
 		// Disabled State
 		&:disabled {
 			color: $color-text-light;
@@ -501,6 +509,7 @@ a[disabled]:focus {
 			box-shadow: none;
 			transform: none;
 		}
+
 		// Icon Styling
 		i {
 			font-size: $font-size-base;
@@ -621,9 +630,11 @@ body:has(.modal-backdrop.active) {
 	flex-direction: column;
 	gap: 10px;
 }
-#number-of-cart{
+
+#number-of-cart {
 	color: $custom-color-4 !important;
 }
+
 /* Responsive Styles for Mobile */
 @media (max-width: 768px) {
 	.cart-item {
@@ -635,10 +646,12 @@ body:has(.modal-backdrop.active) {
 		padding: 10px;
 		padding-top: 20px;
 	}
+
 	/* Ensure text and buttons are properly aligned */
-	.cart-item > * {
+	.cart-item>* {
 		text-align: center;
 	}
+
 	/* Make the last column (remove button) take full width */
 	.cart-item :nth-child(5) {
 		grid-column: span 2;
@@ -1234,6 +1247,7 @@ input {
 					border-bottom: 16px solid $custom-color-4;
 					/* Triangle color */
 				}
+
 				/* Glowing Button */
 				.btn-glow {
 					background: $custom-color-3;
@@ -1245,7 +1259,7 @@ input {
 					cursor: pointer;
 					transition: all 0.3s ease-in-out;
 					box-shadow: 0 0 10px rgba(255, 118, 136, 0.5);
-					top: 20px;
+					top: 30px;
 					right: 20px;
 				}
 
@@ -1304,6 +1318,7 @@ input {
 	width: 100%;
 	height: 100%;
 	padding: 60px 150px 20px;
+
 	/* Left Section: Form */
 	.form-section {
 		flex: 1;
@@ -1354,12 +1369,14 @@ input {
 		color: $color_1;
 		border: 1px solid $color_1;
 	}
+
 	/* Form Layout: 2 Rows */
 	.form-row {
 		display: flex;
 		gap: 20px;
 		width: 100%;
 	}
+
 	/* Floating Label Input & Select */
 	.floating-group {
 		position: relative;
@@ -1387,6 +1404,7 @@ input {
 		cursor: pointer;
 		background: none;
 	}
+
 	/* Floating label */
 	.floating-group label {
 		position: absolute;
@@ -1398,11 +1416,12 @@ input {
 		transition: all 0.3s ease-in-out;
 		pointer-events: none;
 	}
+
 	/* Move label when focused or filled */
-	.floating-group input:focus ~ label,
-	.floating-group input:not(:placeholder-shown) ~ label,
-	.floating-group select:focus ~ label,
-	.floating-group select:not([value=""]) ~ label {
+	.floating-group input:focus~label,
+	.floating-group input:not(:placeholder-shown)~label,
+	.floating-group select:focus~label,
+	.floating-group select:not([value=""])~label {
 		top: -10px;
 		font-size: 14px;
 		color: $color_1;
@@ -1426,6 +1445,7 @@ input {
 		/* Lighter shade on hover */
 		box-shadow: 0px 4px 10px rgba(159, 95, 46, 0.4);
 	}
+
 	/* Right Section: Order Summary */
 	.order-summary {
 		// width: 400px;
@@ -1469,6 +1489,7 @@ input {
 		font-weight: bold;
 		margin-top: 10px;
 	}
+
 	/* Product Section */
 	.product {
 		display: flex;
@@ -1476,7 +1497,7 @@ input {
 		justify-items: center;
 		margin: 15px 0;
 		gap: 15px;
-		color: $color-black;
+		color: $color-white;
 	}
 
 	img {
@@ -1485,7 +1506,7 @@ input {
 		margin-right: 10px;
 		border-radius: 4px;
 	}
-	
+
 	.product-details {
 		flex-grow: 1;
 	}
@@ -1549,7 +1570,7 @@ input {
 		width: 90%;
 		margin-top: 20px;
 		box-shadow: none;
-		flex: 0 0 50%!important;
+		flex: 0 0 50% !important;
 		box-sizing: border-box;
 	}
 
@@ -1572,10 +1593,11 @@ input {
 		width: 90%;
 		margin-top: 20px;
 		box-shadow: none;
+
 		button.remove-cart-btn {
 			right: 0;
 			margin-top: 30px;
-		 }
+		}
 	}
 
 	.form-row {
@@ -1604,6 +1626,7 @@ input {
 	padding: 40px;
 	border-radius: 8px;
 	box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.1);
+
 	/* Two-column layout for section */
 	.section {
 		display: flex;
@@ -1614,6 +1637,7 @@ input {
 	.section div {
 		flex-grow: 1;
 	}
+
 	/* Right side: "Edit" link floats right */
 	.section .edit {
 		float: right;
@@ -1669,10 +1693,12 @@ input {
 .modal.noti-modal {
 	background: rgba(0, 0, 0, 0.6);
 	z-index: 10000;
+
 	/* Center modal */
 	.modal-dialog {
 		max-width: 400px;
 	}
+
 	/* Glassmorphism effect */
 	.modal-content {
 		background: rgba(255, 255, 255, 0.2);
@@ -1682,6 +1708,7 @@ input {
 		padding: 20px;
 		box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 	}
+
 	/* Custom close button */
 	.custom-close {
 		position: absolute;
@@ -1692,6 +1719,7 @@ input {
 		padding: 5px;
 		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 	}
+
 	/* Smooth animation */
 	.modal.fade .modal-dialog {
 		transform: translateY(-50px);
@@ -1828,14 +1856,15 @@ input {
 	padding: 0;
 	margin: -2px 0;
 	column-gap: 25px;
-	font-family: Suisse,sans-serif;
+	font-family: Suisse, sans-serif;
 	font-size: .9375rem;
 	font-weight: 400;
 	line-height: 1.4;
 	list-style: none
 }
 
-.RadioGroup_base__ttFz5, .RadioGroup_base__ttFz5 * {
+.RadioGroup_base__ttFz5,
+.RadioGroup_base__ttFz5 * {
 	box-sizing: border-box
 }
 
@@ -1877,7 +1906,7 @@ body.has-tabbed .RadioGroup_radio__hnn9G:focus-within:after {
 
 .RadioGroup_label__ACZd_ {
 	display: flex;
-	font-family: Suisse,sans-serif;
+	font-family: Suisse, sans-serif;
 	font-size: .875rem
 }
 
@@ -1897,11 +1926,11 @@ body.has-tabbed .RadioGroup_radio__hnn9G:focus-within:after {
 	color: #e0dfd6
 }
 
-.RadioGroup_input__fjmeL:checked ~ .RadioGroup_labelContent__48GiJ.RadioGroup_dark__cngsS {
+.RadioGroup_input__fjmeL:checked~.RadioGroup_labelContent__48GiJ.RadioGroup_dark__cngsS {
 	color: $custom-color-4
 }
 
-.RadioGroup_input__fjmeL:checked ~ .RadioGroup_labelContent__48GiJ.RadioGroup_light__8vuuK {
+.RadioGroup_input__fjmeL:checked~.RadioGroup_labelContent__48GiJ.RadioGroup_light__8vuuK {
 	color: #f5f5f5
 }
 
@@ -1914,7 +1943,7 @@ body.has-tabbed .RadioGroup_radio__hnn9G:focus-within:after {
 }
 
 .RadioGroup_singleLabel__QBtyv {
-	font-family: Suisse,sans-serif;
+	font-family: Suisse, sans-serif;
 	font-size: .875rem
 }
 
@@ -1939,7 +1968,7 @@ body.has-tabbed .RadioGroup_radio__hnn9G:focus-within:after {
 	float: left;
 	transform: translateY(3px);
 	transition: all .5s ease;
-	transition: border-color .2s cubic-bezier(.215,.61,.355,1)
+	transition: border-color .2s cubic-bezier(.215, .61, .355, 1)
 }
 
 .RadioGroup_pot__g3kNx.RadioGroup_dark__cngsS {
@@ -1950,13 +1979,15 @@ body.has-tabbed .RadioGroup_radio__hnn9G:focus-within:after {
 	border-color: #bcbbb4
 }
 
-.RadioGroup_input__fjmeL:focus ~ .RadioGroup_pot__g3kNx:focus-visible, body.RadioGroup_has-tabbed__Laps6 .RadioGroup_input__fjmeL:focus ~ .RadioGroup_pot__g3kNx {
+.RadioGroup_input__fjmeL:focus~.RadioGroup_pot__g3kNx:focus-visible,
+body.RadioGroup_has-tabbed__Laps6 .RadioGroup_input__fjmeL:focus~.RadioGroup_pot__g3kNx {
 	outline: 2px solid #252525;
 	outline-offset: calc(var(--focus-offset, 0px) + 4px);
 	transition: none
 }
 
-.RadioGroup_input__fjmeL:focus ~ .RadioGroup_pot__g3kNx:focus-visible:before, body.RadioGroup_has-tabbed__Laps6 .RadioGroup_input__fjmeL:focus ~ .RadioGroup_pot__g3kNx:before {
+.RadioGroup_input__fjmeL:focus~.RadioGroup_pot__g3kNx:focus-visible:before,
+body.RadioGroup_has-tabbed__Laps6 .RadioGroup_input__fjmeL:focus~.RadioGroup_pot__g3kNx:before {
 	content: "";
 	pointer-events: none;
 	position: absolute;
@@ -1975,12 +2006,12 @@ body.has-tabbed .RadioGroup_radio__hnn9G:focus-within:after {
 	background-color: transparent;
 	border-radius: 100%;
 	content: "";
-	transition: background-color .2s cubic-bezier(.645,.045,.355,1)
+	transition: background-color .2s cubic-bezier(.645, .045, .355, 1)
 }
 
 .RadioGroup_disabled__PYov_ .RadioGroup_pot__g3kNx {
 	border-color: #999;
-	background-color: rgba(51,51,51,.05);
+	background-color: rgba(51, 51, 51, .05);
 	cursor: auto
 }
 
@@ -1988,33 +2019,36 @@ body.has-tabbed .RadioGroup_radio__hnn9G:focus-within:after {
 	display: none
 }
 
-.RadioGroup_input__fjmeL:hover ~ .RadioGroup_pot__g3kNx.RadioGroup_dark__cngsS:after {
+.RadioGroup_input__fjmeL:hover~.RadioGroup_pot__g3kNx.RadioGroup_dark__cngsS:after {
 	background-color: #8a939d
 }
 
-.RadioGroup_input__fjmeL:hover ~ .RadioGroup_pot__g3kNx.RadioGroup_light__8vuuK:after {
+.RadioGroup_input__fjmeL:hover~.RadioGroup_pot__g3kNx.RadioGroup_light__8vuuK:after {
 	background-color: #d5d4c9
 }
 
-.RadioGroup_input__fjmeL:checked ~ .RadioGroup_pot__g3kNx.RadioGroup_dark__cngsS:after {
+.RadioGroup_input__fjmeL:checked~.RadioGroup_pot__g3kNx.RadioGroup_dark__cngsS:after {
 	background-color: $custom-color-4;
 }
 
-.RadioGroup_input__fjmeL:checked ~ .RadioGroup_pot__g3kNx.RadioGroup_light__8vuuK:after {
+.RadioGroup_input__fjmeL:checked~.RadioGroup_pot__g3kNx.RadioGroup_light__8vuuK:after {
 	background-color: #bcbbb4
 }
 
 /* Overlay Container */
 .loading-overlay {
-	display: none; /* Show via JS when needed */
+	display: none;
+	/* Show via JS when needed */
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
 	z-index: 9999;
-	background: rgba(255, 255, 255, 0.8); /* Light overlay; change for dark */
-	backdrop-filter: blur(4px); /* Optional blur effect */
+	background: rgba(255, 255, 255, 0.8);
+	/* Light overlay; change for dark */
+	backdrop-filter: blur(4px);
+	/* Optional blur effect */
 	align-items: center;
 	justify-content: center;
 	transition: opacity 0.3s ease-in-out;
@@ -2032,14 +2066,16 @@ body.has-tabbed .RadioGroup_radio__hnn9G:focus-within:after {
 	width: 60px;
 	height: 60px;
 	border: 6px solid #e0e0e0;
-	border-top-color: #007bff; /* Primary color */
+	border-top-color: #007bff;
+	/* Primary color */
 	border-radius: 50%;
 	animation: spin 1s linear infinite;
 }
 
 /* Full-screen dark overlay */
 .loading-overlay {
-	display: none; /* Toggle with JS */
+	display: none;
+	/* Toggle with JS */
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -2115,14 +2151,14 @@ body.has-tabbed .RadioGroup_radio__hnn9G:focus-within:after {
 }
 
 section.third-section.container table tr td p {
-    margin-bottom: 30px;
+	margin-bottom: 30px;
 	min-width: 180px;
 	text-transform: none;
 	// color: $color-white!important;
 }
 
 section.third-section.container table tr td img {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 @media (max-width: 768px) {
@@ -2135,27 +2171,29 @@ section.third-section.container table tr td img {
 		margin-left: 200px;
 	}
 
-	
+
 	main:has(.product-info) .product-card:first-child {
-		margin-left: 700px;
+		margin-left: 1200px;
 	}
 
 	.custom-nav-right-hamburger {
 		display: block !important;
 	}
 
-	.custom-nav-links li{
+	.custom-nav-links li {
 		display: none;
 	}
 
 	.display-header.d-flex.justify-content-between.pb-2 {
 		text-align: center;
-		justify-content:center !important;
+		justify-content: center !important;
 	}
 }
+
 .custom-nav-right-hamburger {
 	display: none;
 }
+
 #menuToggle {
 	display: block;
 	/* You can also use relative/absolute here if you want to stay on the top */
@@ -2184,8 +2222,10 @@ section.third-section.container table tr td img {
 	top: -7px;
 	left: -5px;
 	cursor: pointer;
-	opacity: 0; /* hide this */
-	z-index: 2; /* and place it over the hamburger */
+	opacity: 0;
+	/* hide this */
+	z-index: 2;
+	/* and place it over the hamburger */
 
 	-webkit-touch-callout: none;
 }
@@ -2203,7 +2243,7 @@ section.third-section.container table tr td img {
 	border-radius: 3px;
 	z-index: 1;
 	transform-origin: 4px 0px;
-	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease;
+	transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.55s ease;
 }
 
 #menuToggle span:first-child {
@@ -2218,7 +2258,7 @@ section.third-section.container table tr td img {
  * Transform all the slices of hamburger
  * into a crossmark.
  */
-#menuToggle input:checked ~ span {
+#menuToggle input:checked~span {
 	opacity: 1;
 	transform: rotate(45deg) translate(-2px, -1px);
 	background: $custom-color-4;
@@ -2227,7 +2267,7 @@ section.third-section.container table tr td img {
 /*
  * But let's hide the middle one.
  */
-#menuToggle input:checked ~ span:nth-last-child(3) {
+#menuToggle input:checked~span:nth-last-child(3) {
 	opacity: 0;
 	transform: rotate(0deg) scale(0.2, 0.2);
 }
@@ -2235,7 +2275,7 @@ section.third-section.container table tr td img {
 /*
  * Ohyeah and the last one should go the other direction
  */
-#menuToggle input:checked ~ span:nth-last-child(2) {
+#menuToggle input:checked~span:nth-last-child(2) {
 	transform: rotate(-45deg) translate(0, -1px);
 }
 
@@ -2259,7 +2299,7 @@ section.third-section.container table tr td img {
 
 	transform-origin: 0% 0%;
 	transform: translate(100%, 0);
-	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+	transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
 	right: -20px;
 	top: -20px;
 }
@@ -2277,6 +2317,28 @@ section.third-section.container table tr td img {
 /*
  * And let's slide it in from the left
  */
-#menuToggle input:checked ~ ul {
+#menuToggle input:checked~ul {
 	transform: none;
+}
+
+#cart-link {
+	text-decoration: none;
+}
+
+#infoMessage {
+	color: #fff;
+}
+
+@media (max-width: 768px) {
+	.checkout-container .form-section {
+		margin-top: 100px;
+	}
+}
+
+@media (max-width: 768px) {
+	.contact-us {
+		img {
+			width: 100% !important;
+		}
+	}
 }

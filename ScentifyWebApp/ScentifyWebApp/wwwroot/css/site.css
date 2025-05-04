@@ -87,6 +87,7 @@ a[disabled]:focus {
 
 .product-description {
   color: #fffef2 !important;
+  min-height: 65px;
 }
 
 .section-heading {
@@ -189,7 +190,7 @@ a[disabled]:focus {
   justify-content: center;
 }
 .product-grid-item:hover .image-wrapper img {
-  width: 100%;
+  width: 55%;
   height: 100%;
   -o-object-fit: contain;
      object-fit: contain;
@@ -272,7 +273,7 @@ a[disabled]:focus {
     justify-content: center;
   }
   .product-grid-item .image-wrapper img {
-    width: 100%;
+    width: 55%;
     height: 100%;
     -o-object-fit: contain;
     object-fit: contain;
@@ -306,7 +307,7 @@ a[disabled]:focus {
   border-radius: 8px;
   display: block;
   margin: 0 auto;
-  width: 100%;
+  width: 55%;
   height: 100%;
   -o-object-fit: contain;
      object-fit: contain;
@@ -1139,7 +1140,7 @@ input {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     box-shadow: 0 0 10px rgba(255, 118, 136, 0.5);
-    top: 20px;
+    top: 30px;
     right: 20px;
   }
   #search-modal .modal-dialog .modal-content .btn-glow:hover {
@@ -1353,7 +1354,7 @@ input {
   justify-items: center;
   margin: 15px 0;
   gap: 15px;
-  color: #000;
+  color: #fff;
 }
 .checkout-container img {
   width: 60px;
@@ -1684,7 +1685,8 @@ input {
   list-style: none;
 }
 
-.RadioGroup_base__ttFz5, .RadioGroup_base__ttFz5 * {
+.RadioGroup_base__ttFz5,
+.RadioGroup_base__ttFz5 * {
   box-sizing: border-box;
 }
 
@@ -1799,13 +1801,15 @@ body.has-tabbed .RadioGroup_radio__hnn9G:focus-within:after {
   border-color: #bcbbb4;
 }
 
-.RadioGroup_input__fjmeL:focus ~ .RadioGroup_pot__g3kNx:focus-visible, body.RadioGroup_has-tabbed__Laps6 .RadioGroup_input__fjmeL:focus ~ .RadioGroup_pot__g3kNx {
+.RadioGroup_input__fjmeL:focus ~ .RadioGroup_pot__g3kNx:focus-visible,
+body.RadioGroup_has-tabbed__Laps6 .RadioGroup_input__fjmeL:focus ~ .RadioGroup_pot__g3kNx {
   outline: 2px solid #252525;
   outline-offset: calc(var(--focus-offset, 0px) + 4px);
   transition: none;
 }
 
-.RadioGroup_input__fjmeL:focus ~ .RadioGroup_pot__g3kNx:focus-visible:before, body.RadioGroup_has-tabbed__Laps6 .RadioGroup_input__fjmeL:focus ~ .RadioGroup_pot__g3kNx:before {
+.RadioGroup_input__fjmeL:focus ~ .RadioGroup_pot__g3kNx:focus-visible:before,
+body.RadioGroup_has-tabbed__Laps6 .RadioGroup_input__fjmeL:focus ~ .RadioGroup_pot__g3kNx:before {
   content: "";
   pointer-events: none;
   position: absolute;
@@ -1855,16 +1859,19 @@ body.has-tabbed .RadioGroup_radio__hnn9G:focus-within:after {
 
 /* Overlay Container */
 .loading-overlay {
-  display: none; /* Show via JS when needed */
+  display: none;
+  /* Show via JS when needed */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 9999;
-  background: rgba(255, 255, 255, 0.8); /* Light overlay; change for dark */
+  background: rgba(255, 255, 255, 0.8);
+  /* Light overlay; change for dark */
   -webkit-backdrop-filter: blur(4px);
-          backdrop-filter: blur(4px); /* Optional blur effect */
+          backdrop-filter: blur(4px);
+  /* Optional blur effect */
   align-items: center;
   justify-content: center;
   transition: opacity 0.3s ease-in-out;
@@ -1882,14 +1889,16 @@ body.has-tabbed .RadioGroup_radio__hnn9G:focus-within:after {
   width: 60px;
   height: 60px;
   border: 6px solid #e0e0e0;
-  border-top-color: #007bff; /* Primary color */
+  border-top-color: #007bff;
+  /* Primary color */
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
 /* Full-screen dark overlay */
 .loading-overlay {
-  display: none; /* Toggle with JS */
+  display: none;
+  /* Toggle with JS */
   position: fixed;
   top: 0;
   left: 0;
@@ -1978,7 +1987,7 @@ section.third-section.container table tr td img {
     margin-left: 200px;
   }
   main:has(.product-info) .product-card:first-child {
-    margin-left: 700px;
+    margin-left: 1200px;
   }
   .custom-nav-right-hamburger {
     display: block !important;
@@ -2023,8 +2032,10 @@ section.third-section.container table tr td img {
   top: -7px;
   left: -5px;
   cursor: pointer;
-  opacity: 0; /* hide this */
-  z-index: 2; /* and place it over the hamburger */
+  opacity: 0;
+  /* hide this */
+  z-index: 2;
+  /* and place it over the hamburger */
   -webkit-touch-callout: none;
 }
 
@@ -2115,4 +2126,23 @@ section.third-section.container table tr td img {
  */
 #menuToggle input:checked ~ ul {
   transform: none;
+}
+
+#cart-link {
+  text-decoration: none;
+}
+
+#infoMessage {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .checkout-container .form-section {
+    margin-top: 100px;
+  }
+}
+@media (max-width: 768px) {
+  .contact-us img {
+    width: 100% !important;
+  }
 }/*# sourceMappingURL=site.css.map */

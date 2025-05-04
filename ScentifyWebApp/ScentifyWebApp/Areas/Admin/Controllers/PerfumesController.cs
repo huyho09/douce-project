@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ScentifyWebApp.Authorization.BaseController;
 using ScentifyWebApp.DAL.DB;
+using ScentifyWebApp.Helper;
 using ScentifyWebApp.Libs;
 using ScentifyWebApp.Models.Dtos;
 using ScentifyWebApp.Models.Entities;
@@ -45,6 +46,50 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                     : new List<ProductSize>()
             })
             .ToListAsync();
+
+            // check image save
+            //foreach(var product in products)
+            //{
+            //    if (product.ProductSizes != null && product.ProductSizes.Any())
+            //    {
+            //        var i = 0;
+            //        //foreach (var size in product.ProductSizes)
+            //        //{
+            //        //    if (!string.IsNullOrEmpty(size.ImageUrl))
+            //        //    {
+            //        //        var imagePath = Path.Combine(_environment.WebRootPath, "image-test");
+            //        //        if (!System.IO.File.Exists(imagePath))
+            //        //        {
+            //        //            ImageOptimizer.SaveAsPng(size.ImageUrl.Split("base64,")[1], product.Name + "_" + i, imagePath);
+            //        //            i++;
+            //        //        }
+            //        //    }
+            //        //}
+
+            //        //foreach (var size in product.ProductSizes)
+            //        //{
+            //        //    if (!string.IsNullOrEmpty(size.ImageUrl))
+            //        //    {
+            //        //        var imagePath = Path.Combine(_environment.WebRootPath, "image-test");
+            //        //        if (!System.IO.File.Exists(imagePath))
+            //        //        {
+            //        //            ImageOptimizer.CompressAndSaveImage(size.ImageUrl.Split("base64,")[1], product.Name + "_" + i, imagePath);
+            //        //            i++;
+            //        //        }
+            //        //    }
+            //        //}
+            //    }
+            //}
+
+            //ImageOptimizer.CompressAndSaveAllImages(
+            //    @"D:\Sources\douce-project\ScentifyWebApp\ScentifyWebApp\wwwroot\image-test",
+            //    @"D:\Sources\douce-project\ScentifyWebApp\ScentifyWebApp\wwwroot\image-output"
+            //);
+            //ImageOptimizer.CompressAndSaveAllImages(
+            //    @"D:\Sources\douce-project\ScentifyWebApp\ScentifyWebApp\wwwroot\images\BANNER",
+            //    @"D:\Sources\douce-project\ScentifyWebApp\ScentifyWebApp\wwwroot\image-output"
+            //);
+
             return View(products);
         }
         //[HttpGet("Create")]

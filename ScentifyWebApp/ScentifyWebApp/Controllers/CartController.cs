@@ -99,14 +99,14 @@ namespace ScentifyWebApp.Controllers
             try
             {
                 _cartService.ClearCart();
-                return Json(new { status = 200, message = "Clear all cart successfully." });
+                return Json(new { status = 200, message = "Đã xóa tất cả sản phẩm trong giỏ hàng thành công!" });
             }
             catch (Exception ex)
             {
                 // Log the exception (replace with your logging system)
                 Console.WriteLine($"Error: {ex.Message}");
 
-                return Json(new { status = 500, message = "An error occurred while removing the perfume to the cart." });
+                return Json(new { status = 500, message = "Có lỗi xảy ra không thể xóa sản phẩm khỏi giỏ hàng!" });
             }
         }
     }

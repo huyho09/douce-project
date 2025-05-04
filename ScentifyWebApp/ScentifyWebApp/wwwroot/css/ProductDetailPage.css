@@ -339,7 +339,7 @@ main:has(.product-info) .card {
 
 @media (max-width: 768px) {
   main:has(.product-info) .product-card {
-    height: 450px;
+    height: 480px;
   }
   .container.main.d-flex {
     padding: 15px 30px;

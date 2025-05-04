@@ -24,7 +24,7 @@ namespace ScentifyWebApp.Models.Requests
 
         [Required(ErrorMessage = "Số điện thoại không được để trống!")]
         [RegularExpression(@"^(?:\+84|0)(3[2-9]|5[6|8|9]|7[0|6-9]|8[1-9]|9[0-9])[0-9]{7}$",
-            ErrorMessage = "Số điện thoại không hợp lệ! (e.g., 0912345678).")]
+            ErrorMessage = "Số điện thoại không hợp lệ! (vd: 0912345678).")]
         public string PhoneNumber { get; set; }
 
         //[Required(ErrorMessage = "Country is required")]
