@@ -9,6 +9,7 @@ using ScentifyWebApp.Helper;
 using ScentifyWebApp.Libs;
 using ScentifyWebApp.Models.Dtos;
 using ScentifyWebApp.Models.Entities;
+using System.IO;
 
 namespace ScentifyWebApp.Areas.Admin.Controllers
 {
@@ -46,6 +47,8 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                     : new List<ProductSize>()
             })
             .ToListAsync();
+
+            //await ConvertAndStoreImagesAsync();
 
             // check image save
             //foreach(var product in products)
@@ -92,13 +95,104 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
 
             return View(products);
         }
+
+        public async Task ConvertAndStoreImagesAsync()
+        {
+            // 1) Load all perfumes with their children
+            var perfumes = await _context.Perfume
+                .ToListAsync();
+
+            string baseFolder = Path.Combine(_environment.WebRootPath, "uploads");
+
+            foreach (var perfume in perfumes)
+            {
+                // 2) Handle PriceInfo images
+                var priceInfo = JsonHelpers.ParseJson<ProductSize>(perfume.PriceInfo);
+
+                await ProcessImageCollectionAsync(
+                    items: priceInfo,
+                    folder: Path.Combine(baseFolder, "prices"),
+                    fileNamePrefix: perfume.Name,
+                    updateUrl: (pi, url) => pi.ImageUrl = url
+                );
+
+                perfume.PriceInfo = JsonConvert.SerializeObject(priceInfo);
+
+                var Ingredients = JsonConvert.DeserializeObject<List<Ingredient>>(perfume.Ingredients);
+                // 3) Handle Ingredient images
+                await ProcessImageCollectionAsync(
+                    items: Ingredients ?? new(),
+                    folder: Path.Combine(baseFolder, "ingredients"),
+                    fileNamePrefix: perfume.Name,
+                    updateUrl: (ing, url) => ing.ImageUrl = url
+                );
+                perfume.Ingredients = JsonConvert.SerializeObject(Ingredients);
+            }
+
+            // 4) Save all URL updates in one go
+            await _context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Processes a collection of items that have Base64 ImageUrl strings,
+        /// writes each image to disk, and calls back to update the entity's ImageUrl.
+        /// </summary>
+        private async Task ProcessImageCollectionAsync<T>(
+            IEnumerable<T> items,
+            string folder,
+            string fileNamePrefix,
+            Action<T, string> updateUrl
+        ) where T : class
+        {
+            if (!Directory.Exists(folder))
+                Directory.CreateDirectory(folder);
+
+            int counter = 0;
+            foreach (var item in items)
+            {
+                // via reflection or interface, get the Base64 string:
+                var prop = item.GetType().GetProperty("ImageUrl");
+                var base64 = prop?.GetValue(item) as string;
+                if (string.IsNullOrWhiteSpace(base64) || !base64.Contains("base64,"))
+                    continue;
+
+                // decode after comma
+                var raw = base64.Substring(base64.IndexOf("base64,") + 7);
+                var bytes = Convert.FromBase64String(raw);
+
+                // generate unique name
+                var fileName = $"{SanitizeFileName(fileNamePrefix)}_{counter++}.png";
+                var filePath = Path.Combine(folder, fileName);
+                var relativeUrl = Path.Combine("/uploads", Path.GetFileName(folder), fileName)
+                                      .Replace("\\", "/");
+
+                // write file
+                await System.IO.File.WriteAllBytesAsync(filePath, bytes);
+
+                // optionally compress/optimize here:
+                // ImageOptimizer.CompressAndSave(filePath);
+
+                // update the entity's ImageUrl field to the new URL
+                updateUrl(item, relativeUrl);
+            }
+        }
+
+        /// <summary>
+        /// Removes invalid URL/path characters from a string.
+        /// </summary>
+        private string SanitizeFileName(string input)
+        {
+            foreach (var c in Path.GetInvalidFileNameChars())
+                input = input.Replace(c, '_');
+            return input;
+        }
+
         //[HttpGet("Create")]
         public IActionResult Create()
         {
             var model = new DtoPerfume();
             return View("Create", model);
         }
-
 
         //[HttpPost("Create")]
         [HttpPost]
