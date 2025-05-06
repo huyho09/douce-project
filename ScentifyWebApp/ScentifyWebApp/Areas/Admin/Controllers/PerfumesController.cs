@@ -96,11 +96,11 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
             return View(products);
         }
 
-        public async Task ConvertAndStoreImagesAsync()
+        public async Task ConvertAndStoreImagesAsync(List<Perfume> perfumes)
         {
             // 1) Load all perfumes with their children
-            var perfumes = await _context.Perfume
-                .ToListAsync();
+            //var perfumes = await _context.Perfume
+            //    .ToListAsync();
 
             string baseFolder = Path.Combine(_environment.WebRootPath, "uploads");
 
@@ -112,7 +112,7 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                 await ProcessImageCollectionAsync(
                     items: priceInfo,
                     folder: Path.Combine(baseFolder, "prices"),
-                    fileNamePrefix: perfume.Name,
+                    fileNamePrefix: perfume.Name.Replace(" ", ""),
                     updateUrl: (pi, url) => pi.ImageUrl = url
                 );
 
@@ -123,7 +123,7 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                 await ProcessImageCollectionAsync(
                     items: Ingredients ?? new(),
                     folder: Path.Combine(baseFolder, "ingredients"),
-                    fileNamePrefix: perfume.Name,
+                    fileNamePrefix: perfume.Name.Replace(" ", ""),
                     updateUrl: (ing, url) => ing.ImageUrl = url
                 );
                 perfume.Ingredients = JsonConvert.SerializeObject(Ingredients);
@@ -247,7 +247,9 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                     request.CreatedAt = DateTime.Now;
 
                     _context.Perfume.Add(request);
-                    await _context.SaveChangesAsync();
+
+                    await ConvertAndStoreImagesAsync(new List<Perfume> { request });
+                    //await _context.SaveChangesAsync();
                     return RedirectToAction("index");
                 }
             }
@@ -394,7 +396,10 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                 {
                     existingPerfume.FragranceNotes = JsonConvert.SerializeObject(fragranceNotes);
                 }
-                await _context.SaveChangesAsync();
+
+                await ConvertAndStoreImagesAsync(new List<Perfume> { existingPerfume });
+
+                //await _context.SaveChangesAsync();
             }
             return Redirect("/admin/perfumes/Update?id=" + requestDTO?.Id);
             //return RedirectToAction("Index", "perfumes");
