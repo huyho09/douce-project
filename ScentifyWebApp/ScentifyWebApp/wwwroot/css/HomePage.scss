@@ -14,7 +14,7 @@ $font-family_2: Suisse, sans-serif;
 $font-family_3: Suisse, sans-serif;
 $font-family_4: Zapf Humanist, serif;
 $font-family_5: Suisse Regular, sans-serif;
-$font-family_6: Montserrat ;
+$font-family_6: Montserrat;
 $background-color_1: #bbb;
 $background-color_2: #717171;
 $background-color_3: #ebeade;
@@ -291,6 +291,7 @@ iframe {
 	top: 20px;
 	left: 20px;
 }
+
 .home-detail {
 	color: $color_1;
 	font-family: $font-family_6;
@@ -497,6 +498,7 @@ iframe {
 #testimonials {
 	margin-top: 100px;
 	margin-bottom: 80px;
+
 	h2 {
 		font-family: $font-family_6;
 		font-size: 1.5rem;
@@ -718,7 +720,7 @@ iframe {
 	.Footer_Footer-text-list__qqrVv.Footer_active__jaXqd {
 		order: -1;
 
-		>a {
+		> a {
 			text-decoration: underline;
 		}
 	}
@@ -1131,7 +1133,7 @@ iframe {
 	position: fixed;
 	width: 100vw;
 
-	>button {
+	> button {
 		flex: 1 1 auto;
 		max-width: unset;
 		min-width: unset;
@@ -1190,7 +1192,7 @@ iframe {
 		margin-bottom: 0;
 	}
 
-	p>a {
+	p > a {
 		display: inline-block;
 	}
 }
@@ -1207,6 +1209,7 @@ iframe {
 .FooterBlock_learnMore__UY_VL {
 	text-decoration: underline;
 }
+
 .btn-contact-banner {
 	right: 200px;
 	bottom: 100px;
@@ -1270,6 +1273,7 @@ iframe {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
 	p {
 		color: white;
 		margin-left: 10px;
@@ -1388,10 +1392,12 @@ iframe {
 		margin-top: 40px;
 		margin-bottom: 30px;
 	}
+
 	#mobile-products {
 		padding-top: 0em;
 		padding-bottom: 2em;
 	}
+
 	.Image_picture {
 		width: 100%;
 		min-height: 70vh !important;
@@ -1401,8 +1407,7 @@ iframe {
 	}
 
 	.text-content {
-		text-align: center !important;
-		margin: 50px auto;
+		margin: 40px 20px auto;
 		font-weight: 700;
 
 		p {
@@ -1410,9 +1415,15 @@ iframe {
 		}
 	}
 
+	.details_KeyIngredients {
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+
 	a {
 		font-weight: 700;
 	}
+
 	.btn-contact-banner {
 		right: 40px;
 		bottom: 20px;
