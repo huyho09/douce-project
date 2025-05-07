@@ -31,7 +31,7 @@ namespace ScentifyWebApp.Controllers
                     return Json(new { status = 400, message = "Thêm vào giỏ hàng thất bại!" });
                 }
 
-                return Json(new { status = 200, message = $"Đã thêm {quantity} {addedPerfume.Name} vào giỏ hàng thành công 🎉" });
+                return Json(new { status = 200, message = $"Đã thêm {quantity} {addedPerfume.Name} vào giỏ hàng thành công!" });
             }
             catch (Exception ex)
             {
@@ -54,7 +54,7 @@ namespace ScentifyWebApp.Controllers
                     return Json(new { status = 400, message = "Sửa sản phẩm trong giỏ hàng thất bại!" });
                 }
 
-                return Json(new { status = 200, message = $"Đã cập nhật {quantity} sản phẩm {updatedPerfume.Name} trong giỏ hàng thành công 🎉" });
+                return Json(new { status = 200, message = $"Đã cập nhật {quantity} sản phẩm {updatedPerfume.Name} trong giỏ hàng thành công!" });
             }
             catch (Exception ex)
             {

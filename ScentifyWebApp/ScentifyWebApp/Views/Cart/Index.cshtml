@@ -8,13 +8,14 @@
 <!-- Cart Popup -->
 <div class="cart-container">
 	<div class="cart-header">
-		<p>Giỏ hàng</p>
-		@if (Model != null && Model.Count > 0)
+		<p class="cart-heading">Giỏ hàng</p>
+		<p class="cart-sub-heading">Thể tích</p>
+		<p class="cart-sub-heading">Số lượng</p>
+		@* @if (Model != null && Model.Count > 0)
 		{
-			<a id="clear-all-cart" class="h6 link-light" href="javascript:void(0);" onclick="clearAllCart();">Clear all</a>
-		}
-
-		<button class="close-btn" onclick="toggleCart()">✖</button>
+			<a id="clear-all-cart" class="h6 link-light cart-sub-heading" href="javascript:void(0);" onclick="clearAllCart();">Xóa tất cả</a>
+		} *@
+		<button class="close-btn cart-sub-heading" onclick="toggleCart()">✖</button>
 	</div>
 	@if (Model != null && Model.Count > 0)
 	{
@@ -27,15 +28,16 @@
 				<p class="product-name">@product.Name</p>
 				<p class="product-size">@product.CurrentSize mL</p>
 				<input type="number" min="1" value="@cartItem.Quantity" class="cart-quantity form-control w-75" onchange="updateCartItem(this,'@product.Id')" />
+				<button class="remove-cart-btn btn btn-link" type="button" onclick="removeCartItem('@product.Id', @product.CurrentSize);">Xóa bỏ</button>
 
 				<p class="product-price">@cartItem.Currency @currentProductSizes?.Price.ToString("N0")</p>
-				<button class="remove-cart-btn" type="button" onclick="removeCartItem('@product.Id', @product.CurrentSize);">✕</button>
+				<button class="remove-cart-btn btn btn-link remove-cart-btn-mobile" type="button" onclick="removeCartItem('@product.Id', @product.CurrentSize);">Xóa bỏ</button>
 			</div>
 
 			totalPrice += (double)(currentProductSizes?.Price * cartItem.Quantity ?? 0);
 		}
 
-		<div class="cart-infor float-end col-md-4 col-sm-12">
+		<div class="cart-infor float-end col-md-4 col-sm-12 mt-4">
 			<div class="cart-info">
 				@* <div class="promo-code">
 						<p>Apply a promotional code</p>
@@ -45,7 +47,7 @@
 					<p class="shipping-info">Enjoy complimentary standard shipping on all orders over 90 €.</p> *@
 
 				<div class="cart-total">
-					<p></p>
+					<p>Tổng tiền:</p>
 					<p class="total-price">@totalPrice.ToString("N0") @Model.FirstOrDefault()?.Currency</p>
 				</div>
 
