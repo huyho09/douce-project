@@ -1,4 +1,4 @@
-.btn:focus,
+﻿.btn:focus,
 .btn:active:focus,
 .btn-link.nav-link:focus,
 .form-control:focus,
@@ -27,7 +27,7 @@ a[disabled]:focus {
   text-align: center;
   margin-bottom: 40px;
   padding: 80px 0 0 80px;
-  color: #d5b260;
+  color: #ffd8a9;
 }
 
 @media (max-width: 768px) {
@@ -192,8 +192,7 @@ a[disabled]:focus {
 .product-grid-item:hover .image-wrapper img {
   width: 55%;
   height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   transition: transform 0.6s ease-in-out, opacity 0.3s ease-in-out;
   transform: scale(1.1);
   /* Slight zoom-in effect */
@@ -230,7 +229,7 @@ a[disabled]:focus {
   transition: transform 0.3s ease-in-out;
 }
 .product-grid-item a:hover {
-  color: #ca9e38;
+  color: rgb(202.3432835821, 158.4626865672, 55.6567164179);
 }
 .product-grid-item a:hover::after {
   transform: scaleX(1);
@@ -309,8 +308,7 @@ a[disabled]:focus {
   margin: 0 auto;
   width: 55%;
   height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   /* Keeps the image fully visible without cropping */
 }
 .image-wrapper::before {
@@ -451,8 +449,7 @@ a[disabled]:focus {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
-  -webkit-backdrop-filter: blur(8px);
-          backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
@@ -845,8 +842,7 @@ body.modal-open {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
-  -webkit-backdrop-filter: blur(8px);
-          backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
@@ -981,7 +977,7 @@ input {
 
 .custom-nav-links li a {
   text-decoration: none;
-  color: #d5b260;
+  color: #ffd8a9;
   font-size: 16px;
   font-weight: 600;
   transition: color 0.3s ease-in-out;
@@ -1067,6 +1063,10 @@ input {
 }
 .custom-nav-right .mobile-btn {
   display: none;
+}
+
+.policy-footer {
+  font-size: 1em;
 }
 
 @media (max-width: 768px) {
@@ -1262,9 +1262,7 @@ input {
   outline: none;
   border-radius: 8px;
   transition: all 0.3s ease-in-out;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   color: #fff;
 }
 .checkout-container .floating-group select {
@@ -1280,11 +1278,6 @@ input {
   color: #777;
   transition: all 0.3s ease-in-out;
   pointer-events: none;
-}
-.checkout-container .floating-group input:not(:-moz-placeholder-shown) ~ label {
-  top: -10px;
-  font-size: 14px;
-  color: #fff;
 }
 .checkout-container .floating-group input:focus ~ label,
 .checkout-container .floating-group input:not(:placeholder-shown) ~ label,
@@ -1303,7 +1296,6 @@ input {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  width: -moz-fit-content;
   width: fit-content;
   text-transform: uppercase;
 }
@@ -1533,8 +1525,7 @@ input {
 }
 .modal.noti-modal .modal-content {
   background: rgba(255, 255, 255, 0.2);
-  -webkit-backdrop-filter: blur(15px);
-          backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 20px;
@@ -1630,7 +1621,7 @@ input {
 }
 
 .select2-container--default .select2-results__option[aria-selected=true] {
-  background-color: #4c251d !important;
+  background-color: rgb(75.8333333333, 36.9444444444, 29.1666666667) !important;
   /* A darker shade of #6c1d10 */
   color: #fff !important;
   /* Keep text readable */
@@ -1646,7 +1637,7 @@ input {
 
 .select2-container--default .select2-results__option--highlighted[aria-selected],
 .select2-container--default .select2-results__option:hover {
-  background: #4c251d !important;
+  background: rgb(75.8333333333, 36.9444444444, 29.1666666667) !important;
 }
 
 .select2-search--dropdown {
@@ -1676,8 +1667,7 @@ input {
   justify-content: center;
   padding: 0;
   margin: -2px 0;
-  -moz-column-gap: 25px;
-       column-gap: 25px;
+  column-gap: 25px;
   font-family: Suisse, sans-serif;
   font-size: 0.9375rem;
   font-weight: 400;
@@ -1869,8 +1859,7 @@ body.RadioGroup_has-tabbed__Laps6 .RadioGroup_input__fjmeL:focus ~ .RadioGroup_p
   z-index: 9999;
   background: rgba(255, 255, 255, 0.8);
   /* Light overlay; change for dark */
-  -webkit-backdrop-filter: blur(4px);
-          backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
   /* Optional blur effect */
   align-items: center;
   justify-content: center;
@@ -1905,8 +1894,7 @@ body.RadioGroup_has-tabbed__Laps6 .RadioGroup_input__fjmeL:focus ~ .RadioGroup_p
   width: 100%;
   height: 100%;
   background-color: rgba(15, 15, 15, 0.9);
-  -webkit-backdrop-filter: blur(4px);
-          backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
   z-index: 9999;
   align-items: center;
   justify-content: center;
@@ -2010,8 +1998,7 @@ section.third-section.container table tr td img {
   position: relative;
   z-index: 2;
   -webkit-user-select: none;
-  -moz-user-select: none;
-       user-select: none;
+  user-select: none;
 }
 
 #menuToggle a {
@@ -2145,4 +2132,4 @@ section.third-section.container table tr td img {
   .contact-us img {
     width: 100% !important;
   }
-}/*# sourceMappingURL=site.css.map */
+}

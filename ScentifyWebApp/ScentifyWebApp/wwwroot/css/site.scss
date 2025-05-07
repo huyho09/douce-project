@@ -56,7 +56,7 @@ a[disabled]:focus {
 	text-align: center;
 	margin-bottom: 40px;
 	padding: 80px 0 0 80px;
-	color: $custom-color-4;
+	color: $color_2;
 }
 
 @media (max-width: 768px) {
@@ -1084,7 +1084,7 @@ input {
 
 .custom-nav-links li a {
 	text-decoration: none;
-	color: $custom-color-4;
+	color: $color_2;
 	font-size: 16px;
 	font-weight: 600;
 	transition: color 0.3s ease-in-out;
@@ -1180,6 +1180,9 @@ input {
 		display: none;
 	}
 }
+.policy-footer {
+	font-size: 1em;
+}
 
 @media (max-width: 768px) {
 	.custom-nav-right {
@@ -1247,7 +1250,6 @@ input {
 					border-bottom: 16px solid $custom-color-4;
 					/* Triangle color */
 				}
-
 				/* Glowing Button */
 				.btn-glow {
 					background: $custom-color-3;

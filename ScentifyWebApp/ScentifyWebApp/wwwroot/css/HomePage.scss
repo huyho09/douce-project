@@ -482,7 +482,7 @@ iframe {
 
 .product-store {
 	h2 {
-		color: $custom-color-4 !important;
+		color: $color_2 !important;
 	}
 }
 
@@ -496,8 +496,8 @@ iframe {
 }
 
 #testimonials {
-	margin-top: 100px;
-	margin-bottom: 80px;
+	margin-top: 20px;
+	margin-bottom: 40px;
 
 	h2 {
 		font-family: $font-family_6;
@@ -1149,7 +1149,7 @@ iframe {
 }
 
 .FooterBlock_base__lzouW.FooterBlock_light__JdnEy {
-	color: $custom-color-4;
+	color: $color_2;
 }
 
 .FooterBlock_heading__IVkcc {
@@ -1217,8 +1217,8 @@ iframe {
 
 .flip-card {
 	background-color: transparent;
-	width: 350px;
-	height: 220px;
+	width: 380px;
+	height: 300px;
 	perspective: 1000px;
 }
 
@@ -1248,6 +1248,9 @@ iframe {
 	background-color: #bbb;
 	color: black;
 	border-radius: 20px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 
 	.image-holder {
 		width: 100%;

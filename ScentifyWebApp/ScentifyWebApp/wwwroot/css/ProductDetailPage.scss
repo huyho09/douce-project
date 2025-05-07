@@ -45,7 +45,7 @@ $custom-color-4: #d5b260;
 		font-size: 4em;
 		margin-bottom: 30px;
 		line-height: 1.1;
-		color: $custom-color-4;
+		color: $color_2;
 	}
 
 	.text-content-detail {
@@ -183,11 +183,10 @@ $custom-color-4: #d5b260;
 
 .second-section {
 	text-align: center;
-	color: $color_6;
+	color: $color_2;
 	margin: 0px 0;
 	padding: 60px 30px;
 	position: relative;
-	color: $custom-color-4;
 
 	p {
 		color: $color_7;
@@ -325,7 +324,7 @@ $custom-color-4: #d5b260;
 
 .third-section {
 	padding: 20px 30px 50px;
-	color: $custom-color-4;
+	color: $color_2;
 	position: relative;
 }
 
@@ -361,7 +360,7 @@ $custom-color-4: #d5b260;
 	max-width: 350px;
 
 	&:hover {
-		transform: translateY(-15px);
+		//transform: translateY(-15px);
 		filter: drop-shadow(0 5px 10px $custom-color-3);
 	}
 
@@ -382,13 +381,23 @@ main:has(.product-info) .card {
 
 @media (max-width: 768px) {
 	main:has(.product-info) .product-card {
-		height: 480px;
+		height: 310px;
+	}
+	main:has(.product-info) .card {
+		height: 290px;
+		margin-top: -2rem;
+	}
+	.cards{
+		margin-top: 10px;
+	}
+	.card img{
+		width: 130px;
 	}
 	.container.main.d-flex {
 		padding: 15px 30px;
 	}
 	.section-content .section-title{
-		text-align: center;
+		text-align: left;
 	}
 	.section-content .cards {
 		padding: 10px;
@@ -403,6 +412,31 @@ main:has(.product-info) .card {
 	}
 	.third-section {
 		padding: 0px 30px;
+	}
+	.text-content h1{
+		margin-top: 1em;
+		font-size: 1.5em;
+	}
+	.product-info h3{
+		font-size: 1.2em;
+	}
+	.home-detail li {
+		padding-left: 0px;
+		font-size: 12px;
+	}
+	.section-content {
+		text-align: left;
+		padding-left: 0px;
+	}
+	.section-content h2 {
+		font-size: 1.3em;
+	}
+	.section-label {
+		font-size: 12px;
+		letter-spacing: 1px;
+	}
+	.section-heading {
+		margin-bottom: 30px;
 	}
 }
 
@@ -570,7 +604,8 @@ main:has(.product-info) .card {
 	}
 
 	.product-display {
-		margin-top: 40px;
+		margin-top: 0px;
+		width: 150px;
 	}
 
 	.info-sections {
@@ -590,7 +625,11 @@ main:has(.product-info) .card {
 			}
 		}
 	}
-
+	.product-card img {
+		display:block;
+		width: 50%;
+		margin:auto;
+	}
 	.second-section {
 		.section-subtitle {
 			margin-bottom: 50px;
@@ -621,7 +660,16 @@ main:has(.product-info) .card {
 		max-width: 300px;
 		scroll-snap-align: center;
 	}
-
+	.card.car-no-border:first-child {
+		margin-left: 50em !important;
+	}
+	.product-card:first-child {
+		margin-left: 176em !important;
+	}
+	.add-to-cart{
+		font-size: 11px;
+		padding: 10px 15px;
+	}
 	/* Hide the scrollbar for a clean look */
 	.cards::-webkit-scrollbar,
 	.product-cards::-webkit-scrollbar {
