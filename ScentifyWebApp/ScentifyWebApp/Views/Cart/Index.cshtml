@@ -8,9 +8,16 @@
 <!-- Cart Popup -->
 <div class="cart-container">
     <div class="cart-header">
-        <p class="cart-heading">Giỏ hàng</p>
-        <p class="cart-sub-heading">Thể tích</p>
-        <p class="cart-sub-heading">Số lượng</p>
+        @if (Model != null && Model.Count > 0)
+        {
+            <p class="cart-heading">Giỏ hàng</p>
+            <p class="cart-sub-heading">Thể tích</p>
+            <p class="cart-sub-heading">Số lượng</p>
+        }
+        else
+        {
+            <p class="cart-heading">Giỏ hàng</p>
+        }
         @* @if (Model != null && Model.Count > 0)
 		{
 			<a id="clear-all-cart" class="h6 link-light cart-sub-heading" href="javascript:void(0);" onclick="clearAllCart();">Xóa tất cả</a>
@@ -53,7 +60,7 @@
 
                 <div class="cart-total">
                     <p>Tổng tiền:</p>
-                    <p class="total-price">@totalPrice.ToString("N0") @Model.FirstOrDefault()?.Currency</p>
+                    <p class="total-price">@Model.FirstOrDefault()?.Currency @totalPrice.ToString("N0")</p>
                 </div>
 
                 @if (!validCard)

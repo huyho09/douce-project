@@ -51,17 +51,17 @@
                                 <p class="product-description">@product.ShortDescription</p>
 
                                 <!-- Price Info -->
-                                <div class="price-info row">
+                                <div class="price-info w-100">
                                     @if (priceInfoFirst != null)
                                     {
-                                        <div class="col pr-1">
+                                        <div class="w-50">
                                             <p class="product-price">@priceInfoFirst.VolumeMl mL</p>
 											<a href="/products/details/@product.Id/@priceInfoFirst.VolumeMl" class="size-button" aria-label="@priceInfoFirst.Currency @priceInfoFirst.Price - @priceInfoFirst.VolumeMl mL" data-id="@product.Id">@priceInfoFirst.Currency @priceInfoFirst.Price.ToString("N0")</a>
                                         </div>
                                     }
                                     @if (priceInfoSecond != null)
                                     {
-                                        <div class="col">
+                                        <div class="w-50">
                                             <p class="product-price">@priceInfoSecond.VolumeMl mL</p>
 											<a href="/products/details/@product.Id/@priceInfoSecond.VolumeMl" class="size-button" aria-label="@priceInfoSecond.Currency @priceInfoSecond.Price - @priceInfoSecond.VolumeMl mL" data-id="@product.Id">@priceInfoSecond.Currency @priceInfoSecond.Price.ToString("N0")</a>
                                         </div>
