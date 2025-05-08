@@ -275,11 +275,14 @@ function showNotiModal(message) {
         $("#infoModal").modal("hide");
     }, 10000);
 }
-
+function isMobile() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
 function updatetotalQuantity() {
     let total = 0;
-    if ($(".cart-quantity").length > 0) {
-        $(".cart-quantity").each(function (index, ele) {
+    var cartQuan = isMobile() ? $(".cart-quantity-mobile input") : $(".cart-quantity:not(.mobile)");
+    if (cartQuan.length > 0) {
+        cartQuan.each(function (index, ele) {
             total += parseInt($(ele).val()) || 0; // Ensure numeric value, default to 0 if empty
         });
         $('#number-of-cart').text(total);

@@ -582,7 +582,7 @@ body:has(.modal-backdrop.active) {
 /* Cart Header */
 .cart-header {
 	display: grid;
-	grid-template-columns: 4fr 2fr 1fr 2fr 0.5fr;
+	grid-template-columns: 2.5fr 2.5fr 1fr 1fr 0.5fr 1fr;
 	// justify-content: space-between;
 	// align-items: center;
 	/* Aligns items vertically */
@@ -590,8 +590,6 @@ body:has(.modal-backdrop.active) {
 	padding: 20px 40px 0;
 	/* Adds spacing */
 	border-bottom: 1px solid #ddd;
-
-	.cart-header{ }
 
 	.cart-sub-heading{
 		text-align: center;
@@ -633,7 +631,7 @@ body:has(.modal-backdrop.active) {
 /* Cart Items Layout */
 .cart-item {
 	display: grid;
-	grid-template-columns: 3fr 1fr 1fr 0.5fr 1fr;
+	grid-template-columns: 3fr 2fr 1fr 1fr 0.5fr 1fr;
 	/* Matches header */
 	align-items: center;
 	grid-template-rows:inherit;
@@ -642,7 +640,7 @@ body:has(.modal-backdrop.active) {
 	gap: 0;
 	padding-left: 2%;
 	.product-price{
-		margin-left: 2rem;
+		margin-right: 2rem;
 		text-align: right;
 	}
 	> * {
@@ -669,12 +667,18 @@ body:has(.modal-backdrop.active) {
 }
 .cart-item .remove-cart-btn-mobile {
 	visibility: hidden!important;
+	button {
+		display: none!important;
+	}
+}
+.cart-item .cart-quantity-mobile {
+	display: none!important;
 }
 /* Responsive Styles for Mobile */
 @media (max-width: 768px) {
 	.cart-item,
 	.cart-header {
-		grid-template-columns: 2fr 2fr 2fr 1fr;
+		grid-template-columns:6fr 6fr 3fr 1fr;
 		/* Two columns for better spacing */
 		grid-template-rows: auto auto;
 		/* Allows items to wrap */
@@ -684,18 +688,40 @@ body:has(.modal-backdrop.active) {
 	}
 
 	/* Ensure text and buttons are properly aligned */
-	.cart-item>* ,
 	.cart-header>* {
-		text-align: center;
+		text-align: left;
+	}
+	.cart-header>*:not(.cart-header>*:nth-child(1)) {
+		display: none;
+	}
+
+
+	.cart-header :nth-child(2){
+		margin-left: -8px;
 	}
 
 	.cart-item .product-price{
-		margin-left: -12px;
-		margin-right: 0;
+		// margin-left: -12px;
+		right: 0;
+		width: 120px;
+		text-align: right;
+        margin-right: 0;
+	}
+	.cart-item .product-size{
+		text-align: left;
+	}
+	.cart-item .product-name{
+		grid-column: span 2;
+
+	}
+	.cart-item .remove-cart-btn{
+		visibility: hidden!important;
+		display: none!important;
 	}
 	.cart-item .cart-quantity{
 		grid-column: span 1;
-		width: 120%!important;
+		margin-right: 0;
+		// width: 120%!important;
 	}
 	// /* Make the last column (remove button) take full width */
 	.cart-item :nth-child(5) {
@@ -707,13 +733,31 @@ body:has(.modal-backdrop.active) {
 	// .remove-cart-btn {
 	// 	position: absolute;
 	// }
-
-	.cart-item .remove-cart-btn-mobile {
-		visibility: visible!important;
-		margin-left: 70%;
-		grid-column: span 2;
-		width: 100px!important;
+	.cart-item .cart-quantity {
+		display: none;
 	}
+	.cart-item .cart-quantity-mobile {
+		display: block!important;
+		grid-column: span 2;
+		input{
+			display: block;
+			width: 80px!important;
+			float: right;
+		}
+	}
+	.cart-item .remove-cart-btn-mobile {
+		display: block;
+		visibility: visible!important;
+		grid-column: span 2;
+		text-align: left;
+		width: fit-content!important;
+		button {
+		visibility: visible!important;
+		display: block!important;
+		margin-left: -30px;
+		}
+	}
+
 
 	// button.remove-cart-btn {
 	// 	grid-column: 4 / 5;
@@ -876,14 +920,6 @@ hr {
 	transition: all 0.3s ease-in-out;
 }
 
-/* Hover Effect */
-.remove-cart-btn:hover {
-	color: #f00;
-	/* Turns red on hover */
-	border-color: #f00;
-	/* Outline turns red */
-}
-
 .cart-item {
 	.remove-cart-btn {
 		background: none;
@@ -907,9 +943,13 @@ hr {
 	}
 	
 	/* Hover Effect */
-	.remove-cart-btn:hover {
+	.remove-cart-btn:hover,
+	.remove-cart-btn:active,
+	.remove-cart-btn:focus {
 		color: #f00;
 		text-decoration: none;
+		border: none;
+		box-shadow: none;
 		/* Turns red on hover */
 		// border-color: #f00;
 		/* Outline turns red */

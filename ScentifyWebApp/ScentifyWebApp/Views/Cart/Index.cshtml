@@ -2,79 +2,84 @@
 <!-- Modal Backdrop -->
 <div class="modal-backdrop" onclick="toggleCart()"></div>
 @{
-	double totalPrice = 0;
-	var validCard = false;
+    double totalPrice = 0;
+    var validCard = false;
 }
 <!-- Cart Popup -->
 <div class="cart-container">
-	<div class="cart-header">
-		<p class="cart-heading">Giỏ hàng</p>
-		<p class="cart-sub-heading">Thể tích</p>
-		<p class="cart-sub-heading">Số lượng</p>
-		@* @if (Model != null && Model.Count > 0)
+    <div class="cart-header">
+        <p class="cart-heading">Giỏ hàng</p>
+        <p class="cart-sub-heading">Thể tích</p>
+        <p class="cart-sub-heading">Số lượng</p>
+        @* @if (Model != null && Model.Count > 0)
 		{
 			<a id="clear-all-cart" class="h6 link-light cart-sub-heading" href="javascript:void(0);" onclick="clearAllCart();">Xóa tất cả</a>
 		} *@
-		<button class="close-btn cart-sub-heading" onclick="toggleCart()">✖</button>
-	</div>
-	@if (Model != null && Model.Count > 0)
-	{
-		validCard = true;
-		foreach (var cartItem in Model)
-		{
-			var product = cartItem.Product;
-			var currentProductSizes = product.ProductSizes?.FirstOrDefault(x => x.VolumeMl == product.CurrentSize);
-			<div class="cart-item">
-				<p class="product-name">@product.Name</p>
-				<p class="product-size">@product.CurrentSize mL</p>
-				<input type="number" min="1" value="@cartItem.Quantity" class="cart-quantity form-control w-75" onchange="updateCartItem(this,'@product.Id')" />
-				<button class="remove-cart-btn btn btn-link" type="button" onclick="removeCartItem('@product.Id', @product.CurrentSize);">Xóa bỏ</button>
+        <button class="close-btn cart-sub-heading" onclick="toggleCart()">✖</button>
+    </div>
+    @if (Model != null && Model.Count > 0)
+    {
+        validCard = true;
+        foreach (var cartItem in Model)
+        {
+            var product = cartItem.Product;
+            var currentProductSizes = product.ProductSizes?.FirstOrDefault(x => x.VolumeMl == product.CurrentSize);
+            <div class="cart-item">
+                <p class="product-name">@product.Name</p>
+                <div class="cart-quantity-mobile">
+                    <input type="number" min="1" value="@cartItem.Quantity" class="cart-quantity form-control w-75 mobile" onchange="updateCartItem(this,'@product.Id')" />
+                </div>
+                <p class="product-size">@product.CurrentSize mL</p>
+                <input type="number" min="1" value="@cartItem.Quantity" class="cart-quantity form-control w-75" onchange="updateCartItem(this,'@product.Id')" />
 
-				<p class="product-price">@cartItem.Currency @currentProductSizes?.Price.ToString("N0")</p>
-				<button class="remove-cart-btn btn btn-link remove-cart-btn-mobile" type="button" onclick="removeCartItem('@product.Id', @product.CurrentSize);">Xóa bỏ</button>
-			</div>
+                <button class="remove-cart-btn btn btn-link" type="button" onclick="removeCartItem('@product.Id', @product.CurrentSize);">Xóa bỏ</button>
+                <div class="remove-cart-btn-mobile">
+                    <button class="remove-cart-btn btn btn-link mobile" type="button" onclick="removeCartItem('@product.Id', @product.CurrentSize);">Xóa bỏ</button>
+                </div>
+                <p class="product-price">@cartItem.Currency @currentProductSizes?.Price.ToString("N0")</p>
+            </div>
 
-			totalPrice += (double)(currentProductSizes?.Price * cartItem.Quantity ?? 0);
-		}
+            totalPrice += (double)(currentProductSizes?.Price * cartItem.Quantity ?? 0);
+        }
 
-		<div class="cart-infor float-end col-md-4 col-sm-12 mt-4">
-			<div class="cart-info">
-				@* <div class="promo-code">
+        <div class="cart-infor float-end col-md-4 col-sm-12 mt-4">
+            <div class="cart-info">
+                @* <div class="promo-code">
 						<p>Apply a promotional code</p>
 						<button type="button" class="expand-btn">+</button>
 					</div>
 
 					<p class="shipping-info">Enjoy complimentary standard shipping on all orders over 90 €.</p> *@
 
-				<div class="cart-total">
-					<p>Tổng tiền:</p>
-					<p class="total-price">@totalPrice.ToString("N0") @Model.FirstOrDefault()?.Currency</p>
-				</div>
+                <div class="cart-total">
+                    <p>Tổng tiền:</p>
+                    <p class="total-price">@totalPrice.ToString("N0") @Model.FirstOrDefault()?.Currency</p>
+                </div>
 
-				@if (!validCard)
-				{
-					<a href="javascript:void(0);" class="checkout-btn" @Html.Raw(!validCard ? "disabled" : "")>Thanh toán</a>
-				}
-				else
-				{
-					<a href="/Checkout" class="checkout-btn" @Html.Raw(!validCard ? "disabled" : "")>Thanh toán</a>
-				}
+                @if (!validCard)
+                {
+                    <a href="javascript:void(0);" class="checkout-btn" @Html.Raw(!validCard ? "disabled" : "")>Thanh toán</a>
+                }
+                else
+                {
+                    <a href="/Checkout" class="checkout-btn" @Html.Raw(!validCard ? "disabled" : "")>Thanh toán</a>
+                }
 
-				@*<div class="payment-methods">
+                @*<div class="payment-methods">
 					<svg class="icon"><use xlink:href="#visa"></use></svg>
 					<svg class="icon"><use xlink:href="#mastercard"></use></svg>
 					<svg class="icon"><use xlink:href="#apple-pay"></use></svg>
 					<svg class="icon"><use xlink:href="#klarna"></use></svg>
 				</div>*@
-			</div>
-		</div>
-	}
-	else
-	{
-		<span class="fst-italic text-light text-decoration-underline">
-			You have no items in your cart
-		</span>
-	}
+            </div>
+        </div>
+    }
+    else
+    {
+        <span class="fst-italic text-light text-decoration-underline">
+            You have no items in your cart
+        </span>
+    }
 </div>
 
 <!-- Popup Overlay (Backdrop) -->
@@ -82,12 +87,12 @@
 
 <!-- Popup Container -->
 <div class="popup-container" id="promoPopup">
-	<div class="popup-content">
-		<button class="close-btn" id="closePopup">&times;</button>
-		<h2>Apply a promotional code</h2>
-		<label for="promoCode">Promotional code</label>
-		<input type="text" id="promoCode" placeholder="Enter your code" />
-		<button class="apply-btn">Apply</button>
-	</div>
+    <div class="popup-content">
+        <button class="close-btn" id="closePopup">&times;</button>
+        <h2>Apply a promotional code</h2>
+        <label for="promoCode">Promotional code</label>
+        <input type="text" id="promoCode" placeholder="Enter your code" />
+        <button class="apply-btn">Apply</button>
+    </div>
 </div>
 
