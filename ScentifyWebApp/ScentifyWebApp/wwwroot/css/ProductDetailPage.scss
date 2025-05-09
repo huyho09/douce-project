@@ -41,10 +41,14 @@ $custom-color-4: #d5b260;
 .text-content {
 	max-width: 500px;
 
-	h1 {
-		font-size: 4em;
+	h2 {
+		font-size: 2em;
 		margin-bottom: 30px;
 		line-height: 1.1;
+		color: $color_2;
+	}
+
+	h5 {
 		color: $color_2;
 	}
 
@@ -378,7 +382,50 @@ main:has(.product-info) .product-card {
 main:has(.product-info) .card {
 	height: 380px;
 }
+.tabs {
+	margin-top: 4em !important;
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	font-family: sans-serif;
+	min-height:200px;
+}
 
+.tab-labels {
+	display: flex;
+	cursor: pointer;
+	border-bottom: 1px solid $color_1;
+}
+
+.tab-labels label {
+	padding: 10px 20px;
+	flex: 1;
+	text-align: center;
+	color: $color_1;
+}
+
+input[type="radio"] {
+	display: none;
+}
+
+.tab-content {
+	border-top: none;
+	padding: 15px;
+	display: none;
+}
+
+#tab1:checked ~ .content #content1,
+#tab2:checked ~ .content #content2,
+#tab3:checked ~ .content #content3 {
+	display: block;
+}
+
+#tab1:checked ~ .tab-labels label[for="tab1"],
+#tab2:checked ~ .tab-labels label[for="tab2"],
+#tab3:checked ~ .tab-labels label[for="tab3"] {
+	border-bottom: none;
+	color: $color_2;
+}
 @media (max-width: 768px) {
 	main:has(.product-info) .product-card {
 		height: 310px;
@@ -423,6 +470,7 @@ main:has(.product-info) .card {
 	.home-detail li {
 		padding-left: 0px;
 		font-size: 12px;
+		margin-left:2em;
 	}
 	.section-content {
 		text-align: left;

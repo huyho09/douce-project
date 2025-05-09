@@ -237,6 +237,8 @@ iframe {
 }
 .home-detail li {
   padding: 5px;
+  font-size: 14px;
+  list-style: circle;
 }
 .home-detail li strong {
   color: #d5b260;

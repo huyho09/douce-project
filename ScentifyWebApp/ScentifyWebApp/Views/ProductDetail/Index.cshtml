@@ -1,64 +1,94 @@
 ﻿@model ScentifyWebApp.Models.Dtos.DtoPerfume
 @{
-    ViewData["Title"] = $"{Model.Name} Details";
+	ViewData["Title"] = $"{Model.Name} Details";
 }
 @{
-    var firstSized = Model.ProductSizes?[0].VolumeMl;
-    var secondSized = Model.ProductSizes?[1].VolumeMl;
+	var firstSized = Model.ProductSizes?[0].VolumeMl;
+	var secondSized = Model.ProductSizes?[1].VolumeMl;
 
-    var image1 = Model.ProductSizes?[0].ImageUrl;
-    var image2 = Model.ProductSizes?[1].ImageUrl;
+	var image1 = Model.ProductSizes?[0].ImageUrl;
+	var image2 = Model.ProductSizes?[1].ImageUrl;
 }
+
 @if (Model != null)
 {
-    var priceInfo = Model.ProductSizes?.FirstOrDefault();
+	var priceInfo = Model.ProductSizes?.FirstOrDefault();
 
-    <!-- Main Content -->
-    <div class="container main d-flex">
-        <!-- Text Section -->
-        <div class="text-content">
-            <h1>@Model.Name</h1>
-            <p class="text-content-detail"><span>@Model.ShortDescription</span></p>
+	<!-- Main Content -->
+	<div class="container">
+		<div class="row" style="padding-top:100px">
+			<div class="col-12 col-md-8 d-flex justify-content-center">
+				<div class="d-flex justify-content-center">
+					<div class="product-display d-flex flex-column">
+						<img id="img-product-@firstSized" class="img-product-bigger" loading="lazy" alt="@Model.Name - firstSized"
+							 style="@(Model.CurrentSize == firstSized ? "" : "display:none")" src="@Url.Content(image1?.Replace("./", "~/"))">
+						<img id="img-product-@secondSized" class="img-small" loading="lazy" alt="@Model.Name - secondSized"
+							 style="@(Model.CurrentSize == secondSized ? "" : "display:none")" src="@Url.Content(image2?.Replace("./", "~/"))">
+					</div>
+				</div>
 
-        </div>
-        <div class="product-display d-flex flex-column">
-            <img id="img-product-@firstSized" class="img-product-bigger" loading="lazy" alt="@Model.Name - firstSized"
-            style="@(Model.CurrentSize == firstSized ? "" : "display:none")" src="@Url.Content(image1?.Replace("./", "~/"))">
-            <img id="img-product-@secondSized" class="img-small" loading="lazy" alt="@Model.Name - secondSized"
-            style="@(Model.CurrentSize == secondSized ? "" : "display:none")" src="@Url.Content(image2?.Replace("./", "~/"))">
-            <div>
-                <button class="add-to-cart add-to-cart-btn" data-current-size="@Model.CurrentSize" aria-label="Add to your cart - @priceInfo?.Currency @priceInfo?.Price" data-id="@Model.Id">Thêm giỏ hàng +</button>
-            </div>
-        </div>
-        <!-- Product Image & Info -->
-        <div class="product-display">
+			</div>
+			<div class="col-12 col-md-4">
+				<!-- Product Image & Info -->
+				<div class="d-block" style="margin-top: 50px; margin-left:auto; margin-right:auto;">
+					<!-- Text Section -->
+					<div class="text-content" style="text-align:center;">
+						<h2>@Model.Name</h2>
+						<p class="text-content-detail"><span>@Model.ShortDescription</span></p>
+					</div>
+					<div class="product-info">
+						<p id="the-price-currency">@priceInfo?.Price.ToString("N0") @priceInfo.Currency</p>
+						@if (Model.ProductSizes != null && Model.ProductSizes.Any())
+						{
+							<ul class="RadioGroup_base__ttFz5 ProductDetailBody_variants__0uwqK Transition_shiftInDownEnterDone__X_OxP">
+								@foreach (var item in Model.ProductSizes)
+								{
+									<li class="RadioGroup_radio__hnn9G">
+										<label class="RadioGroup_label__ACZd_" for="size-@item.VolumeMl">
+											<input aria-checked="@(Model.CurrentSize == item.VolumeMl)" class="RadioGroup_input__fjmeL" data-test-ref="PRODUCT_DETAIL_VARIANT_SELECT" data-volume="@item.VolumeMl" data-price="@item.Price.ToString("N0")" data-currency="@item.Currency" id="size-@item.VolumeMl" name="sku" tabindex="0" type="radio" value="@item.VolumeMl" @(Model.CurrentSize == item.VolumeMl ? "checked" : "")>
+											<span class="RadioGroup_pot__g3kNx RadioGroup_dark__cngsS"></span>
+											<span class="RadioGroup_labelContent__48GiJ RadioGroup_dark__cngsS">@item.VolumeMl mL</span>
+										</label>
+									</li>
+								}
+							</ul>
+						}
+						<div>
+							<button class="add-to-cart add-to-cart-btn" data-current-size="@Model.CurrentSize" aria-label="Add to your cart - @priceInfo?.Currency @priceInfo?.Price" data-id="@Model.Id">Thêm giỏ hàng</button>
+						</div>
+					</div>
+					
+					<div class="tabs">
+						<input type="radio" class="tab-radio" id="tab1" name="tab" checked>
+						@*<input type="radio" class="tab-radio" id="tab2" name="tab">*@
 
-            <div class="product-info">
-                <h3 id="the-price-currency">@priceInfo?.Price.ToString("N0") @priceInfo.Currency</h3>
-                @if (Model.ProductSizes != null && Model.ProductSizes.Any())
-                {
-                    <ul class="RadioGroup_base__ttFz5 ProductDetailBody_variants__0uwqK Transition_shiftInDownEnterDone__X_OxP">
-                        @foreach (var item in Model.ProductSizes)
-                        {
-                            <li class="RadioGroup_radio__hnn9G">
-                                <label class="RadioGroup_label__ACZd_" for="size-@item.VolumeMl">
-                                    <input aria-checked="@(Model.CurrentSize == item.VolumeMl)" class="RadioGroup_input__fjmeL" data-test-ref="PRODUCT_DETAIL_VARIANT_SELECT" data-volume="@item.VolumeMl" data-price="@item.Price.ToString("N0")" data-currency="@item.Currency" id="size-@item.VolumeMl" name="sku" tabindex="0" type="radio" value="@item.VolumeMl" @(Model.CurrentSize == item.VolumeMl ? "checked" : "")>
-                                    <span class="RadioGroup_pot__g3kNx RadioGroup_dark__cngsS"></span>
-                                    <span class="RadioGroup_labelContent__48GiJ RadioGroup_dark__cngsS">@item.VolumeMl mL</span>
-                                </label>
-                            </li>
-                        }
-                    </ul>
-                }
+						<div class="tab-labels">
+							<label for="tab1">Các nốt hương chính</label>
+							<label for="tab2"></label>
+						</div>
 
-                <div class="controls">
-                </div>
-            </div>
-        </div>
-    </div>
+						<div class="content">
+							<div class="tab-content" id="content1">
+								<p class="col-md-8 col-sm-12">
+									<ul class="home-detail" style="text-align: left; padding-left:0px;">
+										<li>Hương đầu: @Model.TopPerfumed</li>
+										<li>Hương giữa: @Model.MiddlePerfumed</li>
+										<li>Hương giữa: @Model.BasePerfumed</li>
+									</ul>
+								</p>
+							</div>
+							<div class="tab-content" id="content2">
 
-    <!-- Info Sections -->
-    @* <div class="info-sections">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Info Sections -->
+	@* <div class="info-sections">
 			<div class="section">
 				<div class="number">01</div>
 				<div class="title">DESCRIPTION</div>
@@ -80,127 +110,120 @@
 				<span class="text-content">@Model.Composition</span>
 			</div>
 		</div> *@
-    <!-- Second Section -->
-    <section class="second-section">
-        <div class="section-content container">
-            <h2 class="section-title">Các nốt hương chính</h2>
-            <p class="col-md-8 col-sm-12">
-                <ul class="home-detail" style="text-align: left; padding-left:0px;">
-                    <li>Hương đầu: @Model.TopPerfumed</li>
-                    <li>Hương giữa: @Model.MiddlePerfumed</li>
-                    <li>Hương giữa: @Model.BasePerfumed</li>
-                </ul>
-            </p>
-            @{
-                var ingredients = Model.DtoIngredients;
-                if (ingredients != null && ingredients.Count > 0)
-                {
-                    <!-- Ingredients Cards -->
-                    <div class="cards">
-                        @foreach (var ingredient in ingredients)
-                        {
-                            <div class="card car-no-border">
-                                <img src="@ingredient.ImageUrl" alt="Bergamot">
-                                <h3>@ingredient.Name</h3>
-                                <p>@ingredient.Description</p>
-                            </div>
-                        }
-                    </div>
-                }
+	<!-- Second Section -->
+	<section class="second-section">
+		<div class="section-content container">
+			
+			@{
+				var ingredients = Model.DtoIngredients;
+				if (ingredients != null && ingredients.Count > 0)
+				{
+					<!-- Ingredients Cards -->
+					<div class="cards">
+						@foreach (var ingredient in ingredients)
+						{
+							<div class="card car-no-border">
+								<img src="@ingredient.ImageUrl" alt="Bergamot">
+								<h3>@ingredient.Name</h3>
+								<p>@ingredient.Description</p>
+							</div>
+						}
+					</div>
+				}
 
 
-            }
+			}
 
-            <!-- Navigation Controls -->
-            <!--<div class="nav-controls">
-            <button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
-            <button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
-            </div>-->
-        </div>
-    </section>
-    @if (!string.IsNullOrEmpty(Model.Description))
-    {
-        <section class="third-section container mb-0">
-            <div class="section-content">
-                <!-- Heading -->
-                <div class="section-heading">
-                    <h2 class="section-title">Mô tả</h2>
-                    <div class="section-label">@Html.Raw(Model.Description)</div>
-                </div>
-            </div>
-        </section>
-    }
-    <!-- Third Section -->
-    <section class="third-section container mt-0">
-        <div class="section-content">
-            <!-- Heading -->
-            <div class="section-heading">
-                <h2 class="section-title">Những sản phẩm tương tự</h2>
-            </div>
-            @{
-                var similarItems = Model.SimilarPerfumes;
-                if (similarItems != null && similarItems.Count > 0)
-                {
-                    var index = 1;
-                    <!-- Product Cards -->
-                    <div class="product-cards d-flex justify-content-center">
-                        @foreach (var similarItem in similarItems)
-                        {
-                            var img1 = similarItem.ProductSizes?[0].ImageUrl != null ? similarItem.ProductSizes?[0].ImageUrl.Replace("./", "~/") : "";
-                            <a href="/products/details/@similarItem.Id" class="product-card">
-                                <img src="@img1" alt="@similarItem.Name">
-                                <div class="card-content">
-                                    <h4>@similarItem.Name</h4>
-                                    <p>@similarItem.ShortDescription</p>
-                                    @*<a href="/products/details/@similarItem.Id" class="learn-more">LEARN MORE</a>*@
-                                </div>
-                            </a>
-                            index++;
-                        }
-                    </div>
-                }
-            }
+			<!-- Navigation Controls -->
+			<!--<div class="nav-controls">
+			<button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+			<button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+			</div>-->
+		</div>
+	</section>
+	@if (!string.IsNullOrEmpty(Model.Description))
+	{
+		<section class="third-section container mb-0">
+			<div class="section-content">
+				<!-- Heading -->
+				<div class="section-heading">
+					<h2 class="section-title">Mô tả</h2>
+					<div class="section-label">@Html.Raw(Model.Description)</div>
+				</div>
+			</div>
+		</section>
+	}
+	<!-- Third Section -->
+	<section class="third-section container mt-0">
+		<div class="section-content">
+			<!-- Heading -->
+			<div class="section-heading">
+				<h2 class="section-title">Những sản phẩm tương tự</h2>
+			</div>
+			@{
+				var similarItems = Model.SimilarPerfumes;
+				if (similarItems != null && similarItems.Count > 0)
+				{
+					var index = 1;
+					<!-- Product Cards -->
+					<div class="product-cards d-flex justify-content-center">
+						@foreach (var similarItem in similarItems)
+						{
+							var img1 = similarItem.ProductSizes?[0].ImageUrl != null ? similarItem.ProductSizes?[0].ImageUrl.Replace("./", "~/") : "";
+							<a href="/products/details/@similarItem.Id" class="product-card">
+								<img src="@img1" alt="@similarItem.Name">
+								<div class="card-content">
+									<h4>@similarItem.Name</h4>
+									<p>@similarItem.ShortDescription</p>
+									@*<a href="/products/details/@similarItem.Id" class="learn-more">LEARN MORE</a>*@
+								</div>
+							</a>
+							index++;
+						}
+					</div>
+				}
+			}
 
-            <!-- Navigation Controls -->
-            <!--<div class="nav-controls">
-                <button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
-                <button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
-            </div>-->
-        </div>
-    </section>
+			<!-- Navigation Controls -->
+			<!--<div class="nav-controls">
+				<button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+				<button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+			</div>-->
+		</div>
+	</section>
 }
 <script src="~/js/jquery-1.11.0.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $("input[name='sku']:radio").change(function () {
-            var price = $(this).data("price") || "";
-            var currency = $(this).data("currency") || "";
-            var volume = $(this).data("volume") || 0;
-            $('[id*="img-product-"]').hide();
-            $('#img-product-'+volume).show();
-            if (price && currency) {
-                $("#the-price-currency").text(price.toLocaleString("en-US", { maximumFractionDigits: 0 }) + " " + currency);
-            }
-            $(".add-to-cart-btn").attr("data-current-size", volume);
-        });
-        $("*").each(function () {
-            var color = $(this).css("color");
-            if (color === "rgb(0, 0, 0)") {
-                // Remove only the `color` inline style, keep other styles intact
-                var currentStyle = $(this).attr("style");
-                if (currentStyle) {
-                    var newStyle = currentStyle.replace(/color:\s*rgb\(0,\s*0,\s*0\);?/gi, "").trim();
-                    // Clean up trailing semicolons and extra spaces
-                    newStyle = newStyle.replace(/;{2,}/g, ";").replace(/^;|;$/g, "");
-                    if (newStyle) {
-                        $(this).attr("style", newStyle);
-                    } else {
-                        $(this).removeAttr("style");
-                    }
-                }
-            }
-        });
+	$(document).ready(function () {
+		$("input[name='sku']:radio").change(function () {
+			var price = $(this).data("price") || "";
+			var currency = $(this).data("currency") || "";
+			var volume = $(this).data("volume") || 0;
+			$('[id*="img-product-"]').hide();
+			$('#img-product-' + volume).show();
+			if (price && currency) {
+				$("#the-price-currency").text(price.toLocaleString("en-US", { maximumFractionDigits: 0 }) + " " + currency);
+			}
+			$(".add-to-cart-btn").attr("data-current-size", volume);
+		});
+		$("*").each(function () {
+			var color = $(this).css("color");
+			if (color === "rgb(0, 0, 0)") {
+				// Remove only the `color` inline style, keep other styles intact
+				var currentStyle = $(this).attr("style");
+				if (currentStyle) {
+					var newStyle = currentStyle.replace(/color:\s*rgb\(0,\s*0,\s*0\);?/gi, "").trim();
+					// Clean up trailing semicolons and extra spaces
+					newStyle = newStyle.replace(/;{2,}/g, ";").replace(/^;|;$/g, "");
+					if (newStyle) {
+						$(this).attr("style", newStyle);
+					} else {
+						$(this).removeAttr("style");
+					}
+				}
+			}
+		});
 
-    });
+	});
 
 </script>
