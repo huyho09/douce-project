@@ -383,7 +383,7 @@ input[type=radio] {
 
 @media (max-width: 768px) {
   main:has(.product-info) .product-card {
-    height: 310px;
+    height: 360px;
   }
   main:has(.product-info) .card {
     height: 290px;

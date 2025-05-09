@@ -217,15 +217,12 @@ iframe {
 }
 
 .GridBlockItem_gridItemCopy__kWIsl {
-  position: absolute;
   color: #cc5500;
   font-family: Montserrat;
   font-size: 16px;
   font-weight: 700;
   isolation: isolate;
   line-height: 1.33;
-  top: 20px;
-  left: 20px;
 }
 
 .home-detail {
@@ -1069,6 +1066,9 @@ iframe {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .flip-card-front .image-holder {
   width: 100%;
@@ -1199,6 +1199,9 @@ iframe {
     margin: 40px 20px auto;
     font-weight: 700;
   }
+  .text-content h2 {
+    font-size: 1.9em;
+  }
   .text-content p {
     font-weight: 700;
   }
@@ -1216,7 +1219,7 @@ iframe {
     top: 150px;
   }
   .BodyCopy_copy__8BnZm .Paragraph_base__CFztu {
-    font-size: 1.1em;
+    font-size: 1em;
     color: #fffef2 !important;
   }
   .details_KeyIngredients {
@@ -1233,7 +1236,7 @@ iframe {
   }
   .product-store h2 {
     margin-top: 20px;
-    font-size: 25px;
+    font-size: 24px;
   }
   .btn-discount {
     padding: 10px;

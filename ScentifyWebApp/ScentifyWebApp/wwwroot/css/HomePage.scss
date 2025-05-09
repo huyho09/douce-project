@@ -281,15 +281,15 @@ iframe {
 }
 
 .GridBlockItem_gridItemCopy__kWIsl {
-	position: absolute;
+	//position: absolute;
 	color: $color_3;
 	font-family: $font-family_6;
 	font-size: 16px;
 	font-weight: 700;
 	isolation: isolate;
 	line-height: 1.33;
-	top: 20px;
-	left: 20px;
+	//top: 20px;
+	//left: 20px;
 }
 
 .home-detail {
@@ -1252,6 +1252,9 @@ iframe {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
 	.image-holder {
 		width: 100%;
@@ -1413,7 +1416,9 @@ iframe {
 	.text-content {
 		margin: 40px 20px auto;
 		font-weight: 700;
-
+		h2{
+			font-size:1.9em;
+		}
 		p {
 			font-weight: 700;
 		}
@@ -1436,7 +1441,7 @@ iframe {
 	}
 	.BodyCopy_copy__8BnZm {
 		.Paragraph_base__CFztu {
-			font-size: 1.1em;
+			font-size: 1em;
 			color: $color_7 !important;
 		}
 	}
@@ -1454,7 +1459,7 @@ iframe {
 	}
 	.product-store h2{
 		margin-top: 20px;
-		font-size: 25px;
+		font-size: 24px;
 	}
 	.btn-discount {
 		padding: 10px;
