@@ -316,7 +316,7 @@ iframe {
 }
 
 .BodyCopy_copy__8BnZm .Paragraph_base__CFztu {
-  font-size: 1.3em;
+  font-size: 1.2em;
   color: #fffef2 !important;
 }
 
@@ -1214,6 +1214,30 @@ iframe {
     bottom: 20px;
     height: 50px;
     top: 150px;
+  }
+  .BodyCopy_copy__8BnZm .Paragraph_base__CFztu {
+    font-size: 1.1em;
+    color: #fffef2 !important;
+  }
+  .details_KeyIngredients {
+    font-size: 12px;
+  }
+  #testimonials p, #testimonials a {
+    font-size: 14px;
+  }
+  .size-button {
+    font-size: 12px !important;
+  }
+  .swiper-wrapper {
+    height: 90% !important;
+  }
+  .product-store h2 {
+    margin-top: 20px;
+    font-size: 25px;
+  }
+  .btn-discount {
+    padding: 10px;
+    font-size: 0.75rem;
   }
 }
 @media only screen and (min-width: 640px) {
