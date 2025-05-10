@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ScentifyWebApp.DAL.DB;
 using ScentifyWebApp.Helper;
+using ScentifyWebApp.Infrastructure.ModelConfigurations;
+using ScentifyWebApp.Infrastructure.Services.Contracts;
+using ScentifyWebApp.Infrastructure.Services.Implementations;
 using ScentifyWebApp.Services.Contracts;
 using ScentifyWebApp.Services.Implementations;
 using System.Text;
@@ -40,6 +43,7 @@ namespace ScentifyWebApp
             });
 
             // Configure services
+            builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
             ConfigureServices(builder.Services);
 
             // Configure session
@@ -185,6 +189,8 @@ namespace ScentifyWebApp
             services.AddScoped<IBaseHttpContext, BaseHttpContext>();
             services.AddScoped<IConfigurationService, ConfigurationService>();
             services.AddScoped<IAppTokenService, AppTokenService>();
+            services.AddScoped<IEmailService, EmailService>();
+
             services.AddAutoMapper(typeof(Program));
         }
     }

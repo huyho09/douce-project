@@ -79,7 +79,7 @@ function removeCartItem(productId, volume) {
             reloadCart(function () {
                 toggleCart();
                 updatetotalQuantity();
-                showNotiModal(response.message)
+                //showNotiModal(response.message)
             });
         },
         error: function () {
@@ -98,7 +98,7 @@ function removeCartItemInCheckOut(_this, productId, volume) {
             reloadCart(function () {
                 //toggleCart();
                 updatetotalQuantity();
-                showNotiModal(response.message);
+                //showNotiModal(response.message);
                 if (response.status === 200) {
                     $this.closest(".product").remove();
 
@@ -113,7 +113,7 @@ function removeCartItemInCheckOut(_this, productId, volume) {
 
                 // check empty
                 if ($('.order-summary .product').length == 0) {
-                    showNotiModal("Giỏ hàng đã trống!");
+                    //showNotiModal("Giỏ hàng đã trống!");
                     setTimeout(function () {
                         location.href = '/home';
                     }, 1000);
@@ -204,7 +204,7 @@ function clearAllCart() {
         success: function (response) {
             reloadCart(function () {
                 updatetotalQuantity();
-                showNotiModal(response.message);
+                //showNotiModal(response.message);
             });
         },
         error: function () {
@@ -234,7 +234,7 @@ function saveCart() {
         data: jsonData,
         success: function (response) {
             reloadCart(function () {
-                showNotiModal(response.message)
+                //showNotiModal(response.message)
                 if (response.status === 200) {
                     setTimeout(function () {
                         location.reload();

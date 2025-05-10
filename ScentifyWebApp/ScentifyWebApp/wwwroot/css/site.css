@@ -1445,6 +1445,13 @@ input {
   margin-bottom: 15px;
   color: #fff;
 }
+.checkout-container a {
+  color: #258cfb;
+  text-decoration: underline;
+}
+.checkout-container a:hover {
+  text-decoration: none;
+}
 .checkout-container .summary-item,
 .checkout-container .summary-total {
   display: flex;
@@ -1464,11 +1471,12 @@ input {
   gap: 15px;
   color: #fff;
 }
-.checkout-container img {
+.checkout-container .product img {
   width: 60px;
   height: 60px;
   margin-right: 10px;
   border-radius: 4px;
+  flex: 0 !important;
 }
 .checkout-container .product-details {
   flex-grow: 1;

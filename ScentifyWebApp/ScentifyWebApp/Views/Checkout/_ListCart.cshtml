@@ -31,7 +31,10 @@
 <hr>
 <div class="price-details">
     <div class="summary-item"><span>Tổng số lượng</span><span id="total-quantity">@Model?.Sum(m => m.Quantity)</span></div>
-    <div class="summary-total"><span>Tổng hoá đơn</span><span id="total-price">@Model?.FirstOrDefault()?.Currency @amount.ToString("N0")</span></div>
+    <div class="summary-total"><span>Hóa đơn tạm tính</span><span id="total-price">@Model?.FirstOrDefault()?.Currency @amount.ToString("N0")</span></div>
+    <p class="mt-5"><strong>Lưu ý</strong>: Hóa đơn tạm tính chưa bao gồm phí ship. Đơn hàng cả quý khách sẽ được ship COD. Nếu có nhu cầu thanh toán chuyển khoản trước, vui lòng liên hệ trực tiếp 
+        <a class="link-primary font-weight-bold" href="https://www.facebook.com/Douce.Perfume">fanpage</a> để được hỗ trợ.
+    </p>
 </div>
 
 @*<div class="section">

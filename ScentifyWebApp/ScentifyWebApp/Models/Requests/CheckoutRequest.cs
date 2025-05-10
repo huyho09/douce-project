@@ -27,6 +27,13 @@ namespace ScentifyWebApp.Models.Requests
             ErrorMessage = "Số điện thoại không hợp lệ! (vd: 0912345678).")]
         public string PhoneNumber { get; set; }
 
+        [Required(ErrorMessage = "Địa chỉ email không được để trống!")]
+        [RegularExpression(
+            @"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$",
+            ErrorMessage = "Địa chỉ email không hợp lệ! (ví dụ: example@domain.com)"
+        )]
+        public string EmailAddress { get; set; }
+
         //[Required(ErrorMessage = "Country is required")]
         //public string Country { get; set; }
 

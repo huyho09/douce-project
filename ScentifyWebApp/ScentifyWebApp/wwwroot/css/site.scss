@@ -1639,6 +1639,15 @@ input {
 		color: $color_1;
 	}
 
+	a {
+		color: $color-primary;
+		text-decoration: underline;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
 	.summary-item,
 	.summary-total {
 		display: flex;
@@ -1662,11 +1671,12 @@ input {
 		color: $color-white;
 	}
 
-	img {
+	.product img {
 		width: 60px;
 		height: 60px;
 		margin-right: 10px;
 		border-radius: 4px;
+		flex: 0 !important;
 	}
 
 	.product-details {
@@ -2529,9 +2539,11 @@ section.third-section.container table tr td img {
 		}
 	}
 }
+
 .price-info {
 	display: flex;
 }
+
 @media (max-width: 768px) {
 	.checkout-container .order-summary {
 		margin-top: 80px;

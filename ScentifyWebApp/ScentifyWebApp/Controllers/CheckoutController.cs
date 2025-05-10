@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ScentifyWebApp.Constant;
+using ScentifyWebApp.Infrastructure.Services.Contracts;
 using ScentifyWebApp.Models;
 using ScentifyWebApp.Models.Entities;
 using ScentifyWebApp.Models.Requests;
@@ -18,16 +19,19 @@ namespace ScentifyWebApp.Controllers
         private readonly IMomoService _momoService;
         private readonly IInvoiceService _invoiceService;
         private readonly IMapper _mapper;
+        private readonly IEmailService _emailService;
 
         public CheckoutController(IMomoService momoService
             , ICartService cartService,
             IInvoiceService invoiceService,
-            IMapper mapper)
+            IMapper mapper,
+            IEmailService emailService)
         {
             _cartService = cartService;
             _momoService = momoService;
             _invoiceService = invoiceService;
             _mapper = mapper;
+            _emailService = emailService;
         }
 
         public IActionResult SaveInvoice()
@@ -76,6 +80,8 @@ namespace ScentifyWebApp.Controllers
 
                     var customerInfo = _mapper.Map<CustomerInfo>(model);
                     var newInvoice = CreateInvoiceModel(cart, customerInfo);
+
+                    await _emailService.SendEmailAsync(cart, customerInfo);
                     await _invoiceService.InsertInvoiceAsync(newInvoice);
 
                     // reset cart

@@ -5,11 +5,15 @@
 }
 
 @model CheckoutRequest
-
+<style>
+    .custom-modal-backdrop {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+</style>
 
 @if (Model.IsSuccessed == true)
 {
-    <div b-69tm1zl051="" class="modal fade noti-modal show" id="successModal" tabindex="-1" style="display: block; padding-right: 15px;" aria-modal="true" role="dialog">
+    @* <div b-69tm1zl051="" class="modal fade noti-modal show" id="successModal" tabindex="-1" style="display: block; padding-right: 15px;" aria-modal="true" role="dialog">
         <div b-69tm1zl051="" class="modal-dialog modal-dialog-centered">
             <div b-69tm1zl051="" class="modal-content">
                 <div b-69tm1zl051="" class="modal-body text-center">
@@ -18,13 +22,15 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> *@
 
     <section class="checkout-container">
         <div class="form-section justify-content-start success-container">
-            <p id="success-checkout-msg">
-                🎉Chúc mừng: Thông tin đơn hàng đã được ghi nhận, bạn có thể liên lạc với chủ shop thông qua <a class="link-light" href="https://www.facebook.com/">Fanpage</a> hoặc zalo <a class="link-light" href="javascript:void(0);">090 999 9877</a>
+            <p id="success-checkout-msg" class="text-center font-weight-light">
+                Cảm ơn quý khách, thông tin đơn hàng đã được ghi nhận.<br />
+                Bộ phận bán hàng sẽ sớm liên hệ với quý khách để xác nhận trước khi gửi đơn.<br />
             </p>
+            <h5 class="text-center font-weight-bold">Vui lòng chú ý điện thoại để không bỏ lỡ phiên xác nhận, xin cảm ơn.</h5>
         </div>
     </section>
     <script src="~/admin/vendor/jquery/jquery.min.js"></script>
@@ -45,6 +51,38 @@ else
             @await Html.PartialAsync("_ListCart", Model.CartItems)
         </div>
     </section>
+    <!-- Policy Modal-->
+    <div class="modal fade custom-modal-backdrop" id="policyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Chính sách vận chuyển</h5>
+                    <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h3 class="modal-title h5">LƯU Ý</h3>
+                    <ul>
+                        <li>
+                            Hóa đơn tạm tính chưa bao gồm phí ship. Vui lòng xem chính sách phí vận chuyển <a href="">tại đây</a>
+                        </li>
+                        <li>
+                            Đây là đơn vị <strong>thanh toán COD</strong> (nhận hàng và thanh toán với shipper của đơn vị vận chuyển).
+                            <strong>NẾU quý khách có nhu cầu thanh toán chuyển khoản trước, vui lòng liên hệ trực tiếp với chúng tôi qua Fanpage để được hỗ trợ.</strong>
+                        </li>
+                        <li>
+                            Tất cả đơn hàng được đặt trên website đều sẽ được liên hệ <strong>xác nhận qua điện thoại trước khi giao.</strong>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
 

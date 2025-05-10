@@ -58,13 +58,21 @@
         <!-- Row 3: Address -->
         <div class="form-row">
             <div class="floating-group">
+                <input asp-for="EmailAddress" placeholder="" class="form-control" data-required />
+                <label asp-for="EmailAddress">3. Email</label>
+                <span class="text-danger" asp-validation-for="EmailAddress"></span>
+            </div>
+            <div class="floating-group">
                 <input asp-for="Address" placeholder="" class="form-control" data-required />
-                <label asp-for="Address">3. Thông tin địa chỉ nhà</label>
+                <label asp-for="Address">4. Thông tin địa chỉ nhà</label>
                 <span class="text-danger" asp-validation-for="Address"></span>
             </div>
         </div>
 
-        <button class="continue-btn" type="submit">Hoàn tất</button>
+        <button class="continue-btn" type="submit">Hoàn tất</button><br />
+        <a class="btn link-primary mt-3" data-bs-toggle="modal" data-bs-target="#policyModal">
+            CHÍNH SÁCH VẬN CHUYỂN >>
+        </a>
     </form>
 </div>
 <script>
