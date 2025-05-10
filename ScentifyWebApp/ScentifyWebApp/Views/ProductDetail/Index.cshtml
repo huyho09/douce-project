@@ -12,7 +12,7 @@
 
 @if (Model != null)
 {
-	var priceInfo = Model.ProductSizes?.FirstOrDefault();
+	var priceInfo = Model.ProductSizes?.FirstOrDefault(m => m.VolumeMl == Model.CurrentSize);
 
 	<!-- Main Content -->
 	<div class="container">
@@ -124,7 +124,7 @@
 						{
 							<div class="card car-no-border">
 								<img src="@ingredient.ImageUrl" alt="Bergamot">
-								<h3>@ingredient.Name</h3>
+								<h5 class="small">@ingredient.Name</h5>
 								<p>@ingredient.Description</p>
 							</div>
 						}
@@ -154,7 +154,7 @@
         </section>
     }
     <!-- Third Section -->
-    <section class="third-section container mt-0">
+    <section class="third-section container">
         <div class="section-content">
             <!-- Heading -->
             <div class="section-heading">

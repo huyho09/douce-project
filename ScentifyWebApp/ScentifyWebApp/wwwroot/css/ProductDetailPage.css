@@ -284,7 +284,7 @@
 }
 
 .third-section {
-  padding: 20px 30px 50px;
+  padding: 15px 30px 15px;
   color: #ffd8a9;
   position: relative;
 }
@@ -326,11 +326,17 @@
 .product-card img {
   width: 70%;
   height: auto;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+  margin: auto;
 }
 
 main:has(.product-info) .product-card {
-  height: 480px;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 main:has(.product-info) .card {
@@ -384,7 +390,7 @@ input[type=radio] {
 
 @media (max-width: 768px) {
   main:has(.product-info) .product-card {
-    height: 310px;
+    height: 400px;
   }
   main:has(.product-info) .card {
     height: 290px;
@@ -457,14 +463,14 @@ input[type=radio] {
   text-decoration: none;
   transition: color 0.3sease-in-out;
   color: #d5b260;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 .card-content h4:hover {
   text-decoration: underline;
 }
 .card-content p {
   color: #fff;
-  font-size: 1.1em;
+  font-size: 1rem;
   line-height: 1.4rem;
   margin-bottom: 20px;
   display: -webkit-box;
@@ -639,9 +645,6 @@ input[type=radio] {
     max-width: 300px;
     scroll-snap-align: center;
   }
-  .card.car-no-border:first-child {
-    margin-left: 50em !important;
-  }
   .product-card:first-child {
     margin-left: 176em !important;
   }
@@ -653,5 +656,40 @@ input[type=radio] {
   .cards::-webkit-scrollbar,
   .product-cards::-webkit-scrollbar {
     display: none;
+  }
+}
+@media (max-width: 768px) {
+  main:has(.product-info) .third-section .cards {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  main:has(.product-info) .product-cards,
+  main:has(.product-info) .cards {
+    height: auto;
+  }
+  main:has(.product-info) .third-section:has(.product-cards) {
+    margin-top: -100px;
+  }
+  main:has(.product-info) .card {
+    max-width: 90px;
+    margin-left: 0;
+    padding: 30px 0 0;
+    height: auto;
+  }
+  main:has(.product-info) .card h5 {
+    text-align: center;
+    padding-top: 10px;
+    width: 100%;
+  }
+  main:has(.product-info) .card.car-no-border img {
+    filter: drop-shadow(0 10px 10px #9f5f2e);
+  }
+  main:has(.product-info) .card img {
+    width: 80px;
+  }
+  main:has(.product-info) .second-section {
+    padding: 0;
   }
 }/*# sourceMappingURL=ProductDetailPage.css.map */

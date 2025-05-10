@@ -126,14 +126,15 @@ a[disabled]:focus {
 .product-description {
 	color: $color_7 !important;
 	display: -webkit-box;
-	-webkit-line-clamp: 2;
+	// -webkit-line-clamp: 3;
 	/* Limit to 2 lines */
 	-webkit-box-orient: vertical;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	max-height: 3em;
+	// overflow: hidden;
+	// text-overflow: ellipsis;
+	// max-height: 4.5em;
 	/* 2 lines x 1.5em line-height (adjust to your font) */
 	line-height: 1.5em;
+	padding: 0 10px;
 }
 
 .section-heading {
@@ -164,7 +165,11 @@ a[disabled]:focus {
 @media (max-width: 768px) {
 	.product-grid {
 		grid-template-columns: repeat(2, 1fr);
-		gap: 5px;
+		gap: 10px;
+	}
+
+	.podium-section {
+		padding: 20px 10px;
 	}
 }
 
@@ -199,6 +204,7 @@ a[disabled]:focus {
 		font-size: 14px;
 		color: $color_1;
 		transition: background-color 0.3s;
+		width: 100%;
 	}
 
 	.size-button:hover {
@@ -412,8 +418,11 @@ a[disabled]:focus {
 .body-wrapper {
 	flex: 1;
 	text-align: center;
-	padding: 32px 0;
+	padding: 32px 30px;
 	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 
 	h4 a {
 		text-decoration: none;
@@ -1775,6 +1784,10 @@ input {
 	.form-row {
 		flex-direction: column;
 	}
+
+	.swiper-wrapper>* {
+		flex: 2;
+	}
 }
 
 /* Adjust container layout */
@@ -2340,9 +2353,8 @@ section.third-section.container table tr td img {
 	}
 
 	main:has(.product-info) .card:first-child {
-		margin-left: 200px;
+		margin-left: 10px;
 	}
-
 
 	main:has(.product-info) .product-card:first-child {
 		margin-left: 1200px;
@@ -2542,6 +2554,10 @@ section.third-section.container table tr td img {
 
 .price-info {
 	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 15px;
 }
 
 @media (max-width: 768px) {
@@ -2575,6 +2591,10 @@ section.third-section.container table tr td img {
 		}
 	}
 
+	.body-wrapper {
+		padding: 10px;
+	}
+
 	.price-info {
 		p {
 			font-size: 12px;
@@ -2587,4 +2607,77 @@ section.third-section.container table tr td img {
 			text-align: left;
 		}
 	}
+	
+	.radio-button {
+		font-size: 10px;
+	}
+}
+
+
+.radio-button {
+	display: flex;
+	gap: 5px;
+	justify-content: center;
+	position: relative;
+	align-items: center;
+	color: white;
+	display: flex;
+	flex-direction: row;
+}
+
+.radio-button input[type="radio"] {
+	position: absolute;
+	opacity: 0;
+}
+
+.radio {
+	position: relative;
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	border: 2px solid #ccc;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+	transform: translateZ(-25px);
+	transition: all 0.3s ease-in-out;
+}
+
+.radio::before {
+	position: absolute;
+	content: '';
+	width: 10px;
+	height: 10px;
+	top: 5px;
+	left: 5px;
+	border-radius: 50%;
+	background-color: #fff;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	transition: all 0.3s ease-in-out;
+}
+
+.radio:hover{
+	cursor: pointer;
+}
+
+.radio-button.active input[type="radio"]+.radio {
+	border-color: $custom-color-4;
+	transform: translateZ(0px);
+	//   background-color: #fff;
+}
+
+.radio-button.active input[type="radio"]+.radio::before {
+	opacity: 1;
+}
+
+.size-button {
+  display: inline-block;
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.size-button.hide {
+  display: none;
+  opacity: 0;
 }

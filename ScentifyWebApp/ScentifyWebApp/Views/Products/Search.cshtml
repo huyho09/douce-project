@@ -49,24 +49,34 @@
 
                                 <!-- Description -->
                                 <p class="product-description">@product.ShortDescription</p>
-
                                 <!-- Price Info -->
-                                <div class="price-info row">
+                                <div class="price-info w-100">
                                     @if (priceInfoFirst != null)
                                     {
-                                        <div class="col pr-1">
-                                            <p class="product-price">@priceInfoFirst.VolumeMl mL</p>
-                                            <a href="/products/details/@product.Id/@priceInfoFirst.VolumeMl" class="size-button" aria-label="@priceInfoFirst.Currency @priceInfoFirst.Price - @priceInfoFirst.VolumeMl mL" data-id="@product.Id">@priceInfoFirst.Currency @priceInfoFirst.Price.ToString("N0")</a>
-                                        </div>
+                                        <label class="radio-button active">
+                                            <input type="radio" name="size" value="@priceInfoFirst.VolumeMl">
+                                            <span class="radio"></span>
+                                            @priceInfoFirst.VolumeMl mL
+                                        </label>
                                     }
+
                                     @if (priceInfoSecond != null)
                                     {
-                                        <div class="col">
-                                            <p class="product-price">@priceInfoSecond.VolumeMl mL</p>
-                                            <a href="/products/details/@product.Id/@priceInfoSecond.VolumeMl" class="size-button" aria-label="@priceInfoSecond.Currency @priceInfoSecond.Price - @priceInfoSecond.VolumeMl mL" data-id="@product.Id">@priceInfoSecond.Currency @priceInfoSecond.Price.ToString("N0")</a>
-                                        </div>
+                                        <label class="radio-button">
+                                            <input type="radio" name="size" value="@priceInfoSecond.VolumeMl">
+                                            <span class="radio"></span>
+                                            @priceInfoSecond.VolumeMl mL
+                                        </label>
                                     }
                                 </div>
+                                @if (priceInfoFirst != null)
+                                {
+                                    <a href="/products/details/@product.Id/@priceInfoFirst.VolumeMl" data-volume="@priceInfoFirst.VolumeMl" class="price size-button" aria-label="@priceInfoFirst.Currency @priceInfoFirst.Price - @priceInfoFirst.VolumeMl mL" data-id="@product.Id">@priceInfoFirst.Currency @priceInfoFirst.Price.ToString("N0")</a>
+                                }
+                                @if (priceInfoSecond != null)
+                                {
+                                    <a href="/products/details/@product.Id/@priceInfoSecond.VolumeMl" data-volume="@priceInfoSecond.VolumeMl" class="price size-button hide" aria-label="@priceInfoSecond.Currency @priceInfoSecond.Price - @priceInfoSecond.VolumeMl mL" data-id="@product.Id">@priceInfoSecond.Currency @priceInfoSecond.Price.ToString("N0")</a>
+                                }
                             </div>
 
                             <!-- Call to Action -->
@@ -96,12 +106,14 @@
     </div>
 </section>
 
+<script src="~/js/jquery-1.11.0.min.js"></script>
 <script>
     let currentPage = 3;
     const itemsPerPage = 3;
 
     async function loadMoreProducts() {
         showLoading();
+
         const response = await fetch(`/Products/LoadMoreProducts`, {
             method: 'POST',
             headers: {
@@ -115,48 +127,81 @@
 
         if (typeof products !== 'underfined' || products?.length > 0) {
             const container = document.querySelector('.product-grid');
-                products.forEach(product => {
+            products.forEach(product => {
                 const item = document.createElement('div');
                 item.className = 'product-grid-item';
 
-                // Handle size options
                 const sizeOptions = product.productSizes || [];
-                const sizeHTML = sizeOptions.slice(0, 2).map(size => `
-                    <div class="col${sizeOptions.length > 1 ? ' pr-1' : ''}">
-                        <p class="product-price">${size.volumeMl} mL</p>
-                        <a href="/products/details/${product.id}/${size.volumeMl}" class="size-button"
-                           aria-label="${size.currency} ${size.price} - ${size.volumeMl} mL"
-                           data-id="${product.id}">
-                            ${size.currency} ${size.price}
-                        </a>
-                    </div>
+
+                // Create radio buttons
+                const radioButtons = sizeOptions.map((size, index) => `
+                    <label class="radio-button ${index === 0 ? 'active' : ''}">
+                        <input data-volume="${size.volumeMl}" type="radio" name="size-${product.id}" value="${size.volumeMl}" ${index === 0 ? 'checked' : ''}>
+                        <span class="radio"></span>
+                        ${size.volumeMl} mL
+                    </label>
+                `).join('');
+
+                // Create size price links (toggle visibility based on selected size)
+                const sizeLinks = sizeOptions.map((size, index) => `
+                    <a href="/products/details/${product.id}/${size.volumeMl}"
+                       data-volume="${size.volumeMl}"
+                       class="price size-button ${index === 0 ? '' : 'hide'}"
+                       aria-label="${size.currency} ${size.price} - ${size.volumeMl} mL"
+                       data-id="${product.id}">
+                       ${size.currency} ${size.price}
+                    </a>
                 `).join('');
 
                 item.innerHTML = `
-                    <div class="image-wrapper">
-                        <a href="/products/details/${product.id}" target="_self">
-                            <img alt="${product.name}" loading="lazy" src="${product.productSizes[0]?.imageUrl}">
-                        </a>
-                    </div>
-
+                    <a href="/products/details/${product.id}" target="_self">
+                        <div class="image-wrapper">
+                            <img alt="${product.name}" loading="lazy" src="${sizeOptions[0]?.imageUrl}">
+                        </div>
+                    </a>
                     <div class="body-wrapper">
                         <h4 class="product-title">
                             <a href="/products/details/${product.id}" target="_self">
                                 ${product.name}
                             </a>
                         </h4>
-
                         <p class="product-description">${product.shortDescription || ''}</p>
-
-                        <div class="price-info row">
-                            ${sizeHTML}
+                        <div class="price-info w-100">
+                            ${radioButtons}
                         </div>
+                        ${sizeLinks}
                     </div>
                 `;
 
                 container.appendChild(item);
-            });
 
+                // Optional: Add event listener to toggle price display based on selected radio
+                const radios = item.querySelectorAll(`input[name="size-${product.id}"]`);
+                const priceLinks = item.querySelectorAll('.size-button');
+
+                radios.forEach(radio => {
+                    radio.addEventListener('change', () => {
+                        const value = $(radio).val();
+                        const $wrapper = $(radio).closest('.body-wrapper');
+                        const $prices = $wrapper.find('.size-button');
+                        const $labels = $wrapper.find('.radio-button');
+
+                        // Slide animation
+                        $prices.each(function (index,price) {
+                            const $price = $(price);
+                            if ($price.attr('data-volume') === value) {
+                                $price.removeClass('hide');
+                            } else {
+                                $price.addClass('hide');
+                            }
+                        });
+
+                        // Active label update
+                        $labels.removeClass('active');
+                        $(radio).closest('.radio-button').addClass('active');
+                    });
+                });
+            });
 
             currentPage++;
 
