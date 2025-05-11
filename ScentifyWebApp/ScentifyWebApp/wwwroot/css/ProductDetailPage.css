@@ -467,7 +467,7 @@ input[type=radio] {
     padding-left: 0px;
   }
   .section-content h2 {
-    font-size: 1.3em;
+    font-size: 1.7rem;
   }
   .section-label {
     font-size: 12px;
@@ -491,14 +491,14 @@ input[type=radio] {
   text-decoration: none;
   transition: color 0.3sease-in-out;
   color: #d5b260;
-  font-size: 1rem;
+  font-size: 1.3rem;
 }
 .card-content h4:hover {
   text-decoration: underline;
 }
 .card-content p {
   color: #fff;
-  font-size: 1rem;
+  font-size: 0.8rem;
   line-height: 1.4rem;
   margin-bottom: 20px;
   display: -webkit-box;
@@ -506,6 +506,7 @@ input[type=radio] {
   -webkit-line-clamp: 3;
   overflow: hidden !important;
   text-overflow: ellipsis;
+  min-height: 75px;
 }
 
 .learn-more {
@@ -722,7 +723,7 @@ main:has(.product-info) .tabs .card {
     padding: 0;
   }
   .tab-labels label {
-    font-size: 1.3em;
+    font-size: 1.7rem;
   }
   main:has(.product-info) .text-content {
     margin: auto;

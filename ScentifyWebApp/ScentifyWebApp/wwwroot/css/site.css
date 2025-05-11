@@ -2406,4 +2406,8 @@ section.third-section.container table tr td img {
 .size-button.hide {
   display: none;
   opacity: 0;
+}
+
+#success-checkout-msg, #success-checkout-msg + h5 {
+  width: 100%;
 }/*# sourceMappingURL=site.css.map */

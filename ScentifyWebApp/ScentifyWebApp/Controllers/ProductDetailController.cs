@@ -84,8 +84,8 @@ namespace ScentifyWebApp.Controllers
                     ProductSizes = !string.IsNullOrWhiteSpace(sp.PriceInfo)
                         ? JsonHelpers.ParseJson<ProductSize>(sp.PriceInfo)
                         : new List<ProductSize>(),
-					DtoIngredients = !string.IsNullOrWhiteSpace(p.Ingredients)
-				   ? JsonConvert.DeserializeObject<List<Ingredient>>(p.Ingredients)
+					DtoIngredients = !string.IsNullOrWhiteSpace(sp.Ingredients)
+				   ? JsonConvert.DeserializeObject<List<Ingredient>>(sp.Ingredients)
 				   : new List<Ingredient>()
 				})
                 .ToListAsync();

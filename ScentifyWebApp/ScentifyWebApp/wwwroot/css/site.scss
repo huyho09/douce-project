@@ -2700,3 +2700,7 @@ section.third-section.container table tr td img {
   display: none;
   opacity: 0;
 }
+
+#success-checkout-msg, #success-checkout-msg+h5{
+	width: 100%;
+}
