@@ -1351,6 +1351,7 @@ input {
   background: #fffef2;
   border-radius: 10px;
   background: transparent;
+  align-items: flex-start;
   color: #fff;
   border: 1px solid #fff;
 }
@@ -1519,6 +1520,10 @@ input {
   color: red;
 }
 
+.total-price {
+  margin-right: 2rem;
+}
+
 /* Responsive */
 @media (max-width: 1280px) {
   .checkout-container {
@@ -1622,6 +1627,9 @@ input {
   }
   .instagram-media {
     height: 500px;
+  }
+  .total-price {
+    margin-right: 10px;
   }
 }
 /* Floating Chat Button */
@@ -2236,7 +2244,7 @@ section.third-section.container table tr td img {
 
 #menu li {
   padding: 10px 0;
-  font-size: 22px;
+  font-size: 1.1rem;
 }
 
 #menu li label {

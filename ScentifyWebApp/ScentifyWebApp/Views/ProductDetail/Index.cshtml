@@ -16,8 +16,8 @@
 
 	<!-- Main Content -->
 	<div class="container">
-		<div class="row" style="padding-top:100px">
-			<div class="col-12 col-md-8 d-flex justify-content-center">
+		<div class="row" style="padding-top:80px">
+			<div class="col-12 col-md-6 d-flex justify-content-center">
 				<div class="d-flex justify-content-center">
 					<div class="product-display d-flex flex-column">
 						<img id="img-product-@firstSized" class="img-product-bigger" loading="lazy" alt="@Model.Name - firstSized"
@@ -28,11 +28,11 @@
 				</div>
 
 			</div>
-			<div class="col-12 col-md-4">
+			<div class="col-12 col-md-6">
 				<!-- Product Image & Info -->
 				<div class="d-block" style="margin-top: 50px; margin-left:auto; margin-right:auto;">
 					<!-- Text Section -->
-					<div class="text-content" style="text-align:center;">
+					<div class="text-content w-100" style="text-align:center;">
 						<h2>@Model.Name</h2>
 						<p class="text-content-detail"><span>@Model.ShortDescription</span></p>
 					</div>
@@ -60,26 +60,56 @@
 					
 					<div class="tabs">
 						<input type="radio" class="tab-radio" id="tab1" name="tab" checked>
-						@*<input type="radio" class="tab-radio" id="tab2" name="tab">*@
+						@* <input type="radio" class="tab-radio" id="tab2" name="tab"> *@
 
 						<div class="tab-labels">
 							<label for="tab1">Các nốt hương chính</label>
-							<label for="tab2"></label>
+							@* <label for="tab2">Mô tả</label> *@
 						</div>
 
 						<div class="content">
 							<div class="tab-content" id="content1">
 								<p class="col-md-8 col-sm-12">
 									<ul class="home-detail" style="text-align: left; padding-left:0px;">
-										<li>Hương đầu: @Model.TopPerfumed</li>
-										<li>Hương giữa: @Model.MiddlePerfumed</li>
-										<li>Hương giữa: @Model.BasePerfumed</li>
+										<li>Top Notes: @Model.TopPerfumed</li>
+										<li>Heart Notes: @Model.MiddlePerfumed</li>
+										<li>Base Notes: @Model.BasePerfumed</li>
 									</ul>
 								</p>
-							</div>
-							<div class="tab-content" id="content2">
+								<!-- Second Section -->
+								<section class="second-section">
+									<div class="section-content container">
 
+										@{
+											var ingredients = Model.DtoIngredients;
+											if (ingredients != null && ingredients.Count > 0)
+											{
+												<!-- Ingredients Cards -->
+												<div class="cards">
+													@foreach (var ingredient in ingredients)
+													{
+														<div class="card car-no-border">
+															<img src="@ingredient.ImageUrl" alt="Bergamot">
+															<h5 class="small">@ingredient.Name</h5>
+															<p>@ingredient.Description</p>
+														</div>
+													}
+												</div>
+											}
+
+
+										}
+
+										<!-- Navigation Controls -->
+										<!--<div class="nav-controls">
+										<button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+										<button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+										</div>-->
+									</div>
+								</section>
 							</div>
+							 @*<div class="tab-content" id="content2">
+							 </div>*@
 						</div>
 					</div>
 				</div>
@@ -110,50 +140,21 @@
 				<span class="text-content">@Model.Composition</span>
 			</div>
 		</div> *@
-	<!-- Second Section -->
-	<section class="second-section">
-		<div class="section-content container">
-			
-			@{
-				var ingredients = Model.DtoIngredients;
-				if (ingredients != null && ingredients.Count > 0)
-				{
-					<!-- Ingredients Cards -->
-					<div class="cards">
-						@foreach (var ingredient in ingredients)
-						{
-							<div class="card car-no-border">
-								<img src="@ingredient.ImageUrl" alt="Bergamot">
-								<h5 class="small">@ingredient.Name</h5>
-								<p>@ingredient.Description</p>
-							</div>
-						}
-					</div>
-				}
 
 
-			}
-
-            <!-- Navigation Controls -->
-            <!--<div class="nav-controls">
-            <button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
-            <button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
-            </div>-->
-        </div>
-    </section>
-    @if (!string.IsNullOrEmpty(Model.Description))
-    {
-        <section class="third-section container mb-0">
-            <div class="section-content">
-                <!-- Heading -->
-                <div class="section-heading">
-                    <h2 class="section-title">Mô tả</h2>
-                    <div class="section-label">@Html.Raw(Model.Description)</div>
-                </div>
-            </div>
-        </section>
-    }
-    <!-- Third Section -->
+	@if (!string.IsNullOrEmpty(Model.Description))
+	{
+		<section class="third-section container mb-0">
+			<div class="section-content">
+				<!-- Heading -->
+				<div class="section-heading">
+					<h2 class="section-title">Mô tả</h2>
+					<div class="section-label">@Html.Raw(Model.Description)</div>
+				</div>
+			</div>
+		</section>
+	}
+	<!-- Third Section -->
     <section class="third-section container">
         <div class="section-content">
             <!-- Heading -->
