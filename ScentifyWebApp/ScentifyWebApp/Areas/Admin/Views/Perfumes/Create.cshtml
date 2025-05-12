@@ -2,6 +2,8 @@
     ViewData["Title"] = "Create Perfume";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+<link rel="stylesheet" href="~/lib/multi-image-uploader/dist/image-uploader.min.css">
+
 <style>
     .modal-content {
         color: black !important;
@@ -66,6 +68,12 @@
                             <div class="form-outline mb-4 col-lg-6">
                                 <label class="form-label" for="ShortDescription">Short Description:</label>
                                 <textarea id="ShortDescription" name="ShortDescription" class="form-control">@Model?.ShortDescription</textarea>
+                            </div>
+
+                            <!-- Upload Description Images -->
+                            <div class="form-outline mb-4 col-lg-12">
+                                <label class="form-label" for="DescriptionImages">Upload Description Images:</label>
+                                <div class="input-images-2" style="padding-top: .5rem;"></div>
                             </div>
 
                             <!-- Description -->
@@ -259,8 +267,10 @@
         </div>
     </div>
 </div>
-<script src="~/admin/vendor/jquery/jquery.min.js"></script>
-
+@* <script src="~/admin/vendor/jquery/jquery.min.js"></script> *@
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="~/lib/multi-image-uploader/dist/image-uploader.min.js"></script>
 <script>
     $(document).ready(function () {
         $('#summernote').summernote({
@@ -303,6 +313,23 @@
 
             // Trigger the change event on page load to set initial values
             checkbox.dispatchEvent(new Event('change'));
+        });
+
+        let preloaded = [
+            {id: 1, src: 'https://picsum.photos/500/500?random=1'},
+            {id: 2, src: 'https://picsum.photos/500/500?random=2'},
+            {id: 3, src: 'https://picsum.photos/500/500?random=3'},
+            {id: 4, src: 'https://picsum.photos/500/500?random=4'},
+            {id: 5, src: 'https://picsum.photos/500/500?random=5'},
+            {id: 6, src: 'https://picsum.photos/500/500?random=6'},
+        ];
+
+        $('.input-images-2').imageUploader({
+            preloaded: preloaded,
+            imagesInputName: 'photos',
+            preloadedInputName: 'old',
+            maxSize: 2 * 1024 * 1024,
+            maxFiles: 10
         });
     });
 </script>
