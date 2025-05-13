@@ -49,7 +49,7 @@ $custom-color-4: #d5b260;
 
 body {
 	position: relative;
-	background-image: url('/images/background-img.jpg');
+	//background-image: url('/images/background-img.jpg');
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: 100% 100%;
@@ -62,7 +62,7 @@ body::before {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(255, 255, 255, 0.06);
+	//background: rgba(255, 255, 255, 0.06);
 	/* White overlay with 50% opacity */
 	z-index: -1;
 }
@@ -662,6 +662,7 @@ iframe {
 }
 
 .Footer_Footer-wrap__I56_P {
+	border-top: 1px solid $color_1;
 	min-height: 50vh;
 	position: relative;
 }
@@ -1287,7 +1288,15 @@ iframe {
 		margin-right: 10px;
 	}
 }
-
+.commit-title {
+	margin-left: 11px;
+}
+.commit-content-box {
+	font-size: 20px;
+	h5 {
+		margin-left: 11px;
+	}
+}
 
 @media only screen and (min-width: 1025px) {
 	.subNavigation_subNavContainer__8LZ2X {
@@ -1464,6 +1473,9 @@ iframe {
 	.btn-discount {
 		padding: 10px;
 		font-size: 0.75rem;
+	}
+	.commit-content-box{
+		font-size: 16px;
 	}
 }
 

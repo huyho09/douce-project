@@ -1247,6 +1247,10 @@ input {
 	&:hover {
 		color: $color-black;
 	}
+
+	img {
+		width: 120px;
+	}
 }
 
 /* Center Navigation Links */
