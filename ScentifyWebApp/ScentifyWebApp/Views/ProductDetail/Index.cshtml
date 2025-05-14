@@ -9,28 +9,99 @@
 	var image1 = Model.ProductSizes?[0].ImageUrl;
 	var image2 = Model.ProductSizes?[1].ImageUrl;
 }
+<link rel="stylesheet" href="~/css/ProductDetailPage.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+<style>
+	.slider img {
+		width: 100%;
+		height: 100%;
+	}
+	.slick-dots {
+		bottom:1rem;
+		display:flex;
 
+	}
+	.presentation {
+		cursor: pointer;
+		height: 15px;
+		width: 15px;
+		margin: 0 2px;
+		background-color: #bbb;
+		border-radius: 50%;
+		display: inline-block;
+		transition: background-color 0.6s ease;
+	}
+
+		.presentation:hover {
+			background-color: #717171;
+		}
+	.slick-slide {
+		min-height: 350px;
+	}
+	.slick-dots li {
+		width: 10px;
+	}
+	.slick-dots li button:before {
+		opacity: 0.45;
+		color: white;
+	}
+		.slick-dots li.slick-active button:before {
+			color: white;
+		}
+</style>
 @if (Model != null)
 {
 	var priceInfo = Model.ProductSizes?.FirstOrDefault(m => m.VolumeMl == Model.CurrentSize);
 
 	<!-- Main Content -->
-	<div class="container">
-		<div class="row" style="padding-top:80px">
-			<div class="col-12 col-md-6 d-flex justify-content-center">
-				<div class="d-flex justify-content-center">
-					<div class="product-display d-flex flex-column">
-						<img id="img-product-@firstSized" class="img-product-bigger" loading="lazy" alt="@Model.Name - firstSized"
-							 style="@(Model.CurrentSize == firstSized ? "" : "display:none")" src="@Url.Content(image1?.Replace("./", "~/"))">
-						<img id="img-product-@secondSized" class="img-small" loading="lazy" alt="@Model.Name - secondSized"
-							 style="@(Model.CurrentSize == secondSized ? "" : "display:none")" src="@Url.Content(image2?.Replace("./", "~/"))">
-					</div>
+	<div class="m-0">
+		<div class="row m-0">
+			<div id="carousel-detail" class="carousel slide" data-ride="carousel">
+				<div class="slider DetailSwiper">
+						<div>
+							<img id="mobi-img-product-@firstSized" src="@Url.Content(image1?.Replace("./", "~/"))" alt="Slide 0">
+						</div>
+						<div>
+							<img id="mobi-img-product-@firstSized" src="@Url.Content(image2?.Replace("./", "~/"))" alt="Slide 1">
+						</div>
+						<div>
+							<img src="https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwfa81c311/Y0909280/Y0909280_F090955009_E02_GHC.jpg?sw=1280" alt="Slide 2">
+						</div>
+						<div>
+							<img src="https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw0642a50f/Y0909280/Y0909280_F090955009_E04_GHC.jpg?sw=1280" alt="Slide 3">
+						</div>
+
 				</div>
 
 			</div>
-			<div class="col-12 col-md-6">
+			<div class="col-12 col-md-8 pc-view-hero-detail">
+				<div class="container">
+					<div class="row">
+						<div class="row">
+							<div class="col-12 d-flex justify-content-center">
+								<img id="img-product-@firstSized" class="img-fluid" loading="lazy" alt="@Model.Name - firstSized"
+									 style="@(Model.CurrentSize == firstSized ? "" : "display:none")" src="@Url.Content(image1?.Replace("./", "~/"))">
+								<img id="img-product-@secondSized" class="img-fluid" loading="lazy" alt="@Model.Name - secondSized"
+									 style="@(Model.CurrentSize == secondSized ? "" : "display:none")" src="@Url.Content(image2?.Replace("./", "~/"))">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<img src="https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw7d659be1/Y0958160/Y0958160_F095355009_E02_GHC.jpg?sw=1024"
+									 class="img-fluid" alt="Image 2">
+							</div>
+							<div class="col-md-6">
+								<img src="https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwfa81c311/Y0909280/Y0909280_F090955009_E02_GHC.jpg?sw=1280"
+									 class="img-fluid" alt="Image 3">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 col-md-4">
 				<!-- Product Image & Info -->
-				<div class="d-block" style="margin-top: 50px; margin-left:auto; margin-right:auto;">
+				<div class="d-block product-info-container">
 					<!-- Text Section -->
 					<div class="text-content w-100" style="text-align:center;">
 						<h2>@Model.Name</h2>
@@ -57,14 +128,14 @@
 							<button class="add-to-cart add-to-cart-btn" data-current-size="@Model.CurrentSize" aria-label="Add to your cart - @priceInfo?.Currency @priceInfo?.Price" data-id="@Model.Id">Thêm giỏ hàng</button>
 						</div>
 					</div>
-					
+
 					<div class="tabs">
 						<input type="radio" class="tab-radio" id="tab1" name="tab" checked>
-						@* <input type="radio" class="tab-radio" id="tab2" name="tab"> *@
+						<input type="radio" class="tab-radio" id="tab2" name="tab">
 
 						<div class="tab-labels">
 							<label for="tab1">Các nốt hương chính</label>
-							@* <label for="tab2">Mô tả</label> *@
+							<label for="tab2">Mô tả</label>
 						</div>
 
 						<div class="content">
@@ -108,8 +179,12 @@
 									</div>
 								</section>
 							</div>
-							 @*<div class="tab-content" id="content2">
-							 </div>*@
+							<div class="tab-content" id="content2">
+								@if (!string.IsNullOrEmpty(Model.Description))
+								{
+									<p>@Html.Raw(Model.Description)</p>
+								}
+							</div>
 						</div>
 					</div>
 				</div>
@@ -142,49 +217,38 @@
 		</div> *@
 
 
-	@if (!string.IsNullOrEmpty(Model.Description))
-	{
-		<section class="third-section container mb-0">
-			<div class="section-content">
-				<!-- Heading -->
-				<div class="section-heading">
-					<h2 class="section-title">Mô tả</h2>
-					<div class="section-label">@Html.Raw(Model.Description)</div>
-				</div>
-			</div>
-		</section>
-	}
+
 	<!-- Third Section -->
-    <section class="third-section container">
-        <div class="section-content">
-            <!-- Heading -->
-            <div class="section-heading">
-                <h2 class="section-title">Những sản phẩm khác</h2>
-            </div>
-            @{
-                var similarItems = Model.SimilarPerfumes;
-                if (similarItems != null && similarItems.Count > 0)
-                {
-                    var index = 1;
-                    <!-- Product Cards -->
-                    <div class="product-cards d-flex justify-content-center">
-                        @foreach (var similarItem in similarItems)
-                        {
-                            var img1 = similarItem.ProductSizes?[0].ImageUrl != null ? similarItem.ProductSizes?[0].ImageUrl.Replace("./", "~/") : "";
-                            var itemIngredients = string.Join(", ", similarItem.DtoIngredients?.Select(m => m.Name.Trim()) ?? new List<string>());
-                            <a href="/products/details/@similarItem.Id" class="product-card">
-                                <img src="@img1" alt="@similarItem.Name">
-                                <div class="card-content">
-                                    <h4>@similarItem.Name</h4>
-                                    <p>@itemIngredients</p>
-                                    @*<a href="/products/details/@similarItem.Id" class="learn-more">LEARN MORE</a>*@
-                                </div>
-                            </a>
-                            index++;
-                        }
-                    </div>
-                }
-            }
+	<section class="third-section container mt-5">
+		<div class="section-content">
+			<!-- Heading -->
+			<div class="section-heading">
+				<h2 class="section-title">Những sản phẩm khác</h2>
+			</div>
+			@{
+				var similarItems = Model.SimilarPerfumes;
+				if (similarItems != null && similarItems.Count > 0)
+				{
+					var index = 1;
+					<!-- Product Cards -->
+					<div class="product-cards d-flex justify-content-center">
+						@foreach (var similarItem in similarItems)
+						{
+							var img1 = similarItem.ProductSizes?[0].ImageUrl != null ? similarItem.ProductSizes?[0].ImageUrl.Replace("./", "~/") : "";
+							var itemIngredients = string.Join(", ", similarItem.DtoIngredients?.Select(m => m.Name.Trim()) ?? new List<string>());
+							<a href="/products/details/@similarItem.Id" class="product-card">
+								<img src="@img1" alt="@similarItem.Name">
+								<div class="card-content">
+									<h4>@similarItem.Name</h4>
+									<p>@itemIngredients</p>
+									@*<a href="/products/details/@similarItem.Id" class="learn-more">LEARN MORE</a>*@
+								</div>
+							</a>
+							index++;
+						}
+					</div>
+				}
+			}
 
 			<!-- Navigation Controls -->
 			<!--<div class="nav-controls">
@@ -195,6 +259,7 @@
 	</section>
 }
 <script src="~/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
 	$(document).ready(function () {
 		$("input[name='sku']:radio").change(function () {
@@ -203,6 +268,8 @@
 			var volume = $(this).data("volume") || 0;
 			$('[id*="img-product-"]').hide();
 			$('#img-product-' + volume).show();
+			$('[id*="mobi-img-product"]').hide();
+			$('#mobi-img-product-' + volume).show();
 			if (price && currency) {
 				$("#the-price-currency").text(price.toLocaleString("en-US", { maximumFractionDigits: 0 }) + " " + currency);
 			}
@@ -228,4 +295,14 @@
 
 	});
 
+</script>
+<script>
+	$('.slider').slick({
+		dots: true,
+		arrows: false,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 1,
+		adaptiveHeight: true
+	});
 </script>
