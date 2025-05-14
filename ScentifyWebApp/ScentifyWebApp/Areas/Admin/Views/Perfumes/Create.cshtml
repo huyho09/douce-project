@@ -2,7 +2,6 @@
     ViewData["Title"] = "Create Perfume";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-<link rel="stylesheet" href="~/lib/multi-image-uploader/dist/image-uploader.min.css">
 
 <style>
     .modal-content {
@@ -18,7 +17,7 @@
                     <h1 class="h3 text-gray-900 mb-4 mt-5 font-weight-bold">CREATE CATEGORY ITEM</h1>
                 </div>
                 <div class="h-full overflow-hidden m-4">
-                    <form asp-area="Admin" asp-action="Create" asp-controller="Perfumes" class="needs-validation" method="post" novalidate>
+                    <form asp-area="Admin" asp-action="Create" asp-controller="Perfumes" method="post" enctype="multipart/form-data">
                         @if (!string.IsNullOrEmpty(ViewData["ErrorSubmit"]?.ToString()))
                         {
                             <p class="text-danger">@ViewData["ErrorSubmit"]</p>
@@ -69,12 +68,6 @@
                                 <label class="form-label" for="ShortDescription">Short Description:</label>
                                 <textarea id="ShortDescription" name="ShortDescription" class="form-control">@Model?.ShortDescription</textarea>
                             </div>
-
-                           @*  <!-- Upload Description Images -->
-                            <div class="form-outline mb-4 col-lg-12">
-                                <label class="form-label" for="DescriptionImages">Upload Description Images:</label>
-                                <div class="input-images-2" style="padding-top: .5rem;"></div>
-                            </div> *@
 
                             <!-- Description -->
                             <div class="form-outline mb-4 col-lg-12">
@@ -140,6 +133,19 @@
                                     <label class="form-label" for="Price2">Price 2 (VND):</label>
                                     <input id="Price2" name="Price2" type="number" class="form-control" step="0.01" min="0" value="@Model?.Price2" />
                                 </div>
+                            </div>
+
+                            <!-- Upload More Description Images -->
+                            @* <div class="form-outline mb-4 col-lg-12">
+                                <label class="form-label" for="DescriptionImageFiles">Upload More Description Images:</label>
+                                <div class="input-images-2" style="padding-top: .5rem;"></div>
+                            </div> *@
+                            <div class="form-outline mb-4 col-lg-12">
+                                <label class="form-label" for="DescriptionImageFiles">Upload More Description Images:</label>
+                                <div class="input-images-2" style="padding-top: .5rem;"></div>
+
+                                <!-- Placeholder for hidden inputs -->
+                                <div id="hidden-image-fields"></div>
                             </div>
 
                             <!-- Ingredients -->
@@ -268,68 +274,73 @@
     </div>
 </div>
 @* <script src="~/admin/vendor/jquery/jquery.min.js"></script> *@
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="~/lib/multi-image-uploader/dist/image-uploader.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#summernote').summernote({
-            callbacks: {
-                onImageLinkInsert: function (url) {
-                    // url is the image url from the dialog
-                    $img = $('<img>').attr({ src: url })
-                    $summernote.summernote('insertNode', $img[0]);
-                }
-            },
-            height: 300,
-            fontNames: ['Montserrat', 'Serif', 'Open Sans', 'Sans', 'sans-serif', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Comfortaa'],
-            fontNamesIgnoreCheck: ['Montserrat', 'Serif', 'Open Sans', 'Sans', 'sans-serif', 'Comfortaa']
-        });
-
-        // summernote.image.link.insert
-        $('#summernote').on('summernote.image.link.insert', function (we, url) {
-            // url is the image url from the dialog
-            $img = $('<img>').attr({ src: url })
-            $summernote.summernote('insertNode', $img[0]);
-        });
-
-         // Select all checkboxes in the Fragrance Notes section
-        const checkboxes = document.querySelectorAll('.form-outline input[type="checkbox"]');
-
-        // Add an event listener to each checkbox
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                // Get the name of the checkbox (e.g., "Citrus" from id="Citrus")
-                const checkboxName = this.id;
-
-                // Find the corresponding hidden input with the same name (e.g., name="Citrus")
-                const hiddenInput = document.querySelector(`input[type="hidden"][name="${checkboxName}"]`);
-
-                // Update the hidden input's value based on checkbox state
-                if (hiddenInput) {
-                    hiddenInput.value = this.checked ? 'true' : 'false';
-                }
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote({
+                callbacks: {
+                    onImageLinkInsert: function (url) {
+                        // url is the image url from the dialog
+                        $img = $('<img>').attr({ src: url })
+                        $summernote.summernote('insertNode', $img[0]);
+                    }
+                },
+                height: 300,
+                fontNames: ['Montserrat', 'Serif', 'Open Sans', 'Sans', 'sans-serif', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Comfortaa'],
+                fontNamesIgnoreCheck: ['Montserrat', 'Serif', 'Open Sans', 'Sans', 'sans-serif', 'Comfortaa']
             });
 
-            // Trigger the change event on page load to set initial values
-            checkbox.dispatchEvent(new Event('change'));
+            // summernote.image.link.insert
+            $('#summernote').on('summernote.image.link.insert', function (we, url) {
+                // url is the image url from the dialog
+                $img = $('<img>').attr({ src: url })
+                $summernote.summernote('insertNode', $img[0]);
+            });
+
+             // Select all checkboxes in the Fragrance Notes section
+            const checkboxes = document.querySelectorAll('.form-outline input[type="checkbox"]');
+
+            // Add an event listener to each checkbox
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    // Get the name of the checkbox (e.g., "Citrus" from id="Citrus")
+                    const checkboxName = this.id;
+
+                    // Find the corresponding hidden input with the same name (e.g., name="Citrus")
+                    const hiddenInput = document.querySelector(`input[type="hidden"][name="${checkboxName}"]`);
+
+                    // Update the hidden input's value based on checkbox state
+                    if (hiddenInput) {
+                        hiddenInput.value = this.checked ? 'true' : 'false';
+                    }
+                });
+
+                // Trigger the change event on page load to set initial values
+                checkbox.dispatchEvent(new Event('change'));
+            });
         });
+    </script>
+    <script>
+        $(document).ready(function () {
+            const base64Images = @Html.Raw(Json.Serialize(Model?.ListDescriptionImages));
+            let preloaded;
+            if(base64Images?.length > 0){
+                preloaded = base64Images.map((src, index) => ({
+                    id: index + 1,
+                    src: src
+                }));
+            }
+            const maxFiles = 6;
 
-        // let preloaded = [
-        //     {id: 1, src: 'https://picsum.photos/500/500?random=1'},
-        //     {id: 2, src: 'https://picsum.photos/500/500?random=2'},
-        //     {id: 3, src: 'https://picsum.photos/500/500?random=3'},
-        //     {id: 4, src: 'https://picsum.photos/500/500?random=4'},
-        //     {id: 5, src: 'https://picsum.photos/500/500?random=5'},
-        //     {id: 6, src: 'https://picsum.photos/500/500?random=6'},
-        // ];
-
-        // $('.input-images-2').imageUploader({
-        //     preloaded: preloaded,
-        //     imagesInputName: 'photos',
-        //     preloadedInputName: 'old',
-        //     maxSize: 2 * 1024 * 1024,
-        //     maxFiles: 10
-        // });
-    });
-</script>
+            $('.input-images-2').imageUploader({
+                preloaded: preloaded,
+                imagesInputName: 'DescriptionImageFiles',
+                extensions: ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.tiff', '.svg'],
+                maxSize: 2 * 1024 * 1024,
+                maxFiles: maxFiles,
+                preloadedInputName: 'DescriptionImageFiles',
+                // optional: preloaded logic if editing
+            });
+        });
+    </script>
+}

@@ -16,7 +16,7 @@
                     <h1 class="h3 text-gray-900 mb-4 mt-5 font-weight-bold">@Model.Name DETAILS</h1>
                 </div>
                 <div class="h-full overflow-hidden m-5">
-                    <form asp-area="Admin" asp-controller="Perfumes" asp-action="Update" class="needs-validation" method="post" novalidate>
+                    <form asp-area="Admin" asp-controller="Perfumes" asp-action="Update" class="needs-validation" method="post" enctype="multipart/form-data" novalidate>
                         <input type="text" asp-for="Id" id="productId" value="@Model.Id" hidden />
                         @if (!string.IsNullOrEmpty(ViewData["ErrorSubmit"]?.ToString()))
                         {
@@ -150,6 +150,20 @@
                                     <label class="form-label" for="Price2">Price 2 (VND):</label>
                                     <input asp-for="Price2" name="Price2" type="number" class="form-control" step="0.01" min="0" value="@Model.Price2" />
                                 </div>
+                            </div>
+
+                            <!-- Upload More Description Images -->
+                            @* <div class="form-outline mb-4 col-lg-12">
+                                <label class="form-label" for="DescriptionImageFiles">Upload More Description Images:</label>
+                                <div class="input-images-2" style="padding-top: .5rem;"></div>
+                            </div> *@
+                            <div class="form-outline mb-4 col-lg-12">
+                                <label class="form-label" for="DescriptionImageFiles">Upload More Description Images:</label>
+                                <div class="input-images-2" style="padding-top: .5rem;"></div>
+                                <input type="hidden" name="DescriptionImages" value="@Model.DescriptionImages" />
+                                <input type="hidden" name="SaveImageIndexChange" value="" />
+                                <!-- Placeholder for hidden inputs -->
+                                <div id="hidden-image-fields"></div>
                             </div>
 
                             <!-- Currency -->
@@ -292,28 +306,75 @@
         </div>
     </div>
 </div>
-<script src="~/admin/vendor/jquery/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#summernote').summernote({
-            callbacks: {
-                onImageLinkInsert: function (url) {
-                    // url is the image url from the dialog
-                    $img = $('<img>').attr({ src: url })
-                    $summernote.summernote('insertNode', $img[0]);
-                }
-            },
-            height: 300,
-            fontNames: ['Montserrat', 'Serif', 'Open Sans', 'Sans', 'sans-serif', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Comfortaa'],
-            fontNamesIgnoreCheck: ['Montserrat', 'Serif', 'Open Sans', 'Sans', 'sans-serif', 'Comfortaa']
-        });
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote({
+                callbacks: {
+                    onImageLinkInsert: function (url) {
+                        // url is the image url from the dialog
+                        $img = $('<img>').attr({ src: url })
+                        $summernote.summernote('insertNode', $img[0]);
+                    }
+                },
+                height: 300,
+                fontNames: ['Montserrat', 'Serif', 'Open Sans', 'Sans', 'sans-serif', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Comfortaa'],
+                fontNamesIgnoreCheck: ['Montserrat', 'Serif', 'Open Sans', 'Sans', 'sans-serif', 'Comfortaa']
+            });
 
-        // summernote.image.link.insert
-        $('#summernote').on('summernote.image.link.insert', function (we, url) {
-            // url is the image url from the dialog
-            $img = $('<img>').attr({ src: url })
-            $summernote.summernote('insertNode', $img[0]);
-        });
+            // summernote.image.link.insert
+            $('#summernote').on('summernote.image.link.insert', function (we, url) {
+                // url is the image url from the dialog
+                $img = $('<img>').attr({ src: url })
+                $summernote.summernote('insertNode', $img[0]);
+            });
 
-    });
-</script>
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            const base64Images = @Html.Raw(Json.Serialize(Model?.ListDescriptionImages));
+            let preloaded;
+            if(base64Images?.length > 0){
+                preloaded = base64Images.map((src, index) => ({
+                    id: index + 1,
+                    src: src
+                }));
+            }
+            const maxFiles = 6;
+
+            $('.input-images-2').imageUploader({
+                preloaded: preloaded,
+                imagesInputName: 'DescriptionImageFiles',
+                extensions: ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.tiff', '.svg'],
+                maxSize: 2 * 1024 * 1024,
+                maxFiles: maxFiles,
+                preloadedInputName: 'DescriptionImageFiles',
+                // optional: preloaded logic if editing
+            });
+            setTimeout(function(){
+                let missingImages = [];
+                const origin = $('.input-images-2 input:not([id])').map(function () {
+                    return $(this).val();  // Get the value of each input
+                }).get(); 
+                $('.input-images-2 .delete-image').on('click', function(){
+                    setTimeout(function(){
+                        var inputs = $('.input-images-2 input:not([id])').map(function () {
+                            return $(this).val();  // Get the value of each input
+                        }).get();
+                        var itemChange = origin.filter(value => !inputs.includes(value));
+                        if(!missingImages.includes(itemChange)){
+                            missingImages.push(itemChange);
+                        }
+                        // Update the hidden input field with the missing images array
+                        if (missingImages.length > 0) {
+                            $('input[name="SaveImageIndexChange"]').val(missingImages.join(',')); // Set missing values as comma-separated string
+                        } else {
+                            $('input[name="SaveImageIndexChange"]').val(''); // Clear the value if no images are missing
+                        }
+                    }, 300);
+                });
+            },300);
+        });
+    </script>
+}

@@ -25,7 +25,7 @@ namespace ScentifyWebApp.Models.Entities
         public string ShortDescription { get; set; } = string.Empty;
 
         [Column(TypeName = "nvarchar(max)")]
-        public string Description { get; set; } = string.Empty;
+        public string? Description { get; set; } = string.Empty;
 
         [Column(TypeName = "nvarchar(max)")]
         public string Composition { get; set; } = string.Empty;
@@ -54,6 +54,8 @@ namespace ScentifyWebApp.Models.Entities
         [Required]
         public string Status { get; set; } = "Available";
         public string ImageUrl { get; set; } = string.Empty;
+        [Column(TypeName = "nvarchar(max)")]
+        public string DescriptionImages { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     }

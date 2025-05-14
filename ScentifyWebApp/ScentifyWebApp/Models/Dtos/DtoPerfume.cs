@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using ScentifyWebApp.Models.Entities;
 
 namespace ScentifyWebApp.Models.Dtos
@@ -63,6 +64,24 @@ namespace ScentifyWebApp.Models.Dtos
         public string Ingredient_Img_4 { get; set; } = "";
 
         public string ImageUrl { get; set; } = ""; // URL hình ảnh sản phẩm
+        public string? DescriptionImages { get; set; }
+        public List<string>? ListDescriptionImages
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(DescriptionImages))
+                {
+                    return JsonConvert.DeserializeObject<List<string>>(DescriptionImages);
+                }
+                return default;
+            }
+            set
+            {
+            }
+        }
+
+        public List<IFormFile> DescriptionImageFiles { get; set; } = new();
+        public List<int> SaveImageIndexChange { get; set; } = new();
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
