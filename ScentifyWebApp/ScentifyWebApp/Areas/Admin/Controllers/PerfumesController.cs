@@ -132,6 +132,11 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
 
                     var DescriptionImages = JsonConvert.DeserializeObject<List<string>>(perfume.DescriptionImages) ?? new List<string>();
                     var updateDescriptionImages = new List<string>();
+                    if (DescriptionImages.Count > 0)
+                    {
+                        updateDescriptionImages.AddRange(DescriptionImages.Where(m => m.Contains("upload")));// check path exist.
+                    }
+
                     await ProcessImageCollectionAsync(
                         items: DescriptionImages ?? new(),
                         folder: Path.Combine(baseFolder, "description-images"),
@@ -172,7 +177,10 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                     base64 = item.ToString();
                 }
                 if (string.IsNullOrWhiteSpace(base64) || base64.Contains("uploads"))
+                {
+                    counter++;
                     continue;
+                }
                 var raw = "";
                 if (!base64.Contains("base64,"))
                 {
@@ -477,7 +485,7 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                     var ListDescriptionImages = requestDTO.ListDescriptionImages;
                     foreach (var index in requestDTO.SaveImageIndexChange)
                     {
-                        var ind = index-1;
+                        var ind = index - 1;
                         ListDescriptionImages = ListDescriptionImages
                                 .Where((item, index) => index != ind)
                                 .ToList();

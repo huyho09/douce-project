@@ -137,3 +137,60 @@ function updateInvoiceStatus(status) {
 //            });
 //    }
 //}
+
+// Reset image when clicking close icon
+$('.close-icon').on('click', function (e) {
+    e.stopPropagation(); // prevent triggering upload click
+    const $container = $(this).parent();
+    if ($container.find('.uploaded-image').attr('src')?.length > 0) {
+        $container.find('.uploaded-image').attr('src', '');
+        $container.find('.upload-input').val('');
+        $container.find('input[type="hidden"]').val('');
+    }
+});
+function getFormatBase64Values($images) {
+    var formatResults = [];
+    $images.each(function (index, image) {
+        var src = image.getAttribute("src");
+        if (src.split("base64,").length > 1) {
+            formatResults.push(src.split("base64,")[1]);
+        } else {
+            formatResults.push(src);
+        }
+    });
+    return formatResults;
+}
+$(() => {
+    
+    $('form').on('submit', function (e) {
+        //e.preventDefault();
+
+        const $form = $(this);
+
+        var jsonImages = JSON.stringify(getFormatBase64Values($('.input-images-2 .uploaded-image img')));
+        if (jsonImages) {
+            $('[name="DescriptionImages"]').val(jsonImages);
+        }
+
+        const data = $form.serialize(); // URL-encoded string
+
+        // Example: add custom field
+        const finalData = data;
+
+        $.ajax({
+            url: $form.attr('action'),
+            method: $form.attr('method') || 'POST',
+            data: finalData,
+            success: function (response) {
+                console.log('Response:', response);
+                alert("Successful");
+                $('html, body').animate({
+                    scrollTop: $('[role="main"]').offset().top
+                }, 500); // 500ms animation duration
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+});
