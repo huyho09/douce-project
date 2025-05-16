@@ -98,39 +98,58 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
 
         public async Task ConvertAndStoreImagesAsync(List<Perfume> perfumes)
         {
-            // 1) Load all perfumes with their children
-            //var perfumes = await _context.Perfume
-            //    .ToListAsync();
-
-            string baseFolder = Path.Combine(_environment.WebRootPath, "uploads");
-
-            foreach (var perfume in perfumes)
+            try
             {
-                // 2) Handle PriceInfo images
-                var priceInfo = JsonHelpers.ParseJson<ProductSize>(perfume.PriceInfo);
+                // 1) Load all perfumes with their children
+                //var perfumes = await _context.Perfume
+                //    .ToListAsync();
 
-                await ProcessImageCollectionAsync(
-                    items: priceInfo,
-                    folder: Path.Combine(baseFolder, "prices"),
-                    fileNamePrefix: perfume.Name.Replace(" ", ""),
-                    updateUrl: (pi, url) => pi.ImageUrl = url
-                );
+                string baseFolder = Path.Combine(_environment.WebRootPath, "uploads");
 
-                perfume.PriceInfo = JsonConvert.SerializeObject(priceInfo);
+                foreach (var perfume in perfumes)
+                {
+                    // 2) Handle PriceInfo images
+                    var priceInfo = JsonHelpers.ParseJson<ProductSize>(perfume.PriceInfo);
 
-                var Ingredients = JsonConvert.DeserializeObject<List<Ingredient>>(perfume.Ingredients);
-                // 3) Handle Ingredient images
-                await ProcessImageCollectionAsync(
-                    items: Ingredients ?? new(),
-                    folder: Path.Combine(baseFolder, "ingredients"),
-                    fileNamePrefix: perfume.Name.Replace(" ", ""),
-                    updateUrl: (ing, url) => ing.ImageUrl = url
-                );
-                perfume.Ingredients = JsonConvert.SerializeObject(Ingredients);
+                    await ProcessImageCollectionAsync(
+                        items: priceInfo,
+                        folder: Path.Combine(baseFolder, "prices"),
+                        fileNamePrefix: perfume.Name.Replace(" ", ""),
+                        updateUrl: (pi, url) => pi.ImageUrl = url
+                    );
+
+                    perfume.PriceInfo = JsonConvert.SerializeObject(priceInfo);
+
+                    var Ingredients = JsonConvert.DeserializeObject<List<Ingredient>>(perfume.Ingredients);
+                    // 3) Handle Ingredient images
+                    await ProcessImageCollectionAsync(
+                        items: Ingredients ?? new(),
+                        folder: Path.Combine(baseFolder, "ingredients"),
+                        fileNamePrefix: perfume.Name.Replace(" ", ""),
+                        updateUrl: (ing, url) => ing.ImageUrl = url
+                    );
+                    perfume.Ingredients = JsonConvert.SerializeObject(Ingredients);
+
+                    var DescriptionImages = JsonConvert.DeserializeObject<List<string>>(perfume.DescriptionImages) ?? new List<string>();
+                    var updateDescriptionImages = new List<string>();
+                    if (DescriptionImages.Count > 0)
+                    {
+                        updateDescriptionImages.AddRange(DescriptionImages.Where(m => m.Contains("upload")));// check path exist.
+                    }
+
+                    await ProcessImageCollectionAsync(
+                        items: DescriptionImages ?? new(),
+                        folder: Path.Combine(baseFolder, "description-images"),
+                        fileNamePrefix: perfume.Name.Replace(" ", ""), // optional name prefix
+                        updateUrl: (item, url) => updateDescriptionImages.Add(url) // update with new URL
+                    );
+                    perfume.DescriptionImages = JsonConvert.SerializeObject(updateDescriptionImages);
+                }
+
+                // 4) Save all URL updates in one go
+                await _context.SaveChangesAsync();
             }
-
-            // 4) Save all URL updates in one go
-            await _context.SaveChangesAsync();
+            catch (Exception ex) { }
         }
 
         /// <summary>
@@ -153,11 +172,26 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                 // via reflection or interface, get the Base64 string:
                 var prop = item.GetType().GetProperty("ImageUrl");
                 var base64 = prop?.GetValue(item) as string;
-                if (string.IsNullOrWhiteSpace(base64) || !base64.Contains("base64,"))
+                if (prop == null)
+                {
+                    base64 = item.ToString();
+                }
+                if (string.IsNullOrWhiteSpace(base64) || base64.Contains("uploads"))
+                {
+                    counter++;
                     continue;
+                }
+                var raw = "";
+                if (!base64.Contains("base64,"))
+                {
+                    raw = base64;
+                }
+                else
+                {
+                    raw = base64.Substring(base64.IndexOf("base64,") + 7);
+                }
 
                 // decode after comma
-                var raw = base64.Substring(base64.IndexOf("base64,") + 7);
                 var bytes = Convert.FromBase64String(raw);
 
                 // generate unique name
@@ -200,6 +234,7 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
         {
             try
             {
+                // convert to base 64
                 if (requestDTO != null)
                 {
                     var request = _mapper.Map<Perfume>(requestDTO);
@@ -244,6 +279,25 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                 };
 
                     request.Ingredients = JsonConvert.SerializeObject(ingredients);
+
+                    var descriptionImages = new List<string>();
+                    foreach (var file in requestDTO.DescriptionImageFiles)
+                    {
+                        if (file != null && file.Length > 0)
+                        {
+                            using var ms = new MemoryStream();
+                            file.CopyTo(ms);
+
+                            var fileBytes = ms.ToArray();
+
+                            // If you want base64 string
+                            var base64 = Convert.ToBase64String(fileBytes);
+                            descriptionImages.Add(base64);
+                            // Save or process as needed
+                        }
+                    }
+                    request.DescriptionImages = JsonConvert.SerializeObject(descriptionImages);
+
                     request.CreatedAt = DateTime.Now;
 
                     _context.Perfume.Add(request);
@@ -262,72 +316,79 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
         //[HttpGet("Update")]
         public async Task<IActionResult> Update(string id)
         {
-            if (!Guid.TryParse(id, out Guid guidId))
+            try
             {
-            }
-            var product = _context.Perfume.FirstOrDefault(m => m.Id == guidId);
-            var viewModel = _mapper.Map<DtoPerfume>(product);
-            if (product != null && !string.IsNullOrEmpty(product.PriceInfo))
-            {
-                var PriceInfoData = product.PriceInfo;
-                var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
-                if (!string.IsNullOrEmpty(product.FragranceNotes))
+                if (!Guid.TryParse(id, out Guid guidId))
                 {
-                    var fragranceNotes = JsonHelpers.ParseJson<FragranceNote>(product.FragranceNotes);
-                    if (fragranceNotes != null && fragranceNotes.Any())
+                }
+                var product = _context.Perfume.FirstOrDefault(m => m.Id == guidId);
+                var viewModel = _mapper.Map<DtoPerfume>(product);
+                if (product != null && !string.IsNullOrEmpty(product.PriceInfo))
+                {
+                    var PriceInfoData = product.PriceInfo;
+                    var productSizes = JsonHelpers.ParseJson<ProductSize>(PriceInfoData);
+                    if (!string.IsNullOrEmpty(product.FragranceNotes))
                     {
-                        viewModel.Citrus = fragranceNotes[0].Citrus;
-                        viewModel.Floral = fragranceNotes[0].Floral;
-                        viewModel.Fruity = fragranceNotes[0].Fruity;
-                        viewModel.Woody = fragranceNotes[0].Woody;
-                        viewModel.Musky = fragranceNotes[0].Musky;
-                        viewModel.Oriental = fragranceNotes[0].Oriental;
-                        viewModel.Spicy = fragranceNotes[0].Spicy;
-                        viewModel.Tobacco = fragranceNotes[0].Tobacco;
-                        viewModel.Gourmand = fragranceNotes[0].Gourmand;
-                    }
-                    if (!string.IsNullOrEmpty(product.Ingredients))
-                    {
-                        viewModel.DtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(product.Ingredients);
-                        if (viewModel.DtoIngredients != null)
+                        var fragranceNotes = JsonHelpers.ParseJson<FragranceNote>(product.FragranceNotes);
+                        if (fragranceNotes != null && fragranceNotes.Any())
                         {
-                            viewModel.Ingredient_Img_1 = viewModel.DtoIngredients.Count > 0 ? viewModel.DtoIngredients[0]?.ImageUrl ?? "" : "";
-                            viewModel.Ingredient_Img_2 = viewModel.DtoIngredients.Count > 1 ? viewModel.DtoIngredients[1]?.ImageUrl ?? "" : "";
-                            viewModel.Ingredient_Img_3 = viewModel.DtoIngredients.Count > 2 ? viewModel.DtoIngredients[2]?.ImageUrl ?? "" : "";
-                            viewModel.Ingredient_Img_4 = viewModel.DtoIngredients.Count > 3 ? viewModel.DtoIngredients[3]?.ImageUrl ?? "" : "";
-
-                            viewModel.Ingredient_Name_1 = viewModel.DtoIngredients.Count > 0 ? viewModel.DtoIngredients[0]?.Name ?? "" : "";
-                            viewModel.Ingredient_Name_2 = viewModel.DtoIngredients.Count > 1 ? viewModel.DtoIngredients[1]?.Name ?? "" : "";
-                            viewModel.Ingredient_Name_3 = viewModel.DtoIngredients.Count > 2 ? viewModel.DtoIngredients[2]?.Name ?? "" : "";
-                            viewModel.Ingredient_Name_4 = viewModel.DtoIngredients.Count > 3 ? viewModel.DtoIngredients[3]?.Name ?? "" : "";
+                            viewModel.Citrus = fragranceNotes[0].Citrus;
+                            viewModel.Floral = fragranceNotes[0].Floral;
+                            viewModel.Fruity = fragranceNotes[0].Fruity;
+                            viewModel.Woody = fragranceNotes[0].Woody;
+                            viewModel.Musky = fragranceNotes[0].Musky;
+                            viewModel.Oriental = fragranceNotes[0].Oriental;
+                            viewModel.Spicy = fragranceNotes[0].Spicy;
+                            viewModel.Tobacco = fragranceNotes[0].Tobacco;
+                            viewModel.Gourmand = fragranceNotes[0].Gourmand;
                         }
+                        if (!string.IsNullOrEmpty(product.Ingredients))
+                        {
+                            viewModel.DtoIngredients = JsonConvert.DeserializeObject<List<Ingredient>>(product.Ingredients);
+                            if (viewModel.DtoIngredients != null)
+                            {
+                                viewModel.Ingredient_Img_1 = viewModel.DtoIngredients.Count > 0 ? viewModel.DtoIngredients[0]?.ImageUrl ?? "" : "";
+                                viewModel.Ingredient_Img_2 = viewModel.DtoIngredients.Count > 1 ? viewModel.DtoIngredients[1]?.ImageUrl ?? "" : "";
+                                viewModel.Ingredient_Img_3 = viewModel.DtoIngredients.Count > 2 ? viewModel.DtoIngredients[2]?.ImageUrl ?? "" : "";
+                                viewModel.Ingredient_Img_4 = viewModel.DtoIngredients.Count > 3 ? viewModel.DtoIngredients[3]?.ImageUrl ?? "" : "";
 
+                                viewModel.Ingredient_Name_1 = viewModel.DtoIngredients.Count > 0 ? viewModel.DtoIngredients[0]?.Name ?? "" : "";
+                                viewModel.Ingredient_Name_2 = viewModel.DtoIngredients.Count > 1 ? viewModel.DtoIngredients[1]?.Name ?? "" : "";
+                                viewModel.Ingredient_Name_3 = viewModel.DtoIngredients.Count > 2 ? viewModel.DtoIngredients[2]?.Name ?? "" : "";
+                                viewModel.Ingredient_Name_4 = viewModel.DtoIngredients.Count > 3 ? viewModel.DtoIngredients[3]?.Name ?? "" : "";
+                            }
+
+                        }
+                    }
+
+                    if (productSizes != null && productSizes.Any())
+                    {
+                        viewModel.ProductSizes = productSizes;
+                        for (var i = 0; i < productSizes.Count(); i++)
+                        {
+                            if (i == 0)
+                            {
+                                viewModel.Price1 = productSizes[i].Price;
+                                viewModel.VolumeMl1 = productSizes[i].VolumeMl;
+                                viewModel.Currency = productSizes[i].Currency;
+                                viewModel.ImageUrl1 = productSizes[i].ImageUrl;
+                            }
+                            if (i == 1)
+                            {
+                                viewModel.Price2 = productSizes[i].Price;
+                                viewModel.VolumeMl2 = productSizes[i].VolumeMl;
+                                viewModel.Currency = productSizes[i].Currency;
+                                viewModel.ImageUrl2 = productSizes[i].ImageUrl;
+                            }
+                        }
                     }
                 }
-
-                if (productSizes != null && productSizes.Any())
-                {
-                    viewModel.ProductSizes = productSizes;
-                    for (var i = 0; i < productSizes.Count(); i++)
-                    {
-                        if (i == 0)
-                        {
-                            viewModel.Price1 = productSizes[i].Price;
-                            viewModel.VolumeMl1 = productSizes[i].VolumeMl;
-                            viewModel.Currency = productSizes[i].Currency;
-                            viewModel.ImageUrl1 = productSizes[i].ImageUrl;
-                        }
-                        if (i == 1)
-                        {
-                            viewModel.Price2 = productSizes[i].Price;
-                            viewModel.VolumeMl2 = productSizes[i].VolumeMl;
-                            viewModel.Currency = productSizes[i].Currency;
-                            viewModel.ImageUrl2 = productSizes[i].ImageUrl;
-                        }
-                    }
-                }
+                return View(viewModel);
             }
-            return View(viewModel);
+            catch (Exception ex)
+            {
+                throw new Exception();
+            }
         }
 
         //[HttpPost("Update")]
@@ -385,6 +446,54 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                 };
 
                 requestDTO.Ingredients = JsonConvert.SerializeObject(ingredients);
+
+                if (requestDTO.DescriptionImageFiles?.Count > 0)
+                {
+                    var descriptionImages = new List<string>();
+                    foreach (var file in requestDTO.DescriptionImageFiles)
+                    {
+                        if (file != null && file.Length > 0)
+                        {
+                            using var ms = new MemoryStream();
+                            file.CopyTo(ms);
+
+                            var fileBytes = ms.ToArray();
+
+                            // If you want base64 string
+                            var base64 = Convert.ToBase64String(fileBytes);
+
+                            descriptionImages.Add(base64);
+                            // Save or process as needed
+                        }
+                    }
+
+                    if (requestDTO.SaveImageIndexChange.Count > 0)
+                    {
+                        var ind = 0;
+                        foreach (var index in requestDTO.SaveImageIndexChange)
+                        {
+                            requestDTO.ListDescriptionImages[index] = descriptionImages[ind];
+                            ind++;
+                        }
+                    }
+
+                    existingPerfume.DescriptionImages = JsonConvert.SerializeObject(descriptionImages);
+                }
+
+                if (requestDTO.SaveImageIndexChange.Count > 0)
+                {
+                    var ListDescriptionImages = requestDTO.ListDescriptionImages;
+                    foreach (var index in requestDTO.SaveImageIndexChange)
+                    {
+                        var ind = index - 1;
+                        ListDescriptionImages = ListDescriptionImages
+                                .Where((item, index) => index != ind)
+                                .ToList();
+                        //requestDTO.ListDescriptionImages = new List<string>();
+                        //.AddRange(t);
+                    }
+                    existingPerfume.DescriptionImages = JsonConvert.SerializeObject(ListDescriptionImages);
+                }
 
                 requestDTO.CreatedAt = existingPerfume.CreatedAt;
                 _mapper.Map(requestDTO, existingPerfume);

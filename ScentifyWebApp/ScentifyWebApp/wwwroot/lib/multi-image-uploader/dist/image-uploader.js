@@ -9,8 +9,8 @@
             imagesInputName: 'images',
             preloadedInputName: 'preloaded',
             label: 'Drag & Drop files here or click to browse',
-            extensions: ['.jpg', '.jpeg', '.png', '.gif', '.svg'],
-            mimes: ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'],
+            extensions: ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.svg'],
+            mimes: ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/webp', 'image/svg+xml'],
             maxSize: undefined,
             maxFiles: undefined,
         };
@@ -69,7 +69,7 @@
             $input = $('<input>', {
                 type: 'file',
                 id: plugin.settings.imagesInputName + '-' + random(),
-                name: plugin.settings.imagesInputName + '[]',
+                name: plugin.settings.imagesInputName,
                 accept: plugin.settings.extensions.join(','),
                 multiple: ''
             }).appendTo($container);
