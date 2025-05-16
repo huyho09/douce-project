@@ -41,6 +41,9 @@ $(document).ready(function () {
         let productId = $(this).data("id");
         let quantity = 1; // Default to 1 if not provided
         let currentSize = $('.product-info input:checked').data('volume');
+        if (currentSize == undefined || currentSize == null) {
+            currentSize = $('.vol-detail.vol-detail-active').data('volume');
+        }
         $.ajax({
             url: "/Cart/AddToCart",
             type: "POST",
