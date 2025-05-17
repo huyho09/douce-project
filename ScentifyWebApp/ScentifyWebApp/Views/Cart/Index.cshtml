@@ -43,7 +43,7 @@
                 <div class="remove-cart-btn-mobile">
                     <button class="remove-cart-btn btn btn-link mobile" type="button" onclick="removeCartItem('@product.Id', @product.CurrentSize);">Xóa bỏ</button>
                 </div>
-                <p class="product-price">@cartItem.Currency @currentProductSizes?.Price.ToString("N0")</p>
+                <p class="product-price">@currentProductSizes?.Price.ToString("N0") @cartItem.Currency</p>
             </div>
 
             totalPrice += (double)(currentProductSizes?.Price * cartItem.Quantity ?? 0);
@@ -60,7 +60,7 @@
 
                 <div class="cart-total">
                     <p>Tổng tiền:</p>
-                    <p class="total-price">@Model.FirstOrDefault()?.Currency @totalPrice.ToString("N0")</p>
+                    <p class="total-price">@totalPrice.ToString("N0") @Model.FirstOrDefault()?.Currency</p>
                 </div>
 
                 @if (!validCard)

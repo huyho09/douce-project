@@ -71,11 +71,11 @@
                                 </div>
                                 @if (priceInfoFirst != null)
                                 {
-                                    <a href="/products/details/@product.Id/@priceInfoFirst.VolumeMl" data-volume="@priceInfoFirst.VolumeMl" class="price size-button" aria-label="@priceInfoFirst.Currency @priceInfoFirst.Price - @priceInfoFirst.VolumeMl mL" data-id="@product.Id">@priceInfoFirst.Currency @priceInfoFirst.Price.ToString("N0")</a>
+                                    <a href="/products/details/@product.Id/@priceInfoFirst.VolumeMl" data-volume="@priceInfoFirst.VolumeMl" class="price size-button" aria-label="@priceInfoFirst.Currency @priceInfoFirst.Price - @priceInfoFirst.VolumeMl mL" data-id="@product.Id">@priceInfoFirst.Price.ToString("N0") @priceInfoFirst.Currency</a>
                                 }
                                 @if (priceInfoSecond != null)
                                 {
-                                    <a href="/products/details/@product.Id/@priceInfoSecond.VolumeMl" data-volume="@priceInfoSecond.VolumeMl" class="price size-button hide" aria-label="@priceInfoSecond.Currency @priceInfoSecond.Price - @priceInfoSecond.VolumeMl mL" data-id="@product.Id">@priceInfoSecond.Currency @priceInfoSecond.Price.ToString("N0")</a>
+                                    <a href="/products/details/@product.Id/@priceInfoSecond.VolumeMl" data-volume="@priceInfoSecond.VolumeMl" class="price size-button hide" aria-label="@priceInfoSecond.Currency @priceInfoSecond.Price - @priceInfoSecond.VolumeMl mL" data-id="@product.Id">@priceInfoSecond.Price.ToString("N0") @priceInfoSecond.Currency</a>
                                 }
                             </div>
 

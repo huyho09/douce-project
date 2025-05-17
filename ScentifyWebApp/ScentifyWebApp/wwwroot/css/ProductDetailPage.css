@@ -355,6 +355,8 @@ main:has(.product-info) .tabs .card img {
 .product-card img {
   height: -moz-fit-content;
   height: fit-content;
+  width: 65%;
+  margin: 0 auto;
   -o-object-fit: contain;
      object-fit: contain;
 }
@@ -582,7 +584,6 @@ input[type=radio] {
   -webkit-line-clamp: 3;
   overflow: hidden !important;
   text-overflow: ellipsis;
-  min-height: 75px;
 }
 
 .learn-more {

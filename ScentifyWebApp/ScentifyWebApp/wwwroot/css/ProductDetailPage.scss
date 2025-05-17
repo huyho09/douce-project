@@ -419,6 +419,8 @@ main:has(.product-info) .tabs {
 		// display: block;
 		// margin: auto;
 		height: fit-content;
+		width: 65%;
+		margin: 0 auto;
 		object-fit: contain;
 	}
 }
@@ -667,7 +669,7 @@ input[type="radio"] {
 		-webkit-line-clamp: 3;
 		overflow: hidden !important;
 		text-overflow: ellipsis;
-		min-height: 75px;
+		// min-height: 75px;
 	}
 }
 
