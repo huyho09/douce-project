@@ -160,37 +160,3 @@ function getFormatBase64Values($images) {
     });
     return formatResults;
 }
-$(() => {
-    
-    $('form').on('submit', function (e) {
-        //e.preventDefault();
-
-        const $form = $(this);
-
-        var jsonImages = JSON.stringify(getFormatBase64Values($('.input-images-2 .uploaded-image img')));
-        if (jsonImages) {
-            $('[name="DescriptionImages"]').val(jsonImages);
-        }
-
-        const data = $form.serialize(); // URL-encoded string
-
-        // Example: add custom field
-        const finalData = data;
-
-        $.ajax({
-            url: $form.attr('action'),
-            method: $form.attr('method') || 'POST',
-            data: finalData,
-            success: function (response) {
-                console.log('Response:', response);
-                alert("Successful");
-                $('html, body').animate({
-                    scrollTop: $('[role="main"]').offset().top
-                }, 500); // 500ms animation duration
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-            }
-        });
-    });
-});

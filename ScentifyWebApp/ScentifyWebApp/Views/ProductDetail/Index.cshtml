@@ -54,26 +54,29 @@
 						<div class="row">
 							<div class="col-12 d-flex justify-content-center">
 								<img id="img-product-@firstSized" class="img-fluid" loading="lazy" alt="@Model.Name - firstSized"
-									 style="@(Model.CurrentSize == firstSized ? "" : "display:none")" src="@Url.Content(image1?.Replace("./", "~/"))">
+								style="@(Model.CurrentSize == firstSized ? "" : "display:none")" src="@Url.Content(image1?.Replace("./", "~/"))">
 								<img id="img-product-@secondSized" class="img-fluid" loading="lazy" alt="@Model.Name - secondSized"
-									 style="@(Model.CurrentSize == secondSized ? "" : "display:none")" src="@Url.Content(image2?.Replace("./", "~/"))">
+								style="@(Model.CurrentSize == secondSized ? "" : "display:none")" src="@Url.Content(image2?.Replace("./", "~/"))">
 							</div>
 						</div>
 
-						@for (int i = 0; i < ListDescriptionImages.Count; i += 2)
+						@if (ListDescriptionImages?.Count > 0)
 						{
-							<div class="row mb-3">
-								<div class="col-md-6">
-									<img src="@ListDescriptionImages[i]" class="img-fluid" alt="Image @i" />
-								</div>
-
-								@if (i + 1 < ListDescriptionImages.Count)
-								{
+							for (int i = 0; i < ListDescriptionImages.Count; i += 2)
+							{
+								<div class="row mb-3">
 									<div class="col-md-6">
-										<img src="@ListDescriptionImages[i + 1]" class="img-fluid" alt="Image @(i + 1)" />
+										<img src="@ListDescriptionImages[i]" class="img-fluid" alt="Image @i" />
 									</div>
-								}
-							</div>
+
+									@if (i + 1 < ListDescriptionImages.Count)
+									{
+										<div class="col-md-6">
+											<img src="@ListDescriptionImages[i + 1]" class="img-fluid" alt="Image @(i + 1)" />
+										</div>
+									}
+								</div>
+							}
 						}
 						@* <div class="row">
 							<div class="col-md-6">
@@ -144,11 +147,14 @@
 												<div class="cards">
 													@foreach (var ingredient in ingredients)
 													{
-														<div class="card car-no-border">
-															<h5 class="small">@ingredient.Name</h5>
-															<p>@ingredient.Description</p>
-															<img src="@ingredient.ImageUrl" alt="Bergamot">
-														</div>
+														@if (!string.IsNullOrEmpty(ingredient.Name) && !string.IsNullOrEmpty(ingredient.ImageUrl))
+														{
+															<div class="card car-no-border">
+																<h5 class="small">@ingredient.Name</h5>
+																@*<p>@ingredient.Description</p>*@
+																<img src="@ingredient.ImageUrl" alt="Bergamot">
+															</div>
+														}
 													}
 												</div>
 											}
