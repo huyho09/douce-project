@@ -1,4 +1,4 @@
-﻿/* Reset */
+/* Reset */
 /* Header */
 /* Main Content */
 /* Image & Info */
@@ -36,6 +36,7 @@
   color: #fff;
   position: relative;
   padding-left: 5px;
+  font-size: 14px;
 }
 
 .add-to-cart {
@@ -60,7 +61,8 @@
   position: relative;
   width: 300px;
   height: auto;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .product-display img {
   margin-top: 30px;
@@ -73,7 +75,8 @@
 }
 
 .img-small {
-  object-fit: scale-down;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
 }
 
 .product-info {
@@ -230,7 +233,8 @@ main:has(.product-info) .tabs .card img {
 .card img {
   width: 180px;
   margin-bottom: 20px;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   transition: 0.3s;
   margin: 0 auto;
   /* Ensures horizontal centering */
@@ -349,11 +353,10 @@ main:has(.product-info) .tabs .card img {
   filter: drop-shadow(0 5px 10px #9f5f2e);
 }
 .product-card img {
-  width: 70%;
-  height: auto;
-  object-fit: cover;
-  display: block;
-  margin: auto;
+  height: -moz-fit-content;
+  height: fit-content;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 main:has(.product-info) .product-card {
@@ -378,14 +381,14 @@ main:has(.product-info) .card {
 .tab-labels {
   display: flex;
   cursor: pointer;
-  border-bottom: 1px solid #fff;
+  border-bottom: 0.5px solid #fff;
 }
 
 .tab-labels label {
   padding: 10px 20px;
   flex: 1;
+  text-align: center;
   color: #fff;
-  font-size: 18px;
 }
 
 input[type=radio] {
@@ -408,7 +411,7 @@ input[type=radio] {
 #tab1:checked ~ .tab-labels label[for=tab1],
 #tab2:checked ~ .tab-labels label[for=tab2],
 #tab3:checked ~ .tab-labels label[for=tab3] {
-  border-bottom: none;
+  border-bottom: 3px solid #ffd8a9;
   color: #ffd8a9;
 }
 
@@ -564,14 +567,14 @@ input[type=radio] {
   text-decoration: none;
   transition: color 0.3sease-in-out;
   color: #d5b260;
-  font-size: 1.3rem;
+  font-size: 16px;
 }
 .card-content h4:hover {
   text-decoration: underline;
 }
 .card-content p {
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 14px;
   line-height: 1.4rem;
   margin-bottom: 20px;
   display: -webkit-box;
@@ -802,6 +805,7 @@ main:has(.product-info) .tabs .card {
   main:has(.product-info) .third-section .cards {
     padding-top: 0;
     padding-bottom: 0;
+    height: -moz-fit-content;
     height: fit-content;
   }
   main:has(.product-info) .product-cards,
@@ -834,4 +838,10 @@ main:has(.product-info) .tabs .card {
   main:has(.product-info) .text-content {
     margin: auto;
   }
-}
+  main:has(.product-info) .slider img {
+    max-width: 100%;
+    width: auto;
+    height: 450px;
+    margin: auto;
+  }
+}/*# sourceMappingURL=ProductDetailPage.css.map */

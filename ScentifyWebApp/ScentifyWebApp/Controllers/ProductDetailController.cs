@@ -62,13 +62,15 @@ namespace ScentifyWebApp.Controllers
                 MiddlePerfumed = p.MiddlePerfumed,
                 BasePerfumed = p.BasePerfumed,
                 FragranceNotes = p.FragranceNotes,
-                Description = p.Description,
+                Description = p.Description ?? "",
+                ShortDescription = p.ShortDescription,
                 DtoIngredients = !string.IsNullOrWhiteSpace(p.Ingredients)
                    ? JsonConvert.DeserializeObject<List<Ingredient>>(p.Ingredients)
                    : new List<Ingredient>(),
                 ProductSizes = !string.IsNullOrWhiteSpace(p.PriceInfo)
                    ? JsonHelpers.ParseJson<ProductSize>(p.PriceInfo)
-                   : new List<ProductSize>()
+                   : new List<ProductSize>(),
+                DescriptionImages = p.DescriptionImages
             };
 
             // Step 3: Fetch similar perfumes separately

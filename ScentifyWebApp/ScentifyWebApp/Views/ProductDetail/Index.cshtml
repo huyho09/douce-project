@@ -12,12 +12,12 @@
 <link rel="stylesheet" href="~/css/ProductDetailPage.css" />
 
 <style>
-	
+
 </style>
 @if (Model != null)
 {
 	var priceInfo = Model.ProductSizes?.FirstOrDefault(m => m.VolumeMl == Model.CurrentSize);
-
+	var ListDescriptionImages = Model.ListDescriptionImages;
 	<!-- Main Content -->
 	<div class="m-0">
 		<div class="row m-0">
@@ -29,12 +29,21 @@
 					<div>
 						<img src="@Url.Content(image2?.Replace("./", "~/"))" alt="Slide 1">
 					</div>
-					<div>
+					@if (ListDescriptionImages?.Count > 0)
+					{
+						foreach (var image in ListDescriptionImages) {
+							<div>
+								<img src="@image" alt="Slide Image">
+							</div>
+						}
+					}
+
+					@* <div>
 						<img src="https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw7d659be1/Y0958160/Y0958160_F095355009_E02_GHC.jpg?sw=1024" alt="Slide 2">
 					</div>
 					<div>
 						<img src="https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwfa81c311/Y0909280/Y0909280_F090955009_E02_GHC.jpg?sw=1280" alt="Slide 3">
-					</div>
+					</div> *@
 
 				</div>
 
@@ -50,7 +59,23 @@
 									 style="@(Model.CurrentSize == secondSized ? "" : "display:none")" src="@Url.Content(image2?.Replace("./", "~/"))">
 							</div>
 						</div>
-						<div class="row">
+
+						@for (int i = 0; i < ListDescriptionImages.Count; i += 2)
+						{
+							<div class="row mb-3">
+								<div class="col-md-6">
+									<img src="@ListDescriptionImages[i]" class="img-fluid" alt="Image @i" />
+								</div>
+
+								@if (i + 1 < ListDescriptionImages.Count)
+								{
+									<div class="col-md-6">
+										<img src="@ListDescriptionImages[i + 1]" class="img-fluid" alt="Image @(i + 1)" />
+									</div>
+								}
+							</div>
+						}
+						@* <div class="row">
 							<div class="col-md-6">
 								<img src="https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dw7d659be1/Y0958160/Y0958160_F095355009_E02_GHC.jpg?sw=1024"
 									 class="img-fluid" alt="Image 2">
@@ -59,7 +84,7 @@
 								<img src="https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Sites-master_dior/default/dwfa81c311/Y0909280/Y0909280_F090955009_E02_GHC.jpg?sw=1280"
 									 class="img-fluid" alt="Image 3">
 							</div>
-						</div>
+						</div> *@
 					</div>
 				</div>
 			</div>

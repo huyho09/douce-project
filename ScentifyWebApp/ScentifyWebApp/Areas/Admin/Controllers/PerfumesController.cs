@@ -447,53 +447,53 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
 
                 requestDTO.Ingredients = JsonConvert.SerializeObject(ingredients);
 
-                if (requestDTO.DescriptionImageFiles?.Count > 0)
-                {
-                    var descriptionImages = new List<string>();
-                    foreach (var file in requestDTO.DescriptionImageFiles)
-                    {
-                        if (file != null && file.Length > 0)
-                        {
-                            using var ms = new MemoryStream();
-                            file.CopyTo(ms);
+                //if (requestDTO.DescriptionImageFiles?.Count > 0)
+                //{
+                //    var descriptionImages = new List<string>();
+                //    foreach (var file in requestDTO.DescriptionImageFiles)
+                //    {
+                //        if (file != null && file.Length > 0)
+                //        {
+                //            using var ms = new MemoryStream();
+                //            file.CopyTo(ms);
 
-                            var fileBytes = ms.ToArray();
+                //            var fileBytes = ms.ToArray();
 
-                            // If you want base64 string
-                            var base64 = Convert.ToBase64String(fileBytes);
+                //            // If you want base64 string
+                //            var base64 = Convert.ToBase64String(fileBytes);
 
-                            descriptionImages.Add(base64);
-                            // Save or process as needed
-                        }
-                    }
+                //            descriptionImages.Add(base64);
+                //            // Save or process as needed
+                //        }
+                //    }
 
-                    if (requestDTO.SaveImageIndexChange.Count > 0)
-                    {
-                        var ind = 0;
-                        foreach (var index in requestDTO.SaveImageIndexChange)
-                        {
-                            requestDTO.ListDescriptionImages[index] = descriptionImages[ind];
-                            ind++;
-                        }
-                    }
+                //    if (requestDTO.SaveImageIndexChange.Count > 0)
+                //    {
+                //        var ind = 0;
+                //        foreach (var index in requestDTO.SaveImageIndexChange)
+                //        {
+                //            requestDTO.ListDescriptionImages[index] = descriptionImages[ind];
+                //            ind++;
+                //        }
+                //    }
 
-                    existingPerfume.DescriptionImages = JsonConvert.SerializeObject(descriptionImages);
-                }
+                //    existingPerfume.DescriptionImages = JsonConvert.SerializeObject(descriptionImages);
+                //}
 
-                if (requestDTO.SaveImageIndexChange.Count > 0)
-                {
-                    var ListDescriptionImages = requestDTO.ListDescriptionImages;
-                    foreach (var index in requestDTO.SaveImageIndexChange)
-                    {
-                        var ind = index - 1;
-                        ListDescriptionImages = ListDescriptionImages
-                                .Where((item, index) => index != ind)
-                                .ToList();
-                        //requestDTO.ListDescriptionImages = new List<string>();
-                        //.AddRange(t);
-                    }
-                    existingPerfume.DescriptionImages = JsonConvert.SerializeObject(ListDescriptionImages);
-                }
+                //if (requestDTO.SaveImageIndexChange.Count > 0)
+                //{
+                //    var ListDescriptionImages = requestDTO.ListDescriptionImages;
+                //    foreach (var index in requestDTO.SaveImageIndexChange)
+                //    {
+                //        var ind = index - 1;
+                //        ListDescriptionImages = ListDescriptionImages
+                //                .Where((item, index) => index != ind)
+                //                .ToList();
+                //        //requestDTO.ListDescriptionImages = new List<string>();
+                //        //.AddRange(t);
+                //    }
+                //    existingPerfume.DescriptionImages = JsonConvert.SerializeObject(ListDescriptionImages);
+                //}
 
                 requestDTO.CreatedAt = existingPerfume.CreatedAt;
                 _mapper.Map(requestDTO, existingPerfume);

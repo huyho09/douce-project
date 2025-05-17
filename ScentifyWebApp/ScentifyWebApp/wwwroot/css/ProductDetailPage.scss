@@ -57,6 +57,7 @@ $custom-color-4: #d5b260;
 		color: $color_1;
 		position: relative;
 		padding-left: 5px;
+		font-size: 14px;
 	}
 }
 
@@ -411,11 +412,14 @@ main:has(.product-info) .tabs {
 	}
 
 	img {
-		width: 70%;
-		height: auto;
-		object-fit: cover;
-		display: block;
-		margin: auto;
+		// width: 70%;
+		// height: 380px;
+		// max-height: 380px;
+		// object-fit: cover;
+		// display: block;
+		// margin: auto;
+		height: fit-content;
+		object-fit: contain;
 	}
 }
 
@@ -442,15 +446,14 @@ main:has(.product-info) .card {
 .tab-labels {
 	display: flex;
 	cursor: pointer;
-	border-bottom: 1px solid $color_1;
+	border-bottom: 0.5px solid $color_1;
 }
 
 .tab-labels label {
 	padding: 10px 20px;
 	flex: 1;
-	// text-align: center;
+	text-align: center;
 	color: $color_1;
-	font-size: 18px;
 }
 
 input[type="radio"] {
@@ -473,19 +476,22 @@ input[type="radio"] {
 #tab1:checked~.tab-labels label[for="tab1"],
 #tab2:checked~.tab-labels label[for="tab2"],
 #tab3:checked~.tab-labels label[for="tab3"] {
-	border-bottom: none;
+	border-bottom: 3px solid $color_2;
 	color: $color_2;
 }
 
-#carousel-detail{
+#carousel-detail {
 	display: none;
 }
+
 .pc-view-hero-detail {
 	margin-top: 80px;
 }
+
 .product-info-container {
 	margin-top: 130px;
 }
+
 .slider img {
 	width: 100%;
 	height: 450px;
@@ -527,6 +533,7 @@ input[type="radio"] {
 .slick-dots li.slick-active button:before {
 	color: white;
 }
+
 .col-12.d-flex.justify-content-center {
 	height: 600px;
 }
@@ -539,14 +546,17 @@ input[type="radio"] {
 	color: white;
 	background: $custom-color-2;
 }
+
 .vol-detail:hover {
 	border: 1px solid $custom-color-4;
 	color: $custom-color-4;
 }
+
 .vol-detail-active {
 	border: 1px solid $custom-color-4;
 	color: $custom-color-4;
 }
+
 @media (max-width: 768px) {
 	main:has(.product-info) .product-card {
 		height: 480px;
@@ -640,7 +650,7 @@ input[type="radio"] {
 		text-decoration: none;
 		transition: color 0.3sease-in-out;
 		color: #d5b260;
-		font-size: 1.3rem;
+		font-size: 16px;
 
 		&:hover {
 			text-decoration: underline;
@@ -649,7 +659,7 @@ input[type="radio"] {
 
 	p {
 		color: $color_1;
-		font-size: 0.8rem;
+		font-size: 14px;
 		line-height: 1.4rem;
 		margin-bottom: 20px;
 		display: -webkit-box;
@@ -865,36 +875,45 @@ input[type="radio"] {
 	.product-cards::-webkit-scrollbar {
 		display: none;
 	}
+
 	.product-info-container {
 		margin-top: 2rem;
 	}
+
 	#carousel-detail {
 		display: block;
 		margin-top: 65px;
 	}
-	.pc-view-hero-detail{
-		display:none;
+
+	.pc-view-hero-detail {
+		display: none;
 	}
+
 	.add-to-cart {
 		width: 19rem;
 	}
+
 	.carousel-indicators {
 		justify-content: flex-start;
 		margin-left: 8%;
 	}
-	.dot{
+
+	.dot {
 		width: 10px;
 		height: 10px;
 	}
+
 	.swiper-pagination {
 		text-align: start !important;
 	}
+
 	.swiper-pagination span.swiper-pagination-bullet {
 		width: 7px !important;
 		height: 7px !important;
 		bottom: 1rem;
 		left: 5rem !important;
 	}
+
 	.swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
 		left: 2rem !important;
 		bottom: 3rem;
@@ -950,7 +969,22 @@ main:has(.product-info) .tabs .card {
 		font-size: 16px;
 	}
 
-	main:has(.product-info) .text-content{
+	main:has(.product-info) .text-content {
 		margin: auto;
 	}
+
+	main:has(.product-info) .slider img {
+		max-width: 100%;
+		width: auto;
+		height: 450px;
+		margin: auto;
+	}
+
+	// main:has(.product-info) .slick-slide{
+	// 	display: none;
+	// }
+
+	// main:has(.product-info) .slick-slide.slick-current{
+	// 	display: block;
+	// }
 }

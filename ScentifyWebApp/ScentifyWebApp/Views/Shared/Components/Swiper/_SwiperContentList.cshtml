@@ -18,7 +18,7 @@
 						var imgNo1 = perfume.ProductSizes?[0].ImageUrl != null ? perfume.ProductSizes?[0].ImageUrl.Replace("./", "~/") : "";
 						<div class="swiper-slide">
 							<a href="/products/details/@perfume.Id" target="_self">
-								<img class="img-flacon" src="https://douce.vn/uploads/prices/APHRODITE_0.png" alt="@perfume.Name" />
+								<img class="img-flacon" src="@imgNo1" alt="@perfume.Name" />
 							</a>
 						</div>
 						indexPerfume++;
