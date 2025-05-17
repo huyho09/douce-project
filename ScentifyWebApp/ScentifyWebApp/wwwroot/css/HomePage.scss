@@ -378,6 +378,10 @@ iframe {
 			}
 		}
 	}
+
+	&:hover{
+		text-decoration: underline;
+	}
 }
 
 .BodyCopy_contentWrapper__dvz5y {
@@ -568,7 +572,7 @@ iframe {
 
 .details_heading {
 	color: $color_4;
-	font-size: 1rem;
+	font-size: 1.2rem;
 	font-weight: 700;
 	margin-bottom: .3125rem;
 }
@@ -1457,8 +1461,11 @@ iframe {
 	.details_KeyIngredients{
 		font-size: 12px;
 	}
-	#testimonials p, #testimonials a{
+	#testimonials p {
 		font-size: 14px;
+	}
+	#testimonials a{
+		font-size: 1rem;
 	}
 	.size-button {
 		font-size: 12px !important;

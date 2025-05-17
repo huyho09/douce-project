@@ -37,7 +37,7 @@ a[disabled]:focus {
 }
 .title-section {
   font-family: Montserrat;
-  font-size: 30px;
+  font-size: 16px;
   line-height: 55px;
   font-style: normal;
   font-weight: 700;
@@ -45,12 +45,16 @@ a[disabled]:focus {
   text-transform: capitalize;
 }
 
+h2.title-section {
+  font-size: 24px;
+}
+
 .text-wrapper {
   max-width: 100%;
   text-align: center;
 }
 .text-wrapper p {
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: 400;
   color: #fffef2;
   line-height: 1.5;
@@ -62,7 +66,7 @@ a[disabled]:focus {
 }
 .product-title a {
   color: #d5b260 !important;
-  font-size: 1rem !important;
+  font-size: 14px !important;
   font-weight: 600;
   text-transform: capitalize;
 }
@@ -490,6 +494,9 @@ a[disabled]:focus {
 body:has(.modal-backdrop.active) .cart-container {
   display: block;
 }
+body:has(.modal-backdrop.active) .cart-total p {
+  font-size: 14px;
+}
 
 /* Active States */
 .cart-container.active {
@@ -506,7 +513,7 @@ body:has(.modal-backdrop.active) .cart-container {
   display: grid;
   grid-template-columns: 2.5fr 2.5fr 1fr 1fr 0.5fr 1fr;
   /* Aligns items vertically */
-  font-size: 1.2em;
+  font-size: 14px;
   padding: 20px 40px 0;
   /* Adds spacing */
   border-bottom: 1px solid #ddd;
@@ -525,9 +532,12 @@ body:has(.modal-backdrop.active) .cart-container {
 .cart-header a:hover {
   text-decoration: none;
 }
+.cart-header > * {
+  font-size: 14px;
+}
 
 .text-decoration-underline {
-  font-size: 16px;
+  font-size: 14px;
   width: 100%;
   text-align: center;
   display: block;
@@ -557,12 +567,13 @@ body:has(.modal-backdrop.active) .cart-container {
   padding-left: 2%;
 }
 .cart-item .product-price {
-  margin-right: 2rem;
+  margin-right: 14px;
   text-align: right;
 }
 .cart-item > * {
   align-self: center;
   margin: 0;
+  font-size: 14px;
 }
 .cart-item .remove-cart-btn {
   visibility: hidden;
@@ -672,7 +683,7 @@ body:has(.modal-backdrop.active) .cart-container {
 
 .product-size {
   color: #fffef2 !important;
-  font-size: 1rem;
+  font-size: 14px;
 }
 
 .product-quantity select {
@@ -687,7 +698,7 @@ body:has(.modal-backdrop.active) .cart-container {
 
 .product-price {
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 14px;
 }
 
 /* Separator */
@@ -739,7 +750,7 @@ hr {
 .cart-total {
   display: flex;
   justify-content: space-between;
-  font-size: 1.2em;
+  font-size: 14px;
   font-weight: bold;
   gap: 15px;
 }
@@ -750,7 +761,7 @@ hr {
   padding: 15px;
   background: #f8f5e6;
   color: #111;
-  font-size: 1rem;
+  font-size: 14px;
   border: none;
   cursor: pointer;
   margin-top: 10px;
@@ -793,7 +804,7 @@ hr {
   border: 1px solid rgba(255, 255, 255, 0.5);
   /* Light white outline */
   color: #fff;
-  font-size: 1.2em;
+  font-size: 14px;
   cursor: pointer;
   padding: 5px;
   border-radius: 50%;
@@ -813,7 +824,7 @@ hr {
   background: none;
   /* Light white outline */
   color: #fff;
-  font-size: 1.2em;
+  font-size: 14px;
   cursor: pointer;
   padding: 5px;
   border-radius: 50%;
@@ -939,7 +950,7 @@ body.modal-open {
   background: #fff;
   color: #111;
   border: none;
-  font-size: 1em;
+  font-size: 14px;
   cursor: pointer;
   border-radius: 5px;
   font-weight: bold;
@@ -1007,7 +1018,7 @@ body.modal-open {
   right: 15px;
   background: none;
   border: none;
-  font-size: 1.5em;
+  font-size: 14px;
   cursor: pointer;
   color: rgba(255, 255, 255, 0.5);
 }
@@ -1023,7 +1034,7 @@ input {
   border: 1px solid #ddd;
   border-radius: 5px;
   margin: 10px 0;
-  font-size: 1em;
+  font-size: 14px;
 }
 
 /* Apply Button */
@@ -1033,7 +1044,7 @@ input {
   background: #111;
   color: #fff;
   border: none;
-  font-size: 1em;
+  font-size: 14px;
   cursor: pointer;
   border-radius: 5px;
   font-weight: bold;
@@ -1094,7 +1105,7 @@ input {
 .custom-nav-links li a {
   text-decoration: none;
   color: #ffd8a9;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   transition: color 0.3s ease-in-out;
 }
@@ -1182,7 +1193,7 @@ input {
 }
 
 .policy-footer {
-  font-size: 1em;
+  font-size: 14px;
 }
 
 @media (max-width: 768px) {
@@ -1349,7 +1360,7 @@ input {
 .checkout-container .success-container {
   padding: 40px 20px 30px;
   display: flex;
-  gap: 30px;
+  gap: 15px;
   flex-direction: column;
   background: #fffef2;
   border-radius: 10px;
@@ -1373,7 +1384,7 @@ input {
   width: 100%;
   margin-top: 10px;
   padding: 8px 5px;
-  font-size: 18px;
+  font-size: 14px;
   border: 1px solid #888;
   background: transparent;
   outline: none;
@@ -1393,7 +1404,7 @@ input {
   left: 20px;
   top: 45%;
   transform: translateY(-50%);
-  font-size: 16px;
+  font-size: 14px;
   color: #777;
   transition: all 0.3s ease-in-out;
   pointer-events: none;
@@ -1414,7 +1425,7 @@ input {
 .checkout-container .continue-btn {
   background: #9f5f2e;
   color: white;
-  font-size: 1rem;
+  font-size: 14px;
   padding: 10px 30px;
   margin-top: 10px;
   border: none;
@@ -1453,6 +1464,9 @@ input {
   margin-bottom: 15px;
   color: #fff;
 }
+.checkout-container .price-details p {
+  font-size: 14px;
+}
 .checkout-container a {
   color: #258cfb;
   text-decoration: underline;
@@ -1464,7 +1478,7 @@ input {
 .checkout-container .summary-total {
   display: flex;
   justify-content: space-between;
-  font-size: 16px;
+  font-size: 14px;
   margin-bottom: 5px;
 }
 .checkout-container .summary-total {
@@ -1499,7 +1513,7 @@ input {
   margin: 5px 0;
 }
 .checkout-container .remove {
-  font-size: 12px;
+  font-size: 14px;
   color: red;
   text-decoration: underline;
 }
@@ -1710,7 +1724,7 @@ input {
   /* Match border radius */
   padding: 8px 12px;
   /* Adjust padding */
-  font-size: 16px;
+  font-size: 14px;
   /* Ensure font size consistency */
   color: #fff;
   /* Match text color */
@@ -2067,7 +2081,7 @@ body.RadioGroup_has-tabbed__Laps6 .RadioGroup_input__fjmeL:focus ~ .RadioGroup_p
 /* Text below spinner */
 .loading-text {
   margin-top: 20px;
-  font-size: 1.1rem;
+  font-size: 14px;
   color: #f1f1f1;
   font-family: "Segoe UI", sans-serif;
   font-weight: 500;
@@ -2247,7 +2261,7 @@ section.third-section.container table tr td img {
 
 #menu li {
   padding: 10px 0;
-  font-size: 1.1rem;
+  font-size: 14px;
 }
 
 #menu li label {
@@ -2413,4 +2427,14 @@ section.third-section.container table tr td img {
 
 #success-checkout-msg, #success-checkout-msg + h5 {
   width: 100%;
+}
+
+a[data-bs-target="#policyModal"],
+p#success-checkout-msg,
+p#success-checkout-msg + h5 {
+  font-size: 14px;
+}
+
+p#success-checkout-msg + h5 {
+  font-weight: bold;
 }/*# sourceMappingURL=site.css.map */

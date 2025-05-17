@@ -97,7 +97,7 @@
 .details {
   margin-top: 15px;
   color: #ffd8a9;
-  font-size: 0.9em;
+  font-size: 14px;
 }
 
 .controls {
@@ -141,11 +141,11 @@
 }
 .info-sections .section .number {
   color: #fff;
-  font-size: 1.2em;
+  font-size: 14px;
   margin-bottom: 10px;
 }
 .info-sections .section .title {
-  font-size: 1em;
+  font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: #fff;
@@ -197,10 +197,10 @@ main:has(.product-info) .tabs .card img {
 }
 
 .section-title {
-  font-size: 2.5em;
+  font-size: 16px;
   margin-bottom: 20px;
   text-align: justify;
-  font-size: 2.5em;
+  font-size: 16px;
   max-width: 400px;
 }
 
@@ -247,7 +247,7 @@ main:has(.product-info) .tabs .card img {
 }
 .card p {
   color: #d5b260;
-  font-size: 1em;
+  font-size: 14px;
 }
 .card:hover {
   transform: translateY(-10px);
@@ -328,7 +328,7 @@ main:has(.product-info) .tabs .card img {
   letter-spacing: 2px;
   color: #fffef2;
   margin-bottom: 10px;
-  font-size: 0.9em;
+  font-size: 14px;
 }
 
 .product-cards {
@@ -537,7 +537,7 @@ input[type=radio] {
   }
   .home-detail li {
     padding-left: 0px;
-    font-size: 12px;
+    font-size: 14px;
     margin-left: 2em;
   }
   .section-content {
@@ -548,7 +548,7 @@ input[type=radio] {
     font-size: 1.7rem;
   }
   .section-label {
-    font-size: 12px;
+    font-size: 14px;
     letter-spacing: 1px;
   }
   .section-heading {
@@ -627,7 +627,7 @@ input[type=radio] {
   border: none;
   color: #fff;
   padding: 10px 20px;
-  font-size: 1em;
+  font-size: 14px;
   outline: none;
 }
 .email-box button {
@@ -689,7 +689,7 @@ input[type=radio] {
 .social-icons a {
   color: #fff;
   text-decoration: none;
-  font-size: 1.2em;
+  font-size: 14px;
   transition: 0.3s;
 }
 .social-icons a:hover {
@@ -755,7 +755,7 @@ input[type=radio] {
     margin-left: 176em !important;
   }
   .add-to-cart {
-    font-size: 11px;
+    font-size: 14px;
     padding: 10px 15px;
   }
   /* Hide the scrollbar for a clean look */

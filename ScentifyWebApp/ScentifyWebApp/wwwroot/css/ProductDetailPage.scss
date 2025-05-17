@@ -122,7 +122,7 @@ $custom-color-4: #d5b260;
 .details {
 	margin-top: 15px;
 	color: $color_2;
-	font-size: 0.9em;
+	font-size: 14px;
 }
 
 .controls {
@@ -171,12 +171,12 @@ $custom-color-4: #d5b260;
 
 		.number {
 			color: $color_1;
-			font-size: 1.2em;
+			font-size: 14px;
 			margin-bottom: 10px;
 		}
 
 		.title {
-			font-size: 1em;
+			font-size: 14px;
 			text-transform: uppercase;
 			letter-spacing: 1px;
 			color: $color_1;
@@ -241,10 +241,9 @@ main:has(.product-info) .tabs {
 }
 
 .section-title {
-	font-size: 2.5em;
+	font-size: 16px;
 	margin-bottom: 20px;
 	text-align: justify;
-	font-size: 2.5em;
 	max-width: 400px;
 }
 
@@ -293,7 +292,7 @@ main:has(.product-info) .tabs {
 
 	p {
 		color: $custom-color-4;
-		font-size: 1em;
+		font-size: 14px;
 	}
 
 	&:hover {
@@ -385,7 +384,7 @@ main:has(.product-info) .tabs {
 	letter-spacing: 2px;
 	color: $color_7;
 	margin-bottom: 10px;
-	font-size: 0.9em;
+	font-size: 14px;
 }
 
 .product-cards {
@@ -614,7 +613,7 @@ input[type="radio"] {
 
 	.home-detail li {
 		padding-left: 0px;
-		font-size: 12px;
+		font-size: 14px;
 		margin-left: 2em;
 	}
 
@@ -628,7 +627,7 @@ input[type="radio"] {
 	}
 
 	.section-label {
-		font-size: 12px;
+		font-size: 14px;
 		letter-spacing: 1px;
 	}
 
@@ -716,7 +715,7 @@ input[type="radio"] {
 		border: none;
 		color: $color_1;
 		padding: 10px 20px;
-		font-size: 1em;
+		font-size: 14px;
 		outline: none;
 	}
 
@@ -786,7 +785,7 @@ input[type="radio"] {
 	a {
 		color: $color_1;
 		text-decoration: none;
-		font-size: 1.2em;
+		font-size: 14px;
 		transition: 0.3s;
 
 		&:hover {
@@ -868,7 +867,7 @@ input[type="radio"] {
 	}
 
 	.add-to-cart {
-		font-size: 11px;
+		font-size: 14px;
 		padding: 10px 15px;
 	}
 

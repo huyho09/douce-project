@@ -4,6 +4,7 @@
 <div id="checkout-form-container">
     <form asp-controller="Checkout" asp-action="SaveInvoice" method="post" class="checkout-form" id="checkout-form">
         <input asp-for="CartItems" type="hidden" placeholder="" value="@Model.CartItems" class="form-control" data-required />
+        <p class="h4 product-name">Thông tin đặt hàng:</p>
         @if (!string.IsNullOrEmpty(ViewData["ErrorPay"]?.ToString())){
             <span class="text-danger">@ViewData["ErrorPay"]</span>
         }

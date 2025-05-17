@@ -289,6 +289,9 @@ iframe {
 .Hyperlink_light__12A_f.Hyperlink_light__12A_f .Hyperlink_icon__u_gO9.Hyperlink_icon__u_gO9 svg path {
   fill: #fffef2;
 }
+.Hyperlink_light__12A_f.Hyperlink_light__12A_f:hover {
+  text-decoration: underline;
+}
 
 .BodyCopy_contentWrapper__dvz5y a {
   font-family: Montserrat;
@@ -462,7 +465,7 @@ iframe {
 
 .details_heading {
   color: #aa4406;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: 0.3125rem;
 }
@@ -1244,8 +1247,11 @@ iframe {
   .details_KeyIngredients {
     font-size: 12px;
   }
-  #testimonials p, #testimonials a {
+  #testimonials p {
     font-size: 14px;
+  }
+  #testimonials a {
+    font-size: 1rem;
   }
   .size-button {
     font-size: 12px !important;
