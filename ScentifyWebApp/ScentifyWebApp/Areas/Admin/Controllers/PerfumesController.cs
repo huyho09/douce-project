@@ -383,6 +383,12 @@ namespace ScentifyWebApp.Areas.Admin.Controllers
                         }
                     }
                 }
+
+                // need for update images more time (clear browser cache)
+                Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
+                Response.Headers["Pragma"] = "no-cache";
+                Response.Headers["Expires"] = "0";
+
                 return View(viewModel);
             }
             catch (Exception ex)

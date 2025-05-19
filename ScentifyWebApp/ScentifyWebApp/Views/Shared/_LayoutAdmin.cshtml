@@ -94,6 +94,13 @@
                     <span>Contact Us</span>
                 </a>
             </li>
+
+            @* <li class="nav-item">
+                <a class="nav-link" data-toggle="modal" data-target="#importModal" href="javascript:void(0);">
+                    <i class="fas fa-fw fa-file-import"></i>
+                    <span>Import Email Template</span>
+                </a>
+            </li> *@
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -352,8 +359,40 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" onclick="ClickLogOut();">Logout</>
+                    <button type="button" class="btn btn-primary" onclick="ClickLogOut();">Logout</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Email Modal -->
+    <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="importModalLabel">Import HTML Email Template</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form asp-controller="Template" asp-action="Import" enctype="multipart/form-data" method="post">
+                        <div class="mb-3">
+                            <label for="htmlFile" class="form-label">Choose HTML file</label>
+                            <input class="form-control" type="file" name="htmlFile" accept=".html,.htm" required>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                        </div>
+                    </form>
+                    <form asp-controller="Template" asp-action="UseDefault" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-warning btn-reset-default">Use Default Template</button>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>
