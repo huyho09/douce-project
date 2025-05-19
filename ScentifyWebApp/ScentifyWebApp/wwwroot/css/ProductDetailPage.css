@@ -50,7 +50,7 @@
   transition: 0.3s;
   display: inline-block;
   margin-top: 30px;
-  width: 29.375rem;
+  width: 100%;
 }
 .add-to-cart:hover {
   transform: translateY(-3px);
@@ -200,7 +200,6 @@ main:has(.product-info) .tabs .card img {
   font-size: 16px;
   margin-bottom: 20px;
   text-align: justify;
-  font-size: 16px;
   max-width: 400px;
 }
 

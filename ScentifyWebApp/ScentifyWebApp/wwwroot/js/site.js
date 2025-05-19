@@ -139,7 +139,7 @@ function sumTotalInCheckOut() {
             total += (quantity * price);
         });
     }
-    return total;
+    return total.toLocaleString();
 }
 
 function updateCartItem(_this, productId) {
