@@ -1,4 +1,4 @@
-/* Reset */
+﻿/* Reset */
 /* Header */
 /* Main Content */
 /* Image & Info */
@@ -39,6 +39,10 @@
   font-size: 14px;
 }
 
+.col-12-add-to-cart {
+  padding: 0 2rem;
+}
+
 .add-to-cart {
   background: #9f5f2e;
   border: none;
@@ -61,8 +65,7 @@
   position: relative;
   width: 300px;
   height: auto;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .product-display img {
   margin-top: 30px;
@@ -75,8 +78,7 @@
 }
 
 .img-small {
-  -o-object-fit: scale-down;
-     object-fit: scale-down;
+  object-fit: scale-down;
 }
 
 .product-info {
@@ -232,8 +234,7 @@ main:has(.product-info) .tabs .card img {
 .card img {
   width: 180px;
   margin-bottom: 20px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   transition: 0.3s;
   margin: 0 auto;
   /* Ensures horizontal centering */
@@ -352,12 +353,10 @@ main:has(.product-info) .tabs .card img {
   filter: drop-shadow(0 5px 10px #9f5f2e);
 }
 .product-card img {
-  height: -moz-fit-content;
   height: fit-content;
   width: 65%;
   margin: 0 auto;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 
 main:has(.product-info) .product-card {
@@ -400,7 +399,11 @@ input[type=radio] {
   border-top: none;
   padding: 15px;
   display: none;
-  font-size: 14px;
+  font-size: 14px !important;
+  font-family: Montserrat;
+}
+.tab-content p {
+  font-size: 14px !important;
 }
 
 #tab1:checked ~ .content #content1,
@@ -426,6 +429,9 @@ input[type=radio] {
 
 .product-info-container {
   margin-top: 130px;
+  margin-right: 0rem;
+  padding-left: 2rem;
+  padding-right: 4rem;
 }
 
 .slider img {
@@ -726,6 +732,9 @@ input[type=radio] {
   .second-section .section-subtitle {
     margin-bottom: 50px;
   }
+  .add-to-cart {
+    width: 100% !important;
+  }
 }
 @media (max-width: 768px) {
   .cards,
@@ -805,7 +814,6 @@ main:has(.product-info) .tabs .card {
   main:has(.product-info) .third-section .cards {
     padding-top: 0;
     padding-bottom: 0;
-    height: -moz-fit-content;
     height: fit-content;
   }
   main:has(.product-info) .product-cards,
@@ -844,4 +852,4 @@ main:has(.product-info) .tabs .card {
     height: 450px;
     margin: auto;
   }
-}/*# sourceMappingURL=ProductDetailPage.css.map */
+}

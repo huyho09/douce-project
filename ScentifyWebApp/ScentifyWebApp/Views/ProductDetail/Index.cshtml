@@ -48,7 +48,7 @@
 				</div>
 
 			</div>
-			<div class="col-12 col-md-8 pc-view-hero-detail">
+			<div class="col-12 col-md-7 pc-view-hero-detail">
 				<div class="container">
 					<div class="row">
 						<div class="row">
@@ -91,7 +91,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-12 col-md-4">
+			<div class="col-12 col-md-5">
 				<!-- Product Image & Info -->
 				<div class="d-block product-info-container">
 					<!-- Text Section -->
@@ -112,8 +112,10 @@
 								}
 							</div>
 						}
-						<div>
-							<button class="add-to-cart add-to-cart-btn" data-current-size="@Model.CurrentSize" aria-label="Add to your cart - @priceInfo?.Currency @priceInfo?.Price" data-id="@Model.Id">Thêm giỏ hàng</button>
+						<div class="row">
+							<div class="col-12 col-12-add-to-cart">
+								<button class="add-to-cart add-to-cart-btn" data-current-size="@Model.CurrentSize" aria-label="Add to your cart - @priceInfo?.Currency @priceInfo?.Price" data-id="@Model.Id">Thêm giỏ hàng</button>
+							</div>
 						</div>
 					</div>
 
