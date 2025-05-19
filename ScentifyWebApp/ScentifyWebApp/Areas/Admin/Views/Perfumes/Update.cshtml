@@ -4,11 +4,14 @@
 }
 <style>
     .modal-content {
-        color: black !important;
+    color: black !important;
     }
 
 </style>
 @model ScentifyWebApp.Models.Dtos.DtoPerfume
+@{
+    var descriptionImages = Model?.ListDescriptionImages?.Select(m => $"{m}??v={DateTime.Now.Ticks}");
+}
 <div class="row justify-content-center">
     <div class="col-xl-8 col-lg-12 col-md-7">
         <div class="card o-hidden border-0 shadow-lg my-lg-5">
@@ -317,7 +320,7 @@
                         </div>
                         <div class="mt-5 text-end">
                             <button type="submit" class="btn btn-primary">Update</button>
-                            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                            <a href="/admin/perfumes/index" asp-action="Index" class="btn btn-secondary">Cancel</a>
                         </div>
                     </form>
                 </div>
@@ -352,7 +355,7 @@
     </script>
     <script>
         $(document).ready(function () {
-            const base64Images = @Html.Raw(Json.Serialize(Model?.ListDescriptionImages));
+            const base64Images = @Html.Raw(Json.Serialize(descriptionImages));
             let preloaded;
             if(base64Images?.length > 0){
                 preloaded = base64Images.map((src, index) => ({
