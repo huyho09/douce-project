@@ -48,7 +48,7 @@
 				</div>
 
 			</div>
-			<div class="col-12 col-md-7 pc-view-hero-detail">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-7 pc-view-hero-detail">
 				<div class="container">
 					<div class="row">
 						<div class="row">
@@ -91,7 +91,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-12 col-md-5">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-5">
 				<!-- Product Image & Info -->
 				<div class="d-block product-info-container">
 					<!-- Text Section -->
@@ -224,16 +224,19 @@
 				{
 					var index = 1;
 					<!-- Product Cards -->
-					<div class="product-cards d-flex justify-content-center">
+					<div class="product-cards d-flex justify-content-center gap-3">
 						@foreach (var similarItem in similarItems)
 						{
 							var img1 = similarItem.ProductSizes?[0].ImageUrl != null ? similarItem.ProductSizes?[0].ImageUrl.Replace("./", "~/") : "";
-							var itemIngredients = string.Join(", ", similarItem.DtoIngredients?.Select(m => m.Name.Trim()) ?? new List<string>());
-							<a href="/products/details/@similarItem.Id" class="product-card">
-								<img src="@img1" alt="@similarItem.Name">
-								<div class="card-content">
+							var itemIngredients = string.Join(", ", similarItem.DtoIngredients?
+									.Select(m => m.Name?.Trim())
+									.Where(name => !string.IsNullOrWhiteSpace(name))
+									?? new List<string>());
+							<a href="/products/details/@similarItem.Id" class="product-card similar-product-card">
+								<img src="@img1" alt="@similarItem.Name" class="product-image">
+								<div class="card-content d-flex flex-column justify-content-between similar-product-card-content">
 									<h4>@similarItem.Name</h4>
-									<p>@itemIngredients</p>
+									<p class="product-ingredients similar-product-ingredients">@itemIngredients</p>
 									@*<a href="/products/details/@similarItem.Id" class="learn-more">LEARN MORE</a>*@
 								</div>
 							</a>

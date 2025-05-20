@@ -1,4 +1,4 @@
-﻿/* Reset */
+/* Reset */
 /* Header */
 /* Main Content */
 /* Image & Info */
@@ -65,7 +65,8 @@
   position: relative;
   width: 300px;
   height: auto;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .product-display img {
   margin-top: 30px;
@@ -78,7 +79,8 @@
 }
 
 .img-small {
-  object-fit: scale-down;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
 }
 
 .product-info {
@@ -234,7 +236,8 @@ main:has(.product-info) .tabs .card img {
 .card img {
   width: 180px;
   margin-bottom: 20px;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   transition: 0.3s;
   margin: 0 auto;
   /* Ensures horizontal centering */
@@ -353,10 +356,12 @@ main:has(.product-info) .tabs .card img {
   filter: drop-shadow(0 5px 10px #9f5f2e);
 }
 .product-card img {
+  height: -moz-fit-content;
   height: fit-content;
   width: 65%;
   margin: 0 auto;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 main:has(.product-info) .product-card {
@@ -820,6 +825,7 @@ main:has(.product-info) .tabs .card {
   main:has(.product-info) .third-section .cards {
     padding-top: 0;
     padding-bottom: 0;
+    height: -moz-fit-content;
     height: fit-content;
   }
   main:has(.product-info) .product-cards,
@@ -859,3 +865,24 @@ main:has(.product-info) .tabs .card {
     margin: auto;
   }
 }
+.similar-product-card-content {
+  justify-content: space-between;
+}
+
+.similar-product-ingredients {
+  font-size: 0.85rem;
+  color: #ccc;
+  min-height: 40px;
+  /* Forces consistent space even if fewer ingredients */
+}
+
+main:has(.product-info) .similar-product-card {
+  height: 420px;
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* tablet landscape-specific styles */
+  main:has(.product-info) .similar-product-card {
+    height: 340px;
+  }
+}/*# sourceMappingURL=ProductDetailPage.css.map */

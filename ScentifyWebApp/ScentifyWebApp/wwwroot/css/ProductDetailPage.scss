@@ -60,9 +60,11 @@ $custom-color-4: #d5b260;
 		font-size: 14px;
 	}
 }
-.col-12-add-to-cart{
+
+.col-12-add-to-cart {
 	padding: 0 2rem;
 }
+
 .add-to-cart {
 	background: $custom-color-3;
 	border: none;
@@ -844,6 +846,7 @@ input[type="radio"] {
 			margin-bottom: 50px;
 		}
 	}
+
 	.add-to-cart {
 		width: 100% !important;
 	}
@@ -932,6 +935,7 @@ input[type="radio"] {
 		left: 2rem !important;
 		bottom: 3rem;
 	}
+
 	.product-info-container {
 		margin-top: 130px;
 		margin-right: 0rem;
@@ -1007,4 +1011,27 @@ main:has(.product-info) .tabs .card {
 	// main:has(.product-info) .slick-slide.slick-current{
 	// 	display: block;
 	// }
+}
+
+.similar-product-card-content {
+	justify-content: space-between;
+}
+
+.similar-product-ingredients {
+	font-size: 0.85rem;
+	color: #ccc;
+	min-height: 40px;
+	/* Forces consistent space even if fewer ingredients */
+}
+
+main:has(.product-info) .similar-product-card {
+	height: 420px;
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+	/* tablet landscape-specific styles */
+	main:has(.product-info) .similar-product-card {
+		height: 340px;
+	}
 }
