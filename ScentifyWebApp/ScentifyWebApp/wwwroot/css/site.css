@@ -1,4 +1,4 @@
-.btn:focus,
+﻿.btn:focus,
 .btn:active:focus,
 .btn-link.nav-link:focus,
 .form-control:focus,
@@ -207,8 +207,7 @@ h2.title-section {
 .product-grid-item:hover .image-wrapper img {
   width: 55%;
   height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   transition: transform 0.6s ease-in-out, opacity 0.3s ease-in-out;
   transform: scale(1.1);
   /* Slight zoom-in effect */
@@ -245,7 +244,7 @@ h2.title-section {
   transition: transform 0.3s ease-in-out;
 }
 .product-grid-item a:hover {
-  color: #ca9e38;
+  color: rgb(202.3432835821, 158.4626865672, 55.6567164179);
 }
 .product-grid-item a:hover::after {
   transform: scaleX(1);
@@ -324,8 +323,7 @@ h2.title-section {
   margin: 0 auto;
   width: 55%;
   height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   /* Keeps the image fully visible without cropping */
 }
 .image-wrapper::before {
@@ -469,8 +467,7 @@ h2.title-section {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
-  -webkit-backdrop-filter: blur(8px);
-          backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
@@ -668,7 +665,6 @@ body:has(.modal-backdrop.active) .cart-total p {
     visibility: visible !important;
     grid-column: span 2;
     text-align: left;
-    width: -moz-fit-content !important;
     width: fit-content !important;
   }
   .cart-item .remove-cart-btn-mobile button {
@@ -965,8 +961,7 @@ body.modal-open {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
-  -webkit-backdrop-filter: blur(8px);
-          backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
@@ -1390,9 +1385,7 @@ input {
   outline: none;
   border-radius: 8px;
   transition: all 0.3s ease-in-out;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   color: #fff;
 }
 .checkout-container .floating-group select {
@@ -1408,11 +1401,6 @@ input {
   color: #777;
   transition: all 0.3s ease-in-out;
   pointer-events: none;
-}
-.checkout-container .floating-group input:not(:-moz-placeholder-shown) ~ label {
-  top: -10px;
-  font-size: 14px;
-  color: #fff;
 }
 .checkout-container .floating-group input:focus ~ label,
 .checkout-container .floating-group input:not(:placeholder-shown) ~ label,
@@ -1431,7 +1419,6 @@ input {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  width: -moz-fit-content;
   width: fit-content;
 }
 .checkout-container .continue-btn:hover {
@@ -1681,8 +1668,7 @@ input {
 }
 .modal.noti-modal .modal-content {
   background: rgba(255, 255, 255, 0.2);
-  -webkit-backdrop-filter: blur(15px);
-          backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 20px;
@@ -1778,7 +1764,7 @@ input {
 }
 
 .select2-container--default .select2-results__option[aria-selected=true] {
-  background-color: #4c251d !important;
+  background-color: rgb(75.8333333333, 36.9444444444, 29.1666666667) !important;
   /* A darker shade of #6c1d10 */
   color: #fff !important;
   /* Keep text readable */
@@ -1794,7 +1780,7 @@ input {
 
 .select2-container--default .select2-results__option--highlighted[aria-selected],
 .select2-container--default .select2-results__option:hover {
-  background: #4c251d !important;
+  background: rgb(75.8333333333, 36.9444444444, 29.1666666667) !important;
 }
 
 .select2-search--dropdown {
@@ -1824,8 +1810,7 @@ input {
   justify-content: center;
   padding: 0;
   margin: -2px 0;
-  -moz-column-gap: 25px;
-       column-gap: 25px;
+  column-gap: 25px;
   font-family: Suisse, sans-serif;
   font-size: 0.9375rem;
   font-weight: 400;
@@ -2017,8 +2002,7 @@ body.RadioGroup_has-tabbed__Laps6 .RadioGroup_input__fjmeL:focus ~ .RadioGroup_p
   z-index: 9999;
   background: rgba(255, 255, 255, 0.8);
   /* Light overlay; change for dark */
-  -webkit-backdrop-filter: blur(4px);
-          backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
   /* Optional blur effect */
   align-items: center;
   justify-content: center;
@@ -2053,8 +2037,7 @@ body.RadioGroup_has-tabbed__Laps6 .RadioGroup_input__fjmeL:focus ~ .RadioGroup_p
   width: 100%;
   height: 100%;
   background-color: rgba(15, 15, 15, 0.9);
-  -webkit-backdrop-filter: blur(4px);
-          backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
   z-index: 9999;
   align-items: center;
   justify-content: center;
@@ -2158,8 +2141,7 @@ section.third-section.container table tr td img {
   position: relative;
   z-index: 2;
   -webkit-user-select: none;
-  -moz-user-select: none;
-       user-select: none;
+  user-select: none;
 }
 
 #menuToggle a {
@@ -2437,4 +2419,4 @@ p#success-checkout-msg + h5 {
 
 p#success-checkout-msg + h5 {
   font-weight: bold;
-}/*# sourceMappingURL=site.css.map */
+}
