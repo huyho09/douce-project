@@ -49,7 +49,7 @@ namespace ScentifyWebApp.Infrastructure.Services.Implementations
                                 {item.Product.CurrentSize} mL
                               </td>
                               <td>{item.Quantity}</td>
-                              <td>{item.Product.Currency} {currentProductSizes?.Price.ToString("N0")}</td>
+                              <td>{currentProductSizes?.Price.ToString("N0")} {item.Product.Currency}</td>
                             </tr>");
                     amount += ((currentProductSizes?.Price ?? 0) * item.Quantity);
                 }
@@ -59,7 +59,7 @@ namespace ScentifyWebApp.Infrastructure.Services.Implementations
                    .Replace("{{CustomerFullName}}", customerInfo.FullName)
                    .Replace("{{PhoneNumber}}", customerInfo.PhoneNumber)
                    .Replace("{{ShippingAddress}}", customerInfo.Address)
-                   .Replace("{{FormattedTotal}}", "VND " + amount.ToString("N0"))
+                   .Replace("{{FormattedTotal}}", amount.ToString("N0") + " VND")
                    .Replace("{{Year}}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
                    .Replace("{{Items}}", sbRows.ToString());
 

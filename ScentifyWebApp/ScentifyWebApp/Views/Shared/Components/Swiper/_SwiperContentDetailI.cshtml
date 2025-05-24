@@ -4,91 +4,95 @@
 @model DtoPerfume
 
 @{
-	var imgLogo = "/images/logo/logo-hinh-brown-01.png";
-	var fragranceNotes = Model.FragranceNotes != null
-		? JsonConvert.DeserializeObject<Dictionary<string, bool>>(Model.FragranceNotes.ToString())
-		: new Dictionary<string, bool>();
+    var imgLogo = "/images/logo/logo-hinh-brown-01.png";
+    var fragranceNotes = Model.FragranceNotes != null
+        ? JsonConvert.DeserializeObject<Dictionary<string, bool>>(Model.FragranceNotes.ToString())
+        : new Dictionary<string, bool>();
 }
 
 <style>
-	tbody {
-		display: flex;
-		font-family: Montserrat;
-		font-size: 0.875rem;
-		max-width: 100vw;
-		overflow-x: auto;
-		list-style: none;
-		margin: 0px auto -50px;
-		padding: 0px 20px 50px;
-	}
+    tbody {
+        display: flex;
+        font-family: Montserrat;
+        font-size: 0.875rem;
+        max-width: 100vw;
+        overflow-x: auto;
+        list-style: none;
+        margin: 0px auto -50px;
+        padding: 0px 20px 50px;
+    }
 </style>
 <h3 class="details_heading mb-2">
-	<a data-testid="product-comparison-name" href="#" tabindex="0">@Model.Name</a>
+    <a data-testid="product-comparison-name" href="#" tabindex="0">@Model.Name</a>
 </h3>
 @if (Model.DtoIngredients != null && Model.DtoIngredients.Any())
 {
-	<div class="details_KeyIngredients">
-		@String.Join(", ", Model.DtoIngredients.Select(m => m.Name).ToList())
-	</div>
+    var itemIngredients = string.Join(", ", Model.DtoIngredients?
+    .Select(m => m.Name?.Trim())
+    .Where(name => !string.IsNullOrWhiteSpace(name))
+    ?? new List<string>());
+    <div class="details_KeyIngredients">
+        @itemIngredients
+    </div>
 }
 <div class="unitPricing">
-	@if (Model.ProductSizes != null && Model.ProductSizes.Count() > 0)
-	{
-		var priceInfoFirst = Model.ProductSizes?[0];
-		var priceInfoSecond = Model.ProductSizes?[1];
-		<div class="d-flex justify-content-center mt-3">
-			@if (priceInfoFirst != null)
-			{
-				<div class="" style="margin-right: 15px">
-					<p class="product-price">@priceInfoFirst.VolumeMl mL</p>
-					<a href="/products/details/@Model.Id/@priceInfoFirst.VolumeMl" class="size-button" aria-label="@priceInfoFirst.Currency @priceInfoFirst.Price - @priceInfoFirst.VolumeMl mL" data-id="@Model.Id">@priceInfoFirst.Price.ToString("N0") @priceInfoFirst.Currency</a>
-				</div>
-			}
-			@if (priceInfoSecond != null)
-			{
-				<div class="">
-					<p class="product-price">@priceInfoSecond.VolumeMl mL</p>
-					<a href="/products/details/@Model.Id/@priceInfoSecond.VolumeMl" class="size-button" aria-label="@priceInfoSecond.Currency @priceInfoSecond.Price - @priceInfoSecond.VolumeMl mL" data-id="@Model.Id">@priceInfoSecond.Price.ToString("N0") @priceInfoSecond.Currency</a>
-				</div>
-			}
-		</div>
-	}
+    @if (Model.ProductSizes != null && Model.ProductSizes.Count() > 0)
+    {
+        var priceInfoFirst = Model.ProductSizes?[0];
+        var priceInfoSecond = Model.ProductSizes?[1];
+        <div class="d-flex justify-content-center mt-3">
+            @if (priceInfoFirst != null)
+            {
+                <div class="" style="margin-right: 15px">
+                    <p class="product-price">@priceInfoFirst.VolumeMl mL</p>
+                    <a href="/products/details/@Model.Id/@priceInfoFirst.VolumeMl" class="size-button" aria-label="@priceInfoFirst.Currency @priceInfoFirst.Price - @priceInfoFirst.VolumeMl mL" data-id="@Model.Id">@priceInfoFirst.Price.ToString("N0") @priceInfoFirst.Currency</a>
+                </div>
+            }
+            @if (priceInfoSecond != null)
+            {
+                <div class="">
+                    <p class="product-price">@priceInfoSecond.VolumeMl mL</p>
+                    <a href="/products/details/@Model.Id/@priceInfoSecond.VolumeMl" class="size-button" aria-label="@priceInfoSecond.Currency @priceInfoSecond.Price - @priceInfoSecond.VolumeMl mL" data-id="@Model.Id">@priceInfoSecond.Price.ToString("N0") @priceInfoSecond.Currency</a>
+                </div>
+            }
+        </div>
+    }
 </div>
 
 <div class="color-notes-table">
-	<table class="TypefragranceTable" style="overflow: hidden;">
-		<tbody>
-			<tr>
-				@if (fragranceNotes?.Count > 0)
-				{
-					var trueValueCount = 0;
-					var totalItem = fragranceNotes.Where(x => x.Value).Count();
-					var midIndex = (int)Math.Ceiling(totalItem / 2.0);
-					@foreach (var kvp in fragranceNotes)
-					{
-						var propName = kvp.Key;
-						var propValue = kvp.Value;
-						var scrollClass = "";
-						if (propValue)
-						{
-							trueValueCount++;
-							if (trueValueCount == midIndex)
-							{
-								scrollClass = "scroll-target";
-							}
-						}
-						<td class="@scrollClass">
-							<div class="color-box" style="background-image: url('@(propValue ? imgLogo : "")'); background-size:cover; background-position:center;">
-								@propName
-							</div>
-						</td>
-					}
-				}
-				else
-				{
-					<td>No fragrance notes available</td>
-				}
-			</tr>
-		</tbody>
-	</table>
+    <table class="TypefragranceTable" style="overflow: hidden;">
+        <tbody>
+            <tr>
+                @if (fragranceNotes?.Count > 0)
+                {
+                    var trueValueCount = 0;
+                    var totalItem = fragranceNotes.Where(x => x.Value).Count();
+                    var midIndex = (int)Math.Ceiling(totalItem / 2.0);
+                    @foreach (var kvp in fragranceNotes)
+                    {
+                        var propName = kvp.Key;
+                        var propValue = kvp.Value;
+                        var scrollClass = "";
+                        if (propValue)
+                        {
+                            trueValueCount++;
+                            if (trueValueCount == midIndex)
+                            {
+                                scrollClass = "scroll-target";
+                            }
+                        }
+                        <td class="@scrollClass">
+                            <div class="color-box" style="background-image: url('@(propValue ? imgLogo : "")'); background-size:cover; background-position:center;">
+                                @propName
+                            </div>
+                        </td>
+                    }
+                }
+                else
+                {
+                    <td>No fragrance notes available</td>
+                }
+            </tr>
+        </tbody>
+    </table>
 </div>

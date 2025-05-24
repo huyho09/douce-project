@@ -91,7 +91,11 @@
 									<td>
 										@if (product.DtoIngredients != null && product.DtoIngredients.Any())
 										{
-											@string.Join(", ", product.DtoIngredients.Select(i => i.Name))
+											var itemIngredients = string.Join(", ", product.DtoIngredients?
+											.Select(m => m.Name?.Trim())
+											.Where(name => !string.IsNullOrWhiteSpace(name))
+											?? new List<string>());
+											<span>@itemIngredients</span>
 										}
 									</td>
 									<td>
