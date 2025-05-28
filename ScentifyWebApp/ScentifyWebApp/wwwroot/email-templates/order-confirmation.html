@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Order Confirmation</title>
+    <style>
+        /* Reset & base */
+        body, table, td, p {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        img {
+            border: 0;
+            display: block;
+        }
+
+        a {
+            color: #d58534;
+            text-decoration: none;
+        }
+
+        /* Container */
+        .wrapper {
+            width: 100%;
+            background-color: #2f1f0f;
+            padding: 20px;
+        }
+
+        .content {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #3c2a1b;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: #d58534;
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            font-size: 24px;
+        }
+
+        /* Body */
+        .inner {
+            padding: 20px;
+            color: #fff;
+        }
+
+        .customer-info td {
+            padding: 5px 0;
+        }
+
+        .customer-info .label {
+            font-weight: bold;
+            width: 120px;
+            vertical-align: top;
+        }
+
+        /* Order table */
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+            .order-table th,
+            .order-table td {
+                border-bottom: 1px solid #4a3a2b;
+                padding: 10px;
+                text-align: left;
+            }
+
+            .order-table th {
+                background: #4a3a2b;
+            }
+
+            .order-table img {
+                width: 40px;
+                height: auto;
+                border-radius: 4px;
+            }
+
+        /* Totals */
+        .totals {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+            .totals td {
+                padding: 8px 0;
+            }
+
+            .totals .label {
+                font-weight: bold;
+            }
+
+        /* Footer note */
+        .note {
+            font-size: 12px;
+            color: #ccc;
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="content">
+            <div class="header">Cảm ơn quý khách đã đặt hàng!</div>
+            <div class="inner" style="color:#fff">
+                <p style="color:#fff">Chào <strong>{{CustomerFullName}}</strong>,</p>
+                <p style="color:#fff">
+                    Chúng tôi đã ghi nhận đơn hàng của bạn và đang trong quá trình xử lý.
+                    Dưới đây là thông tin chi tiết:
+                </p>
+                <table class="customer-info">
+                    <tr>
+                        <td class="label" style="color:#fff">Điện thoại:</td>
+                        <td>{{PhoneNumber}}</td>
+                    </tr>
+                    <tr>
+                        <td class="label" style="color:#fff">Địa chỉ:</td>
+                        <td>{{ShippingAddress}}</td>
+                    </tr>
+                </table>
+
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th>Sản phẩm & Chi tiết</th>
+                            <th>Số lượng</th>
+                            <th>Giá</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ITEMS -->
+                        {{Items}}
+                    </tbody>
+                </table>
+
+                <table class="totals">
+                    <tr>
+                        <td class="label">Tổng tiền:</td>
+                        <td><strong>{{FormattedTotal}}</strong></td>
+                    </tr>
+                </table>
+
+                <p class="note" style="color:#fff">
+                    Lưu ý: Số tiền trên hóa đơn tạm tính chưa bao gồm phí vận chuyển.
+                    Đơn hàng sẽ được giao COD theo mặc định.
+                    Nếu quý khách muốn thanh toán trước qua chuyển khoản, vui lòng liên hệ fanpage để được hỗ trợ.
+                </p>
+            </div>
+            <div class="footer">&copy; {{Year}} DOUCÉ — Bản quyền thuộc về DOUCÉ.</div>
+        </div>
+    </div>
+
+</body>
+</html>
